@@ -1,0 +1,239 @@
+﻿@using SellerVendor.Areas.Seller.Models
+@model IEnumerable<tbl_SalesOrder>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+        table th {
+            background-color: #F7F7F7;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table th, table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" >
+          <tr>
+              <th>Sr.No</th>
+
+              <th>LatestShipDate</th>
+              <th>Order Type</th>
+              <th>Purchase Date</th>
+              <th>AmazonOrderID</th>
+              <th>Buyer Email</th>
+
+              <th>IsReplacementOrder</th>
+              <th>LastUpdatedDate</th>
+              <th>ShipServiceLevel</th>
+              <th>NoOfItemshipped</th>
+              <th>Order Status</th>
+              <th>Sales Channel</th>
+              <th>IsBusinessOrder</th>
+              <th>NoOfItemUnshippes</th>
+              <th>Buyer Name</th>
+              <th>IsPremiumOrder</th>
+              <th>EarliestShipDate</th>
+              <th>Marketplace id</th>
+
+              <th>Fulfillment Channel</th>
+              <th>Payment Method</th>
+              <th>Is Prime</th>
+              <th>ShipServiceLevelCategory</th>
+              <th>Seller-Order Id</th>
+
+               <th>PaymentMethodDetail</th>
+               <th>CurrencyCode</th>
+               <th>BillAmount</th>
+               <th>StateRegion</th>
+               <th>City</th>
+               <th>CountryCode</th>
+               <th>PostalCode</th>
+               <th>ShippingName</th>
+               <th>Address_1</th>
+               <th>Address_2</th>
+
+               <th>quantity_ordered</th>
+               <th>product_name</th>
+               <th>asin</th>
+               <th>skuno</th>
+               <th>orderitemid</th>
+               <th>quantityshipped</th>
+               <th>shippingtaxcurrecode</th>
+               <th>shippingtaxAmount</th>
+               <th>promotioncurrency_code</th>
+               <th>promotionamount</th>
+               <th>promotionids</th>
+               <th>shippingdiscount_amt</th>
+               <th>shippingdiscountcode</th>
+               <th>shippingpriceAmount</th>
+               <th>shippingpricecurrcode</th>
+               <th>itemtaxamount</th>
+               <th>itemtaxcurrecode</th>
+               <th>itempricecurrcode</th>
+               <th>itempriceamount</th>
+           </tr>
+         @if (Model.ToList().Count != 0)
+         {
+             int i =0;
+            foreach (tbl_SalesOrder customer in Model)
+              {
+                 i++;
+              <tr>
+                <td>@i.</td>
+                <td>@customer.LatestShipDate</td>
+                <td>@customer.OrderType</td>
+                <td>@customer.PurchaseDate</td>
+                <td>@customer.AmazonOrderID</td>
+                <td>@customer.BuyerEmail</td>
+                <td>@customer.IsReplacementOrder</td>
+                <td>@customer.LastUpdatedDate</td>
+                <td>@customer.ShipServiceLevel</td>
+                <td>@customer.NoOfItemshipped</td>
+                <td>@customer.OrderStatus</td>
+                <td>@customer.SalesChannel</td>
+                <td>@customer.IsBusinessOrder</td>
+                <td>@customer.NoOfItemUnshippes</td>
+                <td>@customer.BuyerName</td>
+                <td>@customer.IsPremiumOrder</td>
+                <td>@customer.EarliestShipDate</td>
+                <td>@customer.Marketplaceid</td>
+                <td>@customer.FulfillmentChannel</td>
+                <td>@customer.PaymentMethod</td>
+                <td>@customer.IsPrime</td>
+                <td>@customer.ShipServiceLevelCategory</td>
+                <td>@customer.SellerOrderId</td>
+
+                <td>@customer.PaymentMethodDetail</td>
+                <td>@customer.CurrencyCode</td>
+                <td>@customer.BillAmount</td>
+                <td>@customer.StateRegion</td>
+                <td>@customer.City</td>
+                <td>@customer.CountryCode</td>
+                <td>@customer.PostalCode</td>
+                <td>@customer.ShippingName</td>
+                <td>@customer.Address_1</td>
+                <td>@customer.Address_2</td>
+               
+                 @if (customer.OrderDetails != null)
+                  {
+                   foreach (var item in customer.OrderDetails)
+                   {
+                         <td>@item.quantity_ordered</td>
+                         <td>@item.product_name</td>
+                         <td>@item.asin</td>
+                         <td>@item.sku_no</td>
+                         <td>@item.order_item_id</td>
+                         <td>@item.quantity_shipped</td>
+                         <td>@item.shipping_tax_curre_code</td>
+                         <td>@item.shipping_tax_Amount</td>
+                         <td>@item.promotion_currency_code</td>
+                         <td>@item.promotion_amount</td>
+                         <td>@item.promotion_ids</td>
+                         <td>@item.shipping_discount_amt</td>
+                         <td>@item.shipping_discount_code</td>
+                         <td>@item.shipping_price_Amount</td>
+                         <td>@item.shipping_price_curr_code</td>
+                         <td>@item.item_tax_amount</td>
+                         <td>@item.item_tax_curre_code</td>
+                         <td>@item.item_price_curr_code</td>
+                         <td>@item.item_price_amount</td>
+                      }
+                    }
+            </tr>
+           }
+         }
+    </table>
+
+   @* <table cellpadding="0" cellspacing="0">
+        <tr>
+            <th>Amazon Order ID</th>
+            <th>Merchant Order ID</th>
+            <th>Purchase Date</th>
+            <th>Last Updated Date</th>
+            <th>Order Status</th>
+            <th>Sales Channel</th>
+            <th>IsBusiness Order</th>
+
+            <th>FulfillmentChannel</th>
+            <th>ShipServiceLevel</th>
+            <th>City</th>
+            <th>State</th>
+            <th>PostalCode</th>
+            <th>Country</th>
+            <th>ASIN</th>
+            <th>SKU</th>
+            <th>ItemStatus</th>
+            <th>ProductName</th>
+            <th>Quantity</th>
+
+            <th>PromotionIDs</th>
+            <th>ShipPromotionDiscount</th>
+              <th>PPP</th>
+              <th>SSS</th>
+        </tr>
+        @foreach (tbl_SalesOrder customer in Model)
+        {
+            <tr>
+               <td>@customer.AmazonOrderID</td>
+                <td>@customer.MerchantOrderID</td>
+               <td>@customer.PurchaseDate</td>
+                <td>@customer.LastUpdatedDate</td>
+                <td>@customer.OrderStatus</td>
+                <td>@customer.SalesChannel</td>
+                <td>@customer.IsBusinessOrder</td>
+
+                <td>@customer.FulfillmentChannel</td>
+                 <td>@customer.ShipServiceLevel</td>
+                <td>@customer.City</td>
+                 <td>@customer.State</td>
+                 <td>@customer.PostalCode</td>
+                 <td>@customer.Country</td>
+
+                @foreach (var item in customer.Orders)
+                {
+                
+                    <td>@item.ASIN</td>
+                    <td>@item.SKU</td>
+                    <td>@item.ItemStatus</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.PromotionIDs</td>
+                    <td>@item.ShipPromotionDiscount</td>
+               
+                   
+                    
+                    foreach (var item2 in item.itemprice)
+                    {                
+                         <td>@item2.pAmonu</td>                       
+                          <td>@item2.shipAmonu</td>                                          
+                    }
+                }
+             
+            </tr>
+        }
+    </table>*@
+</body>
+</html>

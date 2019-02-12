@@ -1,0 +1,112 @@
+﻿@using CaptchaMvc.HtmlHelpers 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en"  ng-app="MyApp2">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+     <link rel="shortcut icon" type="image/png" href="~/Images/raintre.ico"/>
+    <title>Rain Tree</title>
+    
+    <!-- Bootstrap -->
+      
+    <link href="~/UseCssLink/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="~/UseCssLink/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="~/UseCssLink/nprogress/nprogress.css" rel="stylesheet">
+    <!-- Animate.css -->
+   @* <link href="~/UseCssLink/animate.css/animate.min.css" rel="stylesheet">*@
+    <!-- Custom Theme Style -->
+    <link href="~/UseCssLink/build/css/custom.min.css" rel="stylesheet">
+  
+   
+   
+  </head>
+  <body class="login">
+    <div>
+      <a class="hiddenanchor" id="signup"></a>
+      <a class="hiddenanchor" id="signin"></a>
+      <div class="login_wrapper" ng-controller="LoginController">
+          <div data-ng-if="loading" class="loadingdiv"><img src="/Images/ajax-loader.gif" class="ajax-loader" /></div>
+        <div class="animate form login_form">
+            <img src="~/Images/raintree-logo1.png" alt="..." style="margin-left:20%" class=""/>
+          <section class="login_content">
+            <form  name="f1" ng-submit="Login()">
+              <h1>Welcome</h1> <div style="color:rgb(142,2,2)">{{Message}} </div> 
+                <div class="row">
+                     <div>
+                    <input type="text"  ng-model="LoginData.Email" placeholder="username" name="cEmail" ng-class="Submitted?'ng-dirty':''" class="form-control" required autofocus />
+                    <span class="error" ng-show="(f1.cEmail.$dirty || Submitted) && f1.cEmail.$error.required">Username required</span>
+
+                  </div>
+                  <div>
+                    <input type="password" ng-model="LoginData.Password" placeholder="password"   name="cPassword" ng-class="Submitted?'ng-dirty':''" class="form-control" required autofocus />
+                    <span class="error" ng-show="(f1.cPassword.$dirty || Submitted) && f1.cPassword.$error.required">Password required</span>
+               
+                  </div>
+                </div>
+
+              
+
+            
+                
+                @Html.MathCaptcha() <br/> 
+                @*@Html.Captcha(3)*@
+                
+                <p> @ViewBag.ErrorMessage </p> 
+                @*your action link or Login button*@
+
+
+
+
+
+
+
+                
+
+
+
+
+
+
+             
+              <div>           
+                <input type="submit" value="Login" class="btn btn-default submit" />
+                <a class="reset_pass" href="#">Forgot Password?</a>
+                 
+                    <a class="btn btn-default submit" href="~/Home/Seller" data-toggle="modal" style="margin-left:83px;">Add New Seller</a>    
+                  
+              </div>
+
+              <div class="clearfix"></div>
+
+              <div class="separator">
+         
+                <div>
+                  <h1>AccountsCorp</h1>
+                 @* <p>©2017 All Rights Reserved. Soft Dew Tech</p>*@
+                </div>
+              </div>
+            </form>
+          </section>
+        </div>     
+      </div>
+ 
+   </div>
+    <script src="~/Scripts/angular.min.js"></script>  
+    <script src="~/Scripts/textAngular.min.js"></script> 
+    <script src="~/Scripts/dirPagination.js"></script>
+    <script src="~/Scripts/Angular/Module/MyApp.js"></script>
+    <script src="~/Scripts/Angular/Controller/LoginController.js"></script>
+  </body>
+   
+      
+</html>
+

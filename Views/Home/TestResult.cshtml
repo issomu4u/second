@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SellerVendor.Models.tbl_user_login>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>TestResult</title>
+</head>
+<body>
+    <div>
+      <table cellpadding="0" cellspacing="0" >
+          <tr>
+              <th>Sr.No</th>
+
+              <th>Email</th>
+              <th>Last Login</th>
+              <th>Password</th>
+            
+             
+           </tr>
+         @if (Model.ToList().Count != 0)
+         {
+             int i =0;
+             foreach (var item in Model)
+              {
+                 <tr>
+                         <td>@i.</td>
+                         <td>@item.Email</td>
+                         <td>@item.lastlogin</td>
+                         <td>@item.password</td>
+                                         
+                       </tr>
+            
+           }
+         }
+    </table>
+
+    </div>
+</body>
+</html>

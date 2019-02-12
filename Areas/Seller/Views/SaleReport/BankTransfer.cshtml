@@ -1,0 +1,172 @@
+﻿@{
+    ViewBag.Title = "BankTransfer";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+<script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTable/jquery.dataTables.js"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTables.bootstrap.min.js"></script>
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+
+
+
+<div class="agile-grids" data-ng-app="MyAppSeller" data-ng-controller="banktransfer" >
+
+    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1" ng-submit="SearchData()">
+    @*<form name="BankTransfer" data-ng-submit="banktransfer" novalidate enctype="multipart/form-data"> *@
+    <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table" style="height:190px;">
+                    <div class="widget-header">
+                        <i class="icon-search"></i>
+                        <h3>Bank Detail</h3>
+                    </div>
+                  
+                    <div class="widget-content" style="height:145px;">
+                        <div class="form-group">
+                       
+                            <div class="row" style="margin:0px; margin-top:10px;">
+                                <div class="col-lg-4">
+                                    <label>Select MarketPlace</label>  
+                                    <select data-ng-model="ddl_marketplaceAPI" name="ddl_marketplaceAPI" class="form-control">                                      
+                                           <option value="0">-- Select--</option>
+                                           <option data-ng-repeat="item in MarketplaceList" value="{{item.Value}}">{{item.Text}}</option>
+                                          </select>                                 
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>From Date</label>  
+                                    <input ng-model="txt_from" id="txt_from" name="Etxt_from"  type="text" class="form-control"/>                                          
+                                </div>
+                                <div class="col-lg-4"> 
+                                    <label>To Date</label>                                
+                                       <div class="datepicker"
+                                                 date-format="dd-MM-yyyy"
+                                                  button-prev='<i class="fa fa-arrow-circle-left"></i>'
+                                                  button-next='<i class="fa fa-arrow-circle-right"></i>'>
+                                              <input ng-model="txt_to" id="txt_to" name="Etxt_to" date='MM-dd-yyyy'   type="text" class="angular-datepicker-input form-control"/>
+                                           @*<span class="error" ng-show="(f1.Etxt_Productfrom.$dirty) && f1.Etxt_Productfrom.$error.required" >Providing dispatch_date is mandatory!</span>*@
+                                        </div> 
+                                </div>                              
+                            </div>
+                             
+                                 
+                            
+                            <div class="row text-center" style="margin:0px; margin-top:20px;">
+                                <input id="searchSubmit" type="submit" value="Search" tabindex="7" class="btn btn-success" />
+                                <input id="searchReset" type="button" ng-click="cleardata();"value="Clear" tabindex="8" class="btn btn-success" />
+                            </div>
+                       @* }*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </form>
+
+
+
+
+    <div class="grids">
+
+        <div class="table-heading">
+            <h4>Bank Details</h4>
+        </div>
+        <div class="row" style="margin-top:30px;">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            S.No
+                        </th>
+                        <th>
+                            Market Place Name
+                        </th>
+
+                        <th> Deposit Date</th>
+                        <th>Amount</th>
+                        <th>
+                            Status
+                        </th>
+                        <th>
+                            Remarks
+                        </th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    <tr dir-paginate="item in BankList|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'" current-page="currentPage">
+                        <th scope="row">
+                            {{ ($index + 1) + (currentPage - 1) * 10}}
+                        </th>
+                        
+                        <td>{{item.MarketPlaceName}}  </td>
+                        <td>{{item.deposit_date.slice(6, -2) | date: 'dd-MM-yyyy'}}  </td>
+                        <td>{{item.amount}}  </td>
+                        <td>
+                            <span ng-show="item.showEdit">{{item.verifystatus}} </span>
+                           @* <select class="form-control" ng-model="item.verifystatus" title="Select" ng-show="!item.showEdit">
+                                <option value="">--Select--</option>
+                                <option value="1" >Verified</option>
+                                <option value="2"> Not Verified</option>
+                            </select>*@
+                             <select class="form-control"  ng-show="!item.showEdit" style="width:80%;height:30%"  ng-model="item.verifystatus" style="width:30%;height:30%">
+                                      <option value="">--Select--</option>
+                                     <option value="1" >Verified</option>
+                                    <option value="2"> Not Verified</option>
+                                  </select>          
+                        </td>
+                        <td>
+                            <span ng-show="item.showEdit">{{item.remarks}} </span>
+                            <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.remarks">
+                        </td>
+                       
+                        <td>
+                            <p ng-show="item.showEdit">
+                                <span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                               
+                            </p>
+
+                            <p ng-show="!item.showEdit">
+                                <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span>
+                            </p>
+                        </td>
+                    </tr>
+
+                </tbody>
+
+                <tbody style="text-align:right;">
+                    <tr>
+                        <td colspan="5" style="text-align:right;">
+                            <dir-pagination-controls max-size="5"
+                                                     direction-links="true"
+                                                     boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                            </dir-pagination-controls>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+        
+</div>
+</div>
+
+<script>
+    $(function () {
+        $('#txt_from').datepicker();
+    });
+    $(function () {
+        $('#txt_to').datepicker();
+    });
+</script>
+
+@section scripts{
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/banktransfer.js"></script>
+}
+
+
+
+     

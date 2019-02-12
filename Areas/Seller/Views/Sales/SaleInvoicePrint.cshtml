@@ -1,0 +1,654 @@
+﻿@model  SellerVendor.Areas.Seller.Models.PrintSaleOrder
+
+@*<script src="~/Areas/Seller/SellerScripts/jquery.PrintArea.js"></script>*@
+@*http://www.c-sharpcorner.com/code/859/convert-rupees-numbers-to-words-string-using-c-sharp-net.aspx*@
+@*<script language="javascript" type="text/javascript">
+        function PrintDivContent(divId) {
+            var printContent = document.getElementById(divId);
+            var WinPrint = window.open('', '', 'left=0,top=0,toolbar=0,sta­tus=0');
+            WinPrint.document.write(printContent.innerHTML);
+            WinPrint.document.close();
+            WinPrint.focus();
+            WinPrint.print();
+        }
+  </script>*@
+@*<script>
+    
+    var win = window.open('', 'printwindow');
+        win.document.write('<html><head><title>Print it!</title><link rel="stylesheet" type="text/css" href="styles.css"></head><body>');
+        win.document.write($("#content").html());
+        win.document.write('</body></html>');
+        win.print();
+        win.close();
+  
+</script>*@
+
+@*<script>
+    function printContent(id) {
+        var data = document.getElementById(id).innerHTML;
+        var popupWindow = window.open('', 'printwin',
+             'left=100,top=100,width=400,height=400');
+        popupWindow.document.write('<HTML>\n<HEAD>\n');
+        popupWindow.document.write('<TITLE></TITLE>\n');
+        popupWindow.document.write('<URL></URL>\n');
+        popupWindow.document.write("<link href='/stylesheets/report.css' media='print' rel='stylesheet' type='text/css' />\n");
+        popupWindow.document.write("<link href='/stylesheets/report.css' media='screen' rel='stylesheet' type='text/css' />\n");
+        popupWindow.document.write('<script>\n');
+        popupWindow.document.write('function print_win(){\n');
+        popupWindow.document.write('\nwindow.print();\n');
+        popupWindow.document.write('\nwindow.close();\n');
+        popupWindow.document.write('}\n');
+        popupWindow.document.write('<\/script>\n');
+        popupWindow.document.write('</HEAD>\n');
+        popupWindow.document.write('<BODY onload="print_win()">\n');
+        popupWindow.document.write(data);
+        popupWindow.document.write('</BODY>\n');
+        popupWindow.document.write('</HTML>\n');
+        popupWindow.document.close();
+    }
+
+
+</script>*@
+
+   @* <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">*@
+@*<div class="row">
+    <div class="col-sm-12">    
+        <a name="b_print" href="#" class="request-button" onclick="PrintDivContent('dv_Print_Sales');">Print</a>
+    </div>
+</div>*@
+
+@*<div class ="row">
+    <div class="col-sm-6">
+        <div><strong>Sold By:</strong> </div>
+        <div> @Model.business_name </div> 
+        <div> @Model.address</div>
+        <div> @Model.city</div>
+        <div> @Model.statename,@Model.pincode</div>
+        <div> @Model.countryname</div>
+         
+        
+    </div>
+    <div class="col-sm-6">
+        <div><strong style="margin-left:205px;">Billing Address:</strong></div>
+        <div style="margin-right:276px;">
+            <div style="text-align:right">@Model.shipping_Buyer_Name</div> 
+            <div style="text-align:right">@Model.Address_1</div>
+            <div style="text-align:right">@Model.Address_2</div>
+            <div style="text-align:right">@Model.City</div>
+            <div style="text-align:right">@Model.State_Region,@Model.Postal_Code</div>
+            <div style="text-align:right">@Model.Country_Code</div>
+        </div>
+    </div>
+
+</div>*@
+@*<div class ="row">
+    <div class="col-sm-6">       
+        <div><strong>Pan No:</strong> @Model.pan </div> 
+        <div><strong>GST Registration No:</strong> @Model.gstin</div>
+        
+         
+        
+    </div>
+    <div class="col-sm-6">
+        <div><strong style="margin-left:189px;">Shipping Address:</strong></div>
+        <div style="margin-right:276px;">
+            <div style="text-align:right">@Model.shipping_Buyer_Name</div> 
+            <div style="text-align:right">@Model.shipping_Buyer_Name</div> 
+            <div style="text-align:right">@Model.Address_1</div>
+            <div style="text-align:right">@Model.Address_2</div>
+            <div style="text-align:right">@Model.City</div>
+            <div style="text-align:right">@Model.State_Region,@Model.Postal_Code</div>
+            <div style="text-align:right">@Model.Country_Code</div>
+        </div>
+    </div>
+
+</div>*@
+
+@*<div class ="row">
+    <div class="col-sm-6">       
+        <div><strong>Order Number:</strong>@Model.amazon_order_id</div> 
+        <div><strong>Order Date:</strong>@Model.purchase_date</div>
+        
+         
+        
+    </div>
+    <div class="col-sm-6">     
+        <div style="margin-right:276px;">
+            <div style="text-align:right"><strong>Invoice Number:</strong>QNCT-2645</div> 
+            <div style="text-align:right"><strong>Invoice Details:</strong>@Model.shipping_Buyer_Name</div> 
+            <div style="text-align:right"><strong>Invoice Date:</strong>@Model.purchase_date</div>
+            
+        </div>
+    </div>
+
+</div>*@
+@*<div class="row">     
+        <div class="col-sm-2">
+            @Html.Label("Business Name")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.business_name</label>
+        </div>
+        <div class="col-sm-2">
+            @Html.Label("Address")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.address</label>
+        </div>      
+    </div>*@
+
+@*<div class="row">     
+        <div class="col-sm-2">
+            @Html.Label("state")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.statename</label>
+        </div>
+        <div class="col-sm-2">
+            @Html.Label("country")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.countryname</label>
+        </div>
+       
+    </div>*@
+
+@*<div class="row">     
+        <div class="col-sm-2">
+            @Html.Label("Pin Code")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.pincode</label>
+        </div>
+        <div class="col-sm-2">
+            @Html.Label("Pan No")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.pan</label>
+        </div>       
+    </div>*@
+
+@*<div class="row">     
+        <div class="col-sm-2">
+            @Html.Label("Gstin")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.gstin</label>
+        </div>
+        <div class="col-sm-2">
+            @Html.Label("Buyer Name")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.shipping_Buyer_Name</label>
+        </div>      
+    </div>*@
+@*<div class="row">     
+        <div class="col-sm-2">
+            @Html.Label("Address1")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.Address_1</label>
+        </div>
+        <div class="col-sm-2">
+            @Html.Label("Address2")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.Address_2</label>
+        </div>      
+    </div>*@
+
+@*<div class="row">     
+        <div class="col-sm-2">
+            @Html.Label("City")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.City</label>
+        </div>
+        <div class="col-sm-2">
+            @Html.Label("Sate/Region")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.State_Region</label>
+        </div>      
+    </div>*@
+
+@*<div class="row">     
+        <div class="col-sm-2">
+            @Html.Label("Postal-Code")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.Postal_Code</label>
+        </div>
+        <div class="col-sm-2">
+            @Html.Label("Country-code")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.Country_Code</label>
+        </div>      
+    </div>*@
+
+@*<div class="row">     
+        <div class="col-sm-2">
+            @Html.Label("Order-Code")
+        </div>
+        <div class="col-sm-4">
+            <label class="label-View"> @Model.amazon_order_id</label>
+        </div>
+        <div class="col-sm-2">
+            @Html.Label("Order Date")
+        </div>
+        <div class="col-sm-4">
+            
+            <label class="label-View"> @Model.purchase_date</label>
+        </div>      
+    </div>*@
+  @*<div id="dv_DirectorName">
+        <table id="tblDirector_Name" class="table table-bordered">
+            <thead title="Directors Details"  style="background-color: darkgrey">
+                <tr>
+                    <th>SERIAL NO</th>
+                    <th>Description</th>
+                    <th>Unit Price</th>
+                    <th>Quantity</th>
+                    <th>Net Amount</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.id > 0)
+                {
+                    int i = 0;
+                    foreach (var item in Model.ddlsaleorderdetailList)
+                    {
+                        i++;
+                        <tr>
+                            <td>@i.</td>
+                            <td><label>@item.product_name</label></td>
+                            <td><label>@item.item_price_amount</label></td>
+                            <td><label>@item.quantity_ordered</label></td>
+                            <td><label>@item.item_price_amount</label>
+                            
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>*@
+
+
+
+   
+   
+ 
+
+
+
+
+<body   id="dv_Print_Sales">
+
+<div class="container" style="max-width:676px;">
+    <div class="row">
+        <div class="col-xs-12">
+			<div class="col-xs-6">    	
+			<h2><img src="~/NewCSS/images/am.jpg"> </h2>
+			</div>
+			
+			<div class="col-xs-6">
+			<h5 style="float:right"> Tax Invoice / Bill of Supply / Cash Memo <br/> (Triplicate For Supplier )</h5><!--<h3 class="pull-right">Order # 12345</h3>-->
+    		</div>
+		</div>
+	</div>	
+    		<hr>
+    		<div class="row">
+    			<div class="col-xs-6">
+    				<address>
+    				<strong>Sold By :</strong><br>
+    					@Model.business_name<br>
+    					@Model.address<br>
+    					@Model.city<br>
+    					@Model.statename,@Model.pincode<br>
+                        @Model.countryname
+					</address>
+    			</div>
+				
+    			<div class="col-xs-6 text-right">
+    				<address>
+        			<strong>Billing Address :</strong><br>
+    					@Model.shipping_Buyer_Name<br>
+    					@Model.Address_1<br>
+    					@Model.Address_2<br>
+    					@Model.State_Region,@Model.Postal_Code<br>
+                        @Model.Country_Code
+    				</address>
+    			</div>
+    		</div>
+			
+			
+			<div class="row"> 
+				<div class="col-xs-6">
+    				<address style="margin-bottom:0px !important;">
+    				<strong>PAN Number :</strong> @Model.pan
+    				</address>
+					<address>
+    				<strong>GST Registration No. :</strong>	@Model.gstin
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right">
+    				<address>
+        			<strong>Shipping Address :</strong><br>
+    					@Model.shipping_Buyer_Name<br>
+                        @Model.shipping_Buyer_Name<br>
+    					@Model.Address_1<br>
+    					@Model.Address_2<br>
+    					@Model.State_Region,@Model.Postal_Code<br>
+                        @Model.Country_Code
+    				</address>
+    			</div>
+    		</div>
+			
+			
+			
+			<div class="row"> 
+				<div class="col-xs-6">
+    				<address style="margin-bottom:0px !important;">
+    				<strong>Order Number :</strong> @Model.amazon_order_id
+    				</address>
+					<address>
+    				<strong>Order Date :</strong>@Model.purchase_date
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right">
+    				<address style="margin-bottom:0px !important;">
+    				<strong>Invoice Number :</strong> ORD/789-12/IN
+    				</address>
+					<address style="margin-bottom:0px !important;">
+    				<strong>Invoice Details :</strong>14.09.2017
+    				</address>
+					<address>
+    				<strong>Invoice Date :</strong>@Model.purchase_date
+    				</address>
+    			</div>
+    		</div>
+    	</div>
+
+    
+    <div class="row" style="margin:0px !important;">
+   @*  <div class="row" style="margin-left: -82px;width:1195px">*@
+	    @*<div class="col-md-1"></div>*@
+    	<div class="col-md-12">
+    		<div class="panel panel-default">    			
+    				<div class="table-responsive" style="max-width:1299px;">
+    					<table class="table table-condensed">
+    						<thead>
+                                <tr style="background-color:#ccc;">
+        							<td><strong>SERIAL NO</strong></td>
+									<td class="text-center"><strong>Description</strong></td>
+									<td class="text-center"><strong>Unit Price</strong></td>
+									<td class="text-center"><strong>Quantity</strong></td>
+        							<td class="text-center"><strong>Net Amount</strong></td>
+        							@*<td class="text-center"><strong>Tax Rate</strong></td>
+									<td class="text-center"><strong>Tax Type</strong></td>
+        							<td class="text-center"><strong>Tax Amt</strong></td>*@
+        							<td class="text-right"><strong>Total</strong></td>
+                                </tr>
+    						</thead>
+    						<tbody style="font-size: 13px">
+    							<!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                 @if (Model.id > 0)
+                                 {
+                                      int i = 0;
+                                      foreach (var item in Model.ddlsaleorderdetailList)
+                                      {
+                                           i++;
+                                            <tr>
+                                                <td>@i.</td>
+                                                <td class="text-center"><label>@item.product_name</label></td>
+                                                <td class="text-center"><label>@item.item_price_amount</label></td>
+                                                <td class="text-center"><label>@item.quantity_ordered</label></td>
+                                                <td class="text-center"><label>@item.item_price_amount</label>
+                                                <td class="text-center"><label>@item.item_price_amount</label>
+                            
+                                                </td>
+                                 </tr>
+    							@*<tr>
+    								<td>1</td>
+    								<td class="text-center">Wildcraft 45 ltrs Black Hiking Backpack ( Savan D Plus Black ) B017B6BAW2 </td>
+    								<td class="text-center">Rs.10</td>
+									<td class="text-center">10</td>
+									<td class="text-center">Rs.9000</td>
+									<td class="text-center">18%</td>
+									<td class="text-center">GST</td>
+									<td class="text-center">Rs.1600</td>
+    								<td class="text-right">Rs.10600</td>
+    							</tr>*@
+                                @*<tr>
+								    <td>2</td>
+        							<td class="text-center">Wildcraft 450 ltrs White Hiking Backpack ( Savan H Plus White ) BA017B6UY72 </td>
+    								<td class="text-center">Rs.10</td>
+									<td class="text-center">10</td>
+									<td class="text-center">Rs.14000</td>
+									<td class="text-center">18%</td>
+									<td class="text-center">GST</td>
+									<td class="text-center">Rs.2600</td>
+    								<td class="text-right">Rs.16600</td>
+    							</tr>*@
+                               
+    							<tr>
+								    <td class="thick-line"><strong>Total:</strong></td>
+    								<td class="thick-line"></td>
+    								<td class="thick-line"></td>
+									@*<td class="thick-line"></td>
+    								<td class="thick-line"></td>*@
+									@*<td class="thick-line"></td>*@
+    								<td class="thick-line"></td>
+    								<td class="thick-line text-center"></td>
+    								<td class="thick-line text-right"><strong>@item.item_price_amount </strong></td>
+    							</tr> 
+                                           
+                                      }
+                                 }  							
+    						</tbody>
+							
+							<tbody style="font-size: 13px">
+								<tr style="border-bottom:1px solid #ccc">
+									<td><strong> Amount In Words:</strong></td>
+									@*<td><strong> Twenty Seven Thousand Two Hundred Only </strong></td>*@
+                                     <td><strong>@Model.AmountWords</strong></td>
+								</tr>
+							</tbody>
+    					</table>
+						
+						<div style="border-top:1px solid #ccc; width:100%;">
+						<div class="col-md-12">
+						<p style="float:right; margin-top:10px;"><b> For MySource Innoventures Pvt Ltd </b></p><br/> <br/><br/>
+						<p style="float:right;"><b>Authorised Signatory </b></p>
+						</div>
+						</div>
+    				</div>    			
+    		</div>
+    	</div>
+    </div>
+
+</body>
+
+
+    @*<div>
+        @Ajax.ActionLink("Back", "MySalesOrderList", "Sales", new AjaxOptions { HttpMethod = "Get",InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning" })
+    </div>*@
+
+
+<div id="dv_Print_Sales1" style="display:none">
+    
+    
+       
+
+
+
+
+
+<div class="container" style="max-width:1000px;" >
+    <div class="row" style="width:100%;">
+        <div class="col-xs-12">
+			<div class="col-xs-6"  style="float:left">    	
+			<h2><img src="~/NewCSS/images/am.jpg"> </h2>
+			</div>
+			
+			<div class="col-xs-6">
+			<h5 style="float:right"> Tax Invoice / Bill of Supply / Cash Memo <br/> (Triplicate For Supplier )</h5><!--<h3 class="pull-right">Order # 12345</h3>-->
+    		</div>
+		</div>
+	</div>	
+    		<hr><br /><br />
+
+    		<div class="row"  style="width:100%;">
+    			<div class="col-xs-6"  style="float:left">
+    				<address>
+    				<strong>Sold By :</strong><br>
+    					@Model.business_name<br>
+    					@Model.address<br>
+    					@Model.city<br>
+    					@Model.statename,@Model.pincode<br>
+                        @Model.countryname
+					</address>
+    			</div>
+				
+    			<div class="col-xs-6 text-right" style="float:right;">
+    				<address>
+        			<strong>Billing Address :</strong><br>
+    					@Model.shipping_Buyer_Name<br>
+    					@Model.Address_1<br>
+    					@Model.Address_2<br>
+    					@Model.State_Region,@Model.Postal_Code<br>
+                        @Model.Country_Code
+    				</address>
+    			</div>
+    		</div>
+			
+			<br /><br />
+			<div class="row" style="width:100%;"> 
+				<div class="col-xs-6"  style="float:left">
+    				<address style="margin-bottom:0px !important;">
+    				<strong>PAN Number :</strong> @Model.pan
+    				</address>
+					<address>
+    				<strong>GST Registration No. :</strong>	@Model.gstin
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right" style="float:right;">
+    				<address>
+        			<strong>Shipping Address :</strong><br>
+    					@Model.shipping_Buyer_Name<br>
+                        @Model.shipping_Buyer_Name<br>
+    					@Model.Address_1<br>
+    					@Model.Address_2<br>
+    					@Model.State_Region,@Model.Postal_Code<br>
+                        @Model.Country_Code
+    				</address>
+    			</div>
+    		</div>
+			
+			
+			<br /><br />
+			<div class="row" style="width:100%;"> 
+				<div class="col-xs-6">
+    				<address style="margin-bottom:0px !important;">
+    				<strong>Order Number :</strong> @Model.amazon_order_id
+    				</address>
+					<address>
+    				<strong>Order Date :</strong>@Model.purchase_date
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right" style="float:right;">
+    				<address style="margin-bottom:0px !important;">
+    				<strong>Invoice Number :</strong> ORD/789-12/IN
+    				</address>
+					<address style="margin-bottom:0px !important;">
+    				<strong>Invoice Details :</strong>14.09.2017
+    				</address>
+					<address>
+    				<strong>Invoice Date :</strong>@Model.purchase_date
+    				</address>
+    			</div>
+    		</div>
+    	</div>
+
+    
+    <div class="row" style="margin:0px !important;">
+	    <div class="col-md-1"></div>
+    	<div class="col-md-10">
+    		<div class="panel panel-default">    			
+    				<div class="table-responsive">
+    					<table class="table table-condensed">
+    						<thead>
+                                <tr style="background-color:#ccc;">
+        							<td><strong>S.No</strong></td>
+									<td class="text-center"><strong>Description</strong></td>
+									<td class="text-center"><strong>Unit Price</strong></td>
+									<td class="text-center"><strong>Qty</strong></td>
+        							<td class="text-center"><strong>Net Amt.</strong></td>
+        							<td class="text-center"><strong>Tax Rate</strong></td>
+									<td class="text-center"><strong>Tax Type</strong></td>
+        							<td class="text-center"><strong>Tax Amt</strong></td>
+        							<td class="text-right"><strong>Total</strong></td>
+                                </tr>
+    						</thead>
+    						<tbody style="font-size: 13px">
+    							<!-- foreach ($order->lineItems as $line) or some such thing here -->
+    							<tr>
+    								<td>1</td>
+    								<td class="text-center">Wildcraft 45 ltrs Black Hiking Backpack ( Savan D Plus Black ) B017B6BAW2 </td>
+    								<td class="text-center">Rs.10</td>
+									<td class="text-center">10</td>
+									<td class="text-center">Rs.9000</td>
+									<td class="text-center">18%</td>
+									<td class="text-center">GST</td>
+									<td class="text-center">Rs.1600</td>
+    								<td class="text-right">Rs.10600</td>
+    							</tr>
+                                <tr>
+								    <td>2</td>
+        							<td class="text-center">Wildcraft 450 ltrs White Hiking Backpack ( Savan H Plus White ) BA017B6UY72 </td>
+    								<td class="text-center">Rs.10</td>
+									<td class="text-center">10</td>
+									<td class="text-center">Rs.14000</td>
+									<td class="text-center">18%</td>
+									<td class="text-center">GST</td>
+									<td class="text-center">Rs.2600</td>
+    								<td class="text-right">Rs.16600</td>
+    							</tr>
+                               
+    							<tr>
+								    <td class="thick-line"><strong>Total</strong></td>
+    								<td class="thick-line"></td>
+    								<td class="thick-line"></td>
+									<td class="thick-line"></td>
+    								<td class="thick-line"></td>
+									<td class="thick-line"></td>
+    								<td class="thick-line"></td>
+    								<td class="thick-line text-center"><strong>Rs.4200</strong></td>
+    								<td class="thick-line text-right"><strong>Rs.27200 </strong></td>
+    							</tr>    							
+    						</tbody>
+							
+							<tbody style="font-size: 13px">
+								<tr style="border-bottom:1px solid #ccc">
+									<td><strong> Amount In Words:</strong></td>
+									<td><strong> Twenty Seven Thousand Two Hundred Only </strong></td>
+								</tr>
+							</tbody>
+    					</table>
+						
+						<div style="border-top:1px solid #ccc; width:100%;">
+						<div class="col-md-12">
+						<p style="float:right; margin-top:10px;"><b> For MySource Innoventures Pvt Ltd </b></p><br/> <br/><br/>
+						<p style="float:right;"><b>Authorised Signatory </b></p>
+						</div>
+						</div>
+    				</div>    			
+    		</div>
+    	</div>
+    </div>
+
+
+    </div>

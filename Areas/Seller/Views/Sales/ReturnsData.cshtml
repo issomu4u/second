@@ -1,0 +1,89 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.ReturensDataDetail>
+@{
+    ViewBag.Title = "ReturnsData";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+    }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+        table th {
+            background-color: #F7F7F7;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table th, table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" >
+          <tr>
+              <th>Sr.No</th>
+
+              <th>ReturnDate</th>
+              <th>Order_id</th>
+              <th>sku</th>
+              <th>Asin</th>
+              <th>Fnsku</th>
+              <th>Product_name</th>
+              <th>quantity</th>
+              <th>fullfillment_centerid</th>
+              <th>DetailedDepostion</th>
+              <th>Reason</th>
+              <th>Licence_paltenumber</th>
+              <th>Customer_comments</th>                         
+           </tr>
+         @if (Model.ToList().Count != 0)
+         {
+             int i =0;
+             foreach (var  customer in Model)
+              {
+                  if (customer.ReturnsDataDetails != null)
+                  {
+                      foreach (var item in customer.ReturnsDataDetails)
+                      {
+                          i++;
+                           <tr>
+                         <td>@i.</td>
+                         <td>@item.ReturnDate</td>
+                         <td>@item.Order_id</td>
+                         <td>@item.sku</td>
+                         <td>@item.Asin</td>
+                         <td>@item.Fnsku</td>
+                         <td>@item.Product_name</td>
+                         <td>@item.quantity</td>
+                         <td>@item.fullfillment_centerid</td>
+                         <td>@item.DetailedDepostion</td>  
+                         <td>@item.Reason</td>  
+                         <td>@item.Licence_paltenumber</td>  
+                         <td>@item.Customer_comments</td>                                                                                
+                       </tr>
+                      }
+                    }
+            
+           }
+         }
+    </table>
+
+  
+</body>
+</html>
+

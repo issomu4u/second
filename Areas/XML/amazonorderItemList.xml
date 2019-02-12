@@ -1,0 +1,152 @@
+﻿<?xml version="1.0"?>
+<!--<ListOrderItemsResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">-->
+<!--<ListOrderItemsResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd">
+  <ListOrderItemsResult>
+    <OrderItems>
+      <OrderItem>
+        <QuantityOrdered>1</QuantityOrdered>
+        <Title>American Tourister LOGIX 01 BLACK 2017 Backpack</Title>
+        <PromotionDiscount>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>0.00</Amount>
+        </PromotionDiscount>
+        <ASIN>B07227VFXT</ASIN>
+        <SellerSKU>LOGIX01BLACK</SellerSKU>
+        <OrderItemId>32849627535403</OrderItemId>
+        <QuantityShipped>1</QuantityShipped>
+        <ItemPrice>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>2950.00</Amount>
+        </ItemPrice>
+        <ItemTax>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>0.00</Amount>
+        </ItemTax>
+      </OrderItem>
+    </OrderItems>
+    <AmazonOrderId>408-4160369-4221149</AmazonOrderId>
+  </ListOrderItemsResult>
+  <ResponseMetadata>
+    <RequestId>0724cd20-47db-45ae-8064-db609e19e4d1</RequestId>
+  </ResponseMetadata>
+</ListOrderItemsResponse>-->
+
+
+<!--<ListOrderItemsResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">-->
+<ListOrderItemsResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd">
+  <ListOrderItemsResult>
+    <OrderItems>
+      <OrderItem>
+        <QuantityOrdered>1</QuantityOrdered>
+        <Title>Baggit Women's Sling Bag (Beige)</Title>
+        <ShippingTax>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>0.00</Amount>
+        </ShippingTax>
+        <PromotionDiscount>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>0.00</Amount>
+        </PromotionDiscount>
+        <ASIN>B01K37XQDM</ASIN>
+        <SellerSKU>LMPAGATEDENONOFFWHITE</SellerSKU>
+        <OrderItemId>45341428300459</OrderItemId>
+        <PromotionIds>
+          <PromotionId>IN Core Free Shipping 2015/04/08 23-48-5-108</PromotionId>
+        </PromotionIds>
+        <QuantityShipped>1</QuantityShipped>
+        <ShippingPrice>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>25.00</Amount>
+        </ShippingPrice>
+        <ItemPrice>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>855.00</Amount>
+        </ItemPrice>
+        <ItemTax>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>0.00</Amount>
+        </ItemTax>
+        <ShippingDiscount>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>25.00</Amount>
+        </ShippingDiscount>
+      </OrderItem>
+    </OrderItems>
+    <AmazonOrderId>408-9451100-7091529</AmazonOrderId>
+  </ListOrderItemsResult>
+  <ResponseMetadata>
+    <RequestId>906b4be3-cc6a-4112-9535-f936d1076aeb</RequestId>
+  </ResponseMetadata>
+</ListOrderItemsResponse>
+
+
+
+<!--<ListOrderItemsResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">-->
+  <!--<ListOrderItemsResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd">
+  <ListOrderItemsResult>
+    <OrderItems>
+      <OrderItem>
+        <QuantityOrdered>1</QuantityOrdered>
+        <Title>Baggit Women's Cosemetic Bag (Gold)</Title>
+        <PromotionDiscount>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>0.00</Amount>
+        </PromotionDiscount>
+        <IsGift>false</IsGift>
+        <ASIN>B01M7OTVK9</ASIN>
+        <SellerSKU>LMPMAHLONCHEEKGOLD</SellerSKU>
+        <OrderItemId>48697433125619</OrderItemId>
+        <QuantityShipped>1</QuantityShipped>
+        <ItemPrice>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>865.00</Amount>
+        </ItemPrice>
+        <ItemTax>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>0.00</Amount>
+        </ItemTax>
+      </OrderItem>
+    </OrderItems>
+    <AmazonOrderId>402-4990918-8647569</AmazonOrderId>
+  </ListOrderItemsResult>
+  <ResponseMetadata>
+    <RequestId>559c60b4-096a-4777-a9b4-113388df4bb7</RequestId>
+  </ResponseMetadata>
+</ListOrderItemsResponse>-->
+
+
+
+<!--<ListOrderItemsResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">-->
+  <!--<ListOrderItemsResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd">
+  <ListOrderItemsResult>
+    <OrderItems>
+      <OrderItem>
+        <QuantityOrdered>1</QuantityOrdered>
+        <Title>Footfun (from Liberty) Unisex Dark Grey Fashion Sandals - 9 kids UK/India (27 EU)</Title>
+        <PromotionDiscount>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>0.00</Amount>
+        </PromotionDiscount>
+        <IsGift>false</IsGift>
+        <ASIN>B01IP2DO9S</ASIN>
+        <SellerSKU>8074022101270</SellerSKU>
+        <OrderItemId>37959835637899</OrderItemId>
+        <QuantityShipped>1</QuantityShipped>
+        <ItemPrice>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>499.00</Amount>
+        </ItemPrice>
+        <ItemTax>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>0.00</Amount>
+        </ItemTax>
+      </OrderItem>
+    </OrderItems>
+    <AmazonOrderId>408-5904900-4132353</AmazonOrderId>
+  </ListOrderItemsResult>
+  <ResponseMetadata>
+    <RequestId>7183386d-a45a-47e5-a05b-481ebf996328</RequestId>
+  </ResponseMetadata>
+</ListOrderItemsResponse>-->
+
+

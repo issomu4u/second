@@ -1,0 +1,181 @@
+﻿@model SellerVendor.Areas.Seller.Models.model_sales_Association
+<script src="~/Areas/Seller/SellerScripts/ManageSalesTable.js"></script>
+
+
+@{ 
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";  
+}
+
+@using (Ajax.BeginForm("SaveSalesAssociation", "Seller", new AjaxOptions { HttpMethod = "POST", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace, OnFailure = "Errmsg(data);" }, new { id = "PurchaseForm", enctype = "multipart/form-data" }))
+{
+
+    @Html.HiddenFor(m => m.id)
+    @Html.HiddenFor(m =>m.tbl_inventory_id)
+     @Html.HiddenFor(m => m.XmlSalesDetails)
+
+    
+     @Html.HiddenFor(m => m.ItemName)
+     @Html.HiddenFor(m => m.Image)
+
+
+
+
+
+<table id="tbl_category" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>MarketPlace</th>
+            <th>Item SKU</th>         
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model!=null)
+        {
+            int i = 0;
+            foreach (var Item in Model.ddlMarketPlaceList)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@Html.DisplayFor(modelitem => Item.Text)</td>
+                    @*<td>@Html.TextBox(modelitem =>)</td>*@
+                    <td>@Html.DisplayFor(modelitem => Item.Text)</td>
+
+                    
+                   
+                </tr>
+
+            }
+
+        }
+    </tbody>
+</table>
+}
+
+@*@using (Ajax.BeginForm("SaveSalesAssociation", "Seller", new AjaxOptions { HttpMethod = "POST", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace, OnFailure = "Errmsg(data);" }, new { id = "PurchaseForm", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.id)
+    @Html.HiddenFor(m =>m.tbl_inventory_id)
+     @Html.HiddenFor(m => m.XmlSalesDetails)
+
+    
+     @Html.HiddenFor(m => m.ItemName)
+     @Html.HiddenFor(m => m.Image)
+
+    
+    
+    
+    <div class="forms-grids">
+                <div class="clearfix"></div>
+                 <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h3 style="color: #292325;">Add Sales Association</h3>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br />
+                               
+                           
+                                 <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                          
+                            <div class="col-sm-8">
+                                  <label class="label-View">@Model.ItemName</label>                  
+                                 
+                            </div>                                        
+                        </div>
+
+                         <div class="col-md-4">
+                          
+                            <div class="col-sm-8 zoomin">
+                               <div class="col-sm-4">
+                                    @if (!string.IsNullOrEmpty(@Model.Image))
+                                        {
+                                           <a href="~/Upload/InventoryManage/@Model.Image" target="_blank"><img style="width: 150px;margin-left: -6px;" src="~/Images/icons/Download.gif" /></a>
+                                        }
+                                  else
+                                {
+                                       <a href="#"><img style="width: 150px;margin-left: -6px;" src="~/Images/icons/Download.gif" /></a>
+                                  }
+            </div>                           
+                                
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                  </div>     
+                                
+                                                         
+ 
+                           <div id="dv_DirectorName">
+        <table id="tblDirector_Name" class="table">
+            <thead title="Directors Details">
+                <tr>
+                    <th>Item Name</th>
+                     <th>Item Count</th>
+                    
+                 
+					 <th>
+                        <input type="button" class="btn btn-sm btn-warning" onclick="AddNewrowDirectors()" value="Add" style="margin-top: 10px;" />
+                    </th>
+                  
+                    <th hidden="hidden">
+                           @Html.DropDownListFor(m => m.m_marketplace_id, Model.ddlMarketPlaceList, "All", new { @class = "chosen-select  text-input form-control m_marketplace_id" })
+                       </th>
+                  
+                </tr>
+            </thead>
+            <tbody>
+                @if(Model !=null)
+                {
+                if (Model.id > 0)
+                {
+                    foreach (var item in Model.ddlsalesassociation)
+                    {
+                        <tr>
+                             <td style="width:128px;">
+                                    <input type='text' value="@item.m_marketplace_id" hidden="hidden" />
+                                    @if (item.m_marketplace_id > 0)
+                                    {
+                                        Model.m_marketplace_id = Convert.ToInt16(item.m_marketplace_id);
+                                        @Html.DropDownListFor(m => m.m_marketplace_id, Model.ddlMarketPlaceList, new { @class = "chosen-select  text-input form-control" })
+                                    }
+                                </td>                            
+                           <td><input type='text' value="@item.model_seller_code" class="validate[required] text-input form-control" /> </td>
+
+                            
+
+                        
+                             <td>
+                                    <div class='col-lg-3'>
+                                        <a class='delete' title='Delete' data-toggle='modal' href='#' onclick='return CountrowDirector($(this));'><i class='glyphicon glyphicon-trash'></i></a>
+                                    </div>
+                              </td>
+                           
+                        </tr>
+                    }
+                    }
+               
+                }
+            </tbody>
+           
+        </table>
+    </div>
+                                     
+                                   
+                                        <div style="width:100%;margin:0 auto; text-align:center;">
+                                          <input type="submit" id="btnsubmit" value="Submit" name="submit" class="btn btn2 btn-primary" onclick="GetPurchaseAttachment(); SavePurchaseAttachment(); SavePurchaseDetails();" />
+                                             @Ajax.ActionLink("Cancel", "Index", "Purchase", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "dv_PartialView", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning" })
+                                        </div>
+                                    </div>                             
+                        </div>
+                       </div>
+                    </div>
+                </div>*@
+}

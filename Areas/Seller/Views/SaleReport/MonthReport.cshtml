@@ -1,0 +1,317 @@
+﻿@*@model IEnumerable<SellerVendor.Areas.Seller.Models.MonthReport>*@
+@using SellerVendor.Areas.Seller.Models;
+@model dynamic
+@{
+    ViewBag.Title = "MonthReport";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";  
+}
+<script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTable/jquery.dataTables.js"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTables.bootstrap.min.js"></script>
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+
+<script type="text/javascript" language="javascript">
+    $("#tab_administration").addClass("active");     
+    $("#searchReset").live("click", function () {
+        $("#ddl_MonthSelecter").val('');
+        $("#ddl_yearSelecter").val('');
+        $("#ddl_market_place").val('');
+        $("#ddl_eftcod").val(0);
+        $("#ddl_reference").val(0);
+    });
+    $("#btn_mail").live("click", function () {
+        var is_check = false;
+        var exp = $("#ddl_export").val();
+        var email = $("#txt_email").val();
+        if (email == "") {
+            is_check = true;
+            $("#txt_email").focus();
+            $("#txt_email").addClass('errorborder');
+        }
+        else $("#txt_email").removeClass('errorborder');
+        if (exp == "") {
+            is_check = true;
+            $("#ddl_export").focus();
+            $("#ddl_export").addClass('errorborder');
+        }
+        else $("#ddl_export").removeClass('errorborder');
+        if (is_check) {
+            return false;
+        }
+        else return true;
+    });
+
+    $(function () {
+        $("#ddl_yearSelecter").html('');
+        $("#ddl_yearSelecter").append("<option value=0>-Select-</option>");
+        var option = function (i, j) { return $("<option>").append(j + 2017); };
+
+        var options = (new Array(02) + "").split(",").map(option);
+
+        $("#ddl_yearSelecter").append(options);
+
+    });
+    $(function () {
+        $("#ddl_yearSelecter_to").html('');
+        $("#ddl_yearSelecter_to").append("<option value=0>-Select-</option>");
+        var option = function (i, j) { return $("<option>").append(j + 2017); };
+
+        var options = (new Array(02) + "").split(",").map(option);
+
+        $("#ddl_yearSelecter_to").append(options);
+
+    });
+
+    $(function () {
+        $("#ddl_MonthSelecter_to").html('');
+        var monthArray = new Array();
+        monthArray[0] = "-Select-";
+        monthArray[1] = "January";
+        monthArray[2] = "February";
+        monthArray[3] = "March";
+        monthArray[4] = "April";
+        monthArray[5] = "May";
+        monthArray[6] = "June";
+        monthArray[7] = "July";
+        monthArray[8] = "August";
+        monthArray[9] = "September";
+        monthArray[10] = "October";
+        monthArray[11] = "November";
+        monthArray[12] = "December";
+        var option1 = function (i, j) { return $("<option value='"+j+"'>").append(monthArray[j]); };
+        debugger;
+        var options1 = (new Array(13) + "").split(",").map(option1);
+        $("#ddl_MonthSelecter_to").append(options1);
+
+    });
+
+    $(function () {
+        $("#ddl_MonthSelecter_from").html('');
+        var monthArray = new Array();
+        monthArray[0] = "-Select-";
+        monthArray[1] = "January";
+        monthArray[2] = "February";
+        monthArray[3] = "March";
+        monthArray[4] = "April";
+        monthArray[5] = "May";
+        monthArray[6] = "June";
+        monthArray[7] = "July";
+        monthArray[8] = "August";
+        monthArray[9] = "September";
+        monthArray[10] = "October";
+        monthArray[11] = "November";
+        monthArray[12] = "December";
+        var option1 = function (i, j) { return $("<option value='" + j + "'>").append(monthArray[j]); };
+        debugger;
+        var options1 = (new Array(13) + "").split(",").map(option1);
+        $("#ddl_MonthSelecter_from").append(options1);
+
+    });
+    function SaveRow() {
+        var marketplace = $('#ddl_market_place').val();
+        var month_to = $('#ddl_MonthSelecter_to').val();
+        var month_from = $('#ddl_MonthSelecter_from').val();
+        var year = $('#ddl_yearSelecter').val();
+        var year_to = $('#ddl_yearSelecter_to').val();
+
+        if (marketplace == null || marketplace == 0) {
+            alert('Select Market place');
+            return false;
+        }
+        if (month_to == null || month_to == 0) {
+            alert('Select Month From');
+            return false;
+        }
+        if (month_from == null || month_from == 0) {
+            alert('Select Month To');
+            return false;
+        }
+        if (year == null || year == 0) {
+            alert('Select Year From');
+            return false;
+        }
+        if (year_to == null || year_to == 0) {
+            alert('Select Year To');
+            return false;
+        }
+    }
+    
+</script>
+
+<style>
+    .text-right {
+        text-align: right;
+    }
+</style>
+
+
+@using (Html.BeginForm("MonthReport", "SaleReport", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row" style="margin:0px;">
+            <h3>Month Report</h3>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table">
+                    <div class="widget-header">
+                        <i class="icon-search"></i>
+                        <h3>Filter</h3>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="row" style="margin: 0px; margin-top: 10px;">
+                                <div class="col-lg-4">
+                                    <label>Select Market Place</label>
+                                    @Html.DropDownList("ddl_market_place", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control", onchange = "ddlCatChange();" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="exampleSelect1">Select Month From</label>
+                                     @Html.DropDownList("ddl_MonthSelecter_from", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })
+                                       
+                                </div>
+                                 <div class="col-lg-4">
+                                    <label for="exampleSelect1">Select Month To</label>
+                                     @Html.DropDownList("ddl_MonthSelecter_to", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })
+                                       
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="exampleSelect1">Select Year From</label>
+                                     @Html.DropDownList("ddl_yearSelecter", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })                                 
+                                </div>
+                                <div class="col-lg-4">
+                                    <label for="exampleSelect1">Select Year To</label>
+                                     @Html.DropDownList("ddl_yearSelecter_to", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })                                 
+                                </div>
+                            </div>
+                            <div class="row text-center" style="margin: 0px; margin-top: 10px;">
+                                <input id="searchSubmit" type="submit" value="Search" onclick="return SaveRow()"; tabindex="7" class="btn btn-success" />
+                                <input id="searchReset" type="button" value="Clear" tabindex="8" class="btn btn-success" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+
+     <div class="row">
+                <div class="span12">
+                    <div class="col-md-12 text-right" style="margin-bottom: 10px;">
+                        @Html.DropDownList("ddl_export", ViewData["ExportList"] as List<SelectListItem>, new { @style = "width:100px; height:35px;margin-right:5px;" })
+                        <input type="submit" value="Export" id="btn_export" name="command" class="btn btn-small btn-success text-right" />
+                    </div>
+                </div>
+              
+            </div>
+
+                <div class="row">
+                    <div class="span12">
+                        <div class="widget widget-table action-table">
+                            <div class="widget-header">
+                                <i class="icon-th-list"></i>
+                                <h3>Month Voucher</h3>
+                            </div>                   
+                            <div class="widget-content">
+                                <div class="form-group">  
+                                    <table id="dv_EmployeeReportExcel" class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Particulars</th>
+                                                <th colspan="@Model.SowMonthColumn.ColSpan">Month</th> 
+                                                <th rowspan="2" style="vertical-align: top;">Total</th>                                                                                                                                                                                                                                                                             
+                                            </tr>   
+                                             <tr>
+                                                 <th></th>
+                                                 @*<th></th>*@
+                                                 @if (Model.SowMonthColumn.ShowJan)
+                                                 {<th>January</th>}
+                                                 @if (Model.SowMonthColumn.ShowFeb)
+                                                 {<th>February</th>}
+                                                 @if (Model.SowMonthColumn.ShowMarch)
+                                                 {<th>March</th>}
+                                                 @if (Model.SowMonthColumn.ShowApril)
+                                                 {<th>April</th>}
+                                                 @if (Model.SowMonthColumn.ShowMay)
+                                                 {<th>May</th>}
+                                                 @if (Model.SowMonthColumn.ShowJune)
+                                                 {<th>June</th>}
+                                                 @if (Model.SowMonthColumn.ShowJuly)
+                                                 {<th>July</th>}
+                                                 @if (Model.SowMonthColumn.ShowAug)
+                                                 {<th>August</th>}
+                                                 @if (Model.SowMonthColumn.ShowSept)
+                                                 {<th>September</th>}
+                                                 @if (Model.SowMonthColumn.ShowOct)
+                                                 {<th>October</th>}
+                                                 @if (Model.SowMonthColumn.ShowNov)
+                                                 {<th>November</th>}
+                                                 @if (Model.SowMonthColumn.ShowDec)
+                                                 {<th>December</th>}                                                                                                                                                                                                                                                                                                                       
+                                            </tr> 
+                                                                                   
+                                        </thead>
+                                        <tbody>
+                                            @if (Model.MonthReport.Count != 0)
+                                            {
+                                                //int i = 0;
+                                                foreach (MonthReport item in Model.MonthReport)
+                                                {
+                                                    //i++;                                                                                                    
+                                                    <tr>
+                                                        @*<td><b>@Html.DisplayFor(a => item.Number)</b></td>*@
+                                                        <td><b>@Html.DisplayFor(a => item.particulars)</b></td>
+                                                         @if (Model.SowMonthColumn.ShowJan)
+                                                        { <td> @Html.DisplayFor(a => item.Jan)</td>}
+                                                         @if (Model.SowMonthColumn.ShowFeb)
+                                                         {<td>@Html.DisplayFor(a => item.Feb)</td>}
+                                                         @if (Model.SowMonthColumn.ShowMarch)
+                                                         {<td>@Html.DisplayFor(a => item.March)</td>}
+                                                         @if (Model.SowMonthColumn.ShowApril)
+                                                         {<td>@Html.DisplayFor(a => item.April)</td>}
+                                                         @if (Model.SowMonthColumn.ShowMay)
+                                                         {<td>@Html.DisplayFor(a => item.May)</td>}
+                                                        @if (Model.SowMonthColumn.ShowJune)
+                                                        {<td>@Html.DisplayFor(a => item.June)</td>}
+                                                        @if (Model.SowMonthColumn.ShowJuly)
+                                                        {<td>@Html.DisplayFor(a => item.July)</td>}
+                                                        @if (Model.SowMonthColumn.ShowAug)
+                                                        {<td>@Html.DisplayFor(a => item.Aug)</td>}
+                                                         @if (Model.SowMonthColumn.ShowSept)
+                                                         {<td>@Html.DisplayFor(a => item.Sept)</td>}
+                                                        @if (Model.SowMonthColumn.ShowOct)
+                                                        {<td>@Html.DisplayFor(a => item.Oct)</td>}
+                                                        @if (Model.SowMonthColumn.ShowNov)
+                                                        {<td>@Html.DisplayFor(a => item.Nov)</td>}
+                                                        @if (Model.SowMonthColumn.ShowDec)
+                                                        {<td>@Html.DisplayFor(a => item.Dec)</td> }                                                       
+                                                        <td>@Html.DisplayFor(a => item.Total_mounthcount)</td>                                                                                                                                                                                                  
+                                                    </tr>
+                                                   
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>                           
+                            </div>                    
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        
+} 
+
+<script>
+    $(function () { $("#dv_EmployeeReportExcel").DataTable(); });
+    $(function () {
+        $('#txt_from').datepicker();
+    });
+</script>
+  <script type="text/javascript">
+      $(function () {
+          $('#txt_to').datepicker();
+      });
+</script>

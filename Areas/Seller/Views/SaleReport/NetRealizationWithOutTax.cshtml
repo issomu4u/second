@@ -1,0 +1,131 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.SaleReport>
+@{
+    ViewBag.Title = "SaleOrderReport";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+  
+}
+<script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTable/jquery.dataTables.js"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTables.bootstrap.min.js"></script>
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" language="javascript">
+    $("#tab_administration").addClass("active");
+    $("#searchReset").live("click", function () {
+        $("#txt_from").val('');
+        $("#txt_to").val('');
+        $('#ddl_market_place').val(0);
+    });
+
+    $("#btn_mail").live("click", function () {
+        var is_check = false;
+        var exp = $("#ddl_export").val();
+        var email = $("#txt_email").val();
+        if (email == "") {
+            is_check = true;
+            $("#txt_email").focus();
+            $("#txt_email").addClass('errorborder');
+        }
+        else $("#txt_email").removeClass('errorborder');
+        if (exp == "") {
+            is_check = true;
+            $("#ddl_export").focus();
+            $("#ddl_export").addClass('errorborder');
+        }
+        else $("#ddl_export").removeClass('errorborder');
+        if (is_check) {
+            return false;
+        }
+        else return true;
+    });
+
+    function SaveRow() {
+        var marketplace = $('#ddl_market_place').val();
+        var txtFrom = $('#txt_from').val();
+        var txtTo = $('#txt_to').val();
+
+        if (marketplace == null || marketplace == 0) {
+            alert('Select Market place');
+            return false;
+        }
+        if (txtFrom == null || txtFrom == 0) {
+            alert('Select Date From ');
+            return false;
+        }
+        if (txtTo == null || txtTo == 0) {
+            alert('Select Date To');
+            return false;
+        }
+    }
+</script>
+
+<style>
+    .text-right {
+        text-align: right;
+    }
+</style>
+  @using (Html.BeginForm("NetRealizationWithOutTax", "SaleReport", FormMethod.Post))
+  {
+    <div class="container">
+        <div class="row" style="margin:0px;">
+            <h3> Net Realization Without Tax Report</h3>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table">
+                    <div class="widget-header">
+                        <i class="icon-search"></i>
+                        <h3>Filter</h3>
+                    </div>
+                  
+                    <div class="widget-content">
+                        <div class="form-group">
+                            
+                     <div class="row" style="margin:0px; margin-top:10px;">
+                                <div class="col-lg-4">
+                                    <label>Select Market Place</label>
+                                    @Html.DropDownList("ddl_market_place", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control"})                                                                
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>From Date</label>  
+                                    @Html.TextBox("txt_from", "", new { @class = "search-input validate[required] form-control" })                                                
+                                </div>
+                                <div class="col-lg-4"> 
+                                    <label>To Date</label>                                
+                                        @Html.TextBox("txt_to", "", new { @class = "search-input validate[required] form-control" })
+                                </div>                               
+                            </div>
+                           <div class="row" style="margin:0px;margin-top:10px;">                            
+                               <div class="col-lg-4">
+
+                               </div>
+                                                    
+                           </div>
+                             <div class="row text-center" style="margin:0px; margin-top:10px;">
+                                <input id="searchSubmit" type="submit" value="Search" onclick="return SaveRow()"; tabindex="7" class="btn btn-success" />
+                                <input id="searchReset" type="button" value="Clear" tabindex="8" class="btn btn-success" />
+                            </div>
+                      @*    }*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+ </div>
+      
+  }
+<script>
+    $(function () { $("#tbl-company").DataTable(); });
+    $(function () {
+        $('#txt_from').datepicker();
+    });
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#txt_to').datepicker();
+    });
+</script>
+

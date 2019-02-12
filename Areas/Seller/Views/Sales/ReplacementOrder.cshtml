@@ -1,0 +1,84 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.AmazonReplacementOrder>
+@{
+    ViewBag.Title = "ReplacementOrder";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+    }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+        table th {
+            background-color: #F7F7F7;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table th, table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" >
+          <tr>
+              <th>Sr.No</th>
+
+              <th>ShipmentDate</th>
+              <th>SKU</th>
+              <th>ASIN</th>
+              <th>FullfillmentcenterId</th>
+              <th>OriginalFullfillmentcenterID</th>
+
+              <th>Quantity</th>
+              <th>ReplacementReasonCode</th>
+              <th>ReplacementAmazonOrderID</th>
+              <th>OrigialAmazonOrderID</th>
+             
+           </tr>
+         @if (Model.ToList().Count != 0)
+         {
+             int i =0;
+             foreach (var  customer in Model)
+              {
+                  if (customer.ReplacementOrderDetails != null)
+                  {
+                      foreach (var item in customer.ReplacementOrderDetails)
+                      {
+                          i++;
+                           <tr>
+                         <td>@i.</td>
+                         <td>@item.ShipmentDate</td>
+                         <td>@item.SKU</td>
+                         <td>@item.ASIN</td>
+                         <td>@item.FullfillmentcenterId</td>
+                         <td>@item.OriginalFullfillmentcenterID</td>
+                         <td>@item.Quantity</td>
+                         <td>@item.ReplacementReasonCode</td>
+                         <td>@item.ReplacementAmazonOrderID</td>
+                         <td>@item.OrigialAmazonOrderID</td>                       
+                       </tr>
+                      }
+                    }
+            
+           }
+         }
+    </table>
+
+  
+</body>
+</html>

@@ -1,0 +1,292 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.SaleReport>
+@{
+    ViewBag.Title = "SaleOrderReport";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+
+}
+<script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTable/jquery.dataTables.js"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTables.bootstrap.min.js"></script>
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" language="javascript">
+    $("#tab_administration").addClass("active");
+    $("#searchReset").live("click", function () {
+        $("#txt_from").val('');
+        $("#txt_to").val('');
+        $('#ddl_market_place').val(0);
+    });
+
+    $("#btn_mail").live("click", function () {
+        var is_check = false;
+        var exp = $("#ddl_export").val();
+        var email = $("#txt_email").val();
+        if (email == "") {
+            is_check = true;
+            $("#txt_email").focus();
+            $("#txt_email").addClass('errorborder');
+        }
+        else $("#txt_email").removeClass('errorborder');
+        if (exp == "") {
+            is_check = true;
+            $("#ddl_export").focus();
+            $("#ddl_export").addClass('errorborder');
+        }
+        else $("#ddl_export").removeClass('errorborder');
+        if (is_check) {
+            return false;
+        }
+        else return true;
+    });
+
+    function SaveRow() {
+        var marketplace = $('#ddl_market_place').val();
+        var txtFrom = $('#txt_from').val();
+        var txtTo = $('#txt_to').val();
+
+        if (marketplace == null || marketplace == 0) {
+            alert('Select Market place');
+            return false;
+        }
+        if (txtFrom == null || txtFrom == 0) {
+            alert('Select Date From ');
+            return false;
+        }
+        if (txtTo == null || txtTo == 0) {
+            alert('Select Date To');
+            return false;
+        }
+    }
+</script>
+
+<style>
+    .text-right {
+        text-align: right;
+    }
+</style>
+@using (Html.BeginForm("NetRealizationWithOutTax", "SaleReport", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row" style="margin:0px;">
+            <h3>Paytm Net Realization Without Tax Report</h3>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table">
+                    <div class="widget-header">
+                        <i class="icon-search"></i>
+                        <h3>Filter</h3>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="form-group">
+
+                            <div class="row" style="margin:0px; margin-top:10px;">
+                                <div class="col-lg-4">
+                                    <label>Select Market Place</label>
+                                    @Html.DropDownList("ddl_market_place", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>From Date</label>
+                                    @Html.TextBox("txt_from", "", new { @class = "search-input validate[required] form-control" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>To Date</label>
+                                    @Html.TextBox("txt_to", "", new { @class = "search-input validate[required] form-control" })
+                                </div>
+                            </div>
+                            <div class="row" style="margin:0px;margin-top:10px;">
+                                <div class="col-lg-4">
+
+                                </div>
+
+                            </div>
+                            <div class="row text-center" style="margin:0px; margin-top:10px;">
+                                <input id="searchSubmit" type="submit" value="Search" onclick="return SaveRow()" ; tabindex="7" class="btn btn-success" />
+                                <input id="searchReset" type="button" value="Clear" tabindex="8" class="btn btn-success" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <div class="col-md-12 text-right" style="margin-bottom: 10px;">
+                    @Html.DropDownList("ddl_export", ViewData["ExportList"] as List<SelectListItem>, new { @style = "width:100px; height:35px;margin-right:5px;" })
+                    <input type="submit" value="Export" id="btn_export" name="command" class="btn btn-small btn-success text-right" />
+                </div>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table">
+                    <div class="widget-header">
+                        <i class="icon-th-list"></i>
+                        <h3>Paytm Net Realization WithOut Tax Ledger</h3>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="form-group">
+
+                            <table id="tbl-company" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>OrderID</th>
+                                        <th>SKU-No</th>
+                                        <th>ItemName</th>
+                                        <th>ItemPrice</th>
+                                        <th>Product Value</th>
+
+                                        <th>Order Reference Payment-ID</th>
+                                        <th>Refund Reference Payment-ID</th>
+                                        <th>Order-Product Value</th>
+
+                                        <th>Marketplace Commission</th>
+                                        <th>Logistics Charges</th>
+                                        <th>PG Commission</th>
+                                        <th>Penalty</th>
+                                        <th>Net Adjustments</th>
+
+                                        <th>Total Expenses</th>
+                                        <th>Net Realization</th>
+                                        <th>Net Realization %</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ToList().Count != 0)
+                                    {
+                                        int i = 0;
+                                        foreach (var item in Model)
+                                        {
+                                            i++;
+                                            <tr>
+                                                <td>@i.</td>
+                                                <td>@Html.DisplayFor(a => item.OrderID)</td>
+                                                <td>@Html.DisplayFor(a => item.skuNo)</td>
+                                                <td>@Html.DisplayFor(a => item.ProductName)</td>
+                                                <td>@if (item.ProductValue != 0)
+                                                {@Html.DisplayFor(a => item.ProductValue)}</td>
+                                                <td>@if (item.ordertotal != 0)
+                                                {@Html.DisplayFor(a => item.ordertotal)}</td>
+
+                                                <td>@Html.DisplayFor(a => item.ReferenceID)</td>
+                                                <td>@Html.DisplayFor(a => item.refundReferenceID)</td>
+                                                <td>@if (item.Flip_Totalordervalue != 0)
+                                                {@Html.DisplayFor(a => item.Flip_Totalordervalue)}</td>
+
+                                                <td>@if (item.ActualFBAFee != 0)
+                                                {@Html.DisplayFor(a => item.ActualFBAFee)}</td>
+                                                <td>@if (item.ActualTechnologyFee != 0)
+                                                {@Html.DisplayFor(a => item.ActualTechnologyFee)}</td>
+                                                <td>@if (item.ActualCommission != 0)
+                                                {@Html.DisplayFor(a => item.ActualCommission)}</td>
+                                                <td>@if (item.ActualFixedClosingFee != 0)
+                                                {@Html.DisplayFor(a => item.ActualFixedClosingFee)}</td>
+                                                <td>@if (item.ActualShippingChargebackFee != 0)
+                                                {@Html.DisplayFor(a => item.ActualShippingChargebackFee)}</td>
+
+                                                <td>@if (item.FullExpenseTotal != 0)
+                                                {@Html.DisplayFor(a => item.FullExpenseTotal)}</td>
+                                                <td>@Html.DisplayFor(a => item.ActualNetTotal)</td>
+                                                <td>@Html.DisplayFor(a => item.PercentageAmount)</td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                            @*<table id="tbl-company" class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>S.No</th>
+                                            <th>OrderID</th>
+                                            <th>SKU-No</th>
+                                            <th>ItemName</th>
+                                            <th>ItemPrice</th>
+                                            <th>Product Value</th>
+                                            <th>Ref_No</th>
+                                            <th>Order-Commission</th>
+                                            <th>Order-Shipping Fee</th>
+                                            <th>Order-Collection Fee</th>
+                                            <th>Order-Reverse Shipping Fee</th>
+                                            <th>Order-Fixed Fee</th>
+                                            <th>Order-Realization</th>
+                                            <th>Refund_Ref_No</th>
+                                            <th>Refund_Commission</th>
+                                            <th>Refund_Shipping Fee</th>
+                                            <th>Refund_Collection Fee</th>
+                                            <th>Refund_Reverse Shipping Fee</th>
+                                            <th>Refund_Fixed Fee</th>
+                                            <th>Amount Paid</th>
+                                            <th>Net Realization</th>
+                                            <th>Net Realization %</th>
+                                            <th>Profit/Loss Per Order</th>
+                                            <th>Order Expenses</th>
+                                            <th>Refund Expenses</th>
+                                        </tr>
+
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.ToList().Count != 0)
+                                        {
+                                            int i = 0;
+                                            foreach (var item in Model)
+                                            {
+                                                i++;
+                                                <tr>
+                                                   <td>@i.</td>
+                                                    <td>@Html.DisplayFor(a => item.OrderID)</td>
+                                                    <td>@Html.DisplayFor(a => item.skuNo)</td>
+                                                    <td>@Html.DisplayFor(a => item.ProductName)</td>
+                                                    <td>@if (item.ProductValue != 0){@Html.DisplayFor(a => item.ProductValue)}</td>
+                                                    <td>@if (item.ordertotal != 0){@Html.DisplayFor(a => item.ordertotal)}</td>
+                                                    <td>@Html.DisplayFor(a => item.ReferenceID)</td>
+                                                    <td>@if (item.CommissionFee != 0){@Html.DisplayFor(a => item.CommissionFee)}</td>
+                                                    <td>@if (item.flipShipping != 0){@Html.DisplayFor(a => item.flipShipping)}</td>
+                                                    <td>@if (item.flipCollection != 0){@Html.DisplayFor(a => item.flipCollection)}</td>
+                                                    <td>@if (item.flipReverseShipping != 0){@Html.DisplayFor(a => item.flipReverseShipping)}</td>
+                                                    <td>@if (item.flipFixedFee != 0){@Html.DisplayFor(a => item.flipFixedFee)}</td>
+                                                    <td>@Html.DisplayFor(a => item.SumOrder)</td>
+                                                    <td>@Html.DisplayFor(a => item.refundReferenceID)</td>
+                                                    <td>@if (item.RefundCommissionFee != 0){@Html.DisplayFor(a => item.RefundCommissionFee)}</td>
+                                                    <td>@if (item.refund_flipShipping != 0){@Html.DisplayFor(a => item.refund_flipShipping)}</td>
+                                                    <td>@if (item.refund_flipCollection != 0){@Html.DisplayFor(a => item.refund_flipCollection)}</td>
+                                                    <td>@if (item.refund_flipReverseShipping != 0){@Html.DisplayFor(a => item.refund_flipReverseShipping)}</td>
+                                                    <td>@if (item.refund_flipFixedFee != 0){@Html.DisplayFor(a => item.refund_flipFixedFee)}</td>
+                                                    <td>@Html.DisplayFor(a => item.refund_SumOrder)</td>
+                                                    <td>@Html.DisplayFor(a => item.NetTotal)</td>
+                                                    <td>@Html.DisplayFor(a => item.PercentageAmount)</td>
+                                                    <td>@if (item.Profit_lossAmount != 0){@Html.DisplayFor(a => item.Profit_lossAmount)}</td>
+                                                    <td>@if (item.SumFee != 0){@Html.DisplayFor(a => item.SumFee)}</td>
+                                                    <td>@if (item.refund_SumFee != 0){@Html.DisplayFor(a => item.refund_SumFee)}</td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(function () { $("#tbl-company").DataTable(); });
+    $(function () {
+        $('#txt_from').datepicker();
+    });
+
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#txt_to').datepicker();
+    });
+</script>
+

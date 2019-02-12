@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Test";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <link rel="stylesheet" href="//cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css" />
+
+</head>
+
+<body ng-app="myShoppingList">
+    <div ng-controller="myCtrl" class="code">
+        <button ng-click="changePersons()">Change persons</button>
+        {{ message }}
+        <table datatable="ng">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>FirstName</th>
+                    <th>LastName</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr dt-rows ng-repeat="person in persons">
+                    <td>{{ person.id }}</td>
+                    <td>{{ person.firstName }}</td>
+                    <td>{{ person.lastName }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script   src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="//cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    @*<script type="text/javascript"  src="http://code.angularjs.org/1.2.15/angular.js"></script>*@
+    <script src="https://rawgithub.com/vivendi/angular-datatables/master/src/angular-datatables.js"></script>
+	<script src="https://rawgithub.com/vivendi/angular-datatables/master/src/angular-datatables.directive.js"></script>
+	<script src="https://rawgithub.com/vivendi/angular-datatables/master/src/angular-datatables.factory.js"></script>
+	<script src="https://rawgithub.com/vivendi/angular-datatables/master/src/angular-datatables.bootstrap.js"></script>
+         <script>
+             var app = angular.module("myShoppingList", ['datatable']);
+        app.controller("myCtrl", function($scope) {
+            $scope.products = ["Milk", "Bread", "Cheese"];
+        });
+        </script>
+    
+</body>
+
+</html>

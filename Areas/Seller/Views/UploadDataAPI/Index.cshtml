@@ -1,0 +1,1438 @@
+﻿@model SellerVendor.Areas.Seller.Models.vieworderUpload
+@{
+    ViewBag.Title = "DataUpload";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+    int k = 0;
+  
+}
+    <script src="~/Areas/Seller/SellerScripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Areas/Seller/SellerScripts/Cat/naresh.js"></script>
+    <link href="~/Areas/Seller/NewCSS/css/Cat/jquery.alerts.css" rel="stylesheet" />
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+<script src="~/Areas/Seller/TabCss/jquery-ui.js"></script>
+<script src="~/Areas/Seller/TabCss/jquery-1.10.2.js"></script>
+<script type="text/javascript" language="javascript">
+    $("#tab_administration").addClass("active");
+
+
+    function SaveRow() {
+        var txtFrom = $('#txt_from').val();
+        var ddl_marketplace = $('#ddl_marketplaceAPI').val();
+        var txtTo = $('#txt_to').val();
+        if (ddl_marketplace == null || ddl_marketplace == 0) {
+            alert('Select Market Place ');
+            return false;
+        }
+        if (txtFrom == null || txtFrom == 0) {
+            alert('Select Date From ');
+            return false;
+        }
+        if (txtTo == null || txtTo == 0) {
+            alert('Select Date To');
+            return false;
+        }
+
+
+    }
+    function clearform() {
+        $('#ddl_marketplaceAPI').val(0);
+        $('#txt_from').val('');
+        $('#txt_to').val('');
+        $('#ddl_marketplaceOrder').val(0);
+        $('#ddl_marketplacebulk').val(0);
+        $('#ddl_marketplaceSettAPI').val(0);
+        $('#ddl_marketplaceReturn').val(0);
+        $('#txt_Settlementfrom').val('');
+        $('#txt_settlementto').val('');
+        $('#ddl_marketplaceTax').val(0);
+
+        $('#ddl_marketplacereturnAPI').val(0);
+        $('#txt_fromReturn').val('');
+        $('#txt_toReturn').val('');
+        $('#file1').val('');
+        $('#file').val('');
+        $('#file2').val('');
+        $('#file4').val('');
+    }
+    function SaveBulkOrder() {
+        var ddl_marketplace = $('#ddl_marketplaceOrder').val();
+        if (ddl_marketplace == null || ddl_marketplace == 0) {
+            alert('Select Market Place ');
+            return false;
+        }
+    }
+
+    function SaveBulkSettlement() {
+        var ddl_marketplace = $('#ddl_marketplacebulk').val();
+        if (ddl_marketplace == null || ddl_marketplace == 0) {
+            alert('Select Market Place ');
+            return false;
+        }
+
+    }
+
+    function SaveSettlementAPI() {
+        var ddl_marketplace = $('#ddl_marketplaceSettAPI').val();
+        var txtFrom = $('#txt_Settlementfrom').val();
+        var txtTo = $('#txt_settlementto').val();
+        if (ddl_marketplace == null || ddl_marketplace == 0) {
+            alert('Select Market Place ');
+            return false;
+        }
+        if (txtFrom == null || txtFrom == 0) {
+            alert('Select Date From');
+            return false;
+        }
+        if (txtTo == null || txtTo == 0) {
+            alert('Select Date To');
+            return false;
+        }
+        //clearform();
+    }
+
+    function SaveBulkTax() {
+        var ddl_marketplace = $('#ddl_marketplaceTax').val();
+        if (ddl_marketplace == null || ddl_marketplace == 0) {
+            alert('Select Market Place ');
+            return false;
+        }
+    }
+
+    function SaveBulkReturn() {
+        var ddl_marketplace = $('#ddl_marketplaceReturn').val();
+        if (ddl_marketplace == null || ddl_marketplace == 0) {
+            alert('Select Market Place ');
+            return false;
+        }
+    }
+
+    function SaveReturnAPI() {
+        var ddl_marketplace = $('#ddl_marketplacereturnAPI').val();
+        var txtFrom = $('#txt_fromReturn').val();
+        var txtTo = $('#txt_toReturn').val();
+        if (ddl_marketplace == null || ddl_marketplace == 0) {
+            alert('Select Market Place ');
+            return false;
+        }
+        if (txtFrom == null || txtFrom == 0) {
+            alert('Select Date From');
+            return false;
+        }
+        if (txtTo == null || txtTo == 0) {
+            alert('Select Date To');
+            return false;
+        }
+    }
+
+
+    function SaveProductAPI() {
+        var ddl_marketplace = $('#ddl_marketplaceProductAPI').val();
+        var txtFrom = $('#txt_Productfrom').val();
+        var txtTo = $('#txt_Productto').val();
+        if (ddl_marketplace == null || ddl_marketplace == 0) {
+            alert('Select Market Place ');
+            return false;
+        }
+        if (txtFrom == null || txtFrom == 0) {
+            alert('Select Date From');
+            return false;
+        }
+        if (txtTo == null || txtTo == 0) {
+            alert('Select Date To');
+            return false;
+        }
+    }
+</script>
+
+ <script>
+     $(document).ready(function () {
+         $('#txt_Settlementfrom').val('');
+         $('#txt_settlementto').val('');
+
+         $('#txt_from').val('');
+         $('#txt_to').val('');
+
+         $('#txt_fromReturn').val('');
+         $('#txt_toReturn').val('');
+         $('#txt_Productfrom').val('');
+         $('#txt_Productto').val('');
+
+         $("#ddl_marketplaceOrder").val(0);
+         $("#ddl_marketplaceAPI").val(0);
+         $("#ddl_marketplacebulk").val(0);
+         $("#ddl_marketplaceSettAPI").val(0);
+         $("#ddl_marketplaceTax").val(0);
+         $("#ddl_marketplaceReturn").val(0);
+         $("#ddl_marketplacereturnAPI").val(0);
+         $("#ddl_marketplaceProductAPI").val(0);
+
+     });
+     $(function () {
+
+
+         $("#countrytabs").tabs({
+             activate: function (event, ui) {
+                 //alert("PRESSED TAB!");
+                 $('#txt_Settlementfrom').val('');
+                 $('#txt_settlementto').val('');
+
+                 $('#txt_from').val('');
+                 $('#txt_to').val('');
+
+                 $('#txt_fromReturn').val('');
+                 $('#txt_toReturn').val('');
+                 $('#txt_Productfrom').val('');
+                 $('#txt_Productto').val('');
+
+                 $("#ddl_marketplaceOrder").val(0);
+                 $("#ddl_marketplaceAPI").val(0);
+                 $("#ddl_marketplacebulk").val(0);
+                 $("#ddl_marketplaceSettAPI").val(0);
+                 $("#ddl_marketplaceTax").val(0);
+                 $("#ddl_marketplaceReturn").val(0);
+                 $("#ddl_marketplacereturnAPI").val(0);
+                 $("#ddl_marketplacereturnAPI").val(0);
+                 $("#ddl_marketplaceProductAPI").val(0);
+
+             }
+         });
+     });
+
+    </script>
+
+
+
+
+<div id="countrytabs"  data-ng-app="MyAppSeller" ng-controller="UploadDataAPIController" style="width: 1182px;">    
+    
+          <div data-ng-if="loading" class="loadingdiv"><img src="/Images/ajax-loader.gif" class="ajax-loader" /></div>        
+        <ul>  
+            <li><a href="#countrytabs-1">Sales</a></li>                  
+            <li><a href="#countrytabs-2">Settlement</a></li>
+            <li><a href="#countrytabs-3">Tax</a></li>
+            <li><a href="#countrytabs-4">Returns</a></li>
+             <li><a href="#countrytabs-5">ProductList</a></li>
+        </ul>
+        <div id="countrytabs-1" style="height:1000px;">
+
+    <div class="row ">
+        <div class="col-lg-6 col-sm-6">
+            <div class="div-box">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-sm-12">
+                        <a style="font-size: 15px; margin-left: 30px;"><b>Upload Order Report</b></a> (downloaded from channel login)
+                    </div>
+                </div>
+                <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                <div class="row" style="margin: 0">                  
+                     <form name="FormBulkOrder" data-ng-submit="uploadorderFiles(FormBulkOrder.$valid)" novalidate enctype="multipart/form-data">                  
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                   <label>
+                                     Select MarketPlace <span class="required star">*</span>
+                                  </label>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="from-group"  data-ng-class="{ 'has-error' : FormBulkOrder.ddl_marketplaceOrder.$invalid && FormBulkOrder.$submitted }">
+                                    <select data-ng-model="ddl_marketplaceOrder" name="ddl_marketplaceOrder" class="form-control" required>
+                                           <option value="">-- Select--</option>
+                                           <option data-ng-repeat="item in MarketplaceList" value="{{item.Value}}">{{item.Text}}</option>
+                                            </select>
+                                        </div>                              
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5 ">
+                                    <label>
+                                     Select File <span class="required star">*</span>
+                                  </label>
+                                </div>
+                                <div class="col-sm-7">                                                                                                    
+                                    <div class="from-group"  data-ng-class="{ 'has-error' : FormBulkOrder.file.$invalid && FormBulkOrder.$submitted }">
+                                       <input type="file" id="file1" name="file" multiple data-ng-model="files"
+                                            onchange="angular.element(this).scope().getFileDetails(this)" class="form-control"  required/>     
+                                    </div>        
+                                </div>                                                                  
+                            </div>                                                  
+ 
+                            <div class="row text-center" style="margin-top: 80px;">
+                                  <input type="submit"  value="Upload"  name="submit1" class="btn btn2 btn-primary" />                           
+                                <input type="button" id="btnsubmit1" value="Cancel" onclick="clearform()" name="submit1" class="btn btn2 btn-primary" />
+                             
+                            </div>
+                        </div> 
+                    </form>              
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <div class="div-box">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-sm-12">
+                        <a style="font-size: 15px; margin-left: 30px;"><b>Get Sales Orders </b></a> (thru Channel API)
+                    </div>
+                </div>
+                <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                <div class="row" style="margin: 0">
+                    @*@using (Html.BeginForm("OrderAPI", "UploadDataAPI", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                      {
+                        *@
+                   <form name="FormOrderAPI" data-ng-submit="uploadorderapi(FormOrderAPI.$valid)" novalidate enctype="multipart/form-data"> 
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                    <label>
+                                       Select MarketPlace <span class="required star">*</span>
+                                    </label>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="from-group"  data-ng-class="{ 'has-error' : FormOrderAPI.ddl_marketplaceProductAPI.$invalid && FormOrderAPI.$submitted }">
+                                    <select data-ng-model="ddl_marketplaceAPI" name="ddl_marketplaceAPI" class="form-control" data-ng-change="Getsellerapi(ddl_marketplaceAPI)" required>                                      
+                                           <option value="0">-- Select--</option>
+                                           <option data-ng-repeat="item in MarketplaceList" value="{{item.Value}}">{{item.Text}}</option>
+                                          </select>
+                                       </div>
+                                   @* @Html.DropDownList("ddl_marketplaceAPI", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })*@
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                
+                                <div class="col-sm-3">
+                                    <label>
+                                        From Date <span class="required star">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-3">
+                                    @*<div class="datepicker"
+                                                 date-format="dd-MM-yyyy"
+                                                  button-prev='<i class="fa fa-arrow-circle-left"></i>'
+                                                  button-next='<i class="fa fa-arrow-circle-right"></i>'>
+                                              <input ng-model="txt_from" id="txt_from" name="Etxt_from" date='MM-dd-yyyy'   type="text" class="angular-datepicker-input form-control"/>                                        
+                                        </div>*@
+                                    <input ng-model="txt_from" id="txt_from" name="Etxt_from"  type="text" class="form-control"/>
+                                   @* @Html.TextBox("txt_from", "", new { @class = "search-input validate[required] form-control" })*@
+                                </div>
+
+                                <div class="col-sm-3">
+                                    <label>
+                                        To Date <span class="required star">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-3">
+                                     <div class="datepicker"
+                                                 date-format="dd-MM-yyyy"
+                                                  button-prev='<i class="fa fa-arrow-circle-left"></i>'
+                                                  button-next='<i class="fa fa-arrow-circle-right"></i>'>
+                                              <input ng-model="txt_to" id="txt_to" name="Etxt_to" date='MM-dd-yyyy'   type="text" class="angular-datepicker-input form-control"/>
+                                           @*<span class="error" ng-show="(f1.Etxt_Productfrom.$dirty) && f1.Etxt_Productfrom.$error.required" >Providing dispatch_date is mandatory!</span>*@
+                                        </div>
+                                  @* @Html.TextBox("txt_to", "", new { @class = "search-input validate[required] form-control" })*@
+                                </div>
+                            </div>
+                                                           
+                            <div class="row text-center" style="margin-top: 70px;">
+                               
+                                 <span data-ng-if="dataget==1">
+                                     <input type="submit"  value="PULL" name="submit1" class="btn btn2 btn-primary" />
+                                  </span>
+                                  <span data-ng-if="dataget==0">
+                                    <a href="/Seller/SellerSetting/Index" target="_blank">Check Your API Credentials</a>                                    
+                                  </span>                               
+                               @* <input type="submit" id="btnsubmit" value="PULL" name="submit1"onclick="return SaveRow()" class="btn btn2 btn-primary" />*@
+                                <input type="button" id="btnsubmit1" value="Cancel" onclick="clearform()" name="submit1" class="btn btn2 btn-primary" />                            
+                            </div>
+
+                        </div>
+                     </form>
+                    @*}*@
+                </div>
+            </div>
+        </div>
+
+          
+    </div>
+
+     <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">                                            
+                      <div class="x_panel" style="margin-top:20px;"> 
+                          
+                          <div class="row" > 
+                              <div class="col-lg-6 col-sm-6">
+                                 <h3 style="color: #242627;margin-left: 20px;">Sale Upload/API Pull History</h3>
+                              </div>
+                              <div class="col-lg-6 col-sm-6" style="margin-top: 10px; text-align:right;padding-right:25px;">
+                                   <input type="button" id="btnsubmit1" value="Update Tax" ng-click="TaxUpdateCall()" class="btn btn-info" />
+                                 <input type="button" id="btnsubmit1" value="Refresh" ng-click="SalesOrderData()" class="btn btn-info" />
+                              </div>                             
+                               
+                          </div>                     
+                         
+                          
+                          <div class="x_title"></div>
+                           <div class="x_content">                                                                                 
+                             <div class="row" style="margin-top:30px;overflow: auto;">
+                               <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No</th>
+
+                                                <th>Channel</th>
+                                                 
+                                                <th>From Date</th>
+
+                                                <th>To Date</th>
+
+                                                <th>Uploaded Date</th> 
+                                                 
+                                                <th>File Name</th>
+                                                <th>Status</th>
+                                                <th>Orders Uploaded</th>
+
+                                                <th>Pending Tax</th>
+
+                                                <th>Source</th>                                               
+                                                                                                                                                                                
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                       
+                                           <tr dir-paginate="item in OrderUploadList|filter:search|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage" pagination-id="saleorder">
+                                                <th scope="row">
+                                                   {{ ($index + 1) + (currentPage - 1) * 5}}.
+                                                </th>
+                                                 <td>
+                                                       <img  src="{{item.ImagePath}}" alt="Logo" width="50" height="50" />
+                                                </td>
+                                                
+                                                 <td>{{item.FromDate}}</td>   
+                                                 <td>{{item.ToDate}}</td>
+                                                 <td>{{item.UploadedDate}}</td>                 
+                                                 @*<td><a ng-href="System.IO.Path.Combine(Server.MapPath("~/UploadExcel/" + {{item.Sellerid}} + "/OrderSales/"{{item.FileName}}"))" target="_blank">{{item.FileName}}</a></td>*@
+                                                <td>
+                                                    @using (Html.BeginForm("Download", "UploadDataAPI", FormMethod.Post))
+                                                    {
+                                                        <input type="hidden" name="ImageName" value="~/UploadExcel/{{item.Sellerid}}/OrderSales/{{item.FileName}}" />
+                                                        <button type="submit" style="border:0;background: transparent;">{{item.FileName}}</button>
+                                                    }                                             
+                                                </td>
+                                                 <td>{{item.Filestatus}}  </td>
+                                                 <td>{{item.OrderCount}}</td>
+                                                 <td>{{item.BalanceTaxCount}}</td>
+                                                 <td>{{item.SourceName}}</td>   
+                                            </tr>
+
+                                        </tbody>
+
+                                        <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" pagination-id="saleorder">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+</div>
+                           
+                            </div>
+
+                       </div>
+
+
+                    </div>
+                </div>
+
+   </div>
+
+
+    <div id="countrytabs-2" style="height:1000px;">            
+       <div class="row ">
+        <div class="col-lg-6 col-sm-6">
+            <div class="div-box">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-sm-12">
+                        <a style="font-size: 15px; margin-left: 30px;"><b>Upload Settlement Report</b></a> (downloaded from channel login)
+                    </div>
+                </div>
+                <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                <div class="row" style="margin: 0">
+                                  
+                   <form name="FormBulkSettlement" data-ng-submit="uploadFiles(FormBulkSettlement.$valid)" novalidate enctype="multipart/form-data">
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+
+
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                   <label>
+                                     Select MarketPlace <span class="required star">*</span>
+                                  </label>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="from-group"  data-ng-class="{ 'has-error' : FormBulkSettlement.ddl_marketplacebulk.$invalid && FormBulkSettlement.$submitted }">
+                                    <select data-ng-model="ddl_marketplacebulk" name="ddl_marketplacebulk" class="form-control" required>
+                                                <option value="">-- Select--</option>
+                                        <option data-ng-repeat="item in MarketplaceList" value="{{item.Value}}">{{item.Text}}</option>
+                                            </select>
+                                        </div>                                  
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                            <div class="col-sm-5">
+                                <label>
+                                    Select Type 
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                @{var listItems = new List<System.Web.UI.WebControls.ListItem>
+                                            {
+                                                 new System.Web.UI.WebControls.ListItem { Text = "--Select--", Value="0" },
+                                                  new System.Web.UI.WebControls.ListItem { Text = "Electronic Fund Transfer", Value="1" },
+                                                  new System.Web.UI.WebControls.ListItem { Text = "Cash on Delivery", Value="2" }
+                                            };
+                                }
+                                @Html.DropDownList("ddlFundType", new SelectList(listItems, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+                        </div>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                    <label>
+                                     Select File <span class="required star">*</span>
+                                  </label>
+                                </div>
+                                <div class="col-sm-7">
+                                    <div class="from-group"  data-ng-class="{ 'has-error' : FormBulkSettlement.file.$invalid && FormBulkSettlement.$submitted }">
+                                     <input type="file" id="file" name="file" multiple data-ng-model="files"
+                                            onchange="angular.element(this).scope().getFileDetails(this)" class="form-control"  required/>     
+                                        </div>                            
+                                </div>                                                                  
+                            </div>                                                   
+                            <div class="row text-center" style="margin-top: 35px;">
+                                <input type="submit"  value="Upload"  name="submit1" class="btn btn2 btn-primary" />
+                              <input type="button" id="btnsubmit1" value="Cancel" onclick="clearform()" name="submit1" class="btn btn2 btn-primary" />
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <div class="div-box">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-sm-12">
+                        <a style="font-size: 15px; margin-left: 30px;"><b>Get Settlement</b></a> (thru Channel API)
+                    </div>
+                </div>
+                <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                <div class="row" style="margin: 0">
+                   @* @using (Html.BeginForm("SettlementAPI", "UploadDataAPI", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        *@
+                    <form name="FormSettlementAPI" data-ng-submit="uploadsettlementapi(FormSettlementAPI.$valid)" novalidate enctype="multipart/form-data"> 
+                      <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                    <label>
+                                       Select MarketPlace <span class="required star">*</span>
+                                    </label>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="from-group"  data-ng-class="{ 'has-error' : FormSettlementAPI.ddl_marketplaceSettAPI.$invalid && FormSettlementAPI.$submitted }">
+                                    <select data-ng-model="ddl_marketplaceSettAPI" name="ddl_marketplaceSettAPI" class="form-control" data-ng-change="Getsellerapi(ddl_marketplaceSettAPI)" required>
+                                           <option value="0">-- Select--</option>
+                                           <option data-ng-repeat="item in MarketplaceList" value="{{item.Value}}">{{item.Text}}</option>
+                                          </select>
+                                       </div>
+                                   @* @Html.DropDownList("ddl_marketplaceSettAPI", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })*@
+                                </div>
+
+                            </div>
+
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-3">
+                                    <label>
+                                        From Date <span class="required star">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="datepicker"
+                                                 date-format="dd-MM-yyyy"
+                                                  button-prev='<i class="fa fa-arrow-circle-left"></i>'
+                                                  button-next='<i class="fa fa-arrow-circle-right"></i>'>
+                                              <input ng-model="txt_Settlementfrom" id="txt_Settlementfrom" name="Etxt_Settlementfrom" date='MM-dd-yyyy'   type="text" class="angular-datepicker-input form-control"/>
+                                           @*<span class="error" ng-show="(f1.Etxt_Productfrom.$dirty) && f1.Etxt_Productfrom.$error.required" >Providing dispatch_date is mandatory!</span>*@
+                                        </div>
+                                   @* @Html.TextBox("txt_Settlementfrom", "", new { @class = "search-input validate[required] form-control" })*@
+                                </div>
+
+                                 <div class="col-sm-3">
+                                    <label>
+                                        To Date <span class="required star">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-3">
+                                    <div class="datepicker"
+                                                 date-format="dd-MM-yyyy"
+                                                  button-prev='<i class="fa fa-arrow-circle-left"></i>'
+                                                  button-next='<i class="fa fa-arrow-circle-right"></i>'>
+                                              <input ng-model="txt_settlementto" id="txt_settlementto" name="Etxt_settlementto" date='MM-dd-yyyy'   type="text" class="angular-datepicker-input form-control"/>
+                                           @*<span class="error" ng-show="(f1.Etxt_Productfrom.$dirty) && f1.Etxt_Productfrom.$error.required" >Providing dispatch_date is mandatory!</span>*@
+                                        </div>
+                                   @* @Html.TextBox("txt_settlementto", "", new { @class = "search-input validate[required] form-control" })*@
+                                </div>
+                            </div>
+                                                           
+                            <div class="row text-center" style="margin-top: 60px;">
+                                 <span data-ng-if="dataget==1">
+                                      <input type="submit"  value="PULL" name="submit1" class="btn btn2 btn-primary" />
+                                    </span>
+                                  <span data-ng-if="dataget==0">
+                                    <a href="/Seller/SellerSetting/Index" target="_blank">Check Your API Credentials</a>                                    
+                                  </span> 
+                                @* <input type="submit" id="btnsubmit" value="PULL" name="submit1" class="btn btn2 btn-primary" />*@
+                               @* <input type="submit" id="btnsubmit" value="PULL" onclick="return SaveSettlementAPI()" name="submit1" class="btn btn2 btn-primary" />*@
+                                <input type="button" id="btnsubmit1" value="Cancel" onclick="clearform()" name="submit1" class="btn btn2 btn-primary" />
+                            </div>
+
+                        </div>
+                      </form>
+                    @*}*@
+                </div>
+            </div>
+        </div>           
+       </div> 
+            
+            
+            <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">                                            
+                      <div class="x_panel" style="margin-top:20px;">                          
+                           <div class="row" > 
+                              <div class="col-lg-6 col-sm-6">
+                                 <h3 style="color: #242627;margin-left: 20px;">Settlement Upload/API Pull History</h3>
+                              </div>
+                              <div class="col-lg-6 col-sm-6" style="margin-top: 10px; text-align:right;padding-right:25px;">
+                                  <input type="button" id="btnsubmit1" value="Refresh"  ng-click="SettlementData()" class="btn btn-info" />    
+                              </div>                                                           
+                          </div>                            
+                          
+                          <div class="x_title"></div>
+                           <div class="x_content">                                                                                 
+                             <div class="row" style="margin-top:30px;overflow: auto;">
+                               <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                 <th>
+                                                   Channel
+                                                </th> 
+                                                 <th>
+                                                  Reference No
+                                                </th>
+                                                 <th>
+                                                   From Date
+                                                </th>
+                                                 <th>
+                                                   To Date
+                                                </th>
+                                                 <th>
+                                                   Uploaded Date
+                                                </th> 
+                                                <th>
+                                                   Deposit Date
+                                                </th>  
+                                                <th>
+                                                    File Name
+                                                </th>
+                                                 <th>
+                                                    Status
+                                                </th>
+                                                <th>
+                                                    Orders Uploaded
+                                                </th>
+                                                 <th>
+                                                    Source
+                                                </th>                                               
+                                                <th>
+                                                   Suspense
+                                                 </th> 
+                                                 <th>
+                                                   Action
+                                                 </th>                                                                                                                             
+                                                <th>
+                                                
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                       
+                                           <tr dir-paginate="item1 in SettlementUploadList|filter:search|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage2" pagination-id="settlementupload">
+                                                <th scope="row">
+                                                   {{ ($index + 1) + (currentPage2 - 1) * 5}}
+                                                </th>
+                                                 <td>
+                                                       <img  src="{{item1.ImagePath}}" alt="Logo" width="50" height="50" />
+                                                </td>
+                                                 <td>{{item1.ReferenceNo}}</td> 
+                                                 <td>{{item1.FromDate}}</td>   
+                                                 <td>{{item1.ToDate}}</td>
+                                                 <td>{{item1.UploadedDate}}</td>
+                                                 <td>{{item1.DepositDate}}</td> 
+                                              @* <td>{{item1.FileName}}</td>*@
+                                                   <td>
+                                                       @*<a target="_self" href="~/UploadExcel/{{item1.Sellerid}}/settlement/{{item1.FileName}}">{{item1.FileName}}</a>*@
+                                                       @using (Html.BeginForm("Download", "UploadDataAPI", FormMethod.Post))
+                                                        {
+                                                          <input type="hidden" name="ImageName" value="~/UploadExcel/{{item1.Sellerid}}/settlement/{{item1.FileName}}" />
+                                                          <button type="submit" style="border:0;background: transparent;">{{item1.FileName}}</button>
+                                                       } 
+                                                   </td>
+                                               
+                                                 <td>{{item1.Filestatus}}</td>
+                                                 <td><span style="margin-left:50px;">{{item1.OrderCount}}</span></td>
+                                                 <td>{{item1.SourceName}}</td>                                               
+                                                 <td><span data-ng-if="item1.suspenseamt!=0">{{item1.suspenseamt}}</span></td> 
+                                                 
+                                               
+                                               <td data-ng-if="item1.suspenseamt !=0">                                   
+                                                    <a class="btn btn-info btn-sm" ng-click="ViewSuspenseDetails(item1.id)" data-toggle="modal" data-target="#myModal" >Resolve</a>                                                              
+                                              </td>
+                                               <td></td>
+                                            </tr>
+
+                                        </tbody>
+
+                                        <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" pagination-id="settlementupload">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+</div>
+                           
+                            </div>
+
+                       </div>
+
+
+                    </div>
+                </div>   
+                                                        
+      </div>
+
+        
+
+    <div id="countrytabs-3" style="height:1000px;">            
+      <div class="row ">
+        <div class="col-lg-6 col-sm-6">
+            <div class="div-box">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-sm-12">
+                        <a style="font-size: 15px; margin-left: 30px;"><b>Upload Tax Report</b></a> (downloaded from channel login)
+                    </div>
+                </div>
+                <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                <div class="row" style="margin: 0">                        
+                    <form name="FormBulkTax" data-ng-submit="uploadTaxFiles(FormBulkTax.$valid)" novalidate enctype="multipart/form-data">            
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                   <label>
+                                     Select MarketPlace <span class="required star">*</span>
+                                  </label>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="from-group"  data-ng-class="{ 'has-error' : FormBulkTax.ddl_marketplaceTax.$invalid && FormBulkTax.$submitted }">
+                                    <select data-ng-model="ddl_marketplaceTax" name="ddl_marketplaceTax" class="form-control" required>
+                                           <option value="">-- Select--</option>
+                                           <option data-ng-repeat="item in MarketplaceList" value="{{item.Value}}">{{item.Text}}</option>
+                                          </select>
+                                       </div>                                   
+                                </div>
+                            </div>
+                            
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                    <label>
+                                     Select File <span class="required star">*</span>
+                                  </label>
+                                </div>
+                                <div class="col-sm-7">                                 
+                                     <div class="from-group"  data-ng-class="{ 'has-error' : FormBulkTax.file.$invalid && FormBulkTax.$submitted }">
+                                       <input type="file" id="file2" name="file" multiple data-ng-model="files"
+                                            onchange="angular.element(this).scope().getFileDetails(this)" class="form-control"  required/>     
+                                    </div> 
+                                  
+                                </div>                                                                  
+                            </div>  
+                            
+                            <div class="row" style="margin-top: 20px;">
+                            <div class="col-sm-5">
+                                <label>
+                                   Create Order(If not found)
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                            <input type="checkbox" ng-model="filter" ng-true-value="1" ng-false-value="0">
+                               @* @Html.CheckBox("checked", new {@id= "checked"}) *@                         
+                            </div>
+                        </div>                                                 
+                            <div class="row text-center" style="margin-top: 10px;">
+                                  <input type="submit"  value="Upload"  name="submit1" class="btn btn2 btn-primary" />                          
+                                <input type="button" id="btnsubmit1" value="Cancel" onclick="clearform()" name="submit1" class="btn btn2 btn-primary" />
+                            </div>
+
+                        </div>
+                   </form>
+                </div>
+            </div>
+
+            
+        </div>
+              
+      </div>
+        <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">                                            
+                      <div class="x_panel" style="margin-top:20px;">   
+                          <div class="row" > 
+                              <div class="col-lg-6 col-sm-6">
+                                 <h3 style="color: #242627;margin-left: 20px;">Tax Upload/API Pull History</h3>
+                              </div>
+                              <div class="col-lg-6 col-sm-6" style="margin-top: 10px; text-align:right;padding-right:25px;">
+                                 <input type="button" id="btnsubmit1" value="Refresh" ng-click="TaxData()" class="btn btn-info" />   
+                              </div>                                                           
+                          </div>                     
+                          
+                          <div class="x_title"></div>
+                           <div class="x_content">                                                                                 
+                             <div class="row" style="margin-top:30px;overflow: auto;">
+                               <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                 <th>
+                                                   Channel
+                                                </th> 
+                                                 <th>
+                                                   From Date
+                                                </th>
+                                                 <th>
+                                                   To Date
+                                                </th>
+                                                 <th>
+                                                   Uploaded Date
+                                                </th>  
+                                                <th>
+                                                    File Name
+                                                </th>
+                                                <th>
+                                                    Status
+                                                </th>
+                                                <th>
+                                                    Orders Uploaded
+                                                </th>
+                                                 <th>
+                                                    Source
+                                                </th>                                               
+                                                                                                                                                                                
+                                                <th>
+                                                
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                       
+                                           <tr dir-paginate="item in TaxUploadList|filter:search|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage3" pagination-id="taxupload">
+                                                <th scope="row">
+                                                   {{ ($index + 1) + (currentPage3 - 1) * 5}}
+                                                </th>
+                                                 <td>
+                                                       <img  src="{{item.ImagePath}}" alt="Logo" width="50" height="50" />
+                                                </td>
+                                                
+                                                 <td>{{item.FromDate}}</td>   
+                                                 <td>{{item.ToDate}}</td>
+                                                 <td>{{item.UploadedDate}}</td> 
+                                                <td><a href="~/UploadExcel/{{item.Sellerid}}/Tax/{{item.FileName}}" target="_blank">{{item.FileName}}</a></td>                 
+                                                 @*<td>{{item.FileName}}  </td>*@
+                                                 <td>{{item.Filestatus}}  </td>
+                                                 <td>{{item.OrderCount}}</td>
+                                                 <td>{{item.SourceName}}</td>   
+                                            </tr>
+
+                                        </tbody>
+
+                                        <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" pagination-id="taxupload">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+</div>
+                           
+                            </div>
+
+                       </div>
+
+
+                    </div>
+                </div>
+
+
+   </div>
+   
+
+    <div id="countrytabs-4" style="height:1000px;">
+
+       <div class="row ">
+        <div class="col-lg-6 col-sm-6">
+            <div class="div-box">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-sm-12">
+                        <a style="font-size: 15px; margin-left: 30px;"><b>Upload Return Order</b></a> (downloaded from channel login)
+                    </div>
+                </div>
+                <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                <div class="row" style="margin: 0">                   
+                     <form name="FormBulkReturnOrder" data-ng-submit="uploadreturnFiles(FormBulkReturnOrder.$valid)" novalidate enctype="multipart/form-data">                
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                   <label>
+                                     Select MarketPlace <span class="required star">*</span>
+                                  </label>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <div class="from-group"  data-ng-class="{ 'has-error' : FormBulkReturnOrder.ddl_marketplaceReturn.$invalid && FormBulkReturnOrder.$submitted }">
+                                    <select data-ng-model="ddl_marketplaceReturn" name="ddl_marketplaceReturn" class="form-control" required>
+                                           <option value="">-- Select--</option>
+                                           <option data-ng-repeat="item in MarketplaceList" value="{{item.Value}}">{{item.Text}}</option>
+                                          </select>
+                                       </div>                                
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                    <label>
+                                     Select File <span class="required star">*</span>
+                                  </label>
+                                </div>
+                                <div class="col-sm-7">                                   
+                                  <div class="from-group"  data-ng-class="{ 'has-error' : FormBulkReturnOrder.file.$invalid && FormBulkReturnOrder.$submitted }">
+                                       <input type="file" id="file4" name="file" multiple data-ng-model="files"
+                                            onchange="angular.element(this).scope().getFileDetails(this)" class="form-control"  required/>     
+                                    </div> 
+                                </div>                                                                  
+                            </div>                                                   
+                            <div class="row text-center" style="margin-top: 80px;">
+                                <input type="submit"  value="Upload"  name="submit1" class="btn btn2 btn-primary" />
+                               <input type="button" id="btnsubmit1" value="Cancel" onclick="clearform()" name="submit1" class="btn btn2 btn-primary" />
+                            </div>
+
+                        </div>
+                   </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <div class="div-box">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-sm-12">
+                        <a style="font-size: 15px; margin-left: 30px;"><b>Get Return Orders</b></a> (thru Channel API)
+                    </div>
+                </div>
+                <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                <div class="row" style="margin: 0">
+                    @using (Html.BeginForm("", "", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                    <label>
+                                       Select MarketPlace <span class="required star">*</span>
+                                    </label>
+                                </div>
+
+                                <div class="col-sm-4">
+                                    @Html.DropDownList("ddl_marketplacereturnAPI", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-3">
+                                    <label>
+                                        From Date <span class="required star">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-3">
+                                    @Html.TextBox("txt_fromReturn", "", new { @class = "search-input validate[required] form-control" })
+                                </div>
+                                <div class="col-sm-3">
+                                    <label>
+                                        To Date <span class="required star">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-3">
+                                    @Html.TextBox("txt_toReturn", "", new { @class = "search-input validate[required] form-control" })
+                                </div>
+                            </div>
+                                
+                       
+
+                            <div class="row text-center" style="margin-top: 60px;">
+                                <input type="submit" id="btnsubmit" value="PULL" onclick="return SaveReturnAPI()" name="submit1" class="btn btn2 btn-primary" />
+                               <input type="button" id="btnsubmit1" value="Cancel" onclick="clearform()" name="submit1" class="btn btn2 btn-primary" />
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+       <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">                                            
+                      <div class="x_panel" style="margin-top:20px;"> 
+                          
+                          <div class="row" > 
+                              <div class="col-lg-6 col-sm-6">
+                                 <h3 style="color: #242627;margin-left: 20px;">Return Upload/API Pull History</h3>
+                              </div>
+                              <div class="col-lg-6 col-sm-6" style="margin-top: 10px; text-align:right;padding-right:25px;">
+                                 <input type="button" id="btnsubmit1" value="Refresh" ng-click="ReturnOrderData()" class="btn btn-info" />
+                              </div>                             
+                               
+                          </div>                     
+                                                  
+                          <div class="x_title"></div>
+                           <div class="x_content">                                                                                 
+                             <div class="row" style="margin-top:30px;overflow: auto;">
+                               <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                 <th>
+                                                   Channel
+                                                </th> 
+                                                
+                                                 <th>
+                                                   Uploaded Date
+                                                </th>  
+                                                <th>
+                                                    File Name
+                                                </th>
+                                                <th>
+                                                    Status
+                                                </th>
+                                                <th>
+                                                    Orders Uploaded
+                                                </th>
+                                                 <th>
+                                                    Source
+                                                </th>                                               
+                                                                                                                                                                                
+                                                <th>
+                                                
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                       
+                                           <tr dir-paginate="item in ReturnUploadList|filter:search|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage4" pagination-id="returnupload">
+                                                <th scope="row">
+                                                   {{ ($index + 1) + (currentPage4 - 1) * 5}}
+                                                </th>
+                                                 <td>
+                                                       <img  src="{{item.ImagePath}}" alt="Logo" width="50" height="50" />
+                                                </td>                                                                                               
+                                                 <td>{{item.UploadedDate}}</td>
+                                                <td>
+                                                   @* <a href="~/UploadExcel/{{item.Sellerid}}/Return/{{item.FileName}}" target="_blank">{{item.FileName}}</a>*@
+                                                      @using (Html.BeginForm("Download", "UploadDataAPI", FormMethod.Post))
+                                                        {
+                                                          <input type="hidden" name="ImageName" value="~/UploadExcel/{{item.Sellerid}}/Return/{{item.FileName}}" />
+                                                          <button type="submit" style="border:0;background: transparent;">{{item.FileName}}</button>
+                                                       } 
+                                                </td>                   
+                                               
+                                                 <td>{{item.Filestatus}}  </td>
+                                                 <td>{{item.OrderCount}}</td>
+                                                 <td>{{item.SourceName}}</td>   
+                                            </tr>
+
+                                        </tbody>
+
+                                        <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" pagination-id="returnupload">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+</div>
+                           
+                            </div>
+
+                       </div>
+
+
+                    </div>
+                </div>
+   </div>
+
+
+    <div id="countrytabs-5" style="height:800px;">            
+         
+           <div class="row ">
+        <div class="col-lg-6 col-sm-6">
+            <div class="div-box">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-sm-12">
+                        <a style="font-size: 15px; margin-left: 30px;"><b>Upload Product Report</b></a> (downloaded from channel login)
+                    </div>
+                </div>
+                <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                <div class="row" style="margin: 0">
+                     <form name="FormProductReport" data-ng-submit="uploadproductreport(FormProductReport.$valid)" novalidate enctype="multipart/form-data"> 
+                    @*@using (Html.BeginForm("ProductAPI", "UploadDataAPI", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        *@
+                         <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-5">
+                                    <label>
+                                       Select MarketPlace <span class="required star">*</span>
+                                    </label>
+                                </div>
+
+                                <div class="col-sm-4">
+                                     <div class="from-group"  data-ng-class="{ 'has-error' : FormProductReport.ddl_marketplaceProductAPI.$invalid && FormProductReport.$submitted }">
+                                    <select data-ng-model="ddl_marketplaceProductAPI" name="ddl_marketplaceProductAPI" class="form-control" data-ng-change="Getsellerapi(ddl_marketplaceProductAPI)" required>
+                                           <option value="0">-- Select--</option>
+                                           <option data-ng-repeat="item in MarketplaceList" value="{{item.Value}}">{{item.Text}}</option>
+                                          </select>
+                                       </div>
+                                  @*  @Html.DropDownList("ddl_marketplaceProductAPI", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })*@
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-3">
+                                    <label>
+                                        From Date <span class="required star">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-3">
+                                     
+                                    <div class="datepicker"
+                                                 date-format="dd-MM-yyyy"
+                                                  button-prev='<i class="fa fa-arrow-circle-left"></i>'
+                                                  button-next='<i class="fa fa-arrow-circle-right"></i>'>
+                                              <input ng-model="txt_Productfrom" id="txt_Productfrom" name="Etxt_Productfrom" date='MM-dd-yyyy'   type="text" class="angular-datepicker-input form-control"/>
+                                           @*<span class="error" ng-show="(f1.Etxt_Productfrom.$dirty) && f1.Etxt_Productfrom.$error.required" >Providing dispatch_date is mandatory!</span>*@
+                                        </div>
+                                      
+                                   @* @Html.TextBox("txt_Productfrom", "", new { @class = "search-input validate[required] form-control" })*@
+                                </div>
+
+                                 <div class="col-sm-3">
+                                    <label>
+                                        To Date <span class="required star">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-3">
+                                     <div class="datepicker"
+                                                 date-format="dd-MM-yyyy"
+                                                  button-prev='<i class="fa fa-arrow-circle-left"></i>'
+                                                  button-next='<i class="fa fa-arrow-circle-right"></i>'>
+                                              <input ng-model="txt_Productto" id="txt_Productto" name="Etxt_Productto" date='MM-dd-yyyy'    type="text" class="angular-datepicker-input form-control"/>
+                                           @*<span class="error" ng-show="(f1.Etxt_Productto.$dirty) && f1.Etxt_Productto.$error.required" >Providing dispatch_date is mandatory!</span>*@
+                                        </div>
+                                   @* @Html.TextBox("txt_Productto", "", new { @class = "search-input validate[required] form-control" })*@
+                                </div>
+                            </div>
+                        
+                                                           
+                            <div class="row text-center" style="margin-top: 60px;">
+                                 <span data-ng-if="dataget==1">
+                                     <input type="submit"  value="PULL" name="submit1" class="btn btn2 btn-primary" />
+                                  </span>
+                                  <span data-ng-if="dataget==0">
+                                    <a href="/Seller/SellerSetting/Index" target="_blank">Check Your API Credentials</a>                                    
+                                  </span>
+                                @*<input type="submit" id="btnsubmit" value="PULL" onclick="return SaveProductAPI()" name="submit1" class="btn btn2 btn-primary" />*@
+                                <input type="button" id="btnsubmit1" value="Cancel" onclick="clearform()" name="submit1" class="btn btn2 btn-primary" />
+                            </div>
+
+                        </div>
+                          </form>
+                   @* }*@
+                </div>
+            </div>
+
+            
+        </div>
+              
+      </div>
+            
+            <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">                                            
+                      <div class="x_panel" style="margin-top:20px;">                          
+                           <div class="row" > 
+                              <div class="col-lg-6 col-sm-6">
+                                 <h3 style="color: #242627;margin-left: 20px;"> Product API Pull History</h3>
+                              </div>
+                              <div class="col-lg-6 col-sm-6" style="margin-top: 10px; text-align:right;padding-right:25px;">
+                                  <input type="button" id="btnsubmit1" value="Refresh"  ng-click="ProductData()" class="btn btn-info" />    
+                              </div>                                                           
+                          </div>                            
+                          
+                          <div class="x_title"></div>
+                           <div class="x_content">                                                                                 
+                             <div class="row" style="margin-top:30px;">
+                               <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                 <th>
+                                                   Channel
+                                                </th> 
+                                               
+                                                 <th>
+                                                   From Date
+                                                </th>
+                                                 <th>
+                                                   To Date
+                                                </th>
+                                                 <th>
+                                                   Uploaded Date
+                                                </th> 
+                                                
+                                                 <th>
+                                                    Status
+                                                </th>
+                                               
+                                                 <th>
+                                                    Source
+                                                </th>                                               
+                                                                                                                                                                       
+                                                <th>
+                                                
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                       
+                                           <tr dir-paginate="item1 in ProductUploadList|filter:search|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage5" pagination-id="productupload">
+                                                <th scope="row">
+                                                   {{ ($index + 1) + (currentPage5 - 1) * 5}}
+                                                </th>
+                                                 <td>
+                                                       <img  src="{{item1.ImagePath}}" alt="Logo" width="50" height="50" />
+                                                </td>
+                                               
+                                                 <td>{{item1.FromDate}}</td>   
+                                                 <td>{{item1.ToDate}}</td>
+                                                 <td>{{item1.UploadedDate}}</td>                                               
+                                                 <td>{{item1.Filestatus}}</td>                                              
+                                                 <td>{{item1.SourceName}}</td>                                               
+                                                 <td></td>
+                                            </tr>
+
+                                        </tbody>
+
+                                        <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" pagination-id="productupload">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+</div>
+                           
+                            </div>
+
+                       </div>
+
+
+                    </div>
+                </div>   
+                                                        
+      </div>
+
+    <div id="myModal" class="modal fade"  role="dialog">
+            <form id="demo-form4" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">
+
+              
+                <div class="modal-content" style="width:1219px;margin-left:-271px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Suspense Amount Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical"> 
+                            
+                           <div class="x_content">
+                <div class="form-group">                   
+             <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0" style="margin-top:20px;">
+                    <thead>
+                        <tr>
+                             <th>
+                                S.No
+                             </th>
+                             <th>
+                               Reference No
+                             </th>
+                             <th>
+                                Suspense Details
+                             </th>  
+                             <th>
+                                Amount
+                             </th>   
+                             <th>
+                               Order ID
+                             </th>                                                                                                                                                                                                                                            
+                        </tr>
+                    </thead>
+                    <tbody>                    
+                         <tr dir-paginate="item in SuspenseDetailList|filter:search|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage1">
+                          <th scope="row">
+                               {{ ($index + 1) + (currentPage1 - 1) * 5}}                           
+                            
+                            </th>
+                              <td>
+                                {{item.ob_tbl_settlement_upload.settlement_refernece_no}}                                                      
+                              </td>
+                              <td>                               
+                                 {{item.ob_tbl_settlement_suspense_entries.suspense_details}}                                                                    
+                              </td>
+                              <td>                               
+                                 {{item.ob_tbl_settlement_suspense_entries.amount}}                                                                    
+                              </td>  
+                              <td >                               
+                                {{item.ob_tbl_settlement_suspense_entries.order_id_if_present}}                                                      
+                              </td>
+                             
+                                                                                                                        
+                                                        
+                        </tr>
+                    </tbody>   
+                 <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>                    
+                        </table>
+                             
+                                </div>
+
+                                <br />
+                              
+                            </div>
+                                
+                           
+                        </div>
+
+                      <div class="modal-footer">                                                
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+                </form>
+        </div>
+
+</div>
+
+
+<script>
+    $(function () {
+        $('#txt_from').datepicker();
+    });
+    $(function () {
+        $('#txt_fromReturn').datepicker();
+    });
+    $(function () {
+        $('#txt_toReturn').datepicker();
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#txt_to').datepicker();
+    });
+    $(function () {
+        $('#txt_Settlementfrom').datepicker();
+    });
+    $(function () {
+        $('#txt_settlementto').datepicker();
+    });
+    $(function () {
+        $('#txt_Productfrom').datepicker();
+    });
+    $(function () {
+        $('#txt_Productto').datepicker();
+    });
+</script>
+
+@section scripts{        
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/UploadDataAPIController.js"></script>
+  }

@@ -1,0 +1,341 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+<link href="~/Areas/Seller/NewCSS/css/basictable.css" rel="stylesheet" />
+<link href="~/Areas/Seller/NewCSS/css/table-style.css" rel="stylesheet" />
+<script src="~/Areas/Seller/NewCSS/js/jquery.basictable.min.js"></script>
+
+@*<script type="text/javascript">
+    $(document).ready(function() {
+      $('#table').basictable();
+
+      $('#table-breakpoint').basictable({
+        breakpoint: 768
+      });
+
+      $('#table-swap-axis').basictable({
+        swapAxis: true
+      });
+
+      $('#table-force-off').basictable({
+        forceResponsive: false
+      });
+
+      $('#table-no-resize').basictable({
+        noResize: true
+      });
+
+      $('#table-two-axis').basictable();
+
+      $('#table-max-height').basictable({
+        tableWrapper: true
+      });
+    });
+</script>*@
+<div class="row" data-ng-app="MyAppseller2" ng-controller="PurchaseController">
+
+ 
+
+  
+
+        	<div class="grids">
+              <div class="forms-grids">
+                <div class="clearfix"></div>
+                 <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h3 style="color: #292325;text-align:center">Add Purchase</h3>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br />
+                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1" ng-submit="SavePurchaseDetails()">
+
+                                  @* <div style="color:rgb(142,2,2)">{{Message}}</div>*@
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12 " for="first-name" style="color: #242627;">
+                                           Select Vendor Name <span class="required star">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select ng-model="tbl_seller_vendors_id" name="selected_id" class="form-control" ng-options="c.id as c.vendor_name for c in VendorName"  ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                                <option value="">-- Select Vendor Name --</option>
+                                            </select>
+                                             <span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required" >Providing  select Vendor Name is mandatory!</span>                                      
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12" style="color: #242627;">Select Warehouse Name <span class="required star">*</span></label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <select ng-model="tbl_seller_warehouses_id" name="selected_id" class="form-control" ng-options="c.id as c.warehouse_name for c in WareHouse"  ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                                <option value="">--Select WareHouse Name--</option>
+                                            </select>
+                                             <span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required" >Providing  select WareHouse Name is mandatory!</span>
+                                        </div>
+                                    </div>                                   
+                                     <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #242627;">
+                                            Invoice Amount <span class="required star">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" name="uinvoice_amount" ng-model="invoice_amount" maxlength="50" class="form-control" placeholder=" Please Enter Invoice Amount" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.uinvoice_amount.$dirty || IsFormSubmitted) && f1.uinvoice_amount.$error.required" >Providing Invoice Amount is mandatory!</span>
+                                        </div>
+                                    </div>
+                                     <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #242627;">
+                                            Invoice No <span class="required star">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" name="uinvoice_no" ng-model="invoice_no" maxlength="50" class="form-control" placeholder=" Please Enter Invoice No" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.uinvoice_no.$dirty || IsFormSubmitted) && f1.uinvoice_no.$error.required" >Providing Invoice No is mandatory!</span>
+                                        </div>
+                                    </div>                                                                    
+                                       <div class="form-group">
+                                            <label class="control-label col-md-3 col-sm-3 col-xs-12 star" for="first-name" style="color: #242627;">
+                                            Uploaded Invoice Image <span class="required star">*</span>
+                                        </label>                                                                     
+                                      <div class="col-md-6 col-sm-6">                                         
+                                         <input type="file" name="file" accept="image/*" class="form-control col-md-3 col-sm-3 col-xs-12" onchange="angular.element(this).scope().selectFileforUpload(this.files)" required />
+                                           <span class="error" ng-show="(f1.file.$dirty || IsFormSubmitted) && f1.file.$error.required">{{FileInvalidMessage}}</span>
+                                           <span class="error">{{FileInvalidMessage}}</span>                                                                        
+                                        </div>
+                                    </div> 
+
+
+                                      
+                                     <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #242627;">
+                                            PO-Number <span class="required star">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" name="upo_number" ng-model="po_number" maxlength="50" class="form-control" placeholder=" Please Enter Po Number" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.upo_number.$dirty || IsFormSubmitted) && f1.upo_number.$error.required" >Providing Po Number is mandatory!</span>
+                                        </div>
+                                    </div>      
+
+                                     <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #242627;">
+                                            Tax Amount <span class="required star">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" name="utax_amount" ng-model="tax_amount" maxlength="50" class="form-control" placeholder=" Please Enter Tax Amount" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.utax_amount.$dirty || IsFormSubmitted) && f1.utax_amount.$error.required" >Providing Tax Amount is mandatory!</span>
+                                        </div>
+                                    </div>      
+
+                                     <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #242627;">
+                                            Remarks <span class="required star">*</span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <textarea type="text" name="uremarks_po" ng-model="remarks_po" class="form-control" placeholder=" Please Enter Remarks" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus></textarea>
+                                           @* <input type="text" name="uremarks_po" ng-model="remarks_po" maxlength="50" class="form-control" placeholder=" Please Enter Remarks" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>*@
+                                            <span class="error" ng-show="(f1.uremarks_po.$dirty || IsFormSubmitted) && f1.uremarks_po.$error.required" >Providing Remarks is mandatory!</span>
+                                        </div>
+                                    </div>      
+                                      
+                                   <div class="form-group">                              
+                                  <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #242627;">
+                                            PO Date <span class="required star">*</span>
+                                        </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12" >
+                                         <div class="datepicker"
+                                          date-format="dd-MM-yyyy"    
+                                          button-prev='<i class="fa fa-arrow-circle-left"></i>'
+                                          button-next='<i class="fa fa-arrow-circle-right"></i>'>
+                                       <input ng-model="po_date" name="Efromdate" date='MM-dd-yyyy' readonly="readonly" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus   type="text" class="angular-datepicker-input form-control"/>
+                                       <span class="error" ng-show="(f1.Efromdate.$dirty) && f1.Efromdate.$error.required" >Providing PO-Date is mandatory!</span>
+                                    </div>
+                                </div>
+                            </div>
+                                     <div class="form-group">                              
+                                       <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #242627;">
+                                            Date Invoice <span class="required star">*</span>
+                                        </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12" >
+                                         <div class="datepicker"
+                                          date-format="dd-MM-yyyy"    
+                                          button-prev='<i class="fa fa-arrow-circle-left"></i>'
+                                          button-next='<i class="fa fa-arrow-circle-right"></i>'>
+                                       <input ng-model="date_invoice" name="Efromdate" date='MM-dd-yyyy' readonly="readonly" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus   type="text" class="angular-datepicker-input form-control"/>
+                                       <span class="error" ng-show="(f1.Efromdate.$dirty) && f1.Efromdate.$error.required" >Providing Invoice Date is mandatory!</span>
+                                    </div>
+                                </div>
+                            </div>
+                                   
+
+  @* <div id="dv_DirectorName">
+        <table id="tblDirector_Name" class="table">
+            <thead title="Directors Details">
+                <tr>
+                    <th>Name Of Director</th>
+                    <th>Mobile No</th>
+                    <th>Email Id</th>
+					 <th>
+                        <input type="button" class="btn btn-sm btn-warning" onclick="AddNewrowDirectors()" value="Add" style="margin-top: 10px;" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.a_CompanyId > 0)
+                {
+                    foreach (var item in Model.ddlCompanyDirectorList)
+                    {
+                        <tr>
+                            <td><input type='text' value="@item.t_DirectorName" class="validate[required,maxSize[200],custom[onlyLetterSp]], text-input form-control" /></td>
+                            <td>
+                                <input type='text' value="@item.t_MobileNo" class="validate[required,custom[phone],minSize[10],maxSize[15]] text-input form-control" />
+                            </td>
+                            <td>
+                                <input type='text' value="@item.t_Email" class="validate[required,maxSize[200],custom[email]] text-input form-control" />
+                            </td>
+
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr>
+                        <td><input type='text' class="validate[required,maxSize[200],custom[onlyLetterSp]], text-input form-control" /></td>
+                        <td>
+                            <input type='text' class="validate[required,custom[phone],minSize[10],maxSize[15]] text-input form-control" />
+                        </td>
+
+                        <td>
+                            <input type='text' class="validate[required,maxSize[200],custom[email]] form-control" />
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>*@
+
+
+                                     
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <button type="submit" class="btn btn-success">Add</button>
+                                            <button class="btn btn-primary" type="reset">Reset</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        
+                      <div class="x_panel" style="margin-top:40px;">
+                      
+                          <h3 style="color: #292325;text-align:center">Purchase Detail</h3>
+                          <div class="x_title"></div>
+                           <div class="x_content">
+                            
+                                <div class="form-group" style="margin-top:10px;">
+                                    <div class="col-md-6 col-sm-6 col-xs-12" style="color: #292325;margin-left: 30px;">
+                                        Search by  <input type="text" class="control-labe" placeholder="name" ng-model="searchText.ob_tbl_purchase.invoice_no" />
+                                        Exact Match  <input class="control-label" type="checkbox" ng-model="exactMatch" />
+
+                                    </div>
+                                </div>
+
+                                <br />
+                                <!-- table start-->
+                                @* <div class="row">*@
+                               <table class="table table-hover" style="margin-top:30px;margin-left: 35px;">
+                                     <table id="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                <th>
+                                                    Invoice No
+                                                </th>
+                                                <th>
+                                                   Invoice Amount
+                                                </th>                                              
+                                                 <th>
+                                                    Invoice 
+                                                </th>                                                                                              
+                                                                                            
+                                                <th>
+                                                
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+
+                                       <tbody>
+                                       
+                                           <tr dir-paginate="item in PurchaseList|filter:searchText.ob_tbl_purchase.invoice_no:exactMatch|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage">
+                                                <td scope="row">
+                                                   {{ ($index + 1) + (currentPage - 1) * 10}}
+                                                </td>
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_tbl_purchase.invoice_no}} </span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.ob_tbl_purchase.invoice_no">
+                                                </td>
+
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_tbl_purchase.invoice_amount}}</span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.ob_tbl_purchase.invoice_amount">
+                                                </td>
+                                                <td>
+                                                     <img ng-show="item.showEdit" src="{{item.ob_tbl_purchase.invoice_photo_path}}" alt="Logo" width="50" height="50" /> 
+                                                     <img ng-show="!item.showEdit" src="{{item.ob_tbl_purchase.invoice_photo_path}}" alt="Logo" width="50" height="50" /><br />
+                                                     <input type="file" ng-show="!item.showEdit" name="file" accept="image/*"  onchange="angular.element(this).scope().selectFileforUpload(this.files)"/>
+                                                </td>                                                                                                                                           
+                                                <td>
+                                                <p ng-show="item.showEdit"><span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                                                    <strong style="color:red;">|| </strong>
+                                                <span ng-show="item.showDelete" ng-click="toggleDeleteEdit(item)" class="glyphicon glyphicon-trash"></span></p>
+
+                                                <p ng-show="!item.showEdit">
+                                                <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                                <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span></p>
+                                           </td>  
+                                            </tr>
+                                            
+                                        </tbody>
+
+                                       <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+</div>
+                                <!-- table end-->
+                            </div>
+
+                       </div>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+                        </div>
+	          </div>
+      
+       
+</div>
+
+
+@section scripts{        
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/PurchaseController.js"></script>
+  }
+
+

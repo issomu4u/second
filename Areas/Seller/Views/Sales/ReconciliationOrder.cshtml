@@ -1,0 +1,123 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.AmazonreconciliationOrder>
+@*@{
+    ViewBag.Title = "ReconciliationOrder";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+ }*@
+@{
+    Layout = null;
+}
+
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+        table th {
+            background-color: #F7F7F7;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table th, table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" style="margin:0px" >
+          <tr>
+              <th>Sr.No</th>
+
+              <th>settlement_id</th>
+              <th>settlement_start_date</th>
+              <th>settlement_end_date</th>
+              <th>deposit_date</th>
+              <th>total_amount</th>
+              <th>currency</th>
+
+
+              <th>transaction_type</th>
+              <th>order_id</th>
+              <th>merchant_order_id</th>
+              <th>adjustment_id</th>
+              <th>shipment_id</th>
+              <th>marketplace_name</th>
+              <th>amount_type</th>
+              <th>amount_description</th>
+              <th>amount</th>
+              <th>fulfillment_id</th>
+              <th>posted_date</th>
+              <th>posted_date_time</th>
+              <th>order_item_code</th>
+              <th>merchant_order_item_id</th>
+              <th>merchant_adjustment_item_id</th>
+              <th>sku</th>
+              <th>quantity_purchased</th>
+              <th>promotion_id</th>
+              
+             
+           </tr>
+         @if (Model.ToList().Count != 0)
+         {
+             int i =0;
+             foreach (var  customer in Model)
+              {
+                  if (customer.reconciliationorder != null)
+                  {
+                      foreach (var item in customer.reconciliationorder)
+                      {
+                          i++;
+                           <tr>
+                         <td>@i.</td>
+                         <td>@item.settlement_id</td>
+                         <td>@item.settlement_start_date</td>
+                         <td>@item.settlement_end_date</td>
+                         <td>@item.deposit_date</td>
+                         <td>@item.total_amount</td>
+                         <td>@item.currency</td>
+
+                         <td>@item.transaction_type</td>
+                         <td>@item.order_id</td>
+                         <td>@item.merchant_order_id</td>
+                         <td>@item.adjustment_id</td>
+                         <td>@item.shipment_id</td>
+                         <td>@item.marketplace_name</td>
+                         <td>@item.amount_type</td>
+                         <td>@item.amount_description</td>
+                         <td>@item.amount</td>
+                         <td>@item.fulfillment_id</td>
+                         <td>@item.posted_date</td>
+                         <td>@item.posted_date_time</td>
+                         <td>@item.order_item_code</td>
+                         <td>@item.merchant_order_item_id</td>
+                         <td>@item.merchant_adjustment_item_id</td>
+                         <td>@item.sku</td>
+                         <td>@item.quantity_purchased</td>
+                         <td>@item.promotion_id</td>
+                                           
+                       </tr>
+                      }
+                    }
+            
+           }
+         }
+    </table>
+
+  
+</body>
+</html>

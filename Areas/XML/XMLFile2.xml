@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<AmazonEnvelope xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd">
+  <Header>
+    <DocumentVersion>1.00</DocumentVersion>
+  </Header>
+  <MessageType>AllOrdersReport</MessageType>
+  <Message>
+    <Order>
+      <AmazonOrderID>408-5218678-8953952</AmazonOrderID>
+      <MerchantOrderID>408-5218678-8953952</MerchantOrderID>
+      <PurchaseDate>2017-08-14T15:05:24+00:00</PurchaseDate>
+      <LastUpdatedDate>2017-08-16T05:24:47+00:00</LastUpdatedDate>
+      <OrderStatus>Shipped</OrderStatus>
+      <SalesChannel>Amazon.in</SalesChannel>
+      <FulfillmentData>
+        <FulfillmentChannel>Amazon</FulfillmentChannel>
+        <ShipServiceLevel>Standard</ShipServiceLevel>
+        <Address>
+          <City>Pathankot</City>
+          <State>PUNJAB</State>
+          <PostalCode>145001</PostalCode>
+          <Country>IN</Country>
+        </Address>
+      </FulfillmentData>
+      <IsBusinessOrder>false</IsBusinessOrder>
+      <OrderItem>
+        <ASIN>B00ICIFFPC</ASIN>
+        <SKU>8903338018766</SKU>
+        <ItemStatus>Shipped</ItemStatus>
+        <ProductName>Wildcraft Scoot LD Polyester Red Kids Bag (3 - 5 years age)</ProductName>
+        <Quantity>1</Quantity>
+        <ItemPrice>
+          <Component>
+            <Type>Principal</Type>
+            <Amount currency="INR">595.0</Amount>
+          </Component>
+          <Component>
+            <Type>Shipping</Type>
+            <Amount currency="INR">25.0</Amount>
+          </Component>
+        </ItemPrice>
+        <Promotion>
+          <PromotionIDs>IN Core Free Shipping 2015/04/08 23-48-5-108</PromotionIDs>
+          <ShipPromotionDiscount>25.0</ShipPromotionDiscount>
+        </Promotion>
+      </OrderItem>
+    </Order>
+  </Message>
+  <Message>
+    <Order>
+      <AmazonOrderID>405-3978995-6409932</AmazonOrderID>
+      <MerchantOrderID>405-3978995-6409932</MerchantOrderID>
+      <PurchaseDate>2017-08-14</PurchaseDate>
+      <LastUpdatedDate>2017-08-16</LastUpdatedDate>
+      <OrderStatus>Shipped</OrderStatus>
+      <SalesChannel>Amazon.in</SalesChannel>
+      <FulfillmentData>
+        <FulfillmentChannel>Amazon</FulfillmentChannel>
+        <ShipServiceLevel>Expedited</ShipServiceLevel>
+        <Address>
+          <City>NEW DELHI</City>
+          <State>DELHI</State>
+          <PostalCode>110053</PostalCode>
+          <Country>IN</Country>
+        </Address>
+      </FulfillmentData>
+      <IsBusinessOrder>false</IsBusinessOrder>
+      <OrderItem>
+        <ASIN>B01J1L3IO8</ASIN>
+        <SKU>GWREGARBINDASBLACK</SKU>
+        <ItemStatus>Shipped</ItemStatus>
+        <ProductName>Baggit Black Men&apos;s Wallet (2060899)</ProductName>
+        <Quantity>1</Quantity>
+        <ItemPrice>
+          <Component>
+            <Type>Principal</Type>
+            <Amount currency="INR">870.0</Amount>
+          </Component>
+        </ItemPrice>
+      </OrderItem>
+    </Order>
+  </Message>
+  
+  
+  
+ 
+   
+</AmazonEnvelope>

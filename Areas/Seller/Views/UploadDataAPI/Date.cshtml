@@ -1,0 +1,58 @@
+﻿
+
+
+<html ng-app="Demo" style="height:100%;">
+  <head>
+    <meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Angular Moment Picker</title>
+    
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.css" rel="stylesheet">
+  </head>
+  <body ng-cloak style="padding:20px;"
+        ng-controller="DemoController as ctrl">
+    
+    
+    
+    
+    <div class="form-group">
+      <label>First Date <code>{{txtfrom}}</code></label>
+      <input class="form-control"
+             placeholder="Select a date..."
+             moment-picker
+             max-view="hour"
+             ng-model="txtfrom"
+             ng-model-options="{ updateOn: 'blur' }">
+    </div>
+    
+    <hr>
+    
+  
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment-with-locales.js"></script>
+    <script src="//rawgit.com/indrimuska/angular-moment-picker/master/dist/angular-moment-picker.js"></script>
+    @*<script src="script.js"></script>*@
+</body>
+</html>
+<script>
+    angular
+  .module('Demo', ['moment-picker'])
+  .config(function (momentPickerProvider) {
+      momentPickerProvider.options({
+          maxView: 'month',
+          format: 'YYYY-MM-DD',
+      })
+  })
+  .controller('DemoController', ['$scope', '$timeout', function ($scope, $timeout) {
+      var ctrl = this;
+
+      ctrl.useTimeout = false;
+
+      ctrl.first = {
+          momentDate: moment()
+      };
+
+  }]);
+</script>

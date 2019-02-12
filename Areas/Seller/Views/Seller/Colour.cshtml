@@ -1,0 +1,157 @@
+﻿@{
+    ViewBag.Title = "Color";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+@*<link href="~/Areas/Seller/AngularDataTable/dataTables.min.css" rel="stylesheet" />*@
+<div class="row code" data-ng-app="MyAppSeller" ng-controller="ColorController">
+
+        	<div class="grids">
+              <div class="forms-grids">
+                <div class="clearfix"></div>
+                 <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2 style="color: #D52E56;margin-left: 40px;">Add Color</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br />
+                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1" ng-submit="SaveColorDetails()">
+
+                                  @* <div style="color:rgb(142,2,2)">{{Message}}</div>*@
+                                    <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #00bcd4;">
+                                           Color Name <span class="required"></span>
+                                        </label>
+                                         <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" name="ucolor_name" ng-model="color_name" maxlength="50" class="form-control" placeholder=" Please Enter Color Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ucolor_name.$dirty || IsFormSubmitted) && f1.ucolor_name.$error.required" >Providing Color Name is mandatory!</span>
+                                        </div>
+                                    </div>
+
+                                     <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #00bcd4;">
+                                            Color Code <span class="required"></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" name="ucolor_code" ng-model="color_code" maxlength="50" class="form-control" placeholder=" Please Enter Color Code" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ucolor_code.$dirty || IsFormSubmitted) && f1.ucolor_code.$error.required" >Providing Color Code is mandatory!</span>
+                                        </div>
+                                    </div>          
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <button type="submit" class="btn btn-success">Add</button>
+                                            <button class="btn btn-primary" type="reset">Reset</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        
+                      <div class="x_panel" style="margin-top:40px;">
+                      
+                          <h2 style="color: #59D52E;margin-left: 40px;">Color Detail</h2>
+                          <div class="x_title"></div>
+                           <div class="x_content">
+                            
+                                <div class="form-group" style="margin-top:10px;">
+                                    <div class="col-md-6 col-sm-6 col-xs-12" style="color: #59D52E;margin-left: 30px;">
+                                        Search by : <input type="text" class="control-labe" placeholder="name" ng-model="searchText.ob_tbl_seller_warehouses.warehouse_name" />
+                                        Exact Match : <input class="control-label" type="checkbox" ng-model="exactMatch" />
+
+                                    </div>
+                                </div>
+
+                                <br />
+                                <!-- table start-->
+                                 <div class="row">
+                               @*<table id="asset_table" class="table table-bordered table-hover" style="margin-top:30px;margin-left: 35px;">*@
+                                   <table  class="table table-hover" width="100%" cellspacing="0">
+                                   @*   <table datatable="ng">*@
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                   Address
+                                                </th>                                              
+                                                                                      
+                                                <th>
+                                                
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                       
+                                           <tr dir-paginate="item in ColorList|filter:searchText.ob_m_color.color_name:exactMatch|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage">
+                                                
+                                             @* <tr dt-rows ng-repeat="item in ColorList">  *@
+                                            <th scope="row">
+                                                   {{ ($index + 1) + (currentPage - 1) * 10}}
+                                                </th>
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_m_color.color_name}} </span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.ob_m_color.color_name">
+                                                </td>
+
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_m_color.color_code}}</span>
+                                                    <input ng-show="!item.showEdit" type="email" style="width:80%;height:30%" ng-model="item.ob_m_color.color_code">
+                                                </td>
+                                                <td>
+                                                <p ng-show="item.showEdit"><span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                                                    <strong style="color:red;">|| </strong>
+                                                <span ng-show="item.showDelete" ng-click="toggleDeleteEdit(item)" class="glyphicon glyphicon-trash"></span></p>
+
+                                                <p ng-show="!item.showEdit">
+                                                <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                                <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span></p>
+                                           </td>  
+                                            </tr>
+
+                                        </tbody>
+
+                                        <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+</div>
+                                <!-- table end-->
+                            </div>
+
+                       </div>
+
+                    </div>
+                </div>
+                        </div>
+	          </div>
+      
+       
+</div>
+
+
+
+
+
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/ColorController.js"></script>
+  }
+
+

@@ -1,0 +1,229 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.SaleReport>
+@{
+    ViewBag.Title = "TallyVoucher";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+  
+}
+<script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTable/jquery.dataTables.js"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTables.bootstrap.min.js"></script>
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" language="javascript">
+    $("#tab_administration").addClass("active");
+    $("#searchReset").live("click", function () {
+        $("#txt_from").val('');
+        $("#txt_to").val('');
+        $("#ddl_market_place").val(0);
+        $("#ddl_eftcod").val(0);
+        $("#ddl_reference").val(0);
+    });
+
+   
+    $("#btn_export").live("click", function () {
+        var is_check = false;
+        var exp = $("#ddl_export").val();
+        
+        if (exp == "") {
+            is_check = true;
+            $("#ddl_export").focus();
+            $("#ddl_export").css({'border':'1px solid red'});
+        }
+        else $("#ddl_export").removeAttr('style');
+        if (is_check) {
+            return false;
+        }
+        else return true;
+    });
+    
+   
+
+    function ddlCatChange(ddlCat) {
+        var marketplaceID = $('#ddl_market_place').val();
+        var CatID = $('#ddl_eftcod').val();
+        if (CatID == 0) {
+            $("#ddl_reference").html(""); // clear before appending new list
+            $("#ddl_reference").append($('<option></option>').val(null).html('All'));
+            
+        }
+        $.ajax({
+            url: '/SaleReport/GetReferenceNumber',
+            type: "GET",
+            dataType: "JSON",
+            data: { CatID: CatID, marketplaceID: marketplaceID },
+            success: function (categories) {
+                $("#ddl_reference").html(""); // clear before appending new list
+                //$("#ddl_reference").append($('<option></option>').val(null).html('All'));
+                $.each(categories, function (i, category) {
+                    var app = '';
+                    app = $('<option></option>').val(category.Value).html(category.Text);
+                    $("#ddl_reference").append(app);
+
+                });
+            }
+        });
+    }
+
+    function SaveRow() {
+        var marketplace = $('#ddl_market_place').val();
+        var reference = $('#ddl_reference').val();
+        //var eft = $('#ddl_eftcod').val();
+        //var reference = $('#ddl_reference').val();
+
+        if (marketplace == null || marketplace == 0) {
+            alert('Select Market place');
+            return false;
+        }
+        if (reference == null || reference == 0)
+        {
+            alert('Select Reference No');
+            return false;
+        }
+        //if (eft == null || eft == 0) {
+        //    alert('Select EFT/COD');
+        //    return false;
+        //}
+        
+    }
+</script>
+
+<style>
+    .text-right {
+        text-align: right;
+    }
+</style>
+
+@using (Html.BeginForm("TallyVoucher", "SaleReport", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row" style="margin: 0px;">
+            <h3>Settlement Voucher </h3>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table">
+                    <div class="widget-header">
+                        <i class="icon-search"></i>
+                        <h3>Filter</h3>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="row" style="margin: 0px; margin-top: 10px;">
+                                <div class="col-lg-4">
+                                    <label>Select Market Place</label>
+                                    @Html.DropDownList("ddl_market_place", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control", onchange = "ddlCatChange();"})
+                                </div>
+                                @*<div class="col-lg-4">
+                                    <label for="exampleSelect1">Select EFT/COD Type</label>
+                                         @Html.DropDownList("ddl_eftcod", ViewData["EFTCOD"] as List<SelectListItem>, new { @class = "form-control", onchange = "ddlCatChange();" })
+                                </div>*@
+                                <div class="col-lg-4">
+                                    <label for="exampleSelect1">Select Reference Number</label>
+                                    @Html.DropDownList("ddl_reference", ViewData["ReferenceNumber"] as List<SelectListItem>, new { @class = "form-control"  })
+
+                                </div>
+                            </div>
+                            <div class="row text-center" style="margin: 0px; margin-top: 10px;">
+                                <input id="searchSubmit" type="submit" value="Search" onclick="return SaveRow()";tabindex="7" class="btn btn-success" />
+                                <input id="searchReset" type="button" value="Clear" tabindex="8" class="btn btn-success" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      @*  <div class="row">
+            <div class="span12">
+                <div class="col-md-12 text-right" style="margin-bottom: 10px;">
+                   
+                </div>
+            </div>
+            <div class="span12">
+                <div class="col-md-12 text-right" style="margin-bottom: 10px;">
+                    @Html.TextBox("txt_email", "", new { @style = "height:35px;width:180px;margin-right:5px;", placeholder = "Enter Email ID" })
+                    <input type="submit" value="Send On Mail" id="btn_mail" name="sendmail" class="btn btn-small btn-success text-right" />
+                </div>
+            </div>
+        </div>*@
+
+        <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table">
+                    <div class="widget-header" style="height:44px">
+                        <div class="row" style="margin:0px;">
+                            <div class="col-lg-6">
+                                <i class="icon-th-list"></i>
+                                <h3>Settlement Voucher</h3>
+                            </div>
+                            <div class="col-lg-6 text-right">
+                                @Html.DropDownList("ddl_export", ViewData["ExportList"] as List<SelectListItem>, new { @style = "width:100px; height:30px;margin-right:5px;" })
+                                <input type="submit" value="Export" id="btn_export" name="command" class="btn btn-sm btn-success text-right" style="margin-top:5px;" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <table id="dv_EmployeeReportExcel" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>Voucher Date</th>
+                                        <th>Voucher Number</th>
+                                        <th>Ledger Name</th>
+                                        <th>Reference Number</th>
+                                        <th>Dr Amount</th>
+                                        <th>Cr Amount</th>
+                                        <th>Narration</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @if (Model.ToList().Count != 0)
+                                    {
+                                        int i = 0;
+                                        foreach (var item in Model)
+                                        {
+                                            i++;                                                                                                    
+                                        <tr>
+                                            <td>@i.</td>
+                                            <td>@Html.DisplayFor(a => item.Sett_orderDate)</td>
+                                            <td>@Html.DisplayFor(a => item.VoucherNumber)</td>
+                                            <td>@Html.DisplayFor(a => item.ExpenseName)</td>
+                                            <td>@Html.DisplayFor(a => item.OrderID)</td>
+                                            <td>@Html.DisplayFor(a => item.refund_SumOrder)</td>
+                                            <td>@Html.DisplayFor(a => item.SumOrder)</td>
+                                            <td>@Html.DisplayFor(a => item.Narration)</td>
+                                            
+                                        </tr>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+                        
+}
+
+<script>
+    $(function () { $("#dv_EmployeeReportExcel").DataTable(); });
+    $(function () {
+        $('#txt_from').datepicker();
+    });
+</script>
+<script type="text/javascript">
+    $(function () {
+        $('#txt_to').datepicker();
+    });
+</script>
+
+
+
+
+
+
+

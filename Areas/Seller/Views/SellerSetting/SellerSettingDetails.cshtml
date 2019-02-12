@@ -1,0 +1,62 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.model_tbl_seller_setting>
+@{
+    ViewBag.Title = "SellerSettingDetails";
+}
+@*<div class="container">*@
+   @* <div class="row">
+        <div class="span12">         
+        </div>
+    </div>*@
+    <div class="row">
+        <div class="span12" style="width:97%;">
+            <div class="widget widget-table action-table">
+                <div class="widget-header">
+                    <i class="icon-th-list"></i>
+                    <h3>View Invoice Settings</h3>
+                </div>                
+                <div class="widget-content">
+                    <div class="form-group">
+
+                        <table id="tbl-user" class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>S.No</th>
+                                    <th>Prefix Code</th>                                
+                                    <th>Prefix No. </th>
+                                    <th>Financial Year</th>                                                                   
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (Model.ToList().Count != 0)
+                                {
+                                    int i = 0;
+                                    foreach (var Item in Model)
+                                    {
+                                        i++;
+                                        <tr>
+                                            <td>@i.</td>
+                                            <td>@Html.DisplayFor(modelitem => Item.t_seller_prefix_code)</td>                                         
+                                            <td>@Html.DisplayFor(modelitem => Item.t_running_no)</td>
+                                            <td>@Html.DisplayFor(modelitem=>Item.t_financial_year)</td>                                                                                   
+                                            <td style="min-width:85px;">
+                                                <a href="~/Seller/SellerSetting/Index/@Item.id" class="btn btn-small btn-success"><i class="btn-icon-only icon-pencil"></i></a>
+                                                <a href="@Url.Action("DeleteInvoiceSetting", "SellerSetting", new { id =Item.id })" id="@Item.id" class="btn btn-danger btn-small" onclick="return confirm('Are you sure you want to Delete it?')"><i class="btn-icon-only icon-remove"> </i></a>
+
+                                            </td>
+                                        </tr>
+                                    }
+
+                                }
+                            </tbody>
+                        </table>
+                    </div>                   
+                </div>           
+            </div>
+        </div>
+    </div>
+@*</div>*@
+
+<script>
+    $(function () { $("#tbl-user").DataTable(); });
+</script>

@@ -1,0 +1,117 @@
+﻿
+@model IEnumerable<SellerVendor.Areas.Seller.Models.parseJson>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+        table th {
+            background-color: #F7F7F7;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table th, table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" >
+          <tr>
+              <th>Sr.No</th>
+
+              <th>orderItemId</th>
+              <th>orderId</th>
+              <th>hsn</th>
+              <th>status</th>
+              <th>hold</th>
+
+              <th>orderDate</th>
+              <th>dispatchAfterDate</th>
+              <th>dispatchByDate</th>
+              <th>updatedAt</th>
+              <th>sla</th>
+              <th>quantity</th>
+              <th>title</th>
+              <th>listingId</th>
+              <th>fsn</th>
+              <th>sku</th>
+              <th>price</th>
+              <th>shippingFee</th>
+
+              <th>shippingPincode</th>
+              <th>paymentType</th>
+
+              <th>sellingPrice</th>
+              <th>customerPrice</th>
+              <th>shippingCharge</th>
+              <th>totalPrice</th>
+
+             
+           </tr>
+         @if (Model.ToList().Count != 0)
+         {
+             int i =0;
+             foreach (var  customer in Model)
+              {
+                 if (customer.orderItems != null)
+                  {
+                      foreach (var item in customer.orderItems)
+                      {
+                          i++;
+                           <tr>
+                         <td>@i.</td>
+                         <td>@item.orderItemId</td>
+                         <td>@item.orderId</td>
+                         <td>@item.hsn</td>
+                         <td>@item.status</td>
+                         <td>@item.hold</td>
+                         <td>@item.orderDate</td>
+                         <td>@item.dispatchAfterDate</td>
+                         <td>@item.dispatchByDate</td>
+                         <td>@item.updatedAt</td>
+                         <td>@item.sla</td>
+                         <td>@item.quantity</td>
+                         <td>@item.title</td>
+                         <td>@item.listingId</td>
+                         <td>@item.fsn</td>
+                         <td>@item.sku</td>
+                         <td>@item.price</td>
+                         <td>@item.shippingFee</td>
+                         <td>@item.shippingPincode</td>
+                         <td>@item.paymentType</td>
+                         <td>@item.sellingPrice</td>
+                         <td>@item.customerPrice</td>
+                         <td>@item.shippingCharge</td>
+                         <td>@item.totalPrice</td>
+
+                       </tr>
+                      }
+                    }
+            
+           }
+         }
+    </table>
+
+  
+</body>
+</html>

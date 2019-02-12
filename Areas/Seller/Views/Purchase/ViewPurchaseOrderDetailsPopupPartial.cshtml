@@ -1,0 +1,73 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.PurchaseDetailsviewmodel>
+@{
+   
+    Layout = null;
+  
+}
+
+<table id="tbl_category" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>InventoryName</th>
+            <th>Item Count</th>
+             <th>Base Amount</th>
+
+             <th>CGST Tax</th>
+             <th>CGST Amount</th>
+             <th>IGST Tax</th>
+             <th>IGST Amount</th>
+            @* <th>Rate of Tax</th>
+             <th>Rate of Tax Amount</th>*@
+             <th>SGST Tax</th>
+             <th>SGST Amount</th>
+             <th>Tax Paid</th>
+            <th>Total Amount</th>
+           
+           @* <th>Action</th>*@
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ToList().Count!= 0)
+        {
+            int i = 0;
+            foreach (var Item in Model)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@Html.DisplayFor(modelitem => Item.InventoryName)</td>
+                    <td>@Html.DisplayFor(modelitem => Item.item_count)</td>
+
+                     <td>@Html.DisplayFor(modelitem => Item.base_amount)</td>
+                    <td>@Html.DisplayFor(modelitem => Item.cgst_tax)</td>
+
+                     <td>@Html.DisplayFor(modelitem => Item.CGST_amount)</td>
+                    <td>@Html.DisplayFor(modelitem => Item.igst_tax)</td>
+
+                     <td>@Html.DisplayFor(modelitem => Item.Igst_amount)</td>
+                    @*<td>@Html.DisplayFor(modelitem => Item.rate_of_tax)</td>*@
+
+                    @* <td>@Html.DisplayFor(modelitem => Item.rateoftax_amount)</td>*@
+                    <td>@Html.DisplayFor(modelitem => Item.sgst_tax)</td>
+
+                     <td>@Html.DisplayFor(modelitem => Item.sgst_amount)</td>
+                   
+
+                     <td>@Html.DisplayFor(modelitem => Item.tax_paid)</td>
+                    <td>@Html.DisplayFor(modelitem => Item.t_totaltax_amount)</td>
+                   
+                   
+                </tr>
+
+            }
+
+        }
+    </tbody>
+</table>
+
+
+<script>
+    $(function () { $("#tbl_category").DataTable(); });
+</script>
+

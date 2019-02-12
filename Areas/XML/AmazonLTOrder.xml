@@ -1,0 +1,54 @@
+﻿<?xml version="1.0"?>
+<!--<ListOrdersResponse xmlns="https://mws.amazonservices.com/Orders/2013-09-01">-->
+<!--<?xml version="1.0" encoding="iso-8859-1"?>-->
+<ListOrdersResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd" >
+  <ListOrdersResult>
+    <Orders>
+      <Order>
+        <LatestShipDate>2017-10-13T07:22:05Z</LatestShipDate>
+        <OrderType>StandardOrder</OrderType>
+        <PurchaseDate>2017-10-12T18:48:59Z</PurchaseDate>
+        <AmazonOrderId>404-2521203-7111559</AmazonOrderId>
+        <BuyerEmail>2jdczmly3mdp06p@marketplace.amazon.in</BuyerEmail>
+        <IsReplacementOrder>false</IsReplacementOrder>
+        <LastUpdateDate>2017-10-13T07:22:21Z</LastUpdateDate>
+        <NumberOfItemsShipped>1</NumberOfItemsShipped>
+        <ShipServiceLevel>Expedited</ShipServiceLevel>
+        <OrderStatus>Shipped</OrderStatus>
+        <SalesChannel>Amazon.in</SalesChannel>
+        <IsBusinessOrder>false</IsBusinessOrder>
+        <NumberOfItemsUnshipped>0</NumberOfItemsUnshipped>
+        <PaymentMethodDetails>
+          <PaymentMethodDetail>Standard</PaymentMethodDetail>
+        </PaymentMethodDetails>
+        <BuyerName>Mayur Muralidhar</BuyerName>
+        <OrderTotal>
+          <CurrencyCode>INR</CurrencyCode>
+          <Amount>2655.00</Amount>
+        </OrderTotal>
+        <IsPremiumOrder>false</IsPremiumOrder>
+        <EarliestShipDate>2017-10-13T07:22:05Z</EarliestShipDate>
+        <MarketplaceId>A21TJRUUN4KGV</MarketplaceId>
+        <FulfillmentChannel>AFN</FulfillmentChannel>
+        <PaymentMethod>Other</PaymentMethod>
+        <ShippingAddress>
+          <StateOrRegion>KARNATAKA</StateOrRegion>
+          <City>BENGALURU</City>
+          <CountryCode>IN</CountryCode>
+          <PostalCode>560078</PostalCode>
+          <Name>Nikilaa M</Name>
+          <AddressLine1>A401, Brigade Palmsprings</AddressLine1>
+          <AddressLine2>24th Main, JP Nagar 7th Phase</AddressLine2>
+        </ShippingAddress>
+        <IsPrime>false</IsPrime>
+        <ShipmentServiceLevelCategory>Expedited</ShipmentServiceLevelCategory>
+        <SellerOrderId>404-2521203-7111559</SellerOrderId>
+      </Order>   
+    </Orders>
+    <CreatedBefore>2017-10-14T18:30:00Z</CreatedBefore>
+    <NextToken>HRxJZyDWXJ2aJqJYLDm0ZIfVkJJPpovR6/XZQn9zpT18PxreGhQZY7QzazHyYVyLqBXdLk4iogwM3B3rhUPcuXjwpyLysDxnUC8Jqr8bPYOeXaRUvtI0tSJ0wMvlylZkWQWPqGlbsnM84qdTrqNK4wKkeyHgSMJfOnlPu9Fd1x4VGW9EeuoefLuZIF9n45mtnrZ4AbBdBTeicp5jJPQPcgCy5/GuGI4OLzyB960RsbIZEWUDFvtT58dgqv7QuFyK6W5hAqN9/KJFnoA11hGrg7CXSaG7w7Y2wag2/ezEw/ClQuFX9HJv7/iRDmILvEyo1Yr+D0zvLTlxrBy2GCH8wWZMngK/euHfM2EuKyb4Kyh1Ix9FNS60GgP1TOgBHI/x64nGGD3iAvEszthLnLv6zXt0PFucV9XqgQNSshBto/zVRVNhwy0Le4fikx8VyRgI24HdEQv3vKM=</NextToken>
+  </ListOrdersResult>
+  <ResponseMetadata>
+    <RequestId>35ee8dd6-683c-4ea0-becc-352ff0f8cb35</RequestId>
+  </ResponseMetadata>
+</ListOrdersResponse>

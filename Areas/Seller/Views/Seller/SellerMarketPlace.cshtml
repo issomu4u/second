@@ -1,0 +1,281 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+<div class="row" data-ng-app="MyAppSeller" ng-controller="SellerMarketPlaceController">
+        	<div class="grids">
+              <div class="forms-grids">
+                <div class="clearfix"></div>
+                 <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2 style="color: #D52E56;text-align:center;margin-right:120px;">Add MarketPlace Details </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br />
+                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1" ng-submit="SaveSellerMarketPlace()">
+
+                                 
+                                    <div class="row">                                   
+                                         <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                    Select Market Place<span class="required star">*</span>
+                                                 </label>
+                                            </div>
+                                         <div class="col-sm-4">
+                                           <select ng-model="m_marketplace_id" name="selected_id" class="form-control" ng-options="c.id as c.name for c in MarketPlaceList">
+                                                <option value="">-- Select --</option>
+                                            </select>
+                                             <span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required" >Providing  select Market Place is mandatory!</span>                                            
+                                        </div>
+                                         <div class="col-sm-2" >
+                                        <label for="first-name" style="color: #242627;">
+                                            My Seller Id<span class="required star">*</span>
+                                        </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="umy_unique_id" ng-model="my_unique_id" maxlength="50" class="form-control" placeholder=" Please Enter Your Unique ID" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.umy_unique_id.$dirty || IsFormSubmitted) && f1.umy_unique_id.$error.required" >Providing Unique Id is mandatory!</span>                                                                                    
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div class="row">
+                                         <div class="col-sm-2">
+                                           <label  for="first-name" style="color: #242627;">
+                                              Login Name <span class="required star">*</span>
+                                          </label>
+                                         </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="ut_loginName" ng-model="t_loginName" maxlength="50" class="form-control" placeholder=" Please Enter Login Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ut_loginName.$dirty || IsFormSubmitted) && f1.ut_loginName.$error.required" >Providing Login Name is mandatory!</span>
+                                        </div>
+
+                                     <div class="col-sm-2" >
+                                        <label for="first-name" style="color: #242627;">
+                                           Password <span class="required star">*</span>
+                                        </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="ut_password" ng-model="t_password" maxlength="50" class="form-control" placeholder=" Please Enter Your Password" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ut_password.$dirty || IsFormSubmitted) && f1.ut_password.$error.required" >Providing Password is mandatory!</span>
+                                        </div>                                                                    
+                                    </div>
+
+                                     <div class="row">
+                                         <div class="col-sm-2">
+                                           <label  for="first-name" style="color: #242627;">
+                                              Access Key ID <span class="required star">*</span>
+                                          </label>
+                                         </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="ut_access_Key_id" ng-model="t_access_Key_id" maxlength="50" class="form-control" placeholder=" Please Enter Access Key ID" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ut_access_Key_id.$dirty || IsFormSubmitted) && f1.ut_access_Key_id.$error.required" >Providing Access Key Id is mandatory!</span>
+                                        </div>
+
+                                     <div class="col-sm-2" >
+                                        <label for="first-name" style="color: #242627;">
+                                           Secret Key <span class="required star">*</span>
+                                        </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="ut_secret_Key" ng-model="t_secret_Key" maxlength="50" class="form-control" placeholder=" Please Enter Your Secret Key" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ut_secret_Key.$dirty || IsFormSubmitted) && f1.ut_secret_Key.$error.required" >Providing Secret Key is mandatory!</span>
+                                        </div>                                                                    
+                                    </div>
+
+                                    <div class="row">
+                                         <div class="col-sm-2">
+                                           <label  for="first-name" style="color: #242627;">
+                                              Auth. Token <span class="required star">*</span>
+                                          </label>
+                                         </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="ut_auth_token" ng-model="t_auth_token" maxlength="50" class="form-control" placeholder=" Please Enter Auth. Token" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ut_auth_token.$dirty || IsFormSubmitted) && f1.ut_auth_token.$error.required" >Providing Auth Token is mandatory!</span>
+                                        </div> 
+                                        
+                                        <div class="col-sm-2">
+                                           <label  for="first-name" style="color: #242627;">
+                                              Seller MarketPlace-Id <span class="required star">*</span>
+                                          </label>
+                                         </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="umarket_palce_id" ng-model="market_palce_id" maxlength="50" class="form-control" placeholder=" Please Enter Market Palce Id" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.umarket_palce_id.$dirty || IsFormSubmitted) && f1.umarket_palce_id.$error.required" >Providing Market Place Id is mandatory!</span>
+                                        </div>                                                                                                                                         
+                                    </div>
+
+                                    
+
+                                    
+
+
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group" style="margin-top:15px;">
+                                        <div class="col-md-6 col-sm-6 col-md-offset-3">
+                                            <button type="submit" class="btn btn-success">Add</button>
+                                            <button class="btn btn-primary" type="reset">Reset</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        
+                      <div class="x_panel" style="margin-top:20px;">
+                      
+                          <h3 style="color: #242627;margin-left: 20px;">Seller Market Detail</h3>
+                          <div class="x_title"></div>
+                           <div class="x_content">
+                            
+                                <div class="form-group" style="margin-top:10px;">
+                                    <div class="col-md-6 col-sm-6" style="color: #D59B2E;margin-left: 15px;">
+                                        Search by <input type="text" class="control-labe" placeholder="name" ng-model="search" />                                    
+                                    </div>
+                                </div>
+
+                                <br />
+                           
+                                 <div class="row" style="margin-top:30px;">
+                               <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                 <th>
+                                                   Image
+                                                </th> 
+                                                 <th>
+                                                    Market Place Name
+                                                </th> 
+                                                <th>
+                                                    Unique Id
+                                                </th>
+                                                <th>
+                                                   Login Name
+                                                </th>                                              
+                                                <th>
+                                                    Password
+                                                </th>                                                                                              
+                                                <th>
+                                                    Auth Token
+                                                </th>  
+                                                 <th>
+                                                    Secret Key
+                                                </th>  
+                                                 <th>
+                                                    Access Key
+                                                </th>  
+                                                   <th>
+                                                    Market Place ID
+                                                </th>                                                                                                                                     
+                                                <th>
+                                                
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                       
+                                           <tr dir-paginate="item in SellerMarketList|filter:search|orderBy:'ob_tbl_sellermarketplace.t_loginName'|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage">
+                                                <th scope="row">
+                                                   {{ ($index + 1) + (currentPage - 1) * 10}}
+                                                </th>
+                                                 <td>
+                                                       <img  src="{{item.ImagePath}}" alt="Logo" width="50" height="50" />
+                                                </td>
+                                                
+                                                 <td>                                                   
+                                                     <span ng-show="item.showEdit">{{item.MarketplaceName}}</span>  
+                                                        <select  ng-show="!item.showEdit" style="width:80%;height:30%"  ng-model="item.m_marketplace_id" style="width:30%;height:30%"  ng-options="c.id as c.name for c in MarketPlaceList">
+                                                             <option value="">--Select--</option>
+                                                      </select>                                                                                                     
+                                                   </td>               
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.my_unique_id}} </span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.my_unique_id">
+                                                </td>
+
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.t_loginName}}</span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.t_loginName">
+                                                </td>
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.t_password}}</span>                                                   
+                                                     <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.t_password">
+                                                </td>
+
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.t_auth_token}}</span>                                                   
+                                                     <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.t_auth_token">
+                                                </td>
+
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.t_secret_Key}}</span>                                                   
+                                                     <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.t_secret_Key">
+                                                </td>
+
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.t_access_Key_id}}</span>                                                   
+                                                     <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.t_access_Key_id">
+                                                </td>
+                                            
+                                                   <td>
+                                                    <span ng-show="item.showEdit">{{item.market_palce_id}}</span>                                                   
+                                                     <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.market_palce_id">
+                                                </td>                                        
+                                              
+                                                                                                                       
+                                                 
+                                                <td>
+                                                <p ng-show="item.showEdit"><span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                                                    <strong style="color:red;">|| </strong>
+                                                <span ng-show="item.showDelete" ng-click="toggleDeleteEdit(item)" class="glyphicon glyphicon-trash"></span></p>
+
+                                                <p ng-show="!item.showEdit">
+                                                <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                                <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span></p>                                         
+                                           </td>  
+                                            </tr>
+
+                                        </tbody>
+
+                                        <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+</div>
+                           
+                            </div>
+
+                       </div>
+
+
+                    </div>
+                </div>
+             </div>
+	       </div>
+      
+       
+</div>
+
+
+@section scripts{        
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/SellerMarketPlaceController.js"></script>
+  }
+
+

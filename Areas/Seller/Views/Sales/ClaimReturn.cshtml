@@ -1,0 +1,316 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.partial_tbl_order_history> 
+@{
+    ViewBag.Title = "ClaimReturn";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+<script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript">  
+        $(function () {
+            $("input[name='chkPassPort2']").click(function () {
+                if ($("#chkYes1").is(":checked")) {
+                    var cond = $("input[name='chkPassPort2']").val();                   
+                    $('#Hdn_Condition').val(cond);
+                    $('#chkNo1').prop({ 'checked': false }); // true
+                }
+            });
+            $("input[name='chkPassPort3']").click(function () {
+                var cond1 = $("input[name='chkPassPort3']").val();
+                if (cond1 == 2) {
+                    $('#chkYes1').prop({ 'checked': false }); // true
+                    $('#Hdn_Condition').val(cond1);
+                }
+
+            });
+        });    
+</script>
+<script type="text/javascript">    
+       
+    $("#searchReset").live("click", function () {
+       
+        $("#ddl_market_place").val(0);
+    });
+
+        function CheckYesClick(chk) {
+            var chk_no=chk.split('_');
+            if ($("#" + chk).is(":checked")) {
+                $('#Hdn_Physically').val(1);
+                $('#chkNo_' + chk_no[1]).prop({ 'checked': false }); // true 
+                $('#physically_date').val('');
+                $('#myModal4').modal('show');
+            }
+           
+        }
+        function ChecNoClick(chk)
+        {
+            var chk_yes = chk.split('_');
+            if ($("#" + chk).is(":checked")) {
+                $('#Hdn_Physically').val(2);
+                $('#chkYes_' + chk_yes[1]).prop({ 'checked': false }); // true  
+                $('#myModal3').modal('Hide');
+            }
+        }
+       
+
+        function EditRow(btnID) {
+            var str = btnID.split("_");
+            var ID = str[1];
+            $('#Edit_' + ID).css({ 'display': 'none' });
+            $('#DivSaveBtn_' + ID).css({ 'display': 'block' });
+            $('#chkNo_' + ID).removeAttr('disabled');
+            $('#chkYes_' + ID).removeAttr('disabled');
+           
+        }
+        function SaveRow(btnID)
+        {
+            var physical = $('#Hdn_Physically').val();
+            var physicallydate = $('#physically_date').val();
+            
+            var str = btnID.split("_");
+            var ID = str[1];
+            if (physical == null || physical == 0) {
+                alert('Select Physical' + physicallydate);
+                return;
+            }
+            if (physicallydate == null || physicallydate == 0) {
+                alert('Select Date' + physicallydate);
+                return;
+            }
+            $.ajax({
+                type: "POST",
+                url: "/Sales/SaveClaimGoods",
+                dataType: "json",
+                data: {
+                    id: ID, claim_return_type: physical, claimselected_date: physicallydate
+                },
+                success: function (result) {
+                    //alert(result);
+                    $('#msgg').text(result);
+                    $('#chkNo').prop({ 'checked': false });
+                    $('#chkYes').prop({ 'checked': false });
+                    //CancelRow(btnID);
+                   // ReturnDetails();
+                   // alert('');
+                    window.location.reload();
+                }
+                ,
+                error: function (xhr) {
+                    alert('error');
+                }
+            });
+           // ReturnDetails();
+
+
+        }
+        function CancelRow(btnID) {
+            var str = btnID.split("_");
+            var ID = str[1];
+            $('#Edit_' + ID).css({ 'display': 'block' });
+            $('#DivSaveBtn_' + ID).css({ 'display': 'none' });
+            $('#chkNo_' + ID).attr('disabled',true);
+            $('#chkYes_' + ID).attr('disabled', true);
+            $('#chkNo_' + ID).prop({ 'checked': false });
+            $('#chkYes_' + ID).prop({ 'checked': false });
+        }
+        function ReturnDetails() {         
+            $.ajax({
+                url: '/Sales/ClaimReturn',
+                dataType: "html",
+                type: "GET",
+                contentType: 'application/html; charset=utf-8',
+                async: true,
+                processData: false,
+                cache: false,
+                success: function (data) {
+                   
+
+                },
+                error: function (xhr) {
+                    //jAlert("Error", 'Alert', 'warning');
+                }
+            });
+        }
+</script>
+<script type="text/javascript">
+    $("#searchReset").live("click", function () {
+        $("#txt_from").val('');
+        $("#txt_to").val('');
+        $("#ddl_marketplace").val(0);
+    });
+
+    $(function () {
+        $('#SelectDate').datepicker();
+    });
+                        </script>
+
+<script type="text/javascript">
+    function SavePopupdata() {
+        var abc = $("#physically_date").val(); 
+    }
+</script>
+
+@using (Html.BeginForm("ClaimReturn", "Sales", FormMethod.Post))
+{
+    
+    <div class="container">
+        <div class="row" style="margin:0px;">
+            <h3>Manage Claim</h3>
+        </div>
+        <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table">
+                    <div class="widget-header">
+                        <i class="icon-search"></i>
+                        <h3>Filter</h3>
+                    </div>
+                     <input type="hidden" id="Hdn_Physically" />
+                    <div class="widget-content">
+                        <div class="form-group">
+                            <div class="row" style="margin: 0px; margin-top: 10px;">
+                                <div class="col-lg-4">
+                                    <label>Select Market Place</label>
+                                    @Html.DropDownList("ddl_market_place", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control", onchange = "ddlCatChange();"})
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>Select Date</label>
+                                       @Html.TextBox("txt_from", "", new { @class = "search-input validate[required] form-control" })
+                                       
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>To Date</label>
+                                     @Html.TextBox("txt_to", "", new { @class = "search-input validate[required] form-control" })
+                              
+                                </div>
+                            </div>
+                            <div class="row text-center" style="margin: 0px; margin-top: 10px;">
+                                <input id="searchSubmit" type="submit" value="Search" tabindex="7" class="btn btn-success" />
+                                <input id="searchReset" type="button" value="Clear" tabindex="8" class="btn btn-success" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+           
+
+        <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table">
+                    <div class="widget-header">
+                        <i class="icon-th-list"></i>
+                        <h3>Claim Details </h3>
+                    </div>
+                    <div class="widget-content">
+                        <div class="form-group">                      
+                            <table id="tbl-company" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>OrderID</th>
+                                        <th>Order Date</th>
+                                        <th>SKU No</th>
+                                        <th>ClaimReceived(+)</th>
+                                        <th>ClaimReceived(-)</th>
+                                        <th>Total Product Value</th>                                    
+                                        <th>Fullfilment By</th>                                   
+                                        <th>Claim Request Sent</th>
+                                         <th>Action</th>
+                                        </tr>
+
+                                </thead>
+                                <tbody>
+                                    @if (Model.ToList().Count != 0)
+                                    {
+                                        int i = 0;
+                                        foreach (var item in Model)
+                                        {
+                                            i++;
+                                            <tr>
+                                                <td>@i.</td> 
+                                                <td>@Html.DisplayFor(a => item.order_id)</td>
+                                                <td>@Html.DisplayFor(a => item.OrderDate)</td>
+                                                <td>@Html.DisplayFor(a => item.sku)</td>                                               
+                                                <td>@if (item.ClaimReceived_order !=0){@Html.DisplayFor(a => item.ClaimReceived_order)}</td>
+                                                <td>@if (item.ClaimReceived_refund != 0){@Html.DisplayFor(a => item.ClaimReceived_refund)}</td>
+                                                
+                                                <td>@Html.DisplayFor(a => item.TotalValue)</td>                                                                                           
+                                                <td>@Html.DisplayFor(a => item.fullfillment_id)</td>                                            
+                                                  <td>
+                                                     <label for="chkYes"><input type="radio" id="chkYes_@item.id" disabled onclick="CheckYesClick(this.id)" />Yes</label>
+                                                     <label for="chkNo"> <input type="radio" id="chkNo_@item.id"  disabled onclick ="ChecNoClick(this.id)" />No</label>                                                                                                                                                                                                                                                                                              
+                                                    </td>
+                                                 <td>
+                                                    <a href="#" id="Edit_@item.id" onclick="EditRow(this.id)" class="btn btn-sm btn-success" style="max-width:34px;"><i class="btn-icon-only icon-pencil"></i></a>
+                                                    <div id="DivSaveBtn_@item.id" style="display:none; width:75px;">
+                                                        <a href="#" id="Save_@item.id" onclick="SaveRow(this.id)" class="btn btn-sm btn-primary"><i class="btn-icon-only icon-check"></i></a>
+                                                        <a href="#" id="cancel_@item.id" onclick="CancelRow(this.id)" class="btn btn-sm btn-danger"><i class="btn-icon-only icon-remove"></i></a>
+                                                    </div>
+                                                 
+                                                </td>
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+
+
+
+
+
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+    
+    <div id="myModal4" class="modal fade"  role="dialog">
+            <form id="demo-form3"  class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">              
+                <div class="modal-content" style ="width:800px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Manage Claim Date</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical">                                                                                                                                                
+                                      <div class="row">                                        
+                                         <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Select Date<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                            @Html.TextBox("physically_date", "", new { @class = "search-input validate[required] form-control",id="physically_date" })
+                                        </div>
+                                 </div>                                              
+                             </div>                                                     
+                          </div>                                     
+                      <div class="modal-footer">
+                          <input type="button" class="btnAdd btn btn-success"  value="Save" onclick="SavePopupdata();"data-dismiss="modal" />                                  
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>           
+             </form>
+        </div>
+
+}
+
+      <script>
+          $(function () { $("#tbl-company").DataTable(); });
+          $(function () {
+              $('#txt_from').datepicker();
+          });
+                        </script>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#txt_to').datepicker();
+                                $('#physically_date').datepicker();
+                            });
+
+</script>

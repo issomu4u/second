@@ -1,0 +1,2625 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{1E57828E-03BA-425D-BC79-90D44694A813}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SellerVendor</RootNamespace>
+    <AssemblyName>SellerVendor</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>packages\Antlr.3.5.0.2\lib\Antlr3.Runtime.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="CaptchaMvc, Version=2.5.0.0, Culture=neutral, PublicKeyToken=fe46ad421dd3b0e6, processorArchitecture=MSIL">
+      <HintPath>packages\CaptchaMvc.Mvc5.1.5.0\lib\net45-full\CaptchaMvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.AspNet, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.AspNet.4.3.4.13329\lib\net45-full\DotNetOpenAuth.AspNet.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.Core, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.Core.4.3.4.13329\lib\net45-full\DotNetOpenAuth.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.OAuth.Core.4.3.4.13329\lib\net45-full\DotNetOpenAuth.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OAuth.Consumer, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.OAuth.Consumer.4.3.4.13329\lib\net45-full\DotNetOpenAuth.OAuth.Consumer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.OpenId.Core.4.3.4.13329\lib\net45-full\DotNetOpenAuth.OpenId.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DotNetOpenAuth.OpenId.RelyingParty, Version=4.3.0.0, Culture=neutral, PublicKeyToken=2780ccd10d57b246, processorArchitecture=MSIL">
+      <HintPath>packages\DotNetOpenAuth.OpenId.RelyingParty.4.3.4.13329\lib\net45-full\DotNetOpenAuth.OpenId.RelyingParty.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="itextsharp, Version=5.5.13.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
+      <HintPath>packages\iTextSharp.5.5.13\lib\itextsharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LinqToExcel, Version=1.11.0.0, Culture=neutral, PublicKeyToken=9c8ea65a58f03f1f, processorArchitecture=MSIL">
+      <HintPath>packages\LinqToExcel.1.11.0\lib\LinqToExcel.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Data.Edm, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Data.Edm.5.8.3\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Data.OData.5.8.3\lib\net40\Microsoft.Data.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.Web.WebPages.OAuth, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.OAuth.3.2.6\lib\net45\Microsoft.Web.WebPages.OAuth.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.6.9.12\lib\net45\MySql.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Data.Entity.6.9.12\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MySql.Web, Version=6.9.12.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>packages\MySql.Web.6.9.12\lib\net45\MySql.Web.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>packages\LinqToExcel.1.11.0\lib\Remotion.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Data.Linq, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>packages\LinqToExcel.1.11.0\lib\Remotion.Data.Linq.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Remotion.Interfaces, Version=1.13.52.2, Culture=neutral, PublicKeyToken=0669cf0452175907, processorArchitecture=MSIL">
+      <HintPath>packages\LinqToExcel.1.11.0\lib\Remotion.Interfaces.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Net.Http.Extensions, Version=2.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Extensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Client.5.2.6\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Primitives, Version=4.2.29.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Spatial, Version=5.8.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\System.Spatial.5.8.3\lib\net40\System.Spatial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.Core.5.2.6\lib\net45\System.Web.Http.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.OData, Version=5.7.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.OData.5.7.0\lib\net45\System.Web.Http.OData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebApi.WebHost.5.2.6\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Mvc.5.2.6\lib\net45\System.Web.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.Razor.3.2.6\lib\net45\System.Web.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMatrix.Data, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.Data.3.2.6\lib\net45\WebMatrix.Data.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebMatrix.WebData, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>packages\Microsoft.AspNet.WebPages.WebData.3.2.6\lib\net45\WebMatrix.WebData.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AuthConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Attributes\MarketplaceWebServiceAttribute.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Attributes\MarketplaceWebServiceStreamAttribute.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Attributes\RequestType.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Attributes\ResponseType.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Attributes\StreamType.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\MarketplaceWebService.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\MarketplaceWebServiceClient.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\MarketplaceWebServiceConfig.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\MarketplaceWebServiceException.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Mock\MarketplaceWebServiceMock.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\CancelFeedSubmissionsRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\CancelFeedSubmissionsResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\CancelFeedSubmissionsResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\CancelledReportRequestList.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\CancelReportRequestsRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\CancelReportRequestsResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\CancelReportRequestsResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ContentType.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\Error.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ErrorResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\FeedSubmissionInfo.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\FeedSubmissionList.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionCountRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionCountResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionCountResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionListByNextTokenRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionListByNextTokenResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionListByNextTokenResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionListRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionListResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionListResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionResultRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionResultResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetFeedSubmissionResultResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportCountRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportCountResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportCountResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportListByNextTokenRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportListByNextTokenResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportListByNextTokenResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportListRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportListResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportListResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportRequestCountRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportRequestCountResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportRequestCountResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportRequestListByNextTokenRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportRequestListByNextTokenResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportRequestListByNextTokenResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportRequestListRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportRequestListResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportRequestListResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportScheduleCountRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportScheduleCountResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportScheduleCountResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportScheduleListByNextTokenRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportScheduleListByNextTokenResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportScheduleListByNextTokenResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportScheduleListRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportScheduleListResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\GetReportScheduleListResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\IContentTypeParameter.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\IdList.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ManageReportScheduleList.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ManageReportScheduleRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ManageReportScheduleResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ManageReportScheduleResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\MediaType.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\Report.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ReportInfo.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ReportList.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ReportRequestInfo.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ReportRequestList.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ReportSchedule.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ReportScheduleList.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\RequestReportRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\RequestReportResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\RequestReportResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ResponseHeaderMetadata.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\ResponseMetadata.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\StatusList.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\SubmitFeedRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\SubmitFeedResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\SubmitFeedResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\TypeList.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\UpdatedReportAcknowledgementList.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\UpdateReportAcknowledgementsRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\UpdateReportAcknowledgementsResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\settlement\Model\UpdateReportAcknowledgementsResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\MarketplaceWebServiceOrders.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\MarketplaceWebServiceOrdersClient.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\MarketplaceWebServiceOrdersConfig.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\MarketplaceWebServiceOrdersException.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\MarketplaceWebServiceOrdersSample.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Mock\MarketplaceWebServiceOrdersMock.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\Address.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\BuyerCustomizedInfoDetail.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\BuyerTaxInfo.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\GetOrderRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\GetOrderResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\GetOrderResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\GetServiceStatusRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\GetServiceStatusResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\GetServiceStatusResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\IMWSResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\InvoiceData.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrderItemsByNextTokenRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrderItemsByNextTokenResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrderItemsByNextTokenResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrderItemsRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrderItemsResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrderItemsResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrdersByNextTokenRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrdersByNextTokenResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrdersByNextTokenResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrdersRequest.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrdersResponse.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ListOrdersResult.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\Message.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\Money.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\Order.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\OrderItem.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\PaymentExecutionDetailItem.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\PointsGrantedDetail.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ResponseHeaderMetadata.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\ResponseMetadata.cs" />
+    <Compile Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Model\TaxClassification.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\CancelFeedSubmissionsSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\CancelReportRequestsSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\CancelReportsSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetFeedSubmissionCountSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetFeedSubmissionListByNextTokenSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetFeedSubmissionListSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetFeedSubmissionResultSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetReportCountSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetReportListByNextTokenSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetReportListSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetReportRequestCountSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetReportRequestListByNextTokenSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetReportRequestListSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetReportSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetReportScheduleCountSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetReportScheduleListByNextTokenSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\GetReportScheduleListSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\ManageReportScheduleSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\MarketplaceWebServiceSamples.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\ReportSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\RequestReportSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\SubmitFeedSample.cs" />
+    <Compile Include="Areas\Seller\AmazonModel\settlementModel\UpdateReportAcknowledgementsSample.cs" />
+    <Compile Include="Areas\Seller\CommonClassXML\Serializer.cs" />
+    <Compile Include="Areas\Seller\Common\orderItems.cs" />
+    <Compile Include="Areas\Seller\Controllers\comman_function.cs" />
+    <Compile Include="Areas\Seller\Controllers\CronJobController.cs" />
+    <Compile Include="Areas\Seller\Controllers\FileUploadController.cs" />
+    <Compile Include="Areas\Seller\Controllers\FlipkartParseController.cs" />
+    <Compile Include="Areas\Seller\Controllers\GraphController.cs" />
+    <Compile Include="Areas\Seller\Controllers\log.cs" />
+    <Compile Include="Areas\Seller\Controllers\PurchaseController.cs" />
+    <Compile Include="Areas\Seller\Controllers\SaleReportController.cs" />
+    <Compile Include="Areas\Seller\Controllers\SalesController.cs" />
+    <Compile Include="Areas\Seller\Controllers\SellerController.cs" />
+    <Compile Include="Areas\Seller\Controllers\SellerSettingController.cs" />
+    <Compile Include="Areas\Seller\Controllers\SendMail.cs" />
+    <Compile Include="Areas\Seller\Controllers\UploadDataAPIController.cs" />
+    <Compile Include="Dtos\ImportFileDto.cs" />
+    <Compile Include="Enums\FileStatus.cs" />
+    <Compile Include="Enums\FileType.cs" />
+    <Compile Include="Enums\MarketPlace.cs" />
+    <Compile Include="Areas\Seller\Models\Amazon.cs" />
+    <Compile Include="Areas\Seller\Models\api_parameter.cs" />
+    <Compile Include="Areas\Seller\Models\Browse_Upload_Excel_Utility.cs" />
+    <Compile Include="Areas\Seller\Models\DBContext\API_Context.cs" />
+    <Compile Include="Areas\Seller\Models\DBContext\SellerContext.cs" />
+    <Compile Include="Areas\Seller\Models\exception_history.cs" />
+    <Compile Include="Areas\Seller\Models\Get_Seller_API_DATA.cs" />
+    <Compile Include="Areas\Seller\Models\InventoryDetailsView.cs" />
+    <Compile Include="Areas\Seller\Models\MasterInventoryXML.cs" />
+    <Compile Include="Areas\Seller\Models\MasterLedgerVoucherXML.cs" />
+    <Compile Include="Areas\Seller\Models\m_color.cs" />
+    <Compile Include="Areas\Seller\Models\m_fullfilled.cs" />
+    <Compile Include="Areas\Seller\Models\m_item_status.cs" />
+    <Compile Include="Areas\Seller\Models\m_report_color.cs" />
+    <Compile Include="Areas\Seller\Models\m_saleorder_entry_src.cs" />
+    <Compile Include="Areas\Seller\Models\m_settlement_transaction_type.cs" />
+    <Compile Include="Areas\Seller\Models\m_tbl_expense.cs" />
+    <Compile Include="Areas\Seller\Models\OrderSettlementEntity.cs" />
+    <Compile Include="Areas\Seller\Models\OrderSettlementMappingEntity.cs" />
+    <Compile Include="Areas\Seller\Models\parseJson.cs" />
+    <Compile Include="Areas\Seller\Models\PaytmOrder.cs" />
+    <Compile Include="Areas\Seller\Models\proc_Sales_Voucher.cs" />
+    <Compile Include="Areas\Seller\Models\ProductListingAPI.cs" />
+    <Compile Include="Areas\Seller\Models\PurchaseDetailsviewmodel.cs" />
+    <Compile Include="Areas\Seller\Models\Report_Utility.cs" />
+    <Compile Include="Areas\Seller\Models\ReturnVoucherXml.cs" />
+    <Compile Include="Areas\Seller\Models\SaleReport.cs" />
+    <Compile Include="Areas\Seller\Models\SalesorderReport.cs" />
+    <Compile Include="Areas\Seller\Models\SalesOrderXML.cs" />
+    <Compile Include="Areas\Seller\Models\SalesVoucher.cs" />
+    <Compile Include="Areas\Seller\Models\SalesVoucherXml.cs" />
+    <Compile Include="Areas\Seller\Models\SellerUtility.cs" />
+    <Compile Include="Areas\Seller\Models\Seller_Market.cs" />
+    <Compile Include="Areas\Seller\Models\SettlementAPI.cs" />
+    <Compile Include="Areas\Seller\Models\TallyVoucherXml.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_api_meter.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_category_slabs.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_claim_request.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_courier_comapny.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_customer_details.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_details_items.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_history_return_details.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_imp_bank_transfers.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_inventory.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_inventory_details.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_inventory_effectiveprice.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_inventory_sku_mapping.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_item_category.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_item_sale_association.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_item_subcategory.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_order_delivery.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_order_history.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_order_payment_ledger.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_order_upload.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_product_upload.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_publish_item.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_purchase.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_purchase_details.cs" />
+    <Compile Include="Areas\Seller\Models\m_referenced.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_return_upload.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_Salesledger_tax.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_SalesOrder.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_sales_order.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_sales_order_details.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_sales_order_status.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_sellermarketplace.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_seller_accounting_pkg_details.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_seller_api_plan.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_seller_setting.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_seller_tax_file.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_seller_vendors.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_seller_warehouses.cs" />
+    <Compile Include="Areas\Seller\Models\m_settlement_fee.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_settlement_order.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_settlement_suspense_entries.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_settlement_upload.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_Settlement_voucher.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_tax.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_vendor_payment.cs" />
+    <Compile Include="Areas\Seller\Models\tbl_warehouse_transfer.cs" />
+    <Compile Include="Areas\Seller\Models\ImportFileHistoryEntity.cs" />
+    <Compile Include="Areas\Seller\Models\XMLDummy.cs" />
+    <Compile Include="Areas\Seller\runtime-src\AbstractMwsObject.cs" />
+    <Compile Include="Areas\Seller\runtime-src\IMwsCall.cs" />
+    <Compile Include="Areas\Seller\runtime-src\IMwsObject.cs" />
+    <Compile Include="Areas\Seller\runtime-src\IMwsReader.cs" />
+    <Compile Include="Areas\Seller\runtime-src\IMwsRequestType.cs" />
+    <Compile Include="Areas\Seller\runtime-src\IMwsWriter.cs" />
+    <Compile Include="Areas\Seller\runtime-src\MwsAQCall.cs" />
+    <Compile Include="Areas\Seller\runtime-src\MwsConnection.cs" />
+    <Compile Include="Areas\Seller\runtime-src\MwsException.cs" />
+    <Compile Include="Areas\Seller\runtime-src\MwsResponseHeaderMetadata.cs" />
+    <Compile Include="Areas\Seller\runtime-src\MwsResponseMetadata.cs" />
+    <Compile Include="Areas\Seller\runtime-src\MwsUtil.cs" />
+    <Compile Include="Areas\Seller\runtime-src\MwsXmlBuilder.cs" />
+    <Compile Include="Areas\Seller\runtime-src\MwsXmlReader.cs" />
+    <Compile Include="Areas\Seller\runtime-src\MwsXmlWriter.cs" />
+    <Compile Include="Areas\Seller\SellerAreaRegistration.cs" />
+    <Compile Include="Common\common_function.cs" />
+    <Compile Include="Common\ErrorLog.cs" />
+    <Compile Include="Common\MailMessageFormat.cs" />
+    <Compile Include="Common\SendMail.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\EntitiesWrapper.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\m_database.cs" />
+    <Compile Include="Models\m_item_category.cs" />
+    <Compile Include="Models\m_item_subcategory.cs" />
+    <Compile Include="Models\m_marketplace.cs" />
+    <Compile Include="Models\m_source_of_joining.cs" />
+    <Compile Include="Models\SellerAdminContext.cs" />
+    <Compile Include="Models\tbl_country.cs" />
+    <Compile Include="Models\tbl_exception_history.cs" />
+    <Compile Include="Models\tbl_m_plan.cs" />
+    <Compile Include="Models\tbl_sellers.cs" />
+    <Compile Include="Models\tbl_seller_type.cs" />
+    <Compile Include="Models\tbl_user_login.cs" />
+    <Compile Include="Models\tbl_user_payment.cs" />
+    <Compile Include="Models\temp_item_category.cs" />
+    <Compile Include="Models\temp_item_subcategory.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\BulkImport.cs" />
+    <Compile Include="Utilities\BulkImportBase.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\CancelFeedSubmissionsResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\CancelReportRequestsResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\ErrorResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetFeedSubmissionCountResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetFeedSubmissionListByNextTokenResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetFeedSubmissionListResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetFeedSubmissionResultResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetReportCountResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetReportListByNextTokenResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetReportListResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetReportRequestCountResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetReportRequestListByNextTokenResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetReportRequestListResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetReportResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetReportScheduleCountResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetReportScheduleListByNextTokenResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\GetReportScheduleListResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\ManageReportScheduleResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\RequestReportResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\SubmitFeedResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\settlement\Mock\UpdateReportAcknowledgementsResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Mock\MarketplaceWebServiceOrders.Model.GetOrderResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Mock\MarketplaceWebServiceOrders.Model.GetServiceStatusResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Mock\MarketplaceWebServiceOrders.Model.ListOrderItemsByNextTokenResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Mock\MarketplaceWebServiceOrders.Model.ListOrderItemsResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Mock\MarketplaceWebServiceOrders.Model.ListOrdersByNextTokenResponse.xml" />
+    <Content Include="Areas\Seller\AmazonAPI\src\MarketplaceWebServiceOrders\Mock\MarketplaceWebServiceOrders.Model.ListOrdersResponse.xml" />
+    <Content Include="Areas\Seller\AngularDataTable\angular-datatables.bootstrap.js" />
+    <Content Include="Areas\Seller\AngularDataTable\angular-datatables.directive.js" />
+    <Content Include="Areas\Seller\AngularDataTable\angular-datatables.factory.js" />
+    <Content Include="Areas\Seller\AngularDataTable\angular-datatables.js" />
+    <Content Include="Areas\Seller\AngularDataTable\angular.js" />
+    <Content Include="Areas\Seller\AngularDataTable\dataTables.min.css" />
+    <Content Include="Areas\Seller\AngularDataTable\jquery-1.10.1.min.js" />
+    <Content Include="Areas\Seller\AngularDataTable\jquery.dataTables.min.js" />
+    <Content Include="Areas\Seller\BarGraphCSS\bootstrap\css\bootstrap.css" />
+    <Content Include="Areas\Seller\BarGraphCSS\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Areas\Seller\BarGraphCSS\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Seller\BarGraphCSS\bootstrap\js\bootstrap.js" />
+    <Content Include="Areas\Seller\BarGraphCSS\bootstrap\js\bootstrap.min.js" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\css\font-awesome.css" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Seller\BarGraphCSS\js\jquery-1.10.2.min.js" />
+    <Content Include="Areas\Seller\BarGraphCSS\lightall.css" />
+    <Content Include="Areas\Seller\BarGraphCSS\lightall.js" />
+    <Content Include="Areas\Seller\DataTable\.dataTables.min.js" />
+    <Content Include="Areas\Seller\DataTable\bootstrap.min.css" />
+    <Content Include="Areas\Seller\DataTable\bootstrap1.min.css" />
+    <Content Include="Areas\Seller\DataTable\dataTables.bootstrap.css" />
+    <Content Include="Areas\Seller\DataTable\dataTables.bootstrap.min.js" />
+    <Content Include="Areas\Seller\DataTable\jquery-1.12.4.js" />
+    <Content Include="Areas\Seller\NewCSS\css\aaf5c053.proton.css" />
+    <Content Include="Areas\Seller\NewCSS\css\basictable.css" />
+    <Content Include="Areas\Seller\NewCSS\css\bootstrap.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\bootstrap-responsive.min.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\bootstrap.min.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\dataTables.bootstrap.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\datepicker.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\evol-colorpicker.min.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\font-awesome-ie7.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\font-awesome-ie7.min.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\font-awesome.min.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\jquery.alerts.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\PagedList.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\Site.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\style.css" />
+    <Content Include="Areas\Seller\NewCSS\css\Cat\syncApp.css" />
+    <Content Include="Areas\Seller\NewCSS\css\examples.css" />
+    <Content Include="Areas\Seller\NewCSS\css\font-awesome.css" />
+    <Content Include="Areas\Seller\NewCSS\css\font.css" />
+    <Content Include="Areas\Seller\NewCSS\css\ladda.min.css" />
+    <Content Include="Areas\Seller\NewCSS\css\lsb.css" />
+    <Content Include="Areas\Seller\NewCSS\css\monthly.css" />
+    <Content Include="Areas\Seller\NewCSS\css\morris.css" />
+    <Content Include="Areas\Seller\NewCSS\css\style.css" />
+    <Content Include="Areas\Seller\NewCSS\css\table-style.css" />
+    <Content Include="Areas\Seller\NewCSS\css\typo.css" />
+    <Content Include="Areas\Seller\NewCSS\images\1.png" />
+    <Content Include="Areas\Seller\NewCSS\images\2.png" />
+    <Content Include="Areas\Seller\NewCSS\images\3.png" />
+    <Content Include="Areas\Seller\NewCSS\images\error-bg.jpg" />
+    <Content Include="Areas\Seller\NewCSS\images\error.png" />
+    <Content Include="Areas\Seller\NewCSS\images\g1.jpg" />
+    <Content Include="Areas\Seller\NewCSS\images\g2.jpg" />
+    <Content Include="Areas\Seller\NewCSS\images\g3.jpg" />
+    <Content Include="Areas\Seller\NewCSS\images\g4.jpg" />
+    <Content Include="Areas\Seller\NewCSS\images\g5.jpg" />
+    <Content Include="Areas\Seller\NewCSS\images\g6.jpg" />
+    <Content Include="Areas\Seller\NewCSS\images\logo.png" />
+    <Content Include="Areas\Seller\NewCSS\images\logo1.png" />
+    <Content Include="Areas\Seller\NewCSS\images\Minus.png" />
+    <Content Include="Areas\Seller\NewCSS\images\Plus.png" />
+    <Content Include="Areas\Seller\NewCSS\images\s1.jpg" />
+    <Content Include="Areas\Seller\NewCSS\js\bootstrap.js" />
+    <Content Include="Areas\Seller\NewCSS\js\gmaps.js" />
+    <Content Include="Areas\Seller\NewCSS\js\graph.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery-ui.min.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery.basictable.min.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery.cookie.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery.countdown.min.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery.geocomplete.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery.min.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery.vmap.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery.vmap.sampledata.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery.vmap.world.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery1.9.1.min.js" />
+    <Content Include="Areas\Seller\NewCSS\js\jquery2.0.3.min.js" />
+    <Content Include="Areas\Seller\NewCSS\js\logger.js" />
+    <Content Include="Areas\Seller\NewCSS\js\lsb.js" />
+    <Content Include="Areas\Seller\NewCSS\js\modernizr.js" />
+    <Content Include="Areas\Seller\NewCSS\js\monthly.js" />
+    <Content Include="Areas\Seller\NewCSS\js\morris.js" />
+    <Content Include="Areas\Seller\NewCSS\js\proton.js" />
+    <Content Include="Areas\Seller\NewCSS\js\raphael-min.js" />
+    <Content Include="Areas\Seller\NewCSS\js\screenfull.js" />
+    <Content Include="Areas\Seller\NewCSS\js\skycons.js" />
+    <Content Include="Areas\Seller\NewCSS\js\valida.2.1.6.min.js" />
+    <Content Include="Areas\Seller\NewCSS\js\validator.min.js" />
+    <Content Include="Areas\Seller\script.js" />
+    <Content Include="Areas\Seller\SellerScripts\addclass.js" />
+    <Content Include="Areas\Seller\SellerScripts\angucomplete-alt.css" />
+    <Content Include="Areas\Seller\SellerScripts\angucomplete-alt.js" />
+    <Content Include="Areas\Seller\SellerScripts\angular-chart.js" />
+    <Content Include="Areas\Seller\SellerScripts\angular-chart.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\angular-route.js" />
+    <Content Include="Areas\Seller\SellerScripts\angular-route.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\angular.js" />
+    <Content Include="Areas\Seller\SellerScripts\angular.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\banktransfer.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\ColorController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\CourierNameController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\getInventoryController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\InventoryController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\ManageCategoryController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\MyInventoryListController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\MySalesController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\PurchaseController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\ReturnGoodsController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\SellerController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\SellerMarketPlaceController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\SellerVendorController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\UploadDataAPIController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\VendorPaymentController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Controller\WarehouseController.js" />
+    <Content Include="Areas\Seller\SellerScripts\Angular\Module\MyAppSeller.js" />
+    <Content Include="Areas\Seller\SellerScripts\Bargraph\Chart.js" />
+    <Content Include="Areas\Seller\SellerScripts\Bargraph\jquery-1.11.3.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\bootbox.js" />
+    <Content Include="Areas\Seller\SellerScripts\Cat\bootstrap.js" />
+    <Content Include="Areas\Seller\SellerScripts\Cat\chart.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\Cat\excanvas.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\Cat\jquery-ui.js" />
+    <Content Include="Areas\Seller\SellerScripts\Cat\naresh.js" />
+    <Content Include="Areas\Seller\SellerScripts\CommanJs.js" />
+    <Content Include="Areas\Seller\SellerScripts\dataTables.bootstrap.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\dataTable\jquery.dataTables.js" />
+    <Content Include="Areas\Seller\SellerScripts\dataTable\SellerVendorDataTables.js" />
+    <Content Include="Areas\Seller\SellerScripts\Datetime\angular-datepicker.css" />
+    <Content Include="Areas\Seller\SellerScripts\Datetime\angular-datepicker.js" />
+    <Content Include="Areas\Seller\SellerScripts\Datetime\helper.css" />
+    <Content Include="Areas\Seller\SellerScripts\Datetime\index.js" />
+    <Content Include="Areas\Seller\SellerScripts\Datetime\tableRowColor.css" />
+    <Content Include="Areas\Seller\SellerScripts\dirPagination.js" />
+    <Content Include="Areas\Seller\SellerScripts\DynamicTable.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery-1.7.1.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\angularjs_1.4.4.js" />
+    <Content Include="Areas\Seller\BarGraphCSS\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Seller\BarGraphCSS\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Seller\BarGraphCSS\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Seller\BarGraphCSS\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\core.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\fixed-width.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\font-awesome.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\icons.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\larger.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\list.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\mixins.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\path.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\spinning.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\stacked.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\less\variables.less" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_core.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_icons.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_larger.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_list.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_mixins.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_path.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_spinning.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_stacked.scss" />
+    <Content Include="Areas\Seller\BarGraphCSS\font-awesome\scss\_variables.scss" />
+    <None Include="Areas\Seller\SellerScripts\jquery-1.8.2.intellisense.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery-1.8.2.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery-1.8.2.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery-ui-1.8.24.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery-ui-1.8.24.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery.dataTables.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\jQuery.print.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery.PrintArea.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery.unobtrusive-ajax.min.js" />
+    <None Include="Areas\Seller\SellerScripts\jquery.validate-vsdoc.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery.validate.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery.validate.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Areas\Seller\SellerScripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\knockout-2.2.0.debug.js" />
+    <Content Include="Areas\Seller\SellerScripts\knockout-2.2.0.js" />
+    <Content Include="Areas\Seller\SellerScripts\ManageSalesTable.js" />
+    <Content Include="Areas\Seller\SellerScripts\modernizr-2.6.2.js" />
+    <Content Include="Areas\Seller\SellerScripts\NewAngular.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\popup_content.js" />
+    <Content Include="Areas\Seller\SellerScripts\textAngular.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\langs\en.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\license.txt" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advhr\css\advhr.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advhr\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advhr\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advhr\js\rule.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advhr\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advhr\rule.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advimage\css\advimage.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advimage\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advimage\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advimage\image.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advimage\img\sample.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advimage\js\image.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advimage\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advlink\css\advlink.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advlink\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advlink\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advlink\js\advlink.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advlink\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advlink\link.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advlist\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\advlist\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\autolink\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\autolink\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\autoresize\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\autoresize\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\autosave\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\autosave\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\autosave\langs\en.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\bbcode\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\bbcode\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\contextmenu\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\contextmenu\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\directionality\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\directionality\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\emotions.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-cool.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-cry.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-embarassed.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-foot-in-mouth.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-frown.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-innocent.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-kiss.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-laughing.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-money-mouth.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-sealed.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-smile.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-surprised.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-tongue-out.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-undecided.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-wink.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\img\smiley-yell.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\js\emotions.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\emotions\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\example\dialog.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\example\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\example\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\example\img\example.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\example\js\dialog.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\example\langs\en.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\example\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\example_dependency\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\example_dependency\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\fullpage\css\fullpage.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\fullpage\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\fullpage\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\fullpage\fullpage.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\fullpage\js\fullpage.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\fullpage\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\fullscreen\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\fullscreen\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\fullscreen\fullscreen.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\iespell\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\iespell\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\alert.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\button.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\buttons.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\confirm.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\corners.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\horizontal.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\vertical.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\skins\clearlooks2\window.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\inlinepopups\template.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\insertdatetime\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\insertdatetime\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\layer\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\layer\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\legacyoutput\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\legacyoutput\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\lists\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\lists\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\media\css\media.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\media\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\media\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\media\js\embed.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\media\js\media.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\media\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\media\media.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\media\moxieplayer.swf" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\nonbreaking\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\nonbreaking\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\noneditable\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\noneditable\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\pagebreak\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\pagebreak\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\paste\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\paste\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\paste\js\pastetext.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\paste\js\pasteword.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\paste\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\paste\pastetext.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\paste\pasteword.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\preview\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\preview\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\preview\example.html" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\preview\jscripts\embed.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\preview\preview.html" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\print\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\print\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\save\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\save\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\searchreplace\css\searchreplace.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\searchreplace\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\searchreplace\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\searchreplace\js\searchreplace.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\searchreplace\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\searchreplace\searchreplace.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\spellchecker\css\content.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\spellchecker\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\spellchecker\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\spellchecker\img\wline.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\style\css\props.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\style\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\style\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\style\js\props.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\style\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\style\props.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\tabfocus\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\tabfocus\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\cell.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\css\cell.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\css\row.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\css\table.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\js\cell.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\js\merge_cells.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\js\row.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\js\table.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\merge_cells.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\row.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\table\table.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\template\blank.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\template\css\template.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\template\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\template\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\template\js\template.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\template\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\template\template.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\visualchars\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\visualchars\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\wordcount\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\wordcount\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\abbr.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\acronym.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\attributes.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\cite.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\css\attributes.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\css\popup.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\del.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\editor_plugin.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\editor_plugin_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\ins.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\js\abbr.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\js\acronym.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\js\attributes.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\js\cite.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\js\del.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\js\element_common.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\js\ins.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\plugins\xhtmlxtras\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\about.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\anchor.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\charmap.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\color_picker.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\editor_template.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\editor_template_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\image.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\colorpicker.jpg" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\flash.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\icons.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\iframe.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\pagebreak.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\quicktime.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\realmedia.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\shockwave.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\trans.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\video.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\img\windowsmedia.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\js\about.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\js\anchor.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\js\charmap.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\js\color_picker.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\js\image.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\js\link.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\js\source_editor.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\langs\en.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\langs\en_dlg.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\link.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\shortcuts.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\default\content.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\default\dialog.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\default\img\buttons.png" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\default\img\items.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\default\img\menu_arrow.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\default\img\menu_check.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\default\img\progress.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\default\img\tabs.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\default\ui.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\highcontrast\content.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\highcontrast\dialog.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\highcontrast\ui.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\o2k7\content.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\o2k7\dialog.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\o2k7\img\button_bg.png" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\o2k7\img\button_bg_black.png" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\o2k7\img\button_bg_silver.png" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\o2k7\ui.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\o2k7\ui_black.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\skins\o2k7\ui_silver.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\advanced\source_editor.htm" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\simple\editor_template.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\simple\editor_template_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\simple\img\icons.gif" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\simple\langs\en.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\simple\skins\default\content.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\simple\skins\default\ui.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\simple\skins\o2k7\content.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\simple\skins\o2k7\img\button_bg.png" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\themes\simple\skins\o2k7\ui.css" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\tiny_mce.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\tiny_mce_popup.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\tiny_mce_src.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\utils\editable_selects.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\utils\form_utils.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\utils\mctabs.js" />
+    <Content Include="Areas\Seller\SellerScripts\tinymce\utils\validate.js" />
+    <Content Include="Areas\Seller\SellerScripts\ui-bootstrap-tpls-0.12.0.min.js" />
+    <Content Include="Areas\Seller\SellerScripts\ui-bootstrap-tpls.js" />
+    <Content Include="Areas\Seller\SellerScripts\_references.js" />
+    <Content Include="Areas\Seller\TabCss\jquery-1.10.2.js" />
+    <Content Include="Areas\Seller\TabCss\jquery-ui.css" />
+    <Content Include="Areas\Seller\TabCss\jquery-ui.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\css\style.css" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\examples\basic.html" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\examples\clear-formatting.html" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\examples\events.html" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\examples\form-post.html" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\examples\formatblock-example.html" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\examples\html-editor.html" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\examples\multiple-editors.html" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\examples\simple-toolbar.html" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\gruntfile.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\gulpfile.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\js\bootstrap-wysiwyg.min.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\src\bootstrap-wysiwyg.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\js\npm.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\Gruntfile.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\affix.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\alert.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\button.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\carousel.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\collapse.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\dropdown.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\modal.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\popover.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\scrollspy.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\tab.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\tooltip.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\transition.js" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\package.js" />
+    <Content Include="Areas\Seller\UseCssLink\build\css\custom.css" />
+    <Content Include="Areas\Seller\UseCssLink\build\css\custom.min.css" />
+    <Content Include="Areas\Seller\UseCssLink\build\images\back_disabled.png" />
+    <Content Include="Areas\Seller\UseCssLink\build\images\back_enabled.png" />
+    <Content Include="Areas\Seller\UseCssLink\build\images\back_enabled_hover.png" />
+    <Content Include="Areas\Seller\UseCssLink\build\images\forward_disabled.png" />
+    <Content Include="Areas\Seller\UseCssLink\build\images\forward_enabled.png" />
+    <Content Include="Areas\Seller\UseCssLink\build\images\forward_enabled_hover.png" />
+    <Content Include="Areas\Seller\UseCssLink\build\images\loading.gif" />
+    <Content Include="Areas\Seller\UseCssLink\build\js\custom.js" />
+    <Content Include="Areas\Seller\UseCssLink\build\js\custom.min.js" />
+    <Content Include="Areas\Seller\UseCssLink\fastclick\lib\fastclick.js" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\.gitignore" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\css\font-awesome.css" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="Areas\Seller\UseCssLink\jquery.hotkeys\jquery.hotkeys.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\AUTHORS.txt" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\dist\jquery.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\dist\jquery.min.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\external\sizzle\dist\sizzle.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\external\sizzle\dist\sizzle.min.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\external\sizzle\LICENSE.txt" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\LICENSE.txt" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\ajax.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\ajax\jsonp.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\ajax\load.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\ajax\parseJSON.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\ajax\parseXML.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\ajax\script.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\ajax\var\location.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\ajax\var\nonce.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\ajax\var\rquery.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\ajax\xhr.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\attributes.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\attributes\attr.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\attributes\classes.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\attributes\prop.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\attributes\support.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\attributes\val.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\callbacks.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\core.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\core\access.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\core\init.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\core\parseHTML.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\core\ready.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\core\var\rsingleTag.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\addGetHookIf.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\adjustCSS.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\curCSS.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\defaultDisplay.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\showHide.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\support.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\var\cssExpand.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\var\getStyles.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\var\isHidden.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\var\rmargin.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\var\rnumnonpx.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\css\var\swap.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\data.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\data\Data.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\data\var\acceptData.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\data\var\dataPriv.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\data\var\dataUser.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\deferred.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\deprecated.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\dimensions.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\effects.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\effects\animatedSelector.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\effects\Tween.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\event.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\event\ajax.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\event\alias.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\event\focusin.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\event\support.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\event\trigger.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\exports\amd.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\exports\global.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\intro.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\jquery.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\manipulation.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\manipulation\buildFragment.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\manipulation\getAll.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\manipulation\setGlobalEval.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\manipulation\support.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\manipulation\var\rcheckableType.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\manipulation\var\rscriptType.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\manipulation\var\rtagName.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\manipulation\wrapMap.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\manipulation\_evalUrl.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\offset.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\outro.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\queue.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\queue\delay.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\selector-native.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\selector-sizzle.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\selector.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\serialize.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\traversing.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\traversing\findFilter.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\traversing\var\dir.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\traversing\var\rneedsContext.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\traversing\var\siblings.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\arr.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\class2type.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\concat.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\document.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\documentElement.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\hasOwn.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\indexOf.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\pnum.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\push.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\rcssNum.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\rnotwhite.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\slice.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\support.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\var\toString.js" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\wrap.js" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\index.html" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\nprogress.css" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\nprogress.js" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\support\extras.css" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\support\style.css" />
+    <Content Include="Areas\XML\AmazonLTOrder.xml" />
+    <Content Include="Areas\XML\AmazonLTOrderList.xml" />
+    <Content Include="Areas\XML\AmazonorderItem.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\XML\amazonorderItemList.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\XML\AmazonOrderTest.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\XML\SettlementAPI.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\XML\settlement_testing.xml" />
+    <Content Include="Areas\XML\XMLFile1.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Areas\XML\XMLFile2.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="build\css\custom.css" />
+    <Content Include="build\css\custom.min.css" />
+    <Content Include="build\images\back_disabled.png" />
+    <Content Include="build\images\back_enabled.png" />
+    <Content Include="build\images\back_enabled_hover.png" />
+    <Content Include="build\images\forward_disabled.png" />
+    <Content Include="build\images\forward_enabled.png" />
+    <Content Include="build\images\forward_enabled_hover.png" />
+    <Content Include="build\images\loading.gif" />
+    <Content Include="build\js\custom.js" />
+    <Content Include="build\js\custom.min.js" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\themes\base\accordion.css" />
+    <Content Include="Content\themes\base\all.css" />
+    <Content Include="Content\themes\base\autocomplete.css" />
+    <Content Include="Content\themes\base\base.css" />
+    <Content Include="Content\themes\base\button.css" />
+    <Content Include="Content\themes\base\core.css" />
+    <Content Include="Content\themes\base\datepicker.css" />
+    <Content Include="Content\themes\base\dialog.css" />
+    <Content Include="Content\themes\base\draggable.css" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_444444_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_555555_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777620_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_777777_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cc0000_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\menu.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\themes\base\progressbar.css" />
+    <Content Include="Content\themes\base\resizable.css" />
+    <Content Include="Content\themes\base\selectable.css" />
+    <Content Include="Content\themes\base\selectmenu.css" />
+    <Content Include="Content\themes\base\slider.css" />
+    <Content Include="Content\themes\base\sortable.css" />
+    <Content Include="Content\themes\base\spinner.css" />
+    <Content Include="Content\themes\base\tabs.css" />
+    <Content Include="Content\themes\base\theme.css" />
+    <Content Include="Content\themes\base\tooltip.css" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\ajax-loader.gif" />
+    <Content Include="Images\flag.jpg" />
+    <Content Include="Images\flag2.jpg" />
+    <Content Include="Images\flag2_green.png" />
+    <Content Include="Images\logo.jpg" />
+    <Content Include="Images\raintre.ico" />
+    <Content Include="Images\raintree-logo.png" />
+    <Content Include="Images\raintree-logo1.png" />
+    <Content Include="Images\raintree-logo12.png" />
+    <Content Include="Images\raintree-logo2.png" />
+    <Content Include="Images\red_flag.png" />
+    <Content Include="Images\rupee%281%29.jpg" />
+    <Content Include="Images\rupee%282%29.jpg" />
+    <Content Include="Images\rupee%283%29.jpg" />
+    <Content Include="Images\rupee.jpg" />
+    <Content Include="Images\wallet.png" />
+    <Content Include="Images\wallet2.png" />
+    <Content Include="NewCSS\css\Cat\bootstrap-responsive.min.css" />
+    <Content Include="NewCSS\css\Cat\bootstrap.min.css" />
+    <Content Include="NewCSS\css\Cat\dataTables.bootstrap.css" />
+    <Content Include="NewCSS\css\Cat\datepicker.css" />
+    <Content Include="NewCSS\css\Cat\evol-colorpicker.min.css" />
+    <Content Include="NewCSS\css\Cat\font-awesome-ie7.css" />
+    <Content Include="NewCSS\css\Cat\font-awesome-ie7.min.css" />
+    <Content Include="NewCSS\css\Cat\font-awesome.min.css" />
+    <Content Include="NewCSS\css\Cat\jquery.alerts.css" />
+    <Content Include="NewCSS\css\Cat\PagedList.css" />
+    <Content Include="NewCSS\css\Cat\Site.css" />
+    <Content Include="NewCSS\css\Cat\style.css" />
+    <Content Include="NewCSS\css\Cat\syncApp.css" />
+    <Content Include="NewCSS\css\datepicker.css" />
+    <Content Include="NewCSS\css\jquery.ui.css" />
+    <Content Include="NewCSS\fonts\fontawesome-webfont.eot" />
+    <Content Include="NewCSS\fonts\fontawesome-webfont.svg" />
+    <Content Include="NewCSS\fonts\fontawesome-webfont.ttf" />
+    <Content Include="NewCSS\fonts\fontawesome-webfont.woff" />
+    <Content Include="NewCSS\fonts\FontAwesome.otf" />
+    <Content Include="NewCSS\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="NewCSS\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Seller\Views\Web.config" />
+    <Content Include="Areas\Seller\NewCSS\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Seller\NewCSS\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Seller\NewCSS\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Seller\NewCSS\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Seller\NewCSS\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Seller\NewCSS\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Seller\NewCSS\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\.bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\examples\php\upload.php" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\package.json" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap-wysiwyg\README.md" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\.bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\CHANGELOG.md" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\.csscomb.json" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\.csslintrc" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\alerts.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\badges.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\bootstrap.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\breadcrumbs.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\button-groups.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\buttons.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\carousel.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\close.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\code.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\component-animations.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\dropdowns.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\forms.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\glyphicons.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\grid.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\input-groups.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\jumbotron.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\labels.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\list-group.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\media.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\alerts.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\background-variant.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\border-radius.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\buttons.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\center-block.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\clearfix.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\forms.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\gradients.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\grid-framework.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\grid.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\hide-text.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\image.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\labels.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\list-group.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\nav-divider.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\nav-vertical-align.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\opacity.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\pagination.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\panels.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\progress-bar.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\reset-filter.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\reset-text.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\resize.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\responsive-visibility.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\size.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\tab-focus.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\table-row.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\text-emphasis.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\text-overflow.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\mixins\vendor-prefixes.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\modals.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\navbar.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\navs.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\normalize.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\pager.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\pagination.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\panels.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\popovers.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\print.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\progress-bars.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\responsive-embed.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\responsive-utilities.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\scaffolding.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\tables.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\theme.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\thumbnails.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\tooltip.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\type.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\utilities.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\variables.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\css\less\wells.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\grunt\.jshintrc" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\grunt\configBridge.json" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\grunt\sauce_browsers.yml" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\.jscsrc" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\js\.jshintrc" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\.csscomb.json" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\.csslintrc" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\alerts.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\badges.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\bootstrap.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\breadcrumbs.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\button-groups.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\buttons.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\carousel.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\close.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\code.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\component-animations.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\dropdowns.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\forms.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\glyphicons.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\grid.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\input-groups.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\jumbotron.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\labels.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\list-group.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\media.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\alerts.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\buttons.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\center-block.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\forms.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\gradients.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\grid.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\image.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\labels.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\list-group.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\opacity.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\pagination.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\panels.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\resize.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\size.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\table-row.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\modals.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\navbar.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\navs.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\normalize.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\pager.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\pagination.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\panels.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\popovers.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\print.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\progress-bars.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\responsive-embed.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\responsive-utilities.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\scaffolding.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\tables.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\theme.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\thumbnails.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\tooltip.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\type.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\utilities.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\variables.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\less\wells.less" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\LICENSE" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\nuget\bootstrap.less.nuspec" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\nuget\bootstrap.nuspec" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\nuget\MyGet.ps1" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\package.json" />
+    <Content Include="Areas\Seller\UseCssLink\bootstrap\README.md" />
+    <Content Include="Areas\Seller\UseCssLink\fastclick\.bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\fastclick\bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\fastclick\LICENSE" />
+    <Content Include="Areas\Seller\UseCssLink\fastclick\README.md" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\.bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\.npmignore" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\css\font-awesome.css.map" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\animated.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\bordered-pulled.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\core.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\fixed-width.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\font-awesome.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\icons.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\larger.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\list.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\mixins.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\path.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\rotated-flipped.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\screen-reader.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\stacked.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\less\variables.less" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\font-awesome.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_animated.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_core.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_icons.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_larger.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_list.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_mixins.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_path.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_stacked.scss" />
+    <Content Include="Areas\Seller\UseCssLink\font-awesome\scss\_variables.scss" />
+    <Content Include="Areas\Seller\UseCssLink\jquery.hotkeys\.bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\jquery.hotkeys\bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\jquery.hotkeys\README.md" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\.bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\dist\jquery.min.map" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\external\sizzle\dist\sizzle.min.map" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\README.md" />
+    <Content Include="Areas\Seller\UseCssLink\jquery\src\.jshintrc" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\.bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\bower.json" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\component.json" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\History.md" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\License.md" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\Notes.md" />
+    <Content Include="Areas\Seller\UseCssLink\nprogress\Readme.md" />
+    <Content Include="Areas\Seller\Views\Shared\EditorTemplates\tinymce_full.cshtml" />
+    <Content Include="Areas\Seller\Views\Shared\EditorTemplates\tinymce_full_compressed.cshtml" />
+    <Content Include="Areas\Seller\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\Seller\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\Seller\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\Warehouse.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\SellerVendor.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\Purchase.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\Colour.cshtml" />
+    <Content Include="Areas\Seller\Views\Purchase\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\Inventory.cshtml" />
+    <Content Include="Areas\Seller\Views\Purchase\ManagePurchase.cshtml" />
+    <Content Include="Areas\Seller\Views\Purchase\ViewPurchaseOrderDetailsPopupPartial.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\ViewInventoryDetailsList.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\InventoryDetailList.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\MyInventoryList.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\VendorPayment.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\Test.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\SellerMarketPlace.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\MySalesOrderList.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\ManageSaleAssociation.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\SaleInvoicePrint.cshtml" />
+    <Content Include="Areas\Seller\Views\SellerSetting\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\CourierComapny.cshtml" />
+    <Content Include="Areas\Seller\Views\FlipkartParse\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\FlipkartParse\Test.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\TabDetails.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\SaleInvoicePrintForDetails.cshtml" />
+    <Content Include="Areas\Seller\Views\SellerSetting\SellerSettingDetails.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\ReplacementOrder.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\ReconciliationOrder.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\OrderInvoicePrint.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\SaleOrderReport.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\SaleLedgerReport.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\OtherRevenueLedgerReport.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\NetRealizationWithTax.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\NetRealizationWithOutTax.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\ProductProfitabilityWithoutTax.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\ProductProfitabilityWithTax.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\DebtorLedgerReport.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\ReimbursementData.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\ReturnsData.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\UploadSettlementExcel.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\TallyVoucher.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\ExpenseOrderReport.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\SalesVoucher.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\Login.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\PartialTopCustomer.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\PartialTopSeller.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\MyInventory.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\ReturnGoods.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\ReturnVoucher.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\SummaryNetRealization.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\BankTransfer.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\ClaimReturn.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\TestXMLFormat.cshtml" />
+    <Content Include="Areas\Seller\Views\Sales\SettlementXMLData.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\MonthReport.cshtml" />
+    <Content Include="Areas\Seller\Views\CronJob\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\FileUpload\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\PartialTopReturn.cshtml" />
+    <Content Include="Areas\Seller\Views\UploadDataAPI\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\MasterInventoryReport.cshtml" />
+    <Content Include="Areas\Seller\Views\UploadDataAPI\Date.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\ManageCategory.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\MasterLedgerVoucher.cshtml" />
+    <Content Include="Areas\Seller\Views\Seller\BarGraph.cshtml" />
+    <Content Include="Areas\Seller\Views\Graph\Index.cshtml" />
+    <Content Include="Areas\Seller\Views\FlipkartParse\GetSalesOrderSearchData.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\SaleOrderReportAmazon.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\SaleOrderReportFlipkart.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\AmazonNetRealizationWithouttax.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\FlipkartNetRealizationWithouttax.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\GstReport.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\SettlementReport.cshtml" />
+    <Content Include="NewCSS\css\aaf5c053.proton.css" />
+    <Content Include="NewCSS\css\basictable.css" />
+    <Content Include="NewCSS\css\bootstrap.css" />
+    <Content Include="NewCSS\css\examples.css" />
+    <Content Include="NewCSS\css\font-awesome.css" />
+    <Content Include="NewCSS\css\font.css" />
+    <Content Include="NewCSS\css\ladda.min.css" />
+    <Content Include="NewCSS\css\lsb.css" />
+    <Content Include="NewCSS\css\monthly.css" />
+    <Content Include="NewCSS\css\morris.css" />
+    <Content Include="NewCSS\css\style.css" />
+    <Content Include="NewCSS\css\table-style.css" />
+    <Content Include="NewCSS\css\typo.css" />
+    <Content Include="NewCSS\images\1.png" />
+    <Content Include="NewCSS\images\2.png" />
+    <Content Include="NewCSS\images\3.png" />
+    <Content Include="NewCSS\images\error-bg.jpg" />
+    <Content Include="NewCSS\images\error.png" />
+    <Content Include="NewCSS\images\g1.jpg" />
+    <Content Include="NewCSS\images\g2.jpg" />
+    <Content Include="NewCSS\images\g3.jpg" />
+    <Content Include="NewCSS\images\g4.jpg" />
+    <Content Include="NewCSS\images\g5.jpg" />
+    <Content Include="NewCSS\images\g6.jpg" />
+    <Content Include="NewCSS\images\logo.png" />
+    <Content Include="NewCSS\images\logo1.png" />
+    <Content Include="NewCSS\images\Minus.png" />
+    <Content Include="NewCSS\images\Plus.png" />
+    <Content Include="NewCSS\images\s1.jpg" />
+    <Content Include="NewCSS\js\bootstrap.js" />
+    <Content Include="NewCSS\js\gmaps.js" />
+    <Content Include="NewCSS\js\graph.js" />
+    <Content Include="NewCSS\js\jquery-ui.min.js" />
+    <Content Include="NewCSS\js\jquery.basictable.min.js" />
+    <Content Include="NewCSS\js\jquery.cookie.js" />
+    <Content Include="NewCSS\js\jquery.countdown.min.js" />
+    <Content Include="NewCSS\js\jquery.geocomplete.js" />
+    <Content Include="NewCSS\js\jquery.min.js" />
+    <Content Include="NewCSS\js\jquery.vmap.js" />
+    <Content Include="NewCSS\js\jquery.vmap.sampledata.js" />
+    <Content Include="NewCSS\js\jquery.vmap.world.js" />
+    <Content Include="NewCSS\js\jquery1.9.1.min.js" />
+    <Content Include="NewCSS\js\jquery2.0.3.min.js" />
+    <Content Include="NewCSS\js\logger.js" />
+    <Content Include="NewCSS\js\lsb.js" />
+    <Content Include="NewCSS\js\modernizr.js" />
+    <Content Include="NewCSS\js\monthly.js" />
+    <Content Include="NewCSS\js\morris.js" />
+    <Content Include="NewCSS\js\proton.js" />
+    <Content Include="NewCSS\js\raphael-min.js" />
+    <Content Include="NewCSS\js\screenfull.js" />
+    <Content Include="NewCSS\js\skycons.js" />
+    <Content Include="NewCSS\js\valida.2.1.6.min.js" />
+    <Content Include="NewCSS\js\validator.min.js" />
+    <Content Include="Scripts\angular-route.js" />
+    <Content Include="Scripts\angular-route.min.js" />
+    <Content Include="Scripts\angular.js" />
+    <Content Include="Scripts\angular.min.js" />
+    <Content Include="Scripts\Angular\Controller\LoginController.js" />
+    <Content Include="Scripts\Angular\Controller\MarketPalceController.js" />
+    <Content Include="Scripts\Angular\Controller\SellerController.js" />
+    <Content Include="Scripts\Angular\Controller\SourceJoiningController.js" />
+    <Content Include="Scripts\Angular\Module\MyApp.js" />
+    <Content Include="Scripts\Cat\bootstrap.js" />
+    <Content Include="Scripts\Cat\chart.min.js" />
+    <Content Include="Scripts\Cat\excanvas.min.js" />
+    <Content Include="Scripts\Cat\jquery-ui.js" />
+    <Content Include="Scripts\Cat\naresh.js" />
+    <Content Include="Scripts\dataTables.bootstrap.min.js" />
+    <Content Include="Scripts\Datetime\angular-datepicker.css" />
+    <Content Include="Scripts\Datetime\angular-datepicker.js" />
+    <Content Include="Scripts\Datetime\helper.css" />
+    <Content Include="Scripts\Datetime\index.js" />
+    <Content Include="Scripts\Datetime\tableRowColor.css" />
+    <Content Include="Scripts\dirPagination.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <Content Include="Areas\Seller\Views\SaleReport\SaleOrderReportPaytm.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\PaytmNetRealizationWithouttax.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\ExpenseReportAmazon.cshtml" />
+    <Content Include="Areas\Seller\Views\SaleReport\ExpenseReportPaytm.cshtml" />
+    <None Include="Properties\PublishProfiles\MyProfile.pubxml" />
+    <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="Scripts\jquery-3.3.1.js" />
+    <Content Include="Scripts\jquery-3.3.1.min.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.js" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.js" />
+    <Content Include="Scripts\jquery-ui-1.12.1.min.js" />
+    <Content Include="Scripts\jquery.dataTables.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\knockout-3.4.2.debug.js" />
+    <Content Include="Scripts\knockout-3.4.2.js" />
+    <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\textAngular.min.js" />
+    <Content Include="Scripts\tinymce\langs\en.js" />
+    <Content Include="Scripts\tinymce\license.txt" />
+    <Content Include="Scripts\tinymce\plugins\advhr\css\advhr.css" />
+    <Content Include="Scripts\tinymce\plugins\advhr\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advhr\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\advhr\js\rule.js" />
+    <Content Include="Scripts\tinymce\plugins\advhr\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\advhr\rule.htm" />
+    <Content Include="Scripts\tinymce\plugins\advimage\css\advimage.css" />
+    <Content Include="Scripts\tinymce\plugins\advimage\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advimage\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\advimage\image.htm" />
+    <Content Include="Scripts\tinymce\plugins\advimage\img\sample.gif" />
+    <Content Include="Scripts\tinymce\plugins\advimage\js\image.js" />
+    <Content Include="Scripts\tinymce\plugins\advimage\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\advlink\css\advlink.css" />
+    <Content Include="Scripts\tinymce\plugins\advlink\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advlink\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\advlink\js\advlink.js" />
+    <Content Include="Scripts\tinymce\plugins\advlink\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\advlink\link.htm" />
+    <Content Include="Scripts\tinymce\plugins\advlist\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\advlist\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autolink\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autoresize\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\autosave\langs\en.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\bbcode\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\contextmenu\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\directionality\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\emotions\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\emotions\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\emotions\emotions.htm" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-cool.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-cry.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-embarassed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-foot-in-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-frown.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-innocent.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-kiss.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-laughing.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-money-mouth.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-sealed.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-smile.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-surprised.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-tongue-out.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-undecided.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-wink.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\img\smiley-yell.gif" />
+    <Content Include="Scripts\tinymce\plugins\emotions\js\emotions.js" />
+    <Content Include="Scripts\tinymce\plugins\emotions\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\example\dialog.htm" />
+    <Content Include="Scripts\tinymce\plugins\example\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\example\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\example\img\example.gif" />
+    <Content Include="Scripts\tinymce\plugins\example\js\dialog.js" />
+    <Content Include="Scripts\tinymce\plugins\example\langs\en.js" />
+    <Content Include="Scripts\tinymce\plugins\example\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\example_dependency\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\example_dependency\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\css\fullpage.css" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\fullpage.htm" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\js\fullpage.js" />
+    <Content Include="Scripts\tinymce\plugins\fullpage\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\fullscreen\fullscreen.htm" />
+    <Content Include="Scripts\tinymce\plugins\iespell\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\iespell\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\alert.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\button.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\buttons.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\confirm.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\corners.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\horizontal.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\img\vertical.gif" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\skins\clearlooks2\window.css" />
+    <Content Include="Scripts\tinymce\plugins\inlinepopups\template.htm" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\insertdatetime\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\layer\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\layer\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\legacyoutput\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\lists\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\media\css\media.css" />
+    <Content Include="Scripts\tinymce\plugins\media\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\media\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\media\js\embed.js" />
+    <Content Include="Scripts\tinymce\plugins\media\js\media.js" />
+    <Content Include="Scripts\tinymce\plugins\media\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\media\media.htm" />
+    <Content Include="Scripts\tinymce\plugins\media\moxieplayer.swf" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\nonbreaking\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\noneditable\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\pagebreak\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\js\pastetext.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\js\pasteword.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\paste\pastetext.htm" />
+    <Content Include="Scripts\tinymce\plugins\paste\pasteword.htm" />
+    <Content Include="Scripts\tinymce\plugins\preview\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\example.html" />
+    <Content Include="Scripts\tinymce\plugins\preview\jscripts\embed.js" />
+    <Content Include="Scripts\tinymce\plugins\preview\preview.html" />
+    <Content Include="Scripts\tinymce\plugins\print\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\print\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\save\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\save\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\css\searchreplace.css" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\js\searchreplace.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\searchreplace\searchreplace.htm" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\css\content.css" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\spellchecker\img\wline.gif" />
+    <Content Include="Scripts\tinymce\plugins\style\css\props.css" />
+    <Content Include="Scripts\tinymce\plugins\style\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\style\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\style\js\props.js" />
+    <Content Include="Scripts\tinymce\plugins\style\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\style\props.htm" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\tabfocus\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\table\cell.htm" />
+    <Content Include="Scripts\tinymce\plugins\table\css\cell.css" />
+    <Content Include="Scripts\tinymce\plugins\table\css\row.css" />
+    <Content Include="Scripts\tinymce\plugins\table\css\table.css" />
+    <Content Include="Scripts\tinymce\plugins\table\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\table\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\table\js\cell.js" />
+    <Content Include="Scripts\tinymce\plugins\table\js\merge_cells.js" />
+    <Content Include="Scripts\tinymce\plugins\table\js\row.js" />
+    <Content Include="Scripts\tinymce\plugins\table\js\table.js" />
+    <Content Include="Scripts\tinymce\plugins\table\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\table\merge_cells.htm" />
+    <Content Include="Scripts\tinymce\plugins\table\row.htm" />
+    <Content Include="Scripts\tinymce\plugins\table\table.htm" />
+    <Content Include="Scripts\tinymce\plugins\template\blank.htm" />
+    <Content Include="Scripts\tinymce\plugins\template\css\template.css" />
+    <Content Include="Scripts\tinymce\plugins\template\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\template\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\template\js\template.js" />
+    <Content Include="Scripts\tinymce\plugins\template\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\plugins\template\template.htm" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\visualchars\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\wordcount\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\abbr.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\acronym.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\attributes.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\cite.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\css\attributes.css" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\css\popup.css" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\del.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\editor_plugin.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\editor_plugin_src.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\ins.htm" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\abbr.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\acronym.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\attributes.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\cite.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\del.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\element_common.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\js\ins.js" />
+    <Content Include="Scripts\tinymce\plugins\xhtmlxtras\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\about.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\anchor.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\charmap.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\color_picker.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\editor_template.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\editor_template_src.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\image.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\colorpicker.jpg" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\flash.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\icons.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\iframe.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\pagebreak.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\quicktime.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\realmedia.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\shockwave.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\trans.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\video.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\img\windowsmedia.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\about.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\anchor.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\charmap.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\color_picker.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\image.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\link.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\js\source_editor.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\langs\en.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\langs\en_dlg.js" />
+    <Content Include="Scripts\tinymce\themes\advanced\link.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\shortcuts.htm" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\content.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\dialog.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\buttons.png" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\items.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\menu_arrow.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\menu_check.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\progress.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\img\tabs.gif" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\default\ui.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\highcontrast\content.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\highcontrast\dialog.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\highcontrast\ui.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\content.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\dialog.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\img\button_bg.png" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\img\button_bg_black.png" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\img\button_bg_silver.png" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\ui.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\ui_black.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\skins\o2k7\ui_silver.css" />
+    <Content Include="Scripts\tinymce\themes\advanced\source_editor.htm" />
+    <Content Include="Scripts\tinymce\themes\simple\editor_template.js" />
+    <Content Include="Scripts\tinymce\themes\simple\editor_template_src.js" />
+    <Content Include="Scripts\tinymce\themes\simple\img\icons.gif" />
+    <Content Include="Scripts\tinymce\themes\simple\langs\en.js" />
+    <Content Include="Scripts\tinymce\themes\simple\skins\default\content.css" />
+    <Content Include="Scripts\tinymce\themes\simple\skins\default\ui.css" />
+    <Content Include="Scripts\tinymce\themes\simple\skins\o2k7\content.css" />
+    <Content Include="Scripts\tinymce\themes\simple\skins\o2k7\img\button_bg.png" />
+    <Content Include="Scripts\tinymce\themes\simple\skins\o2k7\ui.css" />
+    <Content Include="Scripts\tinymce\tiny_mce.js" />
+    <Content Include="Scripts\tinymce\tiny_mce_popup.js" />
+    <Content Include="Scripts\tinymce\tiny_mce_src.js" />
+    <Content Include="Scripts\tinymce\utils\editable_selects.js" />
+    <Content Include="Scripts\tinymce\utils\form_utils.js" />
+    <Content Include="Scripts\tinymce\utils\mctabs.js" />
+    <Content Include="Scripts\tinymce\utils\validate.js" />
+    <Content Include="Temp\errorlog.txt" />
+    <Content Include="Upload\MarketPlaceLogo\amazon-icon.png" />
+    <Content Include="Upload\MarketPlaceLogo\cc20170821194227141.jpg" />
+    <Content Include="Upload\MarketPlaceLogo\index.jpg" />
+    <Content Include="Upload\MarketPlaceLogo\paytm20180526181524900.png" />
+    <Content Include="Upload\MarketPlaceLogo\php20170821155624288.png" />
+    <Content Include="Upload\MarketPlaceLogo\shopping120180426120445078.jpg" />
+    <Content Include="Upload_Log\log.txt" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\css\style.css" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\examples\basic.html" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\examples\clear-formatting.html" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\examples\events.html" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\examples\form-post.html" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\examples\formatblock-example.html" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\examples\html-editor.html" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\examples\multiple-editors.html" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\examples\simple-toolbar.html" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\gruntfile.js" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\gulpfile.js" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\js\bootstrap-wysiwyg.min.js" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\src\bootstrap-wysiwyg.js" />
+    <Content Include="UseCssLink\bootstrap\dist\css\bootstrap-theme.css" />
+    <Content Include="UseCssLink\bootstrap\dist\css\bootstrap-theme.min.css" />
+    <Content Include="UseCssLink\bootstrap\dist\css\bootstrap.css" />
+    <Content Include="UseCssLink\bootstrap\dist\css\bootstrap.min.css" />
+    <Content Include="UseCssLink\bootstrap\dist\js\bootstrap.js" />
+    <Content Include="UseCssLink\bootstrap\dist\js\bootstrap.min.js" />
+    <Content Include="UseCssLink\bootstrap\dist\js\npm.js" />
+    <Content Include="UseCssLink\bootstrap\Gruntfile.js" />
+    <Content Include="UseCssLink\bootstrap\grunt\bs-commonjs-generator.js" />
+    <Content Include="UseCssLink\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <Content Include="UseCssLink\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <Content Include="UseCssLink\bootstrap\grunt\bs-raw-files-generator.js" />
+    <Content Include="UseCssLink\bootstrap\js\affix.js" />
+    <Content Include="UseCssLink\bootstrap\js\alert.js" />
+    <Content Include="UseCssLink\bootstrap\js\button.js" />
+    <Content Include="UseCssLink\bootstrap\js\carousel.js" />
+    <Content Include="UseCssLink\bootstrap\js\collapse.js" />
+    <Content Include="UseCssLink\bootstrap\js\dropdown.js" />
+    <Content Include="UseCssLink\bootstrap\js\modal.js" />
+    <Content Include="UseCssLink\bootstrap\js\popover.js" />
+    <Content Include="UseCssLink\bootstrap\js\scrollspy.js" />
+    <Content Include="UseCssLink\bootstrap\js\tab.js" />
+    <Content Include="UseCssLink\bootstrap\js\tooltip.js" />
+    <Content Include="UseCssLink\bootstrap\js\transition.js" />
+    <Content Include="UseCssLink\bootstrap\package.js" />
+    <Content Include="UseCssLink\build\css\custom.css" />
+    <Content Include="UseCssLink\build\css\custom.min.css" />
+    <Content Include="UseCssLink\build\images\back_disabled.png" />
+    <Content Include="UseCssLink\build\images\back_enabled.png" />
+    <Content Include="UseCssLink\build\images\back_enabled_hover.png" />
+    <Content Include="UseCssLink\build\images\forward_disabled.png" />
+    <Content Include="UseCssLink\build\images\forward_enabled.png" />
+    <Content Include="UseCssLink\build\images\forward_enabled_hover.png" />
+    <Content Include="UseCssLink\build\images\loading.gif" />
+    <Content Include="UseCssLink\build\js\custom.js" />
+    <Content Include="UseCssLink\build\js\custom.min.js" />
+    <Content Include="UseCssLink\fastclick\lib\fastclick.js" />
+    <Content Include="UseCssLink\font-awesome\.gitignore" />
+    <Content Include="UseCssLink\font-awesome\css\font-awesome.css" />
+    <Content Include="UseCssLink\font-awesome\css\font-awesome.min.css" />
+    <Content Include="UseCssLink\font-awesome\HELP-US-OUT.txt" />
+    <Content Include="UseCssLink\google-code-prettify\bin\prettify.min.css" />
+    <Content Include="UseCssLink\google-code-prettify\bin\prettify.min.js" />
+    <Content Include="UseCssLink\google-code-prettify\bin\run_prettify.min.js" />
+    <Content Include="UseCssLink\google-code-prettify\CHANGES.html" />
+    <Content Include="UseCssLink\google-code-prettify\examples\quine.html" />
+    <Content Include="UseCssLink\google-code-prettify\README-zh-Hans.html" />
+    <Content Include="UseCssLink\google-code-prettify\README.html" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-apollo.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-basic.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-clj.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-css.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-dart.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-erlang.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-go.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-hs.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-lisp.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-llvm.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-lua.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-matlab.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-ml.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-mumps.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-n.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-pascal.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-proto.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-r.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-rd.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-scala.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-sql.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-tcl.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-tex.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-vb.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-vhdl.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-wiki.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-xq.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\lang-yaml.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\prettify.css" />
+    <Content Include="UseCssLink\google-code-prettify\src\prettify.js" />
+    <Content Include="UseCssLink\google-code-prettify\src\run_prettify.js" />
+    <Content Include="UseCssLink\google-code-prettify\styles\demo.html" />
+    <Content Include="UseCssLink\google-code-prettify\styles\desert.css" />
+    <Content Include="UseCssLink\google-code-prettify\styles\doxy.css" />
+    <Content Include="UseCssLink\google-code-prettify\styles\index.html" />
+    <Content Include="UseCssLink\google-code-prettify\styles\sons-of-obsidian.css" />
+    <Content Include="UseCssLink\google-code-prettify\styles\sunburst.css" />
+    <Content Include="UseCssLink\jquery.hotkeys\jquery.hotkeys.js" />
+    <Content Include="UseCssLink\jquery\AUTHORS.txt" />
+    <Content Include="UseCssLink\jquery\dist\jquery.js" />
+    <Content Include="UseCssLink\jquery\dist\jquery.min.js" />
+    <Content Include="UseCssLink\jquery\external\sizzle\dist\sizzle.js" />
+    <Content Include="UseCssLink\jquery\external\sizzle\dist\sizzle.min.js" />
+    <Content Include="UseCssLink\jquery\external\sizzle\LICENSE.txt" />
+    <Content Include="UseCssLink\jquery\LICENSE.txt" />
+    <Content Include="UseCssLink\jquery\src\ajax.js" />
+    <Content Include="UseCssLink\jquery\src\ajax\jsonp.js" />
+    <Content Include="UseCssLink\jquery\src\ajax\load.js" />
+    <Content Include="UseCssLink\jquery\src\ajax\parseJSON.js" />
+    <Content Include="UseCssLink\jquery\src\ajax\parseXML.js" />
+    <Content Include="UseCssLink\jquery\src\ajax\script.js" />
+    <Content Include="UseCssLink\jquery\src\ajax\var\location.js" />
+    <Content Include="UseCssLink\jquery\src\ajax\var\nonce.js" />
+    <Content Include="UseCssLink\jquery\src\ajax\var\rquery.js" />
+    <Content Include="UseCssLink\jquery\src\ajax\xhr.js" />
+    <Content Include="UseCssLink\jquery\src\attributes.js" />
+    <Content Include="UseCssLink\jquery\src\attributes\attr.js" />
+    <Content Include="UseCssLink\jquery\src\attributes\classes.js" />
+    <Content Include="UseCssLink\jquery\src\attributes\prop.js" />
+    <Content Include="UseCssLink\jquery\src\attributes\support.js" />
+    <Content Include="UseCssLink\jquery\src\attributes\val.js" />
+    <Content Include="UseCssLink\jquery\src\callbacks.js" />
+    <Content Include="UseCssLink\jquery\src\core.js" />
+    <Content Include="UseCssLink\jquery\src\core\access.js" />
+    <Content Include="UseCssLink\jquery\src\core\init.js" />
+    <Content Include="UseCssLink\jquery\src\core\parseHTML.js" />
+    <Content Include="UseCssLink\jquery\src\core\ready.js" />
+    <Content Include="UseCssLink\jquery\src\core\var\rsingleTag.js" />
+    <Content Include="UseCssLink\jquery\src\css.js" />
+    <Content Include="UseCssLink\jquery\src\css\addGetHookIf.js" />
+    <Content Include="UseCssLink\jquery\src\css\adjustCSS.js" />
+    <Content Include="UseCssLink\jquery\src\css\curCSS.js" />
+    <Content Include="UseCssLink\jquery\src\css\defaultDisplay.js" />
+    <Content Include="UseCssLink\jquery\src\css\hiddenVisibleSelectors.js" />
+    <Content Include="UseCssLink\jquery\src\css\showHide.js" />
+    <Content Include="UseCssLink\jquery\src\css\support.js" />
+    <Content Include="UseCssLink\jquery\src\css\var\cssExpand.js" />
+    <Content Include="UseCssLink\jquery\src\css\var\getStyles.js" />
+    <Content Include="UseCssLink\jquery\src\css\var\isHidden.js" />
+    <Content Include="UseCssLink\jquery\src\css\var\rmargin.js" />
+    <Content Include="UseCssLink\jquery\src\css\var\rnumnonpx.js" />
+    <Content Include="UseCssLink\jquery\src\css\var\swap.js" />
+    <Content Include="UseCssLink\jquery\src\data.js" />
+    <Content Include="UseCssLink\jquery\src\data\Data.js" />
+    <Content Include="UseCssLink\jquery\src\data\var\acceptData.js" />
+    <Content Include="UseCssLink\jquery\src\data\var\dataPriv.js" />
+    <Content Include="UseCssLink\jquery\src\data\var\dataUser.js" />
+    <Content Include="UseCssLink\jquery\src\deferred.js" />
+    <Content Include="UseCssLink\jquery\src\deprecated.js" />
+    <Content Include="UseCssLink\jquery\src\dimensions.js" />
+    <Content Include="UseCssLink\jquery\src\effects.js" />
+    <Content Include="UseCssLink\jquery\src\effects\animatedSelector.js" />
+    <Content Include="UseCssLink\jquery\src\effects\Tween.js" />
+    <Content Include="UseCssLink\jquery\src\event.js" />
+    <Content Include="UseCssLink\jquery\src\event\ajax.js" />
+    <Content Include="UseCssLink\jquery\src\event\alias.js" />
+    <Content Include="UseCssLink\jquery\src\event\focusin.js" />
+    <Content Include="UseCssLink\jquery\src\event\support.js" />
+    <Content Include="UseCssLink\jquery\src\event\trigger.js" />
+    <Content Include="UseCssLink\jquery\src\exports\amd.js" />
+    <Content Include="UseCssLink\jquery\src\exports\global.js" />
+    <Content Include="UseCssLink\jquery\src\intro.js" />
+    <Content Include="UseCssLink\jquery\src\jquery.js" />
+    <Content Include="UseCssLink\jquery\src\manipulation.js" />
+    <Content Include="UseCssLink\jquery\src\manipulation\buildFragment.js" />
+    <Content Include="UseCssLink\jquery\src\manipulation\getAll.js" />
+    <Content Include="UseCssLink\jquery\src\manipulation\setGlobalEval.js" />
+    <Content Include="UseCssLink\jquery\src\manipulation\support.js" />
+    <Content Include="UseCssLink\jquery\src\manipulation\var\rcheckableType.js" />
+    <Content Include="UseCssLink\jquery\src\manipulation\var\rscriptType.js" />
+    <Content Include="UseCssLink\jquery\src\manipulation\var\rtagName.js" />
+    <Content Include="UseCssLink\jquery\src\manipulation\wrapMap.js" />
+    <Content Include="UseCssLink\jquery\src\manipulation\_evalUrl.js" />
+    <Content Include="UseCssLink\jquery\src\offset.js" />
+    <Content Include="UseCssLink\jquery\src\outro.js" />
+    <Content Include="UseCssLink\jquery\src\queue.js" />
+    <Content Include="UseCssLink\jquery\src\queue\delay.js" />
+    <Content Include="UseCssLink\jquery\src\selector-native.js" />
+    <Content Include="UseCssLink\jquery\src\selector-sizzle.js" />
+    <Content Include="UseCssLink\jquery\src\selector.js" />
+    <Content Include="UseCssLink\jquery\src\serialize.js" />
+    <Content Include="UseCssLink\jquery\src\traversing.js" />
+    <Content Include="UseCssLink\jquery\src\traversing\findFilter.js" />
+    <Content Include="UseCssLink\jquery\src\traversing\var\dir.js" />
+    <Content Include="UseCssLink\jquery\src\traversing\var\rneedsContext.js" />
+    <Content Include="UseCssLink\jquery\src\traversing\var\siblings.js" />
+    <Content Include="UseCssLink\jquery\src\var\arr.js" />
+    <Content Include="UseCssLink\jquery\src\var\class2type.js" />
+    <Content Include="UseCssLink\jquery\src\var\concat.js" />
+    <Content Include="UseCssLink\jquery\src\var\document.js" />
+    <Content Include="UseCssLink\jquery\src\var\documentElement.js" />
+    <Content Include="UseCssLink\jquery\src\var\hasOwn.js" />
+    <Content Include="UseCssLink\jquery\src\var\indexOf.js" />
+    <Content Include="UseCssLink\jquery\src\var\pnum.js" />
+    <Content Include="UseCssLink\jquery\src\var\push.js" />
+    <Content Include="UseCssLink\jquery\src\var\rcssNum.js" />
+    <Content Include="UseCssLink\jquery\src\var\rnotwhite.js" />
+    <Content Include="UseCssLink\jquery\src\var\slice.js" />
+    <Content Include="UseCssLink\jquery\src\var\support.js" />
+    <Content Include="UseCssLink\jquery\src\var\toString.js" />
+    <Content Include="UseCssLink\jquery\src\wrap.js" />
+    <Content Include="UseCssLink\nprogress\index.html" />
+    <Content Include="UseCssLink\nprogress\nprogress.css" />
+    <Content Include="UseCssLink\nprogress\nprogress.js" />
+    <Content Include="UseCssLink\nprogress\support\extras.css" />
+    <Content Include="UseCssLink\nprogress\support\style.css" />
+    <Content Include="Views\Category\CategoryTreeView.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Views\Home\Login.cshtml">
+      <SubType>Code</SubType>
+    </Content>
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\_references.js" />
+    <Content Include="Images\accent.png" />
+    <Content Include="Images\bullet.png" />
+    <Content Include="Images\heroAccent.png" />
+    <Content Include="Images\orderedList0.png" />
+    <Content Include="Images\orderedList1.png" />
+    <Content Include="Images\orderedList2.png" />
+    <Content Include="Images\orderedList3.png" />
+    <Content Include="Images\orderedList4.png" />
+    <Content Include="Images\orderedList5.png" />
+    <Content Include="Images\orderedList6.png" />
+    <Content Include="Images\orderedList7.png" />
+    <Content Include="Images\orderedList8.png" />
+    <Content Include="Images\orderedList9.png" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\_ChangePasswordPartial.cshtml" />
+    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
+    <Content Include="Views\Account\_RemoveExternalLoginsPartial.cshtml" />
+    <Content Include="Views\Account\_SetPasswordPartial.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Account\Manage.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
+    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\Home\Seller.cshtml" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\.bower.json" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\bower.json" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\examples\php\upload.php" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\package.json" />
+    <Content Include="UseCssLink\bootstrap-wysiwyg\README.md" />
+    <Content Include="UseCssLink\bootstrap\.bower.json" />
+    <Content Include="UseCssLink\bootstrap\bower.json" />
+    <Content Include="UseCssLink\bootstrap\CHANGELOG.md" />
+    <Content Include="UseCssLink\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <Content Include="UseCssLink\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="UseCssLink\bootstrap\dist\css\bootstrap.css.map" />
+    <Content Include="UseCssLink\bootstrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="UseCssLink\bootstrap\dist\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="UseCssLink\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="UseCssLink\bootstrap\dist\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="UseCssLink\bootstrap\dist\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="UseCssLink\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="UseCssLink\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="UseCssLink\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="UseCssLink\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="UseCssLink\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="UseCssLink\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="UseCssLink\bootstrap\grunt\.jshintrc" />
+    <Content Include="UseCssLink\bootstrap\grunt\configBridge.json" />
+    <Content Include="UseCssLink\bootstrap\grunt\sauce_browsers.yml" />
+    <Content Include="UseCssLink\bootstrap\js\.jscsrc" />
+    <Content Include="UseCssLink\bootstrap\js\.jshintrc" />
+    <Content Include="UseCssLink\bootstrap\less\.csscomb.json" />
+    <Content Include="UseCssLink\bootstrap\less\.csslintrc" />
+    <Content Include="UseCssLink\bootstrap\less\alerts.less" />
+    <Content Include="UseCssLink\bootstrap\less\badges.less" />
+    <Content Include="UseCssLink\bootstrap\less\bootstrap.less" />
+    <Content Include="UseCssLink\bootstrap\less\breadcrumbs.less" />
+    <Content Include="UseCssLink\bootstrap\less\button-groups.less" />
+    <Content Include="UseCssLink\bootstrap\less\buttons.less" />
+    <Content Include="UseCssLink\bootstrap\less\carousel.less" />
+    <Content Include="UseCssLink\bootstrap\less\close.less" />
+    <Content Include="UseCssLink\bootstrap\less\code.less" />
+    <Content Include="UseCssLink\bootstrap\less\component-animations.less" />
+    <Content Include="UseCssLink\bootstrap\less\dropdowns.less" />
+    <Content Include="UseCssLink\bootstrap\less\forms.less" />
+    <Content Include="UseCssLink\bootstrap\less\glyphicons.less" />
+    <Content Include="UseCssLink\bootstrap\less\grid.less" />
+    <Content Include="UseCssLink\bootstrap\less\input-groups.less" />
+    <Content Include="UseCssLink\bootstrap\less\jumbotron.less" />
+    <Content Include="UseCssLink\bootstrap\less\labels.less" />
+    <Content Include="UseCssLink\bootstrap\less\list-group.less" />
+    <Content Include="UseCssLink\bootstrap\less\media.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\alerts.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\background-variant.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\border-radius.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\buttons.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\center-block.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\clearfix.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\forms.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\gradients.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\grid-framework.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\grid.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\hide-text.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\image.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\labels.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\list-group.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\nav-divider.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\nav-vertical-align.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\opacity.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\pagination.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\panels.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\progress-bar.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\reset-filter.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\reset-text.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\resize.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\responsive-visibility.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\size.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\tab-focus.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\table-row.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\text-emphasis.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\text-overflow.less" />
+    <Content Include="UseCssLink\bootstrap\less\mixins\vendor-prefixes.less" />
+    <Content Include="UseCssLink\bootstrap\less\modals.less" />
+    <Content Include="UseCssLink\bootstrap\less\navbar.less" />
+    <Content Include="UseCssLink\bootstrap\less\navs.less" />
+    <Content Include="UseCssLink\bootstrap\less\normalize.less" />
+    <Content Include="UseCssLink\bootstrap\less\pager.less" />
+    <Content Include="UseCssLink\bootstrap\less\pagination.less" />
+    <Content Include="UseCssLink\bootstrap\less\panels.less" />
+    <Content Include="UseCssLink\bootstrap\less\popovers.less" />
+    <Content Include="UseCssLink\bootstrap\less\print.less" />
+    <Content Include="UseCssLink\bootstrap\less\progress-bars.less" />
+    <Content Include="UseCssLink\bootstrap\less\responsive-embed.less" />
+    <Content Include="UseCssLink\bootstrap\less\responsive-utilities.less" />
+    <Content Include="UseCssLink\bootstrap\less\scaffolding.less" />
+    <Content Include="UseCssLink\bootstrap\less\tables.less" />
+    <Content Include="UseCssLink\bootstrap\less\theme.less" />
+    <Content Include="UseCssLink\bootstrap\less\thumbnails.less" />
+    <Content Include="UseCssLink\bootstrap\less\tooltip.less" />
+    <Content Include="UseCssLink\bootstrap\less\type.less" />
+    <Content Include="UseCssLink\bootstrap\less\utilities.less" />
+    <Content Include="UseCssLink\bootstrap\less\variables.less" />
+    <Content Include="UseCssLink\bootstrap\less\wells.less" />
+    <Content Include="UseCssLink\bootstrap\LICENSE" />
+    <Content Include="UseCssLink\bootstrap\nuget\bootstrap.less.nuspec" />
+    <Content Include="UseCssLink\bootstrap\nuget\bootstrap.nuspec" />
+    <Content Include="UseCssLink\bootstrap\nuget\MyGet.ps1" />
+    <Content Include="UseCssLink\bootstrap\package.json" />
+    <Content Include="UseCssLink\bootstrap\README.md" />
+    <Content Include="UseCssLink\fastclick\.bower.json" />
+    <Content Include="UseCssLink\fastclick\bower.json" />
+    <Content Include="UseCssLink\fastclick\LICENSE" />
+    <Content Include="UseCssLink\fastclick\README.md" />
+    <Content Include="UseCssLink\font-awesome\.bower.json" />
+    <Content Include="UseCssLink\font-awesome\.npmignore" />
+    <Content Include="UseCssLink\font-awesome\bower.json" />
+    <Content Include="UseCssLink\font-awesome\css\font-awesome.css.map" />
+    <Content Include="UseCssLink\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="UseCssLink\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="UseCssLink\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="UseCssLink\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="UseCssLink\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="UseCssLink\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="UseCssLink\font-awesome\less\animated.less" />
+    <Content Include="UseCssLink\font-awesome\less\bordered-pulled.less" />
+    <Content Include="UseCssLink\font-awesome\less\core.less" />
+    <Content Include="UseCssLink\font-awesome\less\fixed-width.less" />
+    <Content Include="UseCssLink\font-awesome\less\font-awesome.less" />
+    <Content Include="UseCssLink\font-awesome\less\icons.less" />
+    <Content Include="UseCssLink\font-awesome\less\larger.less" />
+    <Content Include="UseCssLink\font-awesome\less\list.less" />
+    <Content Include="UseCssLink\font-awesome\less\mixins.less" />
+    <Content Include="UseCssLink\font-awesome\less\path.less" />
+    <Content Include="UseCssLink\font-awesome\less\rotated-flipped.less" />
+    <Content Include="UseCssLink\font-awesome\less\screen-reader.less" />
+    <Content Include="UseCssLink\font-awesome\less\stacked.less" />
+    <Content Include="UseCssLink\font-awesome\less\variables.less" />
+    <Content Include="UseCssLink\font-awesome\scss\font-awesome.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_animated.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_bordered-pulled.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_core.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_fixed-width.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_icons.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_larger.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_list.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_mixins.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_path.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_rotated-flipped.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_screen-reader.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_stacked.scss" />
+    <Content Include="UseCssLink\font-awesome\scss\_variables.scss" />
+    <Content Include="UseCssLink\google-code-prettify\.bower.json" />
+    <Content Include="UseCssLink\google-code-prettify\bower.json" />
+    <Content Include="UseCssLink\google-code-prettify\COPYING" />
+    <Content Include="UseCssLink\google-code-prettify\README.md" />
+    <Content Include="UseCssLink\jquery.hotkeys\.bower.json" />
+    <Content Include="UseCssLink\jquery.hotkeys\bower.json" />
+    <Content Include="UseCssLink\jquery.hotkeys\README.md" />
+    <Content Include="UseCssLink\jquery\.bower.json" />
+    <Content Include="UseCssLink\jquery\bower.json" />
+    <Content Include="UseCssLink\jquery\dist\jquery.min.map" />
+    <Content Include="UseCssLink\jquery\external\sizzle\dist\sizzle.min.map" />
+    <Content Include="UseCssLink\jquery\README.md" />
+    <Content Include="UseCssLink\jquery\src\.jshintrc" />
+    <Content Include="UseCssLink\nprogress\.bower.json" />
+    <Content Include="UseCssLink\nprogress\bower.json" />
+    <Content Include="UseCssLink\nprogress\component.json" />
+    <Content Include="UseCssLink\nprogress\History.md" />
+    <Content Include="UseCssLink\nprogress\License.md" />
+    <Content Include="UseCssLink\nprogress\Notes.md" />
+    <Content Include="UseCssLink\nprogress\Readme.md" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_full.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\tinymce_full_compressed.cshtml" />
+    <Content Include="Views\Home\SourceOfJoining.cshtml" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\.csscomb.json" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\.csslintrc" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\alerts.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\badges.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\bootstrap.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\breadcrumbs.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\button-groups.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\buttons.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\carousel.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\close.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\code.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\component-animations.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\dropdowns.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\forms.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\glyphicons.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\grid.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\input-groups.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\jumbotron.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\labels.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\list-group.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\media.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\alerts.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\background-variant.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\border-radius.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\buttons.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\center-block.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\clearfix.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\forms.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\gradients.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\grid-framework.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\grid.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\hide-text.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\image.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\labels.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\list-group.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\nav-divider.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\nav-vertical-align.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\opacity.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\pagination.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\panels.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\progress-bar.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\reset-filter.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\reset-text.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\resize.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\responsive-visibility.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\size.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\tab-focus.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\table-row.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\text-emphasis.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\text-overflow.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\mixins\vendor-prefixes.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\modals.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\navbar.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\navs.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\normalize.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\pager.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\pagination.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\panels.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\popovers.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\print.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\progress-bars.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\responsive-embed.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\responsive-utilities.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\scaffolding.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\tables.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\theme.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\thumbnails.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\tooltip.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\type.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\utilities.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\variables.less" />
+    <Content Include="UseCssLink\bootstrap\dist\css\less\wells.less" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Shared\SubCategory.cshtml" />
+    <Content Include="Views\Category\CategoryDetails.cshtml" />
+    <Content Include="Views\Category\AddSubCategory.cshtml" />
+    <Content Include="Views\Shared\addbuttonpartial.cshtml" />
+    <Content Include="Views\Home\MarketPlace.cshtml" />
+    <Content Include="Views\Home\TestResult.cshtml" />
+    <Content Include="Views\Shared\seller_layout.cshtml" />
+    <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
+    <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Angular\Services\" />
+    <Folder Include="UploadExcel\" />
+    <Folder Include="Upload\InventoryManage\" />
+    <Folder Include="Upload\PurchaseInvoice\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Core">
+      <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>4</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>1</VersionMajor>
+      <VersionMinor>6</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+    <COMReference Include="VBIDE">
+      <Guid>{0002E157-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>5</VersionMajor>
+      <VersionMinor>3</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <PlatformTarget>x86</PlatformTarget>
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2205/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Import Project="packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

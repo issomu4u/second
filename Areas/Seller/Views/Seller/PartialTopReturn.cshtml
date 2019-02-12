@@ -1,0 +1,30 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.TopProduct>  
+@{
+    ViewBag.Title = "PartialTopReturn";
+}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Product Name</th>
+            <th>SKU-No</th>
+            <th> </th>
+            
+            
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var product in Model)  
+        {  
+  
+            <tr>  
+                <td>@product.Name</td> 
+             
+                 <td>@product.SKU</td>
+                   <td>   </td>
+                
+            </tr>  
+        }  
+    </tbody>
+</table>
+

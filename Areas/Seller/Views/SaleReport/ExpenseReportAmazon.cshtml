@@ -1,0 +1,221 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.SaleReport>
+@{
+    ViewBag.Title = "ExpenseOrderReport";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+<script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTable/jquery.dataTables.js"></script>
+<script src="~/Areas/Seller/SellerScripts/dataTables.bootstrap.min.js"></script>
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" language="javascript">
+    $("#tab_administration").addClass("active");
+    $("#searchReset").live("click", function () {
+        $("#txt_from").val('');
+        $("#txt_to").val('');
+        $('#ddl_market_place').val(0);
+    });
+
+    $("#btn_mail").live("click", function () {
+        var is_check = false;
+        var exp = $("#ddl_export").val();
+        var email = $("#txt_email").val();
+        if (email == "") {
+            is_check = true;
+            $("#txt_email").focus();
+            $("#txt_email").addClass('errorborder');
+        }
+        else $("#txt_email").removeClass('errorborder');
+        if (exp == "") {
+            is_check = true;
+            $("#ddl_export").focus();
+            $("#ddl_export").addClass('errorborder');
+        }
+        else $("#ddl_export").removeClass('errorborder');
+        if (is_check) {
+            return false;
+        }
+        else return true;
+    });
+
+    function SaveRow() {
+        var marketplace = $('#ddl_market_place').val();
+        var txtFrom = $('#txt_from').val();
+        var txtTo = $('#txt_to').val();
+        if (marketplace == null || marketplace == 0) {
+            alert('Select Market place');
+            return false;
+        }
+        if (txtFrom == null || txtFrom == 0) {
+            alert('Select Date From ');
+            return false;
+        }
+        if (txtTo == null || txtTo == 0) {
+            alert('Select Date To');
+            return false;
+        }
+    }
+</script>
+
+<style>
+    .text-right {
+        text-align: right;
+    }
+</style>
+@using (Html.BeginForm("ExpenseOrderReport", "SaleReport", FormMethod.Post))
+{
+    <div class="container">
+        <div class="row" style="margin:0px;">
+            <h3> Expense Order Report</h3>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table">
+                    <div class="widget-header">
+                        <i class="icon-search"></i>
+                        <h3>Expense Detail</h3>
+                    </div>
+
+                    <div class="widget-content">
+                        <div class="form-group">
+                            @* @using (Html.BeginForm("ExpenseOrderReport", "SaleReport", FormMethod.Post))
+                                {
+                            *@<div class="row" style="margin:0px; margin-top:10px;">
+                                <div class="col-lg-4">
+                                    <label>Select Market Place</label>
+                                    @Html.DropDownList("ddl_market_place", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>From Date</label>
+                                    @Html.TextBox("txt_from", "", new { @class = "search-input validate[required] form-control" })
+                                </div>
+                                <div class="col-lg-4">
+                                    <label>To Date</label>
+                                    @Html.TextBox("txt_to", "", new { @class = "search-input validate[required] form-control" })
+                                </div>
+                            </div>
+                            <div class="row text-center" style="margin:0px; margin-top:10px;">
+                                <input id="searchSubmit" type="submit" value="Search" onclick="return SaveRow()" ; tabindex="7" class="btn btn-success" />
+                                <input id="searchReset" type="button" value="Clear" tabindex="8" class="btn btn-success" />
+                            </div>
+                            @*}*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <div class="col-md-12 text-right" style="margin-bottom: 10px;">
+                    @Html.DropDownList("ddl_export", ViewData["ExportList"] as List<SelectListItem>, new { @style = "width:100px; height:35px;margin-right:5px;" })
+                    <input type="submit" value="Export" id="btn_export" name="command" class="btn btn-small btn-success text-right" />
+                </div>
+            </div>
+            <div class="span12">
+                <div class="col-md-12 text-right" style="margin-bottom: 10px;">
+                    @Html.TextBox("txt_email", "", new { @style = "height:35px;width:180px;margin-right:5px;", placeholder = "Enter Email ID" })
+                    <input type="submit" value="Send On Mail" id="btn_mail" name="sendmail" class="btn btn-small btn-success text-right" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span12">
+                <div class="widget widget-table action-table">
+                    <div class="widget-header">
+                        <i class="icon-th-list"></i>
+                        <h3>Expense Order Report </h3>
+                    </div>
+                    <div class="widget-content">
+                        <div class="form-group">
+
+                            <p>All date format is in yyyy-MM-dd</p>
+
+                            <table id="tbl-company" class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No</th>
+                                        <th>OrderID</th>
+                                        <th>OrderDate</th>
+                                        <th>Settlement Reference No</th>
+                                        <th>Settlement Reference Date</th>
+                                        <th>Commission(DR)</th>
+                                        <th>Commission(Cr)</th>
+                                        <th>Fixed closing fee(DR)</th>
+                                        <th>Fixed closing fee(CR)</th>
+                                        <th>FBA Weight Handling Fee(DR)</th>
+                                        <th>FBA Weight Handling Fee(CR)</th>
+                                        <th>Technology Fee(DR)</th>
+                                        <th>Technology Fee(CR)</th>
+                                        <th>Refund commission(DR)</th>
+                                        <th>Refund commission(CR)</th>
+                                        <th>Shipping Chargeback(Dr)</th>
+                                        <th>Shipping Chargeback(CR)</th>                                        
+                                    </tr>
+
+                                </thead>
+                                <tbody>
+                                    @if (Model.ToList().Count != 0)
+                                    {
+                                        int i = 0;
+                                        foreach (var item in Model)
+                                        {
+                                            i++;
+                                            <tr>
+                                                <td>@i.</td>
+                                                <td>@Html.DisplayFor(a => item.OrderID)</td>
+                                                <td>@Html.DisplayFor(a => item.OrderDate)</td>
+                                                <td>@Html.DisplayFor(a => item.ReferenceID)</td>
+                                                <td>@Html.DisplayFor(a => item.SettlementDate)</td>
+                                                <td>@if (item.CommissionFee != 0){@Html.DisplayFor(a => item.CommissionFee)}</td>
+                                                <td>@if (item.RefundCommissionFee != 0){@Html.DisplayFor(a => item.RefundCommissionFee)}</td>
+                                                <td>@if (item.FixedClosingFee != 0) {@Html.DisplayFor(a => item.FixedClosingFee)}</td>
+                                                <td>@if (item.RefundFixedClosingFee != 0){@Html.DisplayFor(a => item.RefundFixedClosingFee)}</td>
+                                                <td>@if (item.FBAFEE != 0){@Html.DisplayFor(a => item.FBAFEE)}</td>
+                                                <td>@if (item.RefundFBAFEE != 0){@Html.DisplayFor(a => item.RefundFBAFEE)}</td>
+                                                <td>@if (item.TechnologyFee != 0){@Html.DisplayFor(a => item.TechnologyFee)}</td>
+                                                <td>@if (item.RefundTechnologyFee != 0){@Html.DisplayFor(a => item.RefundTechnologyFee)}</td>
+                                                <td>@if (item.RefundCommision != 0){@Html.DisplayFor(a => item.RefundCommision)}</td>
+                                                <td>@if (item.Refund_Commision != 0){@Html.DisplayFor(a => item.Refund_Commision)}</td>
+                                                <td>@if (item.ShippingChargebackFee != 0) {@Html.DisplayFor(a => item.ShippingChargebackFee)}</td>
+                                                <td>@if (item.RefundShippingChargebackFee != 0) {@Html.DisplayFor(a => item.RefundShippingChargebackFee)}</td>                                               
+                                            </tr>
+                                        }
+                                    }
+                                </tbody>
+
+
+
+
+
+                            </table>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(function () { $("#tbl-company").DataTable(); });
+                            $(function () {
+                                $('#txt_from').datepicker();
+                            });
+</script>
+<script type="text/javascript">
+                            $(function () {
+                                $('#txt_to').datepicker();
+                            });
+
+</script>
+
+
+
+
+
+
+
+

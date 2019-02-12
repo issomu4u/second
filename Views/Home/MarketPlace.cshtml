@@ -1,0 +1,176 @@
+﻿@model SellerVendor.Models.m_marketplace
+@{
+    ViewBag.Title = "MarketPlace";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row" data-ng-app="MyApp2" data-ng-controller="MarketPalceController">
+
+    <div class="">
+
+        <!-- page content -->
+        <div class="">
+            <div class="">
+
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2 style="color: #D52E56;">Add Market Place</h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br />
+                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1" ng-submit="SaveMarketPlaceDetails()">
+
+                                   
+                                      <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #5bc0de;">
+                                            Name: <span class="required"></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" name="uname" ng-model="name" maxlength="50" class="form-control" placeholder=" Please Enter Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                          <span class="error" ng-show="(f1.uname.$dirty || IsFormSubmitted) && f1.uname.$error.required" >Providing Name is mandatory!</span>
+                                             
+                                        </div>
+                                    </div>                                   
+
+                                      <div class="form-group">
+                                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #5bc0de;">
+                                            Api URL: <span class="required"></span>
+                                        </label>
+                                        <div class="col-md-6 col-sm-6 col-xs-12">
+                                            <input type="text" name="uapi_url" ng-model="api_url" maxlength="50" class="form-control"placeholder="Please Enter API URL" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                          <span class="error" ng-show="(f1.uapi_url.$dirty || IsFormSubmitted) && (f1.uapi_url.$error.required)" >Providing API URL is mandatory!</span>
+                                        </div>
+                                    </div>
+
+                          <div class="form-group">
+                               <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name" style="color: #5bc0de;">
+                                            Uploaded Image: <span class="required"></span>
+                                        </label>
+                                                                     
+                                    <div class="col-md-4 col-sm-4" style="margin-left: 20px;">                                         
+                                         <input type="file" name="file" accept="image/*" class="form-control col-md-3 col-sm-3 col-xs-12" onchange="angular.element(this).scope().selectFileforUpload(this.files)" required />
+                                       <span class="error" ng-show="(f1.file.$dirty || IsFormSubmitted) && f1.file.$error.required">{{FileInvalidMessage}}</span>
+                                         <span class="error">{{FileInvalidMessage}}</span>
+                                          
+                                  
+                                </div>
+                            </div>         
+
+
+
+                                                                                      
+                                  <div class="ln_solid"></div>
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                            <button type="submit"  class="btn btn-success">Add</button>
+                                            <button class="btn btn-primary" type="reset">Reset</button>
+
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+
+                         <div class="x_panel">
+                            <h2 style="color: #59D52E;">Market Place Details:</h2>
+                            <div class="x_title"></div>
+                            <div class="x_content">
+                                <div class="form-group">
+                                    <div class="col-md-6 col-sm-6 col-xs-12" style="color: #D59B2E;">
+                                        Search by : <input type="text" class="control-labe" placeholder="source name..." ng-model="searchText.name" />
+                                        Exact Match : <input class="control-label" type="checkbox" ng-model="exactMatch" />
+
+                                    </div>
+                                </div>
+
+                                <br />
+
+                       <!-- table start-->
+                         <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                 <th>
+                                                    Path URL
+                                                </th>
+                                                 <th>
+                                                    Logo
+                                                </th>
+                                                <th>
+                                                    
+                                                </th>
+                                                                                        
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                       
+                                            <tr dir-paginate="item in MarketPlace|filter:searchText.name:exactMatch|itemsPerPage:5"  ng-class-odd="'odd'" ng-class-even="'even'" current-page="currentPage">
+                                                <th scope="row">
+                                                   {{ ($index + 1) + (currentPage - 1) * 10}}
+                                                </th>
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.name}} </span>
+                                                    <input ng-show="!item.showEdit" type="text"  style="width:50%;height:30%" ng-model="item.name"/>
+                                                </td>
+                                               
+                                                  <td>
+                                                    <span ng-show="item.showEdit">{{item.api_url}} </span>
+                                                    <input ng-show="!item.showEdit" type="text"  style="width:50%;height:30%" ng-model="item.api_url"/>
+                                                </td>
+                                                 <td>
+                                                     <img ng-show="item.showEdit" src="{{item.logo_path}}" alt="Logo" width="50" height="50" /> 
+                                                     <img ng-show="!item.showEdit" src="{{item.logo_path}}" alt="Logo" width="50" height="50" /><br />
+                                                     <input type="file" ng-show="!item.showEdit" name="file" accept="image/*"  onchange="angular.element(this).scope().selectFileforUpload(this.files)"/>
+                                                </td>
+                                               
+                                                 
+                                                 <td>
+                                                    <p ng-show="item.showEdit"><span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                                                     <strong style="color:red;">|| </strong>
+                                                    <span ng-show="item.showDelete" ng-click="toggleDeleteEdit(item)" class="glyphicon glyphicon-trash"></span></p>
+
+                                                    <p ng-show="!item.showEdit">
+                                                    <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                                    <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span></p>
+                                                </td>                                               
+                                            </tr>
+
+                                        </tbody>
+                                        <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+                                <!-- table end-->
+                       </div>
+                         </div>             
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+   
+
+</div>
+
+@section scripts{         
+      <script src="~/Scripts/Angular/Controller/MarketPalceController.js"></script>    
+    }

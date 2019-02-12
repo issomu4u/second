@@ -1,0 +1,157 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<AmazonEnvelope xmlns:java="http://xml.apache.org/xalan/java" xmlns:amzn="http://www.amazon.com/XSL/Transform/Extensions" xmlns:xalan="http://xml.apache.org/xslt" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="amzn-envelope.xsd">
+  <Header>
+    <DocumentVersion>'4.01'</DocumentVersion>
+    <MerchantIdentifier>'7856459235'</MerchantIdentifier>
+  </Header>
+  <MessageType>SettlementReport</MessageType>
+  <Message>
+    <MessageID>1</MessageID>
+    <SettlementReport>
+      <SettlementData>
+        <AmazonSettlementID>7172620412</AmazonSettlementID>
+        <TotalAmount currency="INR">137953.41</TotalAmount>
+        <StartDate>2017-12-22T10:18:18+00:00</StartDate>
+        <EndDate>2017-12-29T10:18:18+00:00</EndDate>
+        <DepositDate>2017-12-31T10:18:18+00:00</DepositDate>
+      </SettlementData>
+      <Order>
+        <AmazonOrderID>404-2899498-0187511</AmazonOrderID>
+        <MerchantOrderID>404-2899498-0187511</MerchantOrderID>
+        <ShipmentID>D0yxpl4sN</ShipmentID>
+        <MarketplaceName>Amazon.in</MarketplaceName>
+        <Fulfillment>
+          <MerchantFulfillmentID>AFN</MerchantFulfillmentID>
+          <PostedDate>2017-12-27T05:37:38+00:00</PostedDate>
+          <Item>
+            <AmazonOrderItemCode>34678221363163</AmazonOrderItemCode>
+            <SKU>T397-0534</SKU>
+            <Quantity>1</Quantity>
+            <ItemPrice>
+              <Component>
+                <Type>Principal</Type>
+                <Amount currency="INR">3555.08</Amount>
+              </Component>
+              <Component>
+                <Type>Tax</Type>
+                <Amount currency="INR">639.92</Amount>
+              </Component>
+              <Component>
+                <Type>TCS-IGST</Type>
+                <Amount currency="INR">0.00</Amount>
+              </Component>
+            </ItemPrice>
+            <ItemFees>
+              <Fee>
+                <Type>FBAWeightBasedFee</Type>
+                <Amount currency="INR">-77.00</Amount>
+              </Fee>
+              <Fee>
+                <Type>FBAWeightBasedFee CGST</Type>
+                <Amount currency="INR">-6.93</Amount>
+              </Fee>
+              <Fee>
+                <Type>FBAWeightBasedFee SGST</Type>
+                <Amount currency="INR">-6.93</Amount>
+              </Fee>
+              <Fee>
+                <Type>Technology Fee</Type>
+                <Amount currency="INR">-10.00</Amount>
+              </Fee>
+              <Fee>
+                <Type>Technology Fee IGST</Type>
+                <Amount currency="INR">-1.80</Amount>
+              </Fee>
+              <Fee>
+                <Type>Commission</Type>
+                <Amount currency="INR">-314.63</Amount>
+              </Fee>
+              <Fee>
+                <Type>Commission IGST</Type>
+                <Amount currency="INR">-56.63</Amount>
+              </Fee>
+              <Fee>
+                <Type>FixedClosingFee</Type>
+                <Amount currency="INR">-40.00</Amount>
+              </Fee>
+              <Fee>
+                <Type>FixedClosingFee IGST</Type>
+                <Amount currency="INR">-7.20</Amount>
+              </Fee>
+            </ItemFees>
+          </Item>
+        </Fulfillment>
+      </Order>
+
+      <Refund>
+        <AmazonOrderID>404-2899498-0187511</AmazonOrderID>
+        <MerchantOrderID>404-2899498-0187511</MerchantOrderID>
+        <AdjustmentID>amzn1:crow:HInWx/EVQ6qsKNplZgyQZw</AdjustmentID>
+        <MarketplaceName>Amazon.in</MarketplaceName>
+        <Fulfillment>
+          <MerchantFulfillmentID>AFN</MerchantFulfillmentID>
+          <PostedDate>2017-12-29T06:39:33+00:00</PostedDate>
+          <AdjustedItem>
+            <AmazonOrderItemCode>34678221363163</AmazonOrderItemCode>
+            <MerchantAdjustmentItemID>700594923016</MerchantAdjustmentItemID>
+            <SKU>T397-0534</SKU>
+            <ItemPriceAdjustments>
+              <Component>
+                <Type>Principal</Type>
+                <Amount currency="INR">-3555.08</Amount>
+              </Component>
+              <Component>
+                <Type>Tax</Type>
+                <Amount currency="INR">-639.92</Amount>
+              </Component>
+              <Component>
+                <Type>TCS-IGST</Type>
+                <Amount currency="INR">0.00</Amount>
+              </Component>
+            </ItemPriceAdjustments>
+            <ItemFeeAdjustments>
+              <Fee>
+                <Type>Commission</Type>
+                <Amount currency="INR">314.63</Amount>
+              </Fee>
+              <Fee>
+                <Type>Commission IGST</Type>
+                <Amount currency="INR">56.63</Amount>
+              </Fee>
+              <Fee>
+                <Type>FixedClosingFee</Type>
+                <Amount currency="INR">40.00</Amount>
+              </Fee>
+              <Fee>
+                <Type>FixedClosingFee IGST</Type>
+                <Amount currency="INR">7.20</Amount>
+              </Fee>
+              <Fee>
+                <Type>RefundCommission</Type>
+                <Amount currency="INR">-62.93</Amount>
+              </Fee>
+              <Fee>
+                <Type>RefundCommission IGST</Type>
+                <Amount currency="INR">-11.33</Amount>
+              </Fee>
+            </ItemFeeAdjustments>
+          </AdjustedItem>
+        </Fulfillment>
+      </Refund>
+      <OtherTransaction>
+        <TransactionType>Previous Reserve Amount Balance</TransactionType>
+        <TransactionID>7166104162_CREDIT</TransactionID>
+        <PostedDate>2017-12-22T10:38:35+00:00</PostedDate>
+        <Amount currency="INR">175591.32</Amount>
+      </OtherTransaction>
+      <OtherTransaction>
+        <TransactionType>Current Reserve Amount</TransactionType>
+        <TransactionID>7172620412_DEBIT</TransactionID>
+        <PostedDate>2017-12-29T10:38:28+00:00</PostedDate>
+        <Amount currency="INR">-231547.06</Amount>
+      </OtherTransaction>
+    </SettlementReport>
+
+  </Message>
+</AmazonEnvelope>
+

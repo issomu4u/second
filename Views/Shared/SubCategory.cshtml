@@ -1,0 +1,20 @@
+﻿@model SellerVendor.Controllers.parentSubCategory
+           
+  @*<ul style="padding-left:30px;">
+    @if (Model != null)
+    {        
+        <li>
+            <label for="">@Model.subcategory_name</label>
+        </li>
+    }
+    </ul> *@
+
+
+<ul style="padding-left:30px;">
+    @if (Model != null)
+    {
+        <li>
+            <a href="#" id="View_@Model.id" style="color:Green;" class="edit_node"><b>@Model.subcategory_name</b> </a>
+        </li>
+    }
+</ul>  

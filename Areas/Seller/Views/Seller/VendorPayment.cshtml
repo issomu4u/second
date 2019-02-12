@@ -1,0 +1,468 @@
+﻿@{
+    ViewBag.Title = "Vendor Payment";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+@*<script type="text/javascript">
+        $(function () {
+           $("input[name='chkPassPort']").click(function () {
+
+               if ($("#chkYes").is(":checked")) {
+                   alert("checked");                   
+                   $("#dvPassport").show();
+                   $("#n_paymentMode").val(1);
+                   
+                   
+             
+               } else {
+                   alert("unchecked");                
+                  
+                   $("#dvPassport").hide();
+                   $("#n_paymentMode").val(2);
+               }
+
+             
+
+           });
+       });
+</script>*@
+
+<div class="row" data-ng-app="MyAppSeller" ng-controller="VendorPaymentController">
+
+ 
+    <div class="">         
+            <div class="">
+                <div class="clearfix"></div>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">                          
+
+        <div class="x_panel">
+            <div class="row">       
+              <h4>PO Details</h4>                           
+           </div>
+
+             @* <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="col-sm-3" >
+                                   <label for="first-name">Name</label>
+                            </div>
+                            <div class="col-sm-8">
+                                  <select ng-model="tbl_item_category_id"  class="form-control" ng-options="c.id as c.category_name for c in CategoryList"  ng-change="GetSubCategory(tbl_item_category_id)">
+                                    <option value="">-- Select Vendor Name --</option>
+                                 </select>
+                            </div>                                        
+                        </div>
+
+                         <div class="col-md-4">
+                            <div class="col-sm-3" >
+                                 <label for="first-name">PO Number</label>
+                            </div>
+                            <div class="col-sm-8">
+                                 <select ng-model="tbl_item_subcategory_id" class="form-control" ng-options="c.id as c.subcategory_name for c in subcategorylist"   ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                     <option value="">--Select  PO Number --</option>
+                                 </select>
+                            </div>
+                        </div>
+                         <div class="col-md-4">
+                            <div class="col-sm-3" >
+                                 <label for="first-name">PO Amount</label>
+                            </div>
+                            <div class="col-sm-8">
+                                 <select ng-model="tbl_item_subcategory_id" class="form-control" ng-options="c.id as c.subcategory_name for c in subcategorylist"   ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                     <option value="">--Select PO Amount --</option>
+                                 </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                  <div class="row">
+                        <div class="col-md-4">
+                            <div class="col-sm-3" >
+                                   <label for="first-name">PO Date</label>
+                            </div>
+                            <div class="col-sm-8">
+                                  <select ng-model="tbl_item_category_id"  class="form-control" ng-options="c.id as c.category_name for c in CategoryList"  ng-change="GetSubCategory(tbl_item_category_id)">
+                                    <option value="">-- Select PO Date --</option>
+                                 </select>
+                            </div>                                        
+                        </div>
+
+                      <div class="col-md-4">
+                        
+                             <button type="button" ng-click="SearchRecords1()" class="btn btn-success">Search</button>                                           
+                        </div>
+
+
+                  </div>
+             </div>*@
+
+
+
+
+            <h5>Search PO Details </h5>
+              <input type="text" ng-model="search" style="width:320px;" placeholder="Search...Vendor Name,PO Number,Po Amount" />
+
+            <div class="x_title"></div>
+            <div class="x_content">
+                <div class="form-group">
+                   
+             <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                               S.No
+                            </th>
+                            <th>
+                                Vendor Name
+                            </th>
+                            <th>
+                               PO Number
+                            </th>                           
+                           
+                              <th>
+                                PO Date
+                            </th>
+                             <th>
+                                PO Amount
+                            </th>
+                            <th>
+                               Remarks
+                            </th>
+                             <th>
+                               Status
+                            </th>
+                             <th>
+                               Action
+                            </th>
+                              <th>
+                              
+                            </th>
+
+                        </tr>
+                    </thead>
+                    <tbody>                    
+                         <tr dir-paginate="item in POList|filter:search|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage">
+                            <th scope="row">
+                               {{ ($index + 1) + (currentPage - 1) * 10}}                           
+                            
+                            </th>
+                             <td>
+                              {{item.ob_tbl_seller_vendors.vendor_name}}
+                            </td>
+                            <td>
+                                {{item.ob_tbl_purchase.po_number}}                                
+                            </td>                        
+                           <td>
+                                {{item.ob_tbl_purchase.po_date.slice(6, -2) | date: 'dd-MM-yyyy'}}                                
+                            </td>  
+                            
+                            <td>
+                              {{item.ob_tbl_purchase.invoice_amount}}
+                            </td>
+                              <td>
+                              {{item.ob_tbl_purchase.remarks_po}}
+                            </td>
+
+                              <td>                                 
+                                  <span ng-if="item.ob_tbl_purchase.t_Po_status == 0">Un-Paid</span>     
+                                  <span ng-if="item.ob_tbl_purchase.t_Po_status == 1">Paid</span>                                                                                                                    
+                            </td>
+                              
+                             
+                              <td>
+                                   <a class="btn btn-info btn-sm" ng-click="toggleEdit(item)" href="" data-toggle="modal" data-target="#myModal">Pay PO Amount</a>                                                                              
+                                   <a class="btn btn-info btn-sm" ng-click="toggleView(item)" href="" data-toggle="modal" data-target="#myModal1">View</a>                            
+                              </td>
+                        </tr>
+
+                    </tbody>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5" style="text-align:end;color:red;">
+                                         <dir-pagination-controls
+                                            max-size="5"
+                                            direction-links="true"
+                                            boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">            
+                                      </dir-pagination-controls>
+                                     </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                               
+                                </div>
+
+                                <br />
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+      <div id="myModal" class="modal fade"  role="dialog">
+            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">
+
+              
+                <div class="modal-content" style ="width:800px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{Action}} Purchase Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical"> 
+                            
+                             @Html.Hidden("hdn_Purchase_id")  
+                                     <input type="hidden" name="country" ng-model="hdn_Purchase_id">                                                                                                            
+                                    <div class="row">
+                                               <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                   Vendor Name<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">                                     
+                                            <select ng-model="tbl_vendor_id" name="selected_id" class="form-control"  ng-options="c.id as c.vendor_name for c in POVendorList" disabled>
+                                          
+                                            </select>                                           
+                                             <span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required" >Providing  select Vendor Name is mandatory!</span>                                             
+                                        </div>
+                                            
+                                       <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                     Invoice Amount<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="upo_invoiceAmount" ng-model="po_invoiceAmount" maxlength="50" class="form-control" ng-readonly="true" placeholder=" Please Enter Invoice Amount" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.upo_invoiceAmount.$dirty || IsFormSubmitted) && f1.upo_invoiceAmount.$error.required" >Providing Invoice Amount is mandatory!</span>
+                                        </div>
+                                    </div>                 
+                      
+                                    <div class="row">
+                                               <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                    PO Number<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="upo_number" ng-model="po_number" maxlength="50" ng-readonly="true" class="form-control" placeholder=" Please Enter PO Number" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.upo_number.$dirty || IsFormSubmitted) && f1.upo_number.$error.required" >Providing PO Number is mandatory!</span>
+                                        </div>
+                                            
+                                       <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                     PO Deposit Type<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                            <label for="chkYes1"><input type="radio" id="chkYes" data-ng-click="chkClick()" name="chkPassPort" value="1"/>Cheque</label>
+                                            <label for="chkNo1"> <input type="radio" id="chkNo" data-ng-click="chkClick()" name="chkPassPort"value="2" />Cash</label>  
+                                        </div>                                 
+                                    </div>
+
+                                    <div class="row" data-ng-if="dvPassport">
+                                               <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                    Bank Name<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="ut_BankName" id="t_BankName" ng-model="t_BankName" maxlength="50" class="form-control" placeholder=" Please Enter Bank Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ut_BankName.$dirty || IsFormSubmitted) && f1.ut_BankName.$error.required" >Providing Bank Name is mandatory!</span>
+                                        </div>
+                                            
+                                       <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                     Cheque No<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                             <input type="text" name="ut_chequeno" id="t_chequeno" ng-model="t_chequeno" maxlength="50" class="form-control" placeholder=" Please Enter Cheque Number"  ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ut_chequeno.$dirty || IsFormSubmitted) && f1.ut_chequeno.$error.required" >Providing Cheque Number is mandatory!</span>
+                                        </div>                                 
+                                    </div>
+
+                                  <div class="row">
+                                      <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">PO Amount<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <input type="text" name="ut_PurchaseAmount" ng-model="t_PurchaseAmount" maxlength="50" class="form-control" placeholder=" Please Enter Purchase Amount" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                          <span class="error" ng-show="(f1.ut_PurchaseAmount.$dirty || IsFormSubmitted) && f1.ut_PurchaseAmount.$error.required" >Providing Purchase Amount is mandatory!</span>
+                                      </div> 
+                                      
+                                      <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Remarks<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                           <textarea type="text" name="ut_Remark" ng-model="t_Remark"  class="form-control" placeholder=" Please Enter Remark" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus></textarea>
+                                         @* <input type="text" name="ut_Remark" ng-model="t_Remark" maxlength="50" class="form-control" placeholder=" Please Enter Remark" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>*@
+                                          <span class="error" ng-show="(f1.ut_Remark.$dirty || IsFormSubmitted) && f1.ut_Remark.$error.required" >Providing Remark is mandatory!</span>
+                                      </div>
+                                                                                                                                                    
+                                   </div>
+                           
+                        </div>
+
+                      <div class="modal-footer">
+                            <input type="button" ng-disabled="f1.$invalid" class="btnAdd btn btn-success" value="Save" ng-click="AddUpdatePO()" data-dismiss="modal" />
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+                </form>
+        </div>
+
+        <div id="myModal1" class="modal fade"  role="dialog">
+            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">
+
+              
+                <div class="modal-content" style ="width:800px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title"> Purchase Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical"> 
+                            
+                             @Html.Hidden("hdn_Purchase_id")  
+                                     <input type="hidden" name="country" ng-model="hdn_Purchase_id">                                                                                                            
+                                    <div class="row">
+                                               <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                   Vendor Name<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">                                     
+                                          <select ng-model="tbl_vendor_id" name="selected_id" class="form-control"  ng-options="c.id as c.vendor_name for c in POVendorList" disabled>
+                                              @* <option value="">-- Select Vendor --</option>*@
+                                            </select>
+                                             @*<input name="selected_id" type="hidden" ng-disabled="!catDisabled" ng-model="tbl_vendor_id">
+                                               <input type="text" ng-model="tbl_vendor_id"/>*@
+                                             <span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required" >Providing  select Vendor Name is mandatory!</span>                                             
+                                        </div>
+                                            
+                                       <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                     Invoice Amount<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="upo_invoiceAmount" ng-model="po_invoiceAmount" maxlength="50" class="form-control" ng-readonly="true" placeholder=" Please Enter Invoice Amount" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.upo_invoiceAmount.$dirty || IsFormSubmitted) && f1.upo_invoiceAmount.$error.required" >Providing Invoice Amount is mandatory!</span>
+                                        </div>
+                                    </div>                 
+                      
+                                    <div class="row">
+                                               <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                    PO Number<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="upo_number" ng-model="po_number" maxlength="50" ng-readonly="true" class="form-control" placeholder=" Please Enter PO Number" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.upo_number.$dirty || IsFormSubmitted) && f1.upo_number.$error.required" >Providing PO Number is mandatory!</span>
+                                        </div>
+                                            
+                                       <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                     PO Deposit Type<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4" id="type">
+
+                                         
+                                            <label for="chkYes1"><input type="radio" id="chkYes" name="chkPassPort" value="1"/>Cheque</label>
+                                            <label for="chkNo1"> <input type="radio" id="chkNo" name="chkPassPort"value="2" />Cash</label>  
+                                        </div>                                 
+                                    </div>
+
+                                    <div class="row" data-ng-if="dvPassport">
+                                               <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                    Bank Name<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="ut_BankName" id="t_BankName" ng-readonly="true" ng-model="t_BankName" maxlength="50" class="form-control" placeholder=" Please Enter Bank Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ut_BankName.$dirty || IsFormSubmitted) && f1.ut_BankName.$error.required" >Providing Bank Name is mandatory!</span>
+                                        </div>
+                                            
+                                       <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                     Cheque No<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                             <input type="text" name="ut_chequeno" id="t_chequeno" ng-readonly="true" ng-model="t_chequeno" maxlength="50" class="form-control" placeholder=" Please Enter Cheque Number"  ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ut_chequeno.$dirty || IsFormSubmitted) && f1.ut_chequeno.$error.required" >Providing Cheque Number is mandatory!</span>
+                                        </div>                                 
+                                    </div>
+
+                                  <div class="row">
+                                      <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">PO Amount<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <input type="text" name="ut_PurchaseAmount" ng-readonly="true" ng-model="t_PurchaseAmount" maxlength="50" class="form-control" placeholder=" Please Enter Purchase Amount" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                          <span class="error" ng-show="(f1.ut_PurchaseAmount.$dirty || IsFormSubmitted) && f1.ut_PurchaseAmount.$error.required" >Providing Purchase Amount is mandatory!</span>
+                                      </div> 
+                                      
+                                      <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Remarks<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                           <textarea type="text" name="ut_Remark" ng-model="t_Remark"  ng-readonly="true" class="form-control" placeholder=" Please Enter Remark" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus></textarea>
+                                        @*  <input type="text" name="ut_Remark" ng-model="t_Remark" ng-readonly="true" maxlength="50" class="form-control" placeholder=" Please Enter Remark" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>*@
+                                          <span class="error" ng-show="(f1.ut_Remark.$dirty || IsFormSubmitted) && f1.ut_Remark.$error.required" >Providing Remark is mandatory!</span>
+                                      </div>
+                                                                                                                                                    
+                                   </div>
+                           
+                        </div>
+
+                      <div class="modal-footer">                           
+                            <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+                </form>
+        </div>
+</div>
+     
+     <div id="alertModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <!-- dialog body -->
+                    <div class="modal-body">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        {{msg}}
+                    </div>
+                    <!-- dialog buttons -->
+                    <div class="modal-footer">
+                        <button type="button" ng-click="alertmsg()" class="btn btn-primary">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+   
+ </div>
+  
+@section scripts{
+    
+     <script src="~/Areas/Seller/SellerScripts/Angular/Controller/VendorPaymentController.js"></script>
+}
+    
+
+

@@ -1,0 +1,593 @@
+﻿@model SellerVendor.Areas.Seller.Models.model_tbl_purchase
+<script src="~/Areas/Seller/SellerScripts/DynamicTable.js"></script>
+@{
+    ViewBag.Title = "Purchase";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+    int k = 0; 
+}
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    @*<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>*@
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+        $(function () {
+          
+            var session_value = @Session["TypeSeller"].ToString()
+             console;
+            switch (parseInt(session_value)) {                
+                case 1:
+                    //alert("first case "+session_value);
+                    $("#dvPassport").show();
+                    $("#dvPassport1").show();
+                    $("#n_postatus_type").val(1);
+                    break;
+                case 2:
+                    $("#dvPassport").show();
+                    $("#n_postatus_type").val(2);
+                    //$("#dvPassport1").show();
+                    break;
+                case 3:
+                    //alert("third case" +session_value);
+                    $("#passport3").show();
+                    break;
+            }
+           $("input[name='chkPassPort']").click(function () {
+
+               if ($("#chkYes").is(":checked")) {
+                   //alert("checked");
+                   $("#dvPassport1").show();
+                   $("#dvPassport").show();
+                   $("#n_postatus_type").val(1);                              
+               } else {
+                   //alert("unchecked");                
+                   $("#dvPassport").show();
+                   $("#dvPassport1").hide();
+                   $("#n_postatus_type").val(2);
+               }
+           });
+       });
+</script>
+
+<script type="text/javascript">
+    function SavePopupdata() {
+        var abc = $("#serialNo").val();
+        var itemid = $("hdn_Item_id").val();            
+        var hidden_id = $("#hdn_serialNoId").val();
+        //alert("for popup " + hidden_id);
+        var get_serail_no = $("#hdn_serialNo").val();
+        if (get_serail_no != "") {
+            var get_concatenate_id = hidden_id + "," + abc;
+            var str_text = get_serail_no + "#" + get_concatenate_id;
+            alert("new vlaue conatenate "+str_text);
+            $("#hdn_serialNo").val(str_text);
+        } else {
+            var get_con_id = hidden_id + "," + abc;
+            $("#hdn_serialNo").val(get_con_id);
+        }       
+    } 
+</script>
+
+<script type="text/javascript">
+    function SavePopupBatchQuantitydata() {
+        var batchNo = $("#batchNo").val();
+        var itemserialNo = $("#ItemserialNo").val();       
+        var hidden_id = $("#hdn_ItemId").val();         
+        var get_Orderitem = $("#hdn_serialNo").val();
+        if (get_Orderitem != "") {
+            var get_concatenate_id = hidden_id + "," + itemserialNo + "," + batchNo;
+            var str_text = get_Orderitem + "#" + get_concatenate_id;       
+            $("#hdn_serialNo").val(str_text);
+        } else {
+            var get_con_id = hidden_id + "," + itemserialNo + "," + batchNo;
+            $("#hdn_serialNo").val(get_con_id);
+        }      
+    }
+</script>
+<script type="text/javascript">
+    function SavePopupQuantitydata() {
+        var quantity = $("#Quantity").val();   
+        var hidden_id = $("#hdn_quantity_Id").val();
+        var get_Orderitem = $("#hdn_serialNo").val();
+        if (get_Orderitem != "") {
+            var get_concatenate_id = hidden_id + "," + quantity;
+            var str_text = get_Orderitem + "#" + get_concatenate_id;
+            $("#hdn_serialNo").val(str_text);
+        } else {
+            var get_con_id = hidden_id + "," + quantity;
+            $("#hdn_serialNo").val(get_con_id);
+        }
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function()
+    { 
+        $('#btnsubmit').click(function() 
+        { 
+            var type = $("#n_postatus_type").val();         
+            if (type == "1") {
+                var remarks = $("#remarks_po").val();
+                if (remarks == '') {
+                    $("#remarks_po").after('<span class="error">Please specify remarks.</span>');
+                    return false;
+                }
+                var vendor = $("#tbl_seller_vendors_id").val();
+                if (vendor == '') {
+                    $("#tbl_seller_vendors_id ").after('<span class="error">Please select Vendor.</span>');
+                    return false;
+                }
+                var invoiceno = $("#invoice_no").val();
+                if (invoiceno == '') {
+                    $("#invoice_no ").after('<span class="error">Please specify Invoice No.</span>');
+                    return false;
+                }
+                var ponumber = $("#po_number").val();
+                if (ponumber == '') {
+                    $("#po_number ").after('<span class="error">Please specify PO No.</span>');
+                    return false;
+                }
+                var date1 = $("#po_date").val();
+                if (date1 == '') {
+                    $("#po_date ").after('<span class="error">Please select Po Date.</span>');
+                    return false;
+                }
+                var date2 = $("#date_invoice").val();
+                if (date2 == '') {
+                    $("#date_invoice ").after('<span class="error">Please select Invoice Date.</span>');
+                    return false;
+                }
+            }
+            else {
+                var remarks = $("#remarks_po").val();
+                if (remarks == '') {
+                    $("#remarks_po").after('<span class="error">Please specify remarks.</span>');
+                    return false;
+                }
+            }
+        });
+    });
+</script>
+
+
+@using (Ajax.BeginForm("SaveUpdatePurchase", "Purchase", new AjaxOptions { HttpMethod = "POST", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace, OnFailure = "Errmsg(data);" }, new { id = "PurchaseForm", enctype = "multipart/form-data" }))
+{
+    @Html.HiddenFor(m => m.id)
+    @Html.HiddenFor(m => m.XmlPurchaseDetails)
+    @Html.HiddenFor(m => m.invoice_photo_path)
+    @Html.HiddenFor(model => model.t_JsonData)
+    @Html.HiddenFor(m => m.invoice_amount)
+    @Html.HiddenFor(m => m.tax_amount)
+    @Html.HiddenFor(m => m.n_postatus_type)
+    @Html.HiddenFor(m => m.tbl_seller_warehouses_id)
+    @Html.HiddenFor(m =>m.SaveItemId)
+    @Html.HiddenFor(m =>m.XmlItemquantity)
+    @Html.HiddenFor(m =>m.item_serialNo)
+    @Html.Hidden("hdn_serialNo");
+    @Html.Hidden("hdn_serialNoId");
+    @Html.Hidden("hdn_orderItem")
+    @Html.Hidden("hdn_ItemId"); 
+    @Html.Hidden("hdn_quantity");
+    @Html.Hidden("hdn_quantity_Id")
+
+   
+    <div class="forms-grids">
+                <div class="clearfix"></div>
+                 <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h3 style="color: #292325;">Add Purchase</h3>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br />
+                            
+
+                              
+                            <div class="row" id="passport3" style="display: none">
+           
+                                  <div class="col-sm-2 ">
+                                     @Html.Label("PO Deposit Type")
+                               </div>
+
+                                    <label for="chkYes1"><input type="radio" id="chkYes" name="chkPassPort" value="1"/>Against PO</label>
+                                      <label for="chkNo1"> <input type="radio" id="chkNo" name="chkPassPort"value="2" />Manufacturer</label>                                                       
+                                   </div>
+
+                                          
+                              <div id="dvPassport" style="display: none">
+                                                                                                                                       
+                                         <div class="row" style="margin-top:10px;">                                       
+                                        <div class="col-sm-2 control-label">
+                                         <label for="middle-name" style="color: #242627;">Select Warehouse<span class="required star">*</span></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                             @if (Model.id > 0)
+                                             {
+                                              @Html.TextBoxFor(m => m.WarehosueName, new { @class = "validate[required] text-input form-control", @readonly = "disabled" })
+                                           
+                                             }
+                                             else
+                                             {
+                                               @Html.TextBoxFor(m => m.WarehosueName, new { @class = "validate[required] text-input form-control", @readonly = "disabled" })
+                                             }
+                                          @*  @Html.DropDownListFor(m => m.tbl_seller_warehouses_id, Model.ddlWarehouseList, "--Select Warehouse--", new { @class = "validate[required] text-input form-control search-input" }) *@
+                                        </div>
+                                    <div class="col-sm-2 control-label">
+                                        <label class="control-label" for="first-name" style="color: #242627;">
+                                            Remarks <span class="required star">*</span>
+                                        </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextAreaFor(m => m.remarks_po, new { @class = "validate[required,maxSize[200]] text-input form-control search-input", placeholder = " Please Enter Remarks" })
+                                        </div>
+                                 </div>
+                                           
+                                   </div>
+
+                             <div id="dvPassport1" style="display: none">
+                                                                   
+                                       <div class="row" style="margin-top:10px;">
+                                             <div class="col-sm-2 control-label">
+                                            <label for="first-name" style="color: #242627;">
+                                           Select Vendor Name <span class="required star">*</span>
+                                        </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                           @Html.DropDownListFor(m => m.tbl_seller_vendors_id, Model.ddlVendorList, "--Select Vendor--", new { @class = "validate[required] text-input form-control search-input" }) 
+                                        </div>
+                                      
+                                        <div class="col-sm-2 control-label">
+                                       <label class="control-label" for="first-name" style="color: #242627;">
+                                            Invoice No <span class="required star">*</span>
+                                        </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(m => m.invoice_no, new { @class = "validate[required,maxSize[200]] text-input form-control search-input", placeholder = " Please Enter Invoice No" })
+                                        </div>
+                                 </div>
+                                      
+                                       <div class="row" style="margin-top:10px;">
+                                        <div class="col-sm-2 control-label">
+                                             <label class="control-label" for="first-name" style="color: #242627;">
+                                            Upload Invoice <span class="required star">*</span>
+                                        </label>  
+                                        </div>
+                                  
+                                        <div class="col-sm-4">
+                                          @if (!string.IsNullOrEmpty(@Model.invoice_photo_path))
+                                          {              
+                                               <input type="file" name="HelpDeskAttachUpload" id="file" value="@Model.invoice_photo_path"/>  <a href="/Upload/PurchaseInvoice/@Model.invoice_photo_path" target="_blank"><img style="width: 150px;margin-left: -6px;" src="~/Images/icons/Download.gif" /></a>
+                                          }
+                                          else
+                                          {
+                                               <input type="file" name="HelpDeskAttachUpload" id="file" value="file" class="form-control col-md-3 col-sm-3 col-xs-12" />
+                                          }  
+                                        </div>
+                                        <div class="col-sm-2 control-label">
+                                         <label class="control-label" for="first-name" style="color: #242627;">PO-Number <span class="required star">*</span></label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(m => m.po_number, new { @class = "validate[required,maxSize[200]] text-input form-control search-input", placeholder = " Please Enter PO No" })
+                                        </div>
+                                 </div>                                    
+                                                                                             
+                                       <div class="row" style="margin-top:10px;">
+                                        <div class="col-sm-2 control-label">
+                                            <label class="control-label" for="first-name" style="color: #242627;">
+                                            PO Date <span class="required star">*</span>
+                                        </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                              @Html.TextBoxFor(model => model.po_date, String.Format("{0:dd-MMMM-yyyy}", Model.po_date), new { @class = "search-input validate[required] form-control" })
+                                          <i class="fa fa-calendar"></i>
+                                       </div>
+                                        <div class="col-sm-2 control-label">
+                                        <label class="control-label" for="first-name" style="color: #242627;">
+                                            Date Invoice <span class="required star">*</span>
+                                        </label>
+                                        </div>
+                                        <div class="col-sm-4">                                        
+                                         @Html.TextBoxFor(model => model.date_invoice, String.Format("{0:dd-MMMM-yyyy}", Model.date_invoice), new { @class = "search-input validate[required]  form-control fa fa-calendar" })
+                                              <i class="fa fa-calendar"></i>
+                                        </div>                                        
+                                 </div>
+                              </div>
+                               
+
+
+          <div class="container">
+                    <div class="row">
+
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#po_date').datepicker();
+                            });
+                        </script>
+                        <script type="text/javascript">
+                            $(function () {
+                                $('#date_invoice').datepicker();
+                            });
+                        </script>
+                    </div>
+                </div>
+     <div id="dv_DirectorName">
+        <table id="tblDirector_Name" class="table">
+            <thead title="Directors Details">
+                <tr>
+                    <th>Item Name</th>
+                    <th>Add Details</th>
+                     <th>Item Count</th>
+                    <th>Bought Price</th>                  
+                    <th>CGSTTax%</th>
+                    <th>CGST Amount</th>
+                    <th>IGST Tax%</th>  
+                    <th>IGST Amount</th>                                                      
+                    <th>SGST Tax%</th>
+                    <th>SGST Tax Amount</th>
+                    <th>Tax Paid</th>
+                     <th>Total Amount</th>
+                 
+					 <th>
+                        <input type="button" class="btn btn-sm btn-warning" onclick="AddNewrowDirectors()" value="Add" style="margin-top: 10px;" />
+                    </th>
+                    <th hidden="hidden">
+                           @Html.DropDownListFor(m => m.tbl_inventory_id, Model.ddlInventoryList, "All", new { @class = "chosen-select  text-input form-control tbl_inventory_id" })
+                       </th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.id > 0)
+                {
+                    foreach (var item in Model.ddlPurchaseDetailsviewmodel)
+                    {
+                        <tr>
+                             <td style="width:128px;">
+                                    <input type='text' value="@item.tbl_inventory_id" hidden="hidden" />
+                                    @if (item.tbl_inventory_id > 0)
+                                    {
+                                        Model.tbl_inventory_id = Convert.ToInt16(item.tbl_inventory_id);
+                                        @Html.DropDownListFor(m => m.tbl_inventory_id, Model.ddlInventoryList, new { @class = "chosen-select  text-input form-control" })
+                                    }
+                                </td>
+                             <td>
+                                    <div class='col-lg-3'>
+                                         <input type="button" class="btn btn-sm btn-warning" id="btn_@item.tbl_inventory_id" onclick="AddItemPOPUP(this.tbl_inventory_id);" value="Add" style="margin-top: 10px;width:30px;" />
+                                    </div>
+                              </td>
+                             
+                           <td><input type='text' value="@item.item_count" class="validate[required] text-input form-control" /> </td>
+
+                            <td><input type='text' value="@item.base_amount" class="validate[required], text-input form-control" /></td>
+                                                  
+                            <td><input type='text' value="@item.cgst_tax" class="validate[required] text-input form-control" onblur="OnSelect(this)"  /></td>
+
+                            <td><input type='text' value="@item.CGST_amount" class="validate[required] text-input form-control" onblur="OnSelect(this)"  /></td>
+
+                            <td><input type='text' value="@item.igst_tax" class="validate[required] text-input form-control" onblur="OnSelect(this)"  /></td>
+
+                            <td><input type='text' value="@item.Igst_amount" class="validate[required] text-input form-control" onblur="OnSelect(this)"  /></td>
+                                                   
+                            <td><input type='text' value="@item.sgst_tax" class="validate[required] text-input form-control" onblur="OnSelect(this)" /></td>
+
+                            <td><input type='text' value="@item.sgst_amount" class="validate[required] text-input form-control" onblur="OnSelect(this)" /></td>
+                              
+                            <td><input type='text' value="@item.tax_paid" class="validate[required] text-input form-control" onblur="OnSelect(this)" /></td>
+
+                            <td><input type='text' value="@item.t_totaltax_amount" class="validate[required] text-input form-control" onblur="OnSelect(this)" /></td>
+                        
+                             <td>
+                                    <div class='col-lg-3'>
+                                        <a class='delete' title='Delete' data-toggle='modal' href='#' onclick='return CountrowDirector($(this));'><i class='glyphicon glyphicon-trash'></i></a>
+                                    </div>
+                              </td>
+                           
+                        </tr>
+                    }
+
+                }
+            </tbody>
+             <tfoot>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                             <td></td>
+                          
+                            <td>Totals</td>
+                            <td>
+                                <input type='text' value="@Model.tax_amount" class="text-input form-control" />
+                            </td>
+                            <td>
+                                <input type='text' value="@Model.invoice_amount" class="text-input form-control" />
+                            </td>
+
+                        </tr>
+                    </tfoot>
+        </table>
+    </div>
+                                     
+                                   
+                                        <div style="width:100%;margin:0 auto; text-align:center;">
+                                          <input type="submit" id="btnsubmit" value="Submit" name="submit" class="btn btn2 btn-primary" onclick="GetPurchaseAttachment(); SavePurchaseAttachment(); SavePurchaseDetails();" />
+                                             @Ajax.ActionLink("Cancel", "ManagePurchase", "Purchase", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "dv_PartialView", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning" })
+                                        </div>
+                                    </div>                             
+                        </div>
+                       </div>
+                    </div>
+                </div>
+                       
+    <div id="myModal4" class="modal fade"  role="dialog">
+            <form id="demo-form4"  class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">              
+                <div class="modal-content" style ="width:800px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical">                            
+                               @* @Html.Hidden("hdn_Item_id")         *@                                                                                                                                                                  
+                                      
+                                                                                                              
+                                      <div class="row">                                        
+                                         <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Batch No<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                            @Html.TextAreaFor(m => m.batch_no, new { @class = "validate[required,maxSize[200]] text-input form-control search-input",id="batchNo", placeholder = " Please Enter Remarks" })
+                                        </div>
+                                 </div>  
+                                      <div class="row">                                        
+                                         <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Serial No<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                            @Html.TextAreaFor(m => m.item_serialNo, new { @class = "validate[required,maxSize[200]] text-input form-control search-input",id="ItemserialNo", placeholder = " Please Enter Remarks" })
+                                        </div>
+                                 </div>                                              
+                             </div>                                                     
+                          </div>                                     
+                      <div class="modal-footer">
+                            <input type="button"  class="btnAdd btn btn-success" value="Save" onclick="SavePopupBatchQuantitydata()" data-dismiss="modal" />                        
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>           
+             </form>
+        </div>
+    
+    <div id="myModal1" class="modal fade"  role="dialog">
+            <form id="demo-form1"  class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">              
+                <div class="modal-content" style ="width:800px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical">                            
+                                @Html.Hidden("hdn_Item_id")                                                                                                                                                                           
+                                       @Html.Hidden("hdn_orderItem_id")                                                                                                                                                                                             
+                             <div id="dv_ItemName">
+                                 <table id="tblItem_Name" class="table">
+                                    <thead title="Item Details">
+                                        <tr>
+                                            <th>Batch No</th>
+                                             <th>Item Quantity</th>                                   
+					                         <th>
+                                                <input type="button" class="btn btn-sm btn-warning" onclick="AddNewrowItem()" value="Add" style="margin-top: 10px;" />
+                                            </th>                   
+                                        </tr>
+                                    </thead>
+                                      <tbody>
+                                            @*@if (Model.id > 0)
+                                            {
+                                                foreach (var item in Model.ddlmodelitemdetails)
+                                                {
+                                                    <tr>                                                        
+                                                       <td><input type='text' value="@item.batch_no" class="validate[required] text-input form-control" /> </td>
+                                                        <td><input type='text' value="@item.item_Quantity" class="validate[required], text-input form-control" /></td>
+                                                                             
+                        
+                                                         <td>
+                                                                <div class='col-lg-3'>
+                                                                    <a class='delete' title='Delete' data-toggle='modal' href='#' onclick='return CountrowItem($(this));'><i class='glyphicon glyphicon-trash'></i></a>
+                                                                </div>
+                                                          </td>
+                           
+                                                    </tr>
+                                                }
+                                            }*@
+                                 </tbody>
+             
+                                  </table>
+                                </div>                                                                                      
+                             </div>                                                     
+                          </div>                                                                         
+                      <div class="modal-footer">
+                            <input type="button"  class="btnAdd btn btn-success" value="Save" onclick="AddUpdateSalesDetailsItem()" data-dismiss="modal" />                        
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            
+                </form>
+        </div>
+    
+    <div id="myModal3" class="modal fade"  role="dialog">
+            <form id="demo-form3"  class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">              
+                <div class="modal-content" style ="width:800px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical">                                                                                                                             
+                                      <div class="row">                                        
+                                         <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Serial No<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                            @Html.TextAreaFor(m => m.item_serialNo, new { @class = "validate[required,maxSize[200]] text-input form-control search-input",id="serialNo", placeholder = " Please Enter Remarks" })
+                                        </div>
+                                 </div>                                              
+                             </div>                                                     
+                          </div>                                     
+                      <div class="modal-footer">
+                          <input type="button" class="btnAdd btn btn-success"  value="Save" onclick="SavePopupdata();"data-dismiss="modal" />                                  
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>           
+             </form>
+        </div>
+    
+    <div id="myModal2" class="modal fade"  role="dialog">
+            <form id="demo-form2"  class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">              
+                <div class="modal-content" style ="width:800px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Add Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical">                            
+                               @* @Html.Hidden("hdn_Item_id")                                                                                                                                                                           
+                                       @Html.Hidden("hdn_Quantity") 
+                                                                     *@                                                                           
+                                      <div class="row">                                        
+                                         <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Quantity<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                            @Html.TextAreaFor(m => m.item_Quantity, new { @class = "validate[required,maxSize[200]] text-input form-control search-input",id="Quantity", placeholder = " Please Enter Remarks" })
+                                        </div>
+                                 </div>                                              
+                             </div>                                                     
+                          </div>                                     
+                      <div class="modal-footer">
+                            <input type="button" class="btnAdd btn btn-success" value="Save" onclick="SavePopupQuantitydata();"data-dismiss="modal"/>                        
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>           
+             </form>
+        </div>
+    
+}
+
+
+@*<div class="col-sm-12">
+    <table id="table_id" class="CorporateRecruitment-data-table table table-striped table-bordered showdivs" cellspacing="0"></table>
+</div>*@

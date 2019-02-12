@@ -1,0 +1,46 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.InventoryDetailsView>
+@{
+   
+  
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+  
+}
+
+<table id="tbl_category" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Bought Price</th>
+             <th>Seller Name</th>
+           
+       
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ToList().Count!= 0)
+        {
+            int i = 0;
+            foreach (var Item in Model)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@Html.DisplayFor(modelitem => Item.bought_price)</td>
+                    <td>@Html.DisplayFor(modelitem => Item.SellerName)</td>
+                   
+                   
+                   
+                </tr>
+
+            }
+
+        }
+    </tbody>
+</table>
+
+
+@*<script>
+    $(function () { $("#tbl_category").DataTable(); });
+</script>*@
+
+

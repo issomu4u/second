@@ -1,0 +1,551 @@
+﻿@{
+    ViewBag.Title = "MySalesDetails";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+  
+}
+<script>
+    function SaleInvoicePrint(item) {
+        var str = item.split("_");
+       var id = str[1];
+      
+        $.ajax({
+            url: '/Seller/Sales/SaleInvoicePrint',
+            datatype: "json",
+            type: "post",
+            contenttype: 'application/json; charset=utf-8',
+            async: true,
+            data: { id: id },
+            //data: "{ \"id\":\"" + id + "\" }",
+            success: function (data) {
+                $("#empList").html(data);
+               
+               // $('#myModal3').show();
+                $('#myModal3').modal({
+                    show: 'false'
+                });
+
+            },
+            error: function (xhr) {
+                alert('error');
+            }
+        });
+       
+    }
+</script>
+<div class="row" ng-app="MyAppseller2" ng-controller="MySalesController">
+      <div data-ng-if="loading" class="loadingdiv"><img src="/Images/ajax-loader.gif" class="ajax-loader" /></div>
+    <div class="">
+          
+            <div class="">
+                <div class="clearfix"></div>
+                <div class="row">                          
+                    <div class="col-md-12 col-sm-12 col-xs-12">                          
+      
+
+        <div class="x_panel">
+            <div class="row">         
+              <h4>My Sales Details</h4>                            
+           </div>
+            
+         <h5>Search Product </h5>
+        <input type="text" ng-model="searchText.item.amazon_order_id" placeholder="Search..." />
+
+            <div class="x_title"></div>
+            <div class="x_content">
+                <div class="form-group">                   
+             <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0" style="margin-top:20px;">
+                    <thead>
+                        <tr>
+                            <th>
+                               S.No
+                            </th>
+                             <th>
+                              Market Place
+                            </th>
+                             <th>
+                              Market Place Order ID
+                            </th>                           
+                            <th>
+                              Customer
+                            </th>                           
+                            <th>
+                                Purchase Date
+                            </th>                                                   
+                             <th>
+                               Payment Method Detail
+                            </th>                                                          
+                             <th>
+                               Bill Amount
+                            </th>                            
+                          
+                             <th>
+                               Order Status
+                            </th>
+                            @* <th>
+                                 Action
+                            </th>*@
+                             @*<th>
+                              Order Details View
+                            </th>
+                            <th>
+                               Customer View
+                            </th>*@
+                            @* <th>
+                               Print Invoice
+                            </th>*@
+
+                        </tr>
+                    </thead>
+                    <tbody>                    
+                         <tr dir-paginate="item in SalesList|filter:searchText.item.amazon_order_id:exactMatch|itemsPerPage:20" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage" pagination-id="salesorder">
+                          <th scope="row">                             
+                               {{ ($index + 1) + (currentPage - 1) *20}}<br /> 
+                                
+                                     <span ng-show="item.showEdit" ng-if="item.itemcount == 0"><img src="~/Images/flag2.jpg" width="30" height="30"/></span>
+                                     <span ng-show="item.showEdit" ng-if="item.itemcount !=0"><img src="~/Images/flag.jpg" width="30" height="30" /></span>
+                            </th>
+                        
+                              <td > 
+                                <img  src="{{item.ImagePath}}" alt="Logo" width="50" height="50" />                                                                                                           
+                              </td>
+
+                               
+                              <td>
+                                  <a href="/Seller/Sales/TabDetails?id={{item.id}}" target="_blank">{{item.amazon_order_id}} </a>                           
+                                  @*{{item.amazon_order_id}}    *@                                                  
+                              </td>
+                           
+                              <td >                               
+                                {{item.BuyerName}} <br />{{item.BuyerEmail}} <br />{{item.ContactNO}}                                                     
+                              </td>
+                         
+                              <td>                               
+                                 {{item.purchase_date.slice(6, -2) | date: 'dd-MM-yyyy'}}                                                                    
+                              </td>
+                             
+                              <td>
+                                {{item.PaymentMethodDetail}}                                                      
+                              </td>  
+                                                             
+                              <td>
+                                {{item.BillAmount}}                                                      
+                              </td> 
+                                                       
+                              <td>
+                                  @*<span ng-show="item.showEdit"> {{item.SalesOrderStatus}} </span>*@ 
+                                  <span ng-show="item.showEdit"> {{item.OrderStatus}} </span>                            
+                                  <select  ng-show="!item.showEdit" style="width:100px;height:30%"  ng-model="item.Statusid" style="width:30%;height:30%"  ng-options="c.id as c.sales_order_status for c in StatusList">
+                                      <option value="">--Select--</option>
+                                  </select>                           
+                                </td>
+                              
+                            @* <td>
+                                 <a class="btn btn-info btn-sm" ng-click="UpdateSalesStatus(item);"  data-toggle="modal" data-target="#myModal4">Update Status</a>    
+                             </td>*@
+                                                                                                                           
+                                                                                                                       
+                              @* <td>
+                                   <p ng-show="item.showEdit"><span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>                                                               
+                                   <p ng-show="!item.showEdit">
+                                   <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                   <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span></p>                                  
+                               </td> *@ 
+
+                            @*  <td>
+                                     <a class="btn btn-info btn-sm" ng-click="BindSalesDetails(item);"  data-toggle="modal" data-target="#myModal">View</a>                             
+                              </td>
+                              <td>
+                                     <a class="btn btn-info btn-sm" ng-click="BindCustomerDetails(item);"  data-toggle="modal" data-target="#myModal1">View</a>                             
+                              </td>*@
+
+                               @*<td data-ng-if="item.order_invoice_status==1">                                   
+                                     <a class="btn btn-info btn-sm" id="btn_{{item.id}}" onclick="SaleInvoicePrint(this.id);">Invoice</a>                                                              
+                              </td>*@
+                        </tr>
+
+                    </tbody>
+                            <tbody>
+                                <tr>
+                                    <td colspan="12" style="text-align:end;color:red;">
+                                         <dir-pagination-controls
+                                            max-size="5"
+                                            direction-links="true"
+                                            boundary-links="true" pagination-id="salesorder">            
+                                      </dir-pagination-controls>
+                                     </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                             
+                                </div>
+
+                                <br />
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>      
+          
+    </div>
+
+
+
+
+
+
+    <div id="myModal" class="modal fade"  role="dialog">
+            <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">
+
+              
+                <div class="modal-content" style="width:1328px;margin-left:-333px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Item Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical"> 
+                            
+                           <div class="x_content">
+                <div class="form-group">                   
+             <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0" style="margin-top:20px;">
+                    <thead>
+                        <tr>
+                             <th>S.No</th>
+                             <th>Product Name</th> 
+                             <th>Asin No</th>                           
+                             <th>SKU No/ItemId</th>                                                                                                                                         
+                             <th>Item Amount</th>                            
+                             <th>Quantity Ordered</th>  
+                             <th>Promotion-Id</th> 
+                             <th>Weight</th>
+                             <th>Dimension</th>                          
+                             <th style="width:90px;">Order Status</th> 
+                             <th>Action</th> 
+                             <th>Print Invoice</th> 
+
+                        </tr>
+                    </thead>
+                    <tbody>                    
+                         <tr dir-paginate="item in SalesDetailList|filter:search|orderBy:'ob_tbl_sales_order_details.product_name'|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage">
+                          <th scope="row">
+                               {{ ($index + 1) + (currentPage - 1) * 5}}                           
+                            
+                            </th>
+                              <td>{{item.ob_tbl_sales_order_details.product_name}}</td> 
+
+                              <td >{{item.ob_tbl_sales_order_details.asin}}</td>
+
+                              <td>{{item.ob_tbl_sales_order_details.sku_no}}<br />/{{item.ob_tbl_sales_order_details.order_item_id}}</td>
+                              <td>{{item.ob_tbl_sales_order_details.item_price_amount}}</td> 
+                                                                                                                               
+                              <td>{{item.ob_tbl_sales_order_details.quantity_ordered}}</td>
+
+                              <td>{{item.ob_tbl_sales_order_details.promotion_ids}}</td> 
+
+                              <td>Item:{{item.ob_tbl_inventory.item_weight}}<br/>/Packed:{{item.ob_tbl_inventory.packed_weight}}</td>
+                              
+                              <td>Item:{{item.ob_tbl_inventory.item_dimension}}<br/>/Packed:{{item.ob_tbl_inventory.packed_dimension}}</td>
+                                                           
+                                                                                                                            
+                             @* <td>{{item.ob_tbl_sales_order_status.sales_order_status}} </td>*@
+                              <td>
+                                  <span ng-show="item.showEdit"> {{item.ob_tbl_sales_order_status.sales_order_status}} </span>                             
+                                  <select  ng-show="!item.showEdit" style="width:102%;height:50%"  ng-model="item.ob_tbl_sales_order_details.n_order_status_id" style="width:30%;height:30%"  ng-options="c.id as c.sales_order_status for c in StatusList">
+                                      <option value="">--Select--</option>
+                                  </select>                           
+                                </td>
+                             @* <td>
+                                 <a class="btn btn-info btn-sm" ng-click="UpdateSalesStatus2(item);"  data-toggle="modal" data-target="#myModal4">Update Status</a>    
+                             </td>*@
+                                     
+                              <td data-ng-if="item.ob_tbl_sales_order_details.n_order_invoice_status==1">                                   
+                                     <a class="btn btn-info btn-sm" id="btn_{{item.id}}" onclick="SaleInvoicePrint(this.id);">Invoice</a>                                                              
+                              </td>
+                            @* <td>
+                                   <p ng-show="item.showEdit"><span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                                    <strong style="color:red;">|| </strong>
+                                   <span ng-show="item.showDelete" ng-click="toggleDeleteEdit(item)" class="glyphicon glyphicon-trash"></span>                               
+                                                  
+                                   <p ng-show="!item.showEdit">
+                                   <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                   <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span></p>
+
+                               </td> *@ 
+                        </tr>
+                    </tbody>                        
+                        </table>
+                             
+                                </div>
+
+                                <br />
+                              
+                            </div>
+                                
+                           
+                        </div>
+
+                      <div class="modal-footer">                                                
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+                </form>
+        </div>
+
+    <div id="myModal1" class="modal fade"  role="dialog">
+            <form id="demo-form4" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">
+
+              
+                <div class="modal-content" style="width:1219px;margin-left:-271px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Customer Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical"> 
+                            
+                           <div class="x_content">
+                <div class="form-group">                   
+             <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0" style="margin-top:20px;">
+                    <thead>
+                        <tr>
+                             <th>
+                                S.No
+                             </th>
+                             <th>
+                                Shipping Name
+                             </th>
+                             <th>
+                                Address-1
+                             </th>  
+                             <th>
+                                Address-2
+                             </th>   
+                             <th>
+                                City
+                             </th>                           
+                             <th>
+                                State
+                             </th> 
+                             <th>
+                                Postal Code
+                             </th>                                                                             
+                             <th>
+                                Country Code
+                             </th>                                                      
+                                                      
+                                                                                     
+
+                        </tr>
+                    </thead>
+                    <tbody>                    
+                         <tr dir-paginate="item in SalesCustomerDetailList|filter:search|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage">
+                          <th scope="row">
+                               {{ ($index + 1) + (currentPage - 1) * 5}}                           
+                            
+                            </th>
+                              <td>
+                                {{item.ob_tbl_customer_details.shipping_Buyer_Name}}                                                      
+                              </td>
+                              <td>                               
+                                 {{item.ob_tbl_customer_details.Address_1}}                                                                    
+                              </td>
+                              <td>                               
+                                 {{item.ob_tbl_customer_details.Address_2}}                                                                    
+                              </td>  
+                              <td >                               
+                                {{item.ob_tbl_customer_details.City}}                                                      
+                              </td>
+                              <td>                            
+                                  {{item.ob_tbl_customer_details.State_Region}}                                                      
+                              </td>
+                              <td>
+                                {{item.ob_tbl_customer_details.Postal_Code}}                                                      
+                              </td>   
+                              <td>
+                                  {{item.ob_tbl_customer_details.Country_Code}}                                                      
+                              </td>                           
+                                                                                                                              
+                                                                                                                             
+                                                        
+                        </tr>
+                    </tbody>                       
+                        </table>
+                             
+                                </div>
+
+                                <br />
+                              
+                            </div>
+                                
+                           
+                        </div>
+
+                      <div class="modal-footer">                                                
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+                </form>
+        </div>
+
+
+    <div id="myModal3" class="modal fade"  role="dialog">
+            <form id="demo-form5" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog" style="margin: 30px 20%;">
+                <div class="modal-content" style ="width:120%;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{Action}} Sales Order Full Details</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div id="empList"></div>
+                     </div>
+                     <div class="modal-footer">
+                            <input type="button" ng-disabled="f1.$invalid" class="btnAdd btn btn-success" value="Save" ng-click="AddPublishItem()" data-dismiss="modal" />                        
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+
+
+                    
+                </div>
+            </div>
+               </form>
+        </div>
+
+    <div id="myModal4" class="modal fade"  role="dialog">
+            <form id="demo-form6" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+            <div class="modal-dialog">
+
+              
+                <div class="modal-content" style ="width:800px;">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{Action}} Update Order Status</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical"> 
+                            
+                                @Html.Hidden("hdn_Item_id")  
+                                     <input type="hidden" name="country" ng-model="hdn_Item_id">                                                                                                         
+                                   
+                                       @Html.Hidden("hdn_orderItem_id") 
+                                   <input type="hidden" name="country" ng-model="hdn_orderItem_id">           
+                      
+                                    <div class="row">
+                                               <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                    Order Status<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                            <select ng-model="n_sale_order_status"  class="form-control" ng-options="c.id as c.sales_order_status for c in StatusList">
+                                               <option value="">-- Select Order Status --</option>
+                                            </select>                                      
+                                             <span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required" >Providing  select Status is mandatory!</span>  
+                                        </div>
+                                           </div>
+
+                                 <div class="row">
+                                               <div class="col-sm-2" >
+                                                 <label for="first-name" style="color: #242627;">
+                                                    Courier Name<span class="required star">*</span>
+                                                 </label>
+                                              </div>
+                                         <div class="col-sm-4">
+                                            <select ng-model="n_courier_id"  class="form-control" ng-options="c.id as c.courier_company_name for c in CourierList">
+                                               <option value="">-- Select Courier Name --</option>
+                                            </select>                                      
+                                             <span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required" >Providing  select Courier Name is mandatory!</span>  
+                                        </div>
+                                           </div>
+
+                                      <div class="row">                                        
+                                         <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">AWB Code<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <input type="text" name="ut_awb_number" ng-model="t_awb_number" maxlength="50" class="form-control"  placeholder=" Please Enter AWB Code" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                          <span class="error" ng-show="(f1.ut_awb_number.$dirty || IsFormSubmitted) && f1.ut_awb_number.$error.required" >Providing AWB Code is mandatory!</span>                                        
+                                      </div>                            
+                                    </div>
+
+                                     <div class="row">                                        
+                                         <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Remarks<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                         
+                                          <textarea type="text" name="ut_Remarks" ng-model="t_Remarks" maxlength="50" class="form-control"  placeholder=" Please Enter Remarks" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus></textarea>
+                                          <span class="error" ng-show="(f1.ut_Remarks.$dirty || IsFormSubmitted) && f1.ut_Remarks.$error.required" >Providing Remarks is mandatory!</span>                                         
+                                      </div>                            
+                                    </div>
+                         
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label for="first-name" style="color: #242627;">Dispatched Date<span class="required star">*</span></label>
+                                        </div>
+                                        <div class="col-sm-4" style="margin-left: 20px;">
+                                            <div class="datepicker"
+                                                 date-format="dd-MM-yyyy"
+                                                  button-prev='<i class="fa fa-arrow-circle-left"></i>'
+                                                  button-next='<i class="fa fa-arrow-circle-right"></i>'>
+                                              <input ng-model="dispatch_date" id="dispatch_date" name="Edispatch_date" date='MM-dd-yyyy' readonly="readonly" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus   type="text" class="angular-datepicker-input form-control"/>
+                                           <span class="error" ng-show="(f1.Edispatch_date.$dirty) && f1.Edispatch_date.$error.required" >Providing dispatch_date is mandatory!</span>
+                                        </div>
+                                        </div>
+                                    </div>
+                                
+                             <div class="row">                                        
+                                         <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Shipping Price<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <input type="text" name="ut_shipping_price" ng-model="t_shipping_price" maxlength="50" class="form-control"  placeholder=" Please Enter Shipping Price" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                          <span class="error" ng-show="(f1.ut_shipping_price.$dirty || IsFormSubmitted) && f1.ut_shipping_price.$error.required" >Providing Shipping Price is mandatory!</span>                                        
+                                      </div>                            
+                                    </div>
+
+                             <div class="row">                                        
+                                         <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Shipping Tax<span class="required star">*</span></label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <input type="text" name="ut_shipping_tax" ng-model="t_shipping_tax" maxlength="50" class="form-control"  placeholder=" Please Enter Shipping Tax" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                          <span class="error" ng-show="(f1.ut_shipping_tax.$dirty || IsFormSubmitted) && f1.ut_shipping_tax.$error.required" >Providing Shipping Tax is mandatory!</span>                                        
+                                      </div>                            
+                                    </div>
+                                
+                           
+                        </div>
+
+                      <div class="modal-footer">
+                            <input type="button" ng-disabled="f1.$invalid" class="btnAdd btn btn-success" value="Save" ng-click="AddUpdateItem()" data-dismiss="modal" />                        
+                            <button type="button"  class="btn btn-default" style="width:70px; padding:5px 0 5px;border:solid 0px;" data-dismiss="modal">Close</button>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+                </form>
+        </div>
+
+</div>
+
+
+
+
+@section scripts{
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/MySalesController.js"></script>
+}

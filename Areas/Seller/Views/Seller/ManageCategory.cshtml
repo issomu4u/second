@@ -1,0 +1,269 @@
+﻿@{
+    ViewBag.Title = "ManageCategory";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+
+<script>    
+    function isNumber(evt) {
+        var iKeyCode = (evt.which) ? evt.which : evt.keyCode
+        if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+            return false;
+        return true;
+    }
+    function Number(evt) {
+        var iKeyCode = (evt.which) ? evt.which : evt.keyCode
+        if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+            return false;
+        return true;
+    }
+    function TaxRate(evt) {
+        var iKeyCode = (evt.which) ? evt.which : evt.keyCode
+        if (iKeyCode != 46 && iKeyCode > 31 && (iKeyCode < 48 || iKeyCode > 57))
+            return false;
+        return true;
+    }
+</script>
+
+
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+<div class="row" data-ng-app="MyAppSeller" ng-controller="ManageCategoryController">
+
+     <div class="grids">
+
+         <div class="form-group" style="margin-top: 10px;">
+                                <div class="col-lg-12" >
+                                   <input type="button" class="btn btn-success" ng-click="AddCategoryPopUp();" value="Add Category" style="margin-top:5px;" data-toggle="modal" data-target="#myModal" />
+                                </div>
+                            </div>
+        <div class="forms-grids">
+            <div class="clearfix"></div>
+            <div class="row" style="margin-top: 30px;">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                S.No
+                            </th>
+                            <th>
+                                Category
+                            </th>
+                            <th>
+                                Tax
+                            </th>
+                            <th>Actions</th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody>
+
+                        <tr dir-paginate="item in Category|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'" current-page="currentPage" pagination-id="itemlist">
+                            <th scope="row">
+                                {{ ($index + 1) + (currentPage - 1) * 5}}
+                            </th>
+
+                            <td>
+                                <span ng-show="item.showEdit">{{item.CategoryName}}</span>
+                                @*<input ng-show="!item.showEdit" type="text" style="width:50%;height:30%" ng-model="item.ob_item_category.category_name">*@
+                            </td>
+
+                            <td>
+                                <span ng-show="item.showEdit">{{item.CategoryTax}}</span>
+                                @*<input ng-show="!item.showEdit" type="text" style="width:50%;height:30%" ng-model="item.ob_m_item_tax.tax_rate">*@
+                            </td>
+                            <td>
+                                <input type="button" class="btn btn-success" ng-click="ViewCategory(item.Id);" value="Edit" style="margin-top:5px;" data-toggle="modal" data-target="#myModalview" />
+                            </td>
+                        </tr>
+                    </tbody>
+
+                    <tbody style="text-align: right;">
+                        <tr>
+                            <td colspan="5" style="text-align: right;">
+                                <dir-pagination-controls max-size="5"
+                                                         direction-links="true"
+                                                         boundary-links="true" pagination-id="itemlist">
+                                </dir-pagination-controls>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div id="myModalview" class="modal fade" role="dialog">
+                <form id="demo-form4" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+                    <div class="modal-dialog">                  
+                        <div class="modal-content" style="width:130%">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title"> Manage Category</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-vertical">
+                                    <div class="form-group">
+                                        @Html.Hidden("hdn_Item_id")  
+                                     <input type="hidden" name="country" ng-model="hdn_Item_id">  
+                                        <div class="row">
+                                            <div class="col-md-1 col-sm-1" style="margin-left: 20px; color: #5bc0de;">
+                                                <label for="first-name" style="color: #242627;">
+                                                    Name<span class="required star">*</span>
+                                                </label>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4" style="margin-left: 20px;">
+                                                <input type="text" class="form-control" name="Ecategory_name" ng-model="category_name" maxlength="64" ng-required="category_name" placeholder="Please Enter Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus />
+
+                                                <span class="error" ng-show="(f1.Ecategory_name.$dirty || IsFormSubmitted) && f1.Ecategory_name.$error.required">Providing  select Market Place is mandatory!</span>
+                                            </div>
+
+                                         <div class="col-md-1 col-sm-1" style="margin-left: 20px; color: #5bc0de;">
+                                            <b>HSN Code</b>
+                                         </div>
+                                      <div class="col-md-4 col-sm-4" style="margin-left: 20px;">
+                                       
+                                        <input type="text" class="form-control" name="hsn_code" ng-model="hsn_code" maxlength="64" ng-class="IsFormSubmitted?'ng-dirty':''" required  />
+                                        <span class="error" ng-show="(f1.hsn_code.$dirty) && f1.hsn_code.$error.required">Providing HSN Code is mandatory!</span>
+                                    </div>
+
+                                        </div>
+                                    </div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>S.No.</th>
+                                                <th>From (Rs.)</th>
+                                                <th>To (Rs.)</th>
+                                                <th>Tax Rate</th>
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody ng-repeat="m in ViewCustomers">
+                                            <tr>
+                                               @* @Html.Hidden("hdn_slab_id")  *@
+                                                 <input type="hidden" name="country" ng-model="m.id" value="{{m.id}}" id="id{{$index}}" disabled /> 
+                                                <td>{{ ($index + 1)}}</td>
+                                                <td><input type="text" value="{{m.from_rs}}" id="txt_from{{$index}}" disabled /></td>
+                                                <td><input type="text" value="{{m.to_rs}}" id="txt_to{{$index}}" disabled /></td>
+                                                <td><input type="text" value="{{m.tax_rate}}" id="txt_taxrate{{$index}}" disabled /></td>
+                                                <td>                                                
+                                                    <i class="fa fa-times-circle fa-lg text-danger"
+                                                       ng-click="ViewRemove($index)"
+                                                       title="Delete" aria-hidden="true"></i>
+                                                    <i class="fa fa-pencil" style="color:green" ng-click="ViewEdit($index)" title="Edit" aria-hidden="true"></i>
+                                                    <i class="glyphicon glyphicon-ok" style="color:black" ng-click="ViewCategoryUpdate($index)" title="Update" aria-hidden="true"></i>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                        <tfoot>
+                                            <tr>
+                                                <td></td>
+                                                <td><input type="text" ng-model="txt_from" value=""onkeypress="javascript:return isNumber(event)"/></td>
+                                                <td><input type="text" ng-model="txt_to" value=""onkeypress="javascript:return Number(event)" /></td>
+                                                <td><input type="text" ng-model="taxrate"value=""onkeypress="javascript:return TaxRate(event)"/></td>
+                                                <td>                                                   
+                                                    <i class="fa fa-plus-circle fa-lg text-success" ng-click="ViewAdd()" title="Add" aria-hidden="true"></i>
+                                                </td>
+                                            </tr>
+                                        </tfoot>
+                                    </table>
+                                    <div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <input type="button" class="btnAdd btn btn-success" value="Save" ng-click="UpdateViewCategoryClick();" data-dismiss="modal" />
+                                    <button type="button" class="btn btn-default" ng-click="clearviewpopup();" data-dismiss="modal">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        <div id="myModal" class="modal fade" role="dialog">
+          <form id="demo-form2" name="CategoryDetailForm" data-parsley-validate class="form-horizontal form-label-left" novalidatename="f1" ng-submit="AddCategoryClick(CategoryDetailForm.$valid)">              
+            <div class="modal-dialog">              
+                <div class="modal-content" style="width:130%">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">{{Action}} Category</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-vertical">
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-1 col-sm-1" style="margin-left: 20px; color: #5bc0de;">
+                                        <label for="first-name" style="color: #242627;">
+                                           Name<span class="required star">*</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4" style="margin-left: 20px;">
+                                        <input type="text" name="category_name" ng-model="category_name" maxlength="50" class="form-control" placeholder=" Please Enter Item Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                        <span class="error" ng-show="(f1.category_name.$dirty || IsFormSubmitted) && f1.category_name.$error.required" >Providing Item Name is mandatory!</span>                                      
+                                    </div>
+                                    <div class="col-md-1 col-sm-1" style="margin-left: 20px; color: #5bc0de;">
+                                        <b>HSN Code</b>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4" style="margin-left: 20px;">
+                                       <input type="text" name="hsn_code" ng-model="hsn_code" maxlength="50" class="form-control" placeholder=" Please Enter HSN CODE" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                        <span class="error" ng-show="(f1.hsn_code.$dirty || IsFormSubmitted) && f1.hsn_code.$error.required" >Providing HSN CODE is mandatory!</span>                                      
+                                    </div>
+                                </div>
+                            </div>                           
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>S.No.</th>
+                                        <th>From (Rs.)</th>
+                                        <th>To (Rs.)</th>
+                                        <th>Tax Rate</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody ng-repeat="m in Customers">
+                                    <tr>
+                                        <td>{{ ($index + 1)}}</td>
+                                        <td><input type="text" value="{{m.from_rs}}" id="txt_from{{$index}}" disabled  /></td>
+                                        <td><input type="text" value="{{m.to_rs}}"id="txt_to{{$index}}" disabled /></td>
+                                        <td><input type="text" value="{{m.tax_rate}}" id="txt_taxrate{{$index}}" disabled /></td>
+                                        <td>                                          
+                                            <i class="fa fa-times-circle fa-lg text-danger"
+                                               ng-click="Remove($index)" 
+                                               title="Delete" aria-hidden="true"></i>
+                                            <i class="fa fa-pencil" style="color:green" ng-click="Edit($index)" title="Edit"aria-hidden="true"></i>
+                                            <i class="glyphicon glyphicon-ok" style="color:black" ng-click="CategoryUpdate($index)" title="Update" aria-hidden="true"></i>  
+
+                                        </td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td></td>
+                                        <td><input type="text" ng-model="txt_from" id="tbNumbers" value=""onkeypress="javascript:return isNumber(event)" /></td>
+                                        <td><input type="text" ng-model="txt_to" id="Numbers" value=""onkeypress="javascript:return Number(event)" /></td>
+                                        <td><input type="text" ng-model="taxrate" id="taxrate" value=""onkeypress="javascript:return TaxRate(event)"/></td>
+                                        <td>                                      
+                                            <i class="fa fa-plus-circle fa-lg text-success" ng-click="Add()" title="Add" aria-hidden="true"></i>                                           
+                                        </td>
+                                    </tr>
+                                </tfoot>
+                            </table>                            
+                            <div>
+                          </div>
+                        </div>
+                         <div class="modal-footer">
+                           @* <input type="button"  class="btnAdd btn btn-success" value="Save" ng-click="AddCategoryClick();" data-dismiss="modal" />*@
+                              <button type="submit" class="btn btn-primary">Save</button>
+                            <button type="button"  class="btn btn-default"ng-click="ClearData();" data-dismiss="modal">Close</button>
+                        </div>                  
+                    </div>
+                </div>
+            </div>
+         </form>
+       </div>            
+   </div>
+ </div>
+</div>
+
+    @section scripts{        
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/ManageCategoryController.js"></script>
+  }

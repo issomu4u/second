@@ -1,0 +1,50 @@
+﻿@model  IEnumerable<SellerVendor.Models.m_item_category>
+
+@*@{
+    ViewBag.Title = "CategoryDetails";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+
+
+<table id="tbl_category" class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>S.No</th>
+            <th>Name</th>
+            <th>Tax Rate</th>
+           
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model.ToList().Count!= 0)
+        {
+            int i = 0;
+            foreach (var Item in Model)
+            {
+                i++;
+                <tr>
+                    <td>@i</td>
+                    <td>@Html.DisplayFor(modelitem => Item.category_name)</td>
+                    <td>@Html.DisplayFor(modelitem => Item.tax_rate)</td>
+                   
+                    <td>
+                        <a href="#" id="Edit_@Item.id" class="edit btn btn-small btn-success"><i class="btn-icon-only icon-pencil"></i></a>
+                        <a href="#" id="Update_@Item.id" style="display:none" class="update btn btn-small btn-success"><i class="btn-icon-only icon-ok"></i></a>
+
+                        
+                        <a href="#" id="btn_@Item.id" class="delete btn btn-danger btn-small" onclick="DeleteCategory(this);"><i class="btn-icon-only icon-remove"> </i></a>
+                        <a href="~/Category/AddSubCategory/@Item.id" id="View_@Item.id" class="update btn btn-small btn-success"><i class="btn-icon-only icon-sitemap"></i></a>
+                        @*@Html.ActionLink("", "Delete_Category", "Administration", new { id = Item.ew_m_Category_Details.ID }, new { onclick = "return confirm('Are you sure you want to Delete it?')", @class = "btn btn-small btn-success btn-icon-only icon-remove" })*@
+                    </td>
+                </tr>
+
+            }
+
+        }
+    </tbody>
+</table>
+<script>
+    $(function () { $("#tbl_category").DataTable(); });
+</script>

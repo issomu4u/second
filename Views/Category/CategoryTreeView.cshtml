@@ -1,0 +1,50 @@
+﻿@model SellerVendor.Controllers.categoryTreeView
+<script src="~/Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        alert();
+
+    });
+    </script>
+ <div class="row" style="margin:0px; margin-top:15px;">
+                                <div class="col-lg-12">
+
+                                    @foreach (var item in Model.list_parent_category)
+                                    {
+                                        <ul id="tree">
+                                            <li>
+                                                <div>
+                                                    <img alt="" class="expand" src="~/NewCSS/images/Minus.png" />
+                                                    <img alt="" class="collapse" src="~/NewCSS/images/Plus.png" />
+                                                   
+                                                   @* <label for="">@item.category_name</label>  *@
+                                                    <a href="#" id="View_@item.id" style="color:Red;"><b>@item.category_name</b></a>
+                                                </div>
+                                                <div>
+                                                      <ul style="padding-left:30px;">
+                                                      @foreach (var getSubCategory in item.list_sub_category)
+                                                             {
+                                                                  @Html.Partial("SubCategory", getSubCategory)
+                                                              }
+                                                          <li>
+                                                            @if (ViewBag.CategoryId != null)
+                                                            {
+                                                                <a href="#" id="add_@item.id" class="add_node">Add Node</a>
+                                                            }
+                                                        </li>
+                                                          </ul>
+                                                 @* <ul style="padding-left:30px;">
+                                                        <li>
+                                                            @if (ViewBag.CategoryId != null)
+                                                            {
+                                                                <a href="#" id="View_@ViewBag.CategoryId" class="add_node">Add Node</a>
+                                                            }
+                                                        </li>
+                                                    </ul>*@
+                                                </div>
+                                            </li>
+                                        </ul>
+                                    }
+                                       <ul ><li><a href="~/Category/Index" id="add_0" class="add_node">Add Node</a></li></ul>
+                                </div>
+                            </div>

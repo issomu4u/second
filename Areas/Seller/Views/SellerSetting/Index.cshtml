@@ -1,0 +1,935 @@
+﻿@model SellerVendor.Areas.Seller.Models.model_tbl_seller_setting
+
+@{
+    ViewBag.Title = "Invoice Settings";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+    int k = 0;
+  
+}
+
+<script src="~/Areas/Seller/SellerScripts/jquery-1.7.1.min.js"></script>
+<script src="~/Areas/Seller/SellerScripts/Cat/naresh.js"></script>
+<link href="~/Areas/Seller/NewCSS/css/Cat/jquery.alerts.css" rel="stylesheet" />
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+<script src="~/Areas/Seller/TabCss/jquery-ui.js"></script>
+<script src="~/Areas/Seller/TabCss/jquery-1.10.2.js"></script>
+
+
+<script>
+        $(function () {
+            $("#countrytabs").tabs();
+        });
+    </script>
+
+<script>
+    function yesnoCheck() {
+        debugger;
+        var finaceyear = $('#t_financial_year').val();
+        //alert(finaceyear);
+        if (document.getElementById('yesCheck').checked) {
+            $('#financialyear').val(finaceyear);
+            $("#n_financial_status").val(1);
+        }
+        else {
+            $('#financialyear').val('');
+            $("#n_financial_status").val(2);
+        }
+    }
+
+
+    function GetState(input) {
+        //alert("text")
+        if ($(input).val() != " ") {
+            $.getJSON("/SellerSetting/GetStateList/", { n_CountryId: $(input).val() }, function (data) {
+                $('#n_StateId').empty();
+                $.each(data, function (i, item) {
+                    debugger;
+                    $('#n_StateId').append($('<option/>', {
+                        value: item.Value,
+                        text: item.Text
+
+                    }));
+                });
+                $('#n_StateId option:first').before('<option value=" ">--Select State--</option>');
+                $('#n_StateId').val($('#n_StateId' + "option:contains('Select')").val());
+                $('#n_StateId')[0].attr('selected', 'selected');
+                //  $('#n_StateId option:selected').val(" ");
+            })
+        }
+        else {
+            $('#n_StateId').html('<option value=" ">--Select--</option>');
+        }
+    }
+</script>
+
+<script>
+    function check_pass() {
+        debugger;
+        if (document.getElementById('inputPassword').value == document.getElementById('t_ConfirmPassword').value) {
+            document.getElementById('btnsubmit').disabled = false;
+            bootbox.alert("Match");
+        }
+        else {
+            document.getElementById('btnsubmit').disabled = true;
+        }
+    }
+</script>
+
+<script>
+    function PostGuidNo() {
+        var ret = true;
+        var guid = $("#txt_guid").val();
+        var accounting_sft_id = $("#ddl_tally").val();
+        if (guid == '') {
+            $("#txt_guid").css({ 'border': '1px solid red' });
+            $("#txt_guid").focus();
+            ret = false;
+        } else
+            $("#txt_guid").removeAttr('style');
+        if (ret)
+            Post(guid, accounting_sft_id);
+        else
+            return ret;
+        function Post(guid, accounting_sft_id) {
+            $.ajax({
+                type: "POST",
+                url: "/SellerSetting/SaveGuidNumber",
+                dataType: "json",
+                data: {
+                    txt_guid: guid, ddl_tally: accounting_sft_id
+                },
+                success: function (result) {
+                    $('#msgg').text(result);
+                    Guidclearform();
+                },
+                error: function (result) {
+                    alert('error');
+                }
+            });
+        }
+    }
+    function Guidclearform() {
+        $("#txt_guid").val('');
+        //$("#ddl_tally").val('');
+    }
+
+    function Postseminar() {
+        //alert("abcd");
+        var sellerid = $("#sellerid").val();
+        var oldpassword = $("#t_oldPassword").val();
+        var newpassword = $("#t_NewPassword").val();
+        var confirmpassword = $("#t_ConfirmPassword").val();
+        $.ajax({
+            type: "POST",
+            url: "/SellerSetting/SaveChangePassword",
+            dataType: "json",
+            data: {
+                t_oldPassword: oldpassword, t_NewPassword: newpassword, t_ConfirmPassword: confirmpassword,
+                tbl_seller_id: sellerid
+            },
+            success: function (result) {
+                alert(result);
+                $('#msgg').text(result);
+                clearform();
+            },
+            error: function (result) {
+                alert('error');
+            }
+        });
+    }
+    function clearform() {       
+        $("#t_oldPassword").val() = "";
+        $("#t_NewPassword").val() = "";
+        $("#t_ConfirmPassword").val() = "";
+    }
+</script>
+
+<script>        
+   function phoneno(){          
+      $('#phone').keypress(function(e) {
+         var a = [];
+         var k = e.which;
+         for (i = 48; i < 58; i++)
+               a.push(i);
+           if (!(a.indexOf(k)>=0))
+                e.preventDefault();
+            });
+         }
+    function picocde() {
+       $('#pin').keypress(function (e) {
+          var a = [];
+          var k = e.which;
+          for (i = 48; i < 58; i++)
+                a.push(i);
+           if (!(a.indexOf(k) >= 0))
+                e.preventDefault();
+           });
+        }
+</script>
+
+ <div class="row" data-ng-app="MyAppSeller" ng-controller="SellerMarketPlaceController">
+    <div id="countrytabs">             
+        <ul>  
+            <li><a href="#countrytabs-1">My Market Place</a></li>                  
+            <li><a href="#countrytabs-2">Invoice/Vouchers</a></li>
+            <li><a href="#countrytabs-3">My Account</a></li>
+            <li><a href="#countrytabs-4">Change Password</a></li>
+            <li><a href="#countrytabs-5"> Account Software Settings</a></li>
+            <li><a href="#countrytabs-6">My Profile</a></li>
+        </ul>
+
+        <div id="countrytabs-1" style="height:800px;">                
+           <div class="col-md-12 col-sm-12 col-xs-12">
+               <div class="x_panel">
+                   <div class="x_title">
+                      <h2 style="color: #D52E56;text-align:center;margin-right:120px;">Add MarketPlace Details </h2>
+                      <div class="clearfix"></div>
+                   </div>
+                   <div class="x_content">
+                           <br />
+                       <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1" ng-submit="SaveSellerMarketPlace()">                                
+                           <div class="row">                                   
+                              <div class="col-sm-3" >
+                                 <label for="first-name" style="color: #242627;">
+                                      Select Market Place<span class="required star">*</span>
+                                 </label>
+                              </div>
+                              <div class="col-sm-3">
+                                 <select ng-model="m_marketplace_id" name="selected_id" class="form-control" ng-options="c.id as c.name for c in MarketPlaceList" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                     <option value="">-- Select --</option>
+                                 </select>
+                                 @* <span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required" >Providing  select Market Place is mandatory!</span>  *@                                          
+                              </div>
+                              <div class="col-sm-2">
+                                 <label for="chkPassport" style="color: #242627;">
+                                      Enable API<span class="required star">*</span>
+                                 </label>                                             
+                              </div>
+                              <div class="col-sm-3">
+                                    Yes <input type="radio" name="Passport" ng-click="ShowPassport('Y')" />
+                                    No <input type="radio" name="Passport" checked="checked" ng-click="ShowPassport('N')" />
+                              </div>                                    
+                           </div>
+                                    
+                           <div ng-show="IsVisible">
+                            @* <div class="row" style="margin-top:10px;">
+                                <div class="col-sm-2">
+                                   <label  for="first-name" style="color: #242627;">
+                                       Login Name
+                                   </label>
+                                </div>
+                                <div class="col-sm-4">
+                                      <input type="text" name="ut_loginName" ng-model="t_loginName" maxlength="50" class="form-control" placeholder=" Please Enter Login Name">                                    
+                                </div>
+
+                                <div class="col-sm-2" >
+                                   <label for="first-name" style="color: #242627;"> Password </label>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" name="ut_password" ng-model="t_password" maxlength="50" class="form-control" placeholder=" Please Enter Your Password">                                     
+                                </div>                                                                    
+                             </div>*@
+
+                             <div class="row"  style="margin-top:10px;">
+                                 <div class="col-sm-2">
+                                     <label  for="first-name" style="color: #242627;">Access Key ID</label>
+                                 </div>
+                                 <div class="col-sm-4">
+                                     <input type="text" name="ut_access_Key_id" ng-model="t_access_Key_id" maxlength="50" class="form-control" placeholder="Please Enter Access Key ID">                                          
+                                 </div>
+
+                                 <div class="col-sm-2">
+                                    <label for="first-name" style="color: #242627;">Secret Key</label>
+                                 </div>
+                                 <div class="col-sm-4">
+                                     <input type="text" name="ut_secret_Key" ng-model="t_secret_Key" maxlength="50" class="form-control" placeholder="Please Enter Your Secret Key">                                        
+                                 </div>                                                                    
+                             </div>
+
+                             <div class="row"  style="margin-top:10px;">
+                                @* <div class="col-sm-2">
+                                    <label  for="first-name" style="color: #242627;"> Auth. Token </label>
+                                 </div>
+                                 <div class="col-sm-4">
+                                     <input type="text" name="ut_auth_token" ng-model="t_auth_token" maxlength="50" class="form-control" placeholder=" Please Enter Auth. Token">                                     
+                                 </div>  *@  
+                                 
+                                 <div class="col-sm-2">
+                                        <label for="first-name" style="color: #242627;">
+                                            My Seller Id
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <input type="text" name="umy_unique_id" ng-model="my_unique_id" maxlength="50" class="form-control" placeholder="Please Enter Your Unique ID" />                                  
+                                    </div>
+                                                                      
+                                 <div class="col-sm-2">
+                                     <label  for="first-name" style="color: #242627;">Seller MarketPlace-Id</label>
+                                 </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="umarket_palce_id" ng-model="market_palce_id" maxlength="50" class="form-control" placeholder=" Please Enter Market Palce Id">                                      
+                                        </div>                                                                                                                                         
+                                    </div>
+
+                               <div class="row" style="margin-top:10px;">
+                                                                 
+                                   <div class="col-sm-2">
+                                       <label for="first-name" style="color: #242627;">Seller GSTIN-No</label>
+                                   </div>
+                                   <div class="col-sm-4">
+                                       <input type="text" name="uGSTN_No" ng-model="GSTN_No" maxlength="20" class="form-control" placeholder="Please Enter GSTIN-No">
+                                   </div>
+                               </div>
+
+                                    @*<div class="row"  style="margin-top:10px;">
+                                      <div class="col-sm-2">
+                                        <label  for="first-name" style="color: #242627;"> Auth. Token </label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                         <input type="text" name="ut_auth_token" ng-model="t_auth_token" maxlength="50" class="form-control" placeholder=" Please Enter Auth. Token">                                     
+                                      </div>
+                                    </div>*@
+                            </div>
+                                    
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group" style="margin-top:15px;">
+                                        <div class="col-md-6 col-sm-6 col-md-offset-3">
+                                            <button type="submit" class="btn btn-success">Add</button>
+                                            <button class="btn btn-primary" type="reset">Reset</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        
+                      <div class="x_panel" style="margin-top:20px;">
+                      
+                          <h3 style="color: #242627;margin-left: 20px;">Seller Market Detail</h3>
+                          <div class="x_title"></div>
+                           <div class="x_content">
+                            
+                                <div class="form-group" style="margin-top:10px;">
+                                    <div class="col-md-6 col-sm-6" style="color: #D59B2E;margin-left: 15px;">
+                                        Search by <input type="text" class="control-labe" placeholder="name" ng-model="search" />                                    
+                                    </div>
+                                </div>
+
+                                <br />
+                           
+                                 <div class="row" style="margin-top:30px;overflow: auto;">
+                                  <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                 <th>
+                                                   Channel Name
+                                                </th>                                                 
+                                                <th>
+                                                    Seller Id
+                                                </th>                                               
+                                                 <th>
+                                                    Secret Key
+                                                </th>  
+                                                 <th>
+                                                    Access Key
+                                                </th>  
+                                                 <th>
+                                                    Market Place Id
+                                                </th>  
+                                                <th>
+                                                    GSTN-No
+                                                </th>                                                                                                                                                                              
+                                                <th>
+                                                
+                                                </th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                       
+                                           <tr dir-paginate="item in SellerMarketList|filter:search|orderBy:'ob_tbl_sellermarketplace.t_loginName'|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage">
+                                                <th scope="row">
+                                                   {{ ($index + 1) + (currentPage - 1) * 10}}
+                                                </th>
+                                                 <td>
+                                                       <img  src="{{item.ImagePath}}" alt="Logo" width="50" height="50" />
+                                                </td>
+                                                                                                        
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.my_unique_id}} </span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.my_unique_id">
+                                                </td>                                               
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.t_secret_Key}}</span>                                                   
+                                                     <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.t_secret_Key">
+                                                </td>
+
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.t_access_Key_id}}</span>                                                   
+                                                     <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.t_access_Key_id">
+                                                </td> 
+
+                                               <td>
+                                                    <span ng-show="item.showEdit">{{item.market_palce_id}}</span>                                                   
+                                                     <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.market_palce_id">
+                                                </td> 
+                                               
+                                               <td>
+                                                   <span ng-show="item.showEdit">{{item.GSTN_No}}</span>
+                                                   <input ng-show="!item.showEdit" type="text" style="width:114%;height:30%" ng-model="item.GSTN_No">
+                                               </td>  
+                                                                                         
+                                                <td>
+                                                <p ng-show="item.showEdit"><span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                                                    <strong style="color:red;">|| </strong>
+                                                <span ng-show="item.showDelete" ng-click="toggleDeleteEdit(item)" class="glyphicon glyphicon-trash"></span></p>
+
+                                                <p ng-show="!item.showEdit">
+                                                <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                                <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span></p>                                         
+                                           </td>  
+                                            </tr>
+
+                                        </tbody>
+
+                                        <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+
+                                  </div>
+                           
+                            </div>
+
+                       </div>
+
+
+                    </div>
+               
+       
+        </div>
+
+        <div id="countrytabs-2" style="height:800px;">         
+    <div class="row ">
+        <div class="col-lg-6 col-sm-6">
+            <div class="div-box">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-sm-12">
+                        <a style="font-size: 20px; margin-left: 30px;"><b>Invoice Number</b></a>
+                    </div>
+                </div>
+                <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                <div class="row" style="margin: 0">
+                    @using (Html.BeginForm("SaveUpdateSellerSetting", "SellerSetting", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        @Html.HiddenFor(m => m.id)
+                        @Html.HiddenFor(m => m.t_financial_year)
+                        @Html.HiddenFor(m => m.n_financial_status)
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-4">
+                                    <label>
+                                        Prefix Code<span class="required star">*</span>
+                                    </label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    @Html.TextBoxFor(m => m.t_seller_prefix_code, new { @class = "validate[required,maxSize[200]] text-input search-input", placeholder = " Please Enter Invoice No" })
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-lg-4 ">
+                                    <label>
+                                        @Html.Label("Financial Year") @*<span class="required star">*</span>*@
+                                    </label>
+                                </div>
+                                <div class="col-lg-8">
+                                    <input type="radio" onclick="javascript: yesnoCheck();" name="yesno" id="yesCheck" value="1"> Current Year 
+                                    <input type="radio" onclick="javascript: yesnoCheck();" name="yesno" id="noCheck" value="2"> Financial Year 
+                                    @Html.TextBoxFor(m => m.financialyear, new { @style = "height:30px;display:none;" })
+                                </div>
+                                    
+                                
+                            </div>
+                            
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-4">
+                                    <label>
+                                        Invoice Running No <span class="required star">*</span>
+                                    </label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    @Html.TextBoxFor(m => m.invoice_current_running_no, new { @class = "validate[required,maxSize[200]] text-input search-input", placeholder = " Please Enter Invoice No" })
+                                </div>
+
+                            </div>
+                            <div class="row text-center" style="margin-top: 0px;">
+                                <input type="submit" id="btnsubmit" value="Save" name="submit1" class="btn btn2 btn-primary" />
+                                @Ajax.ActionLink("Cancel", "Index", "SellerSetting", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "dv_PartialView", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning" })
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-6">
+            <div class="div-box">
+                <div class="row" style="margin-top: 15px;">
+                    <div class="col-sm-12">
+                        <a style="font-size: 20px; margin-left: 30px;"><b>Settlement Voucher</b></a>
+                    </div>
+                </div>
+                <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                <div class="row" style="margin: 0">
+                    @using (Html.BeginForm("SettlementVoucher", "SellerSetting", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                    {
+                        <div class="col-md-12 col-sm-12 col-xs-12">
+                            <div class="row" style="margin-top: 10px;">
+                                <div class="col-sm-4">
+                                    <label>
+                                        Prefix <span class="required star">*</span>
+                                    </label>
+                                </div>
+
+                                <div class="col-lg-4">
+                                    @Html.TextBoxFor(m => m.sett_prefix_code, new { @class = "validate[required,maxSize[200]] text-input search-input", placeholder = " Please Enter No" })
+                                </div>
+
+                            </div>
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="col-sm-4 ">
+                                    <label>
+                                        Running No <span class="required star">*</span>
+                                    </label>
+                                </div>
+                                <div class="col-sm-4">
+                                    @Html.TextBoxFor(m => m.sett_current_running_no, new { @class = "text-input search-input", placeholder = " Please Enter No" })
+                                </div>
+                            </div>
+                                
+                            <div class="row text-center" style="margin-top: 40px;">
+                                <input type="submit" id="btnsubmit" value="Save" name="submit1" class="btn btn2 btn-primary" />
+                                @Ajax.ActionLink("Cancel", "UploadSettlementExcel", "Sales", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "dv_PartialView", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning" })
+                            </div>
+
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <div class="row ">
+                <div class="col-lg-6 col-sm-6">
+                    <div class="div-box">
+                        <div class="row" style="margin-top:15px;">
+                            <div class="col-sm-12">
+                                <a style="font-size: 20px; margin-left: 30px;"><b>Sales Voucher</b></a>
+                            </div>
+                        </div>
+                        <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                        <div class="row" style="margin: 0">
+                            @using (Html.BeginForm("SalesVoucher", "SellerSetting", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-sm-4">
+                                            <label>
+                                                Prefix <span class="required star">*</span>
+                                            </label>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            @Html.TextBoxFor(m => m.sales_prefix_code, new { @class = "validate[required,maxSize[200]] text-input search-input", placeholder = " Please Enter No" })
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-4 ">
+                                            <label>
+                                                Running No <span class="required star">*</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(m => m.sales_current_running_no, new { @class = "validate[required,maxSize[200]] text-input search-input", placeholder = " Please Enter No" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row text-center" style="margin-top: 40px;">
+                                        <input type="submit" id="btnsubmit" value="Save" name="submit1" class="btn btn2 btn-primary" />
+                                        @Ajax.ActionLink("Cancel", "UploadSettlementExcel", "Sales", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "dv_PartialView", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning" })
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-sm-6">
+                    <div class="div-box">
+                        <div class="row" style="margin-top: 15px;">
+                            <div class="col-sm-12">
+                                <a style="font-size: 20px; margin-left: 30px;"><b>Return Voucher</b></a>
+                            </div>
+                        </div>
+                        <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+                        <div class="row" style="margin:0">
+                            @using (Html.BeginForm("ReturnVoucher", "SellerSetting", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                            {
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <div class="row" style="margin-top: 10px;">
+                                        <div class="col-sm-4">
+                                            <label>
+                                                Prefix <span class="required star">*</span>
+                                            </label>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            @Html.TextBoxFor(m => m.return_prefix_code, new { @class = "validate[required,maxSize[200]] text-input search-input", placeholder = " Please Enter No" })
+                                        </div>
+
+                                    </div>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <div class="col-sm-4 ">
+                                            <label>
+                                                Running No <span class="required star">*</span>
+                                            </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            @Html.TextBoxFor(m => m.return_current_running_no, new { @class = "validate[required,maxSize[200]] text-input search-input", placeholder = " Please Enter No" })
+                                        </div>
+                                    </div>
+
+                                    <div class="row text-center" style="margin-top: 40px;">
+                                        <input type="submit" id="btnsubmit" value="Save" name="submit1" class="btn btn2 btn-primary" />
+                                        @Ajax.ActionLink("Cancel", "UploadSettlementExcel", "Sales", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "dv_PartialView", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning" })
+                                    </div>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+@*<div style="margin-top:50px;">
+    <div class="widget widget-table action-table">         
+      @*  <div class="widget-content">
+            @{Html.RenderAction("SellerSettingDetails", "SellerSetting");}         
+       </div>
+    </div>
+</div>*@
+ </div>
+
+       
+        <div id="countrytabs-3" style="height:800px;"> 
+            <div class="x_panel" style="margin-top:20px;">               
+                <div class="x_content">                 
+                    <br />
+                    <div class="row">
+                        <div class="span12" style="width:97%;">
+                            <div class="widget widget-table action-table">
+                                <div class="widget-header">
+                                    <i class="icon-th-list"></i>
+                                    <h3>Seller Payment</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <div class="form-group">
+                                        <table id="tbl-user" class="table table-bordered">
+                                            <thead>
+                                              <tr>
+                                                <th>S.No</th>
+                                                <th>Description</th>
+                                                <th>Amount </th>
+                                                <th>Date</th>                                                  
+                                              </tr>
+                                            </thead>
+                                            <tbody>
+                                              <tr>
+                                               <td>1.</td>
+                                               <td>@Model.description</td>
+                                               <td>@Model.amount_added</td>
+                                               <td>@Model.date_of_creation</td>                                        
+                                              </tr>   
+                                            </tbody>
+                                        </table>                                       
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                   
+                    </div>
+                 </div>                
+              </div>
+           </div>
+   
+
+      <div id="countrytabs-4" style="height:800px;">
+
+           @Html.HiddenFor(m => m.id) 
+           @Html.HiddenFor(m => m.tbl_seller_id,new {@id = "sellerid"}) 
+            <label style="color:red" id="msgg"></label>
+            <div class="row">
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">                                                                   
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <br />            
+                  <div>                                                                  
+                           <div class="row" style="margin-top:10px;margin-left: 350px;">
+                           <div class="col-sm-4 control-label">
+                           <label class="control-label" for="first-name" style="color: #242627;">
+                                             Old Password <span class="required star">*</span>
+                                         </label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                            @Html.TextBox("t_oldPassword","", new { @class = "validate[required,maxSize[200]] text-input search-input", placeholder = " Please Enter Old Password" })
+                                      </div>                                     
+                                 </div>
+                              </div>
+                              <div>                                                                  
+                                   <div class="row" style="margin-top:10px;margin-left: 350px;">
+                                      <div class="col-sm-4 control-label">
+                                         <label class="control-label" for="first-name" style="color: #242627;">
+                                           New Password <span class="required star">*</span>
+                                         </label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                             @Html.TextBox("t_NewPassword","", new { @class = "validate[equals[StringOldPassword]] text-input search-input"})
+                                      </div>
+                                    
+                                 </div>                                                                         
+                              </div>                    
+                   
+                              <div>                                                                  
+                                   <div class="row" style="margin-top:10px;margin-left: 350px;">
+                                      <div class="col-sm-4 control-label">
+                                         <label class="control-label" for="first-name" style="color: #242627;">
+                                            Confirm Password <span class="required star">*</span>
+                                         </label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                           @Html.TextBox("t_ConfirmPassword","", new { @class = "validate[required,equals[inputPassword]] text-input search-input"})
+                                      </div>                                     
+                                 </div>
+                              </div>
+
+                   
+                   <div style="width:100%;margin-top:40px; text-align:center;margin-left: -85px;">
+                                <input id="btnsubmit1" type="submit" onclick="Postseminar()" name="submit"  value="Submit" tabindex="4" class="btn btn2 btn-primary" />
+                                <input id="btnCancel" type="button" value="Clear" class="btn btn-success" />
+                            </div>
+            </div>
+        </div>
+    </div>
+    </div>
+      
+     </div>
+
+        <div id="countrytabs-5" style="height:800px;">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="x_panel">
+                        <div class="x_title">
+                            
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="x_content">
+                            <br />
+                            <div>
+                                <div class="row" style="margin-top:10px;margin-left: 394px;">
+                                    <div class="col-sm-3 control-label">
+                                        <label class="control-label" for="first-name" style="color: #242627;">
+                                            GUID <span class="required star">*</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @Html.TextBox("txt_guid", "", new { @class = "validate[required,maxSize[200]] text-input search-input", placeholder = " Please Enter guid" })
+                                    </div>
+                                </div>
+                                <div class="row" style="margin-top:10px;margin-left: 394px;">
+                                    <div class="col-sm-3 control-label">
+                                        <label class="control-label" for="first-name" style="color: #242627;">
+                                            Select <span class="required star">*</span>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        @{var listItems = new List<System.Web.UI.WebControls.ListItem>
+                                            {
+                                                 //new System.Web.UI.WebControls.ListItem { Text = "--Select--", Value="0" },
+                                                  new System.Web.UI.WebControls.ListItem { Text = "Tally", Value="1" },
+                                            };
+                                        }
+                                        @Html.DropDownList("ddl_tally", new SelectList(listItems, "Value", "Text"), new { @class = "form-control" })
+                                    </div>
+                                </div>
+                            </div>
+                            <div style="width:100%;margin-top:40px; text-align:center;margin-left: -85px;">
+                                <input id="btnsubmit1" type="submit" onclick="PostGuidNo()" name="submit" value="Save" tabindex="5" class="btn btn2 btn-primary" />
+                                <input id="btnCancel" type="button" value="Clear" class="btn btn-success" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+ <div id="countrytabs-6">
+@*@using (Html.BeginForm("UpdateProfile", "SellerSetting", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    *@
+     <form id="demo-form5" name="DetailForm" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1" ng-submit="UpdateUserProfile(DetailForm.$valid)">
+     <div class="col-lg-12">
+        @Html.Hidden("hdn_Userid")
+         <input type="hidden" name="country" ng-model="hdn_Userid"> 
+            <div class="col-lg-6">
+                <div class="well">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-lg-6" for="first-name" style="color: black;margin-top:20px;">
+                                Business Name <span class="required"></span>
+                            </label>
+                            <div class="col-lg-4" style="margin-top:20px">
+                                <input type="text" name="uBusiness_name" ng-model="Business_name" maxlength="50" class="text-input search-input" placeholder=" Please Enter Business Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                <span class="error" ng-show="(f1.uBusiness_name.$dirty || IsFormSubmitted) && f1.uBusiness_name.$error.required" >Providing Business Name is mandatory!</span>
+                            </div>
+                        </div>                      
+
+                        <div class="form-group">
+                            <label class="col-lg-6" for="last-name" style="color: black;margin-top:20px;">
+                                Mobile No <span class="required"></span>
+                            </label>
+                            <div class="col-lg-4" style="margin-top:20px">
+                                 <input type="text" name="uMobile" ng-model="Mobile" class="text-input search-input" placeholder=" Please Enter Phone No" id="phone" name="phone" onkeypress="phoneno()" maxlength="10" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>  
+                                <span class="error" ng-show="(f1.uMobile.$dirty || IsFormSubmitted) && f1.uMobile.$error.required" >Providing Phone No is mandatory!</span>                           
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-6" for="first-name" style="color: black;margin-top:20px;">
+                                Contact Person <span class="required"></span>
+                            </label>
+                            <div class="col-lg-4" style="margin-top:20px">
+                                 <input type="text" name="uContact_person" ng-model="Contact_person" maxlength="50" class="text-input search-input" placeholder=" Please Enter Contact Person" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus> 
+                                <span class="error" ng-show="(f1.uContact_person.$dirty || IsFormSubmitted) && f1.uContact_person.$error.required" >Providing Contact Person is mandatory!</span> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-6" for="first-name" style="color: black;margin-top:20px;">
+                                PAN No <span class="required"></span>
+                            </label>
+                            <div class="col-lg-4" style="margin-top:20px">
+                                 <input type="text" name="uPan" ng-model="Pan" maxlength="50" class="text-input search-input" placeholder=" Please Enter Pan No" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus> 
+                                <span class="error" ng-show="(f1.uPan.$dirty || IsFormSubmitted) && f1.uPan.$error.required" >Providing Pan No is mandatory!</span> 
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-lg-6" for="first-name" style="color: black; margin-top:20px;">
+                                GSTIN <span class="required"></span>
+                            </label>
+                            <div class="col-lg-4" style="margin-top:20px">
+                                 <input type="text" name="uGSTIN" ng-model="GSTIN" maxlength="50" class="text-input search-input" placeholder=" Please Enter GSTIN NO" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                <span class="error" ng-show="(f1.uGSTIN.$dirty || IsFormSubmitted) && f1.uGSTIN.$error.required" >Providing GSTIN NO is mandatory!</span> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="well">
+                <div class="row">                                      
+                    <div class="form-group">
+                        <label class="col-lg-6" for="first-name" style="color: black;margin-top:20px;">
+                            Address <span class="required"></span>
+                        </label>
+                        <div class="col-lg-4" style="margin-top:20px">
+                             <input type="text" name="uAddress" ng-model="Address" maxlength="50" class="text-input search-input" placeholder=" Please Enter Your Address" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>   
+                            <span class="error" ng-show="(f1.uAddress.$dirty || IsFormSubmitted) && f1.uAddress.$error.required" >Providing Address is mandatory!</span>                      
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-6 " for="first-name" style="color: black;margin-top:20px;">
+                            Country <span class="required"></span>
+                        </label>
+                        <div class="col-lg-4" style="margin-top:20px">
+                             <select ng-model="Country" name="selected_id" class="form-control" ng-options="c.id as c.countryname for c in CountryList" ng-change="GetState(Country)" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                  <option value="">-- Select Country --</option>
+                              </select>
+                             @*<span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required">Providing  select Country is mandatory!</span> *@                        
+                        </div>
+
+                        <label class="col-lg-6" for="first-name" style="color: black;margin-top:20px;">
+                            City <span class="required"></span>
+                        </label>
+                        <div class="col-lg-4" style="margin-top:20px">
+                             <input type="text" name="uCity" ng-model="City" maxlength="50" class="text-input search-input" placeholder=" Please Enter Your City" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus> 
+                            <span class="error" ng-show="(f1.uCity.$dirty || IsFormSubmitted) && f1.uCity.$error.required" >Providing City is mandatory!</span>                           
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-lg-6" for="first-name" style="color: black;margin-top:20px;">
+                            State <span class="required"></span>
+                        </label>
+                        <div class="col-lg-4" style="margin-top:20px">
+                            <select ng-model="stateid" name="selected_id" class="form-control" ng-options="c.id as c.countryname for c in statelist">
+                               <option value="">--Select State --</option>
+                            </select>                             
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-6" for="first-name" style="color: black;margin-top:20px;">
+                            PinCode <span class="required"></span>
+                        </label>
+                        <div class="col-lg-4" style="margin-top:20px">
+                             <input type="text" name="uPincode" ng-model="Pincode" maxlength="6" class="text-input search-input" placeholder=" Please Enter Pin code" id="pin" name="pin" onkeypress="picocde()" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>   
+                            <span class="error" ng-show="(f1.uPincode.$dirty || IsFormSubmitted) && f1.uPincode.$error.required" >Providing Pin Code is mandatory!</span>                       
+                        </div>
+                    </div>
+                    
+                </div>
+
+            </div>
+
+        </div>
+        
+    </div>
+
+     <div class="row text-center">
+        <input type="submit" id="btnsubmit" value="Update" name="submit1" class="btn btn2 btn-primary" />     
+    </div>
+  </form>
+@*}*@
+ </div>
+ </div>
+
+</div>
+
+@section scripts{        
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/SellerMarketPlaceController.js"></script>
+  }
+
+
+
+
+

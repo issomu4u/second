@@ -1,0 +1,181 @@
+﻿@model  SellerVendor.Areas.Seller.Models.OrderInvoiceprint
+@{
+    ViewBag.Title = "OrderInvoicePrint";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+ }
+
+ 
+<body   id="dv_Print_Sales">
+<div class="container" style="max-width:676px;">
+    <div class="row">
+        <div class="col-xs-12">
+			<div class="col-xs-6">    	
+			<h2><img src="~/NewCSS/images/am.jpg"> </h2>
+			</div>
+			
+			<div class="col-xs-6">
+			<h5 style="float:right"> Tax Invoice / Bill of Supply / Cash Memo <br/> (Triplicate For Supplier )</h5><!--<h3 class="pull-right">Order # 12345</h3>-->
+    		</div>
+		</div>
+	</div>	
+    		<hr>
+    		<div class="row">
+    			<div class="col-xs-6">
+    				<address>
+    				<strong>Sold By :</strong><br>
+    					@Model.business_name<br>
+    					@Model.address<br>
+    					@Model.city<br>
+    					@Model.statename,@Model.pincode<br>
+                        @Model.countryname
+					</address>
+    			</div>
+				
+    			<div class="col-xs-6 text-right">
+    				<address>
+        			<strong>Billing Address :</strong><br>
+    					@Model.shipping_Buyer_Name<br>
+    					@Model.Address_1<br>
+    					@Model.Address_2<br>
+    					@Model.State_Region,@Model.Postal_Code<br>
+                        @Model.Country_Code
+    				</address>
+    			</div>
+    		</div>
+			
+			
+			<div class="row"> 
+				<div class="col-xs-6">
+    				<address style="margin-bottom:0px !important;">
+    				<strong>PAN Number :</strong> @Model.pan
+    				</address>
+					<address>
+    				<strong>GST Registration No. :</strong>	@Model.gstin
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right">
+    				<address>
+        			<strong>Shipping Address :</strong><br>
+    					@Model.shipping_Buyer_Name<br>
+                        @Model.shipping_Buyer_Name<br>
+    					@Model.Address_1<br>
+    					@Model.Address_2<br>
+    					@Model.State_Region,@Model.Postal_Code<br>
+                        @Model.Country_Code
+    				</address>
+    			</div>
+    		</div>
+			
+			
+			
+			<div class="row"> 
+				<div class="col-xs-6">
+    				<address style="margin-bottom:0px !important;">
+    				<strong>Order Number :</strong> @Model.amazon_order_id
+    				</address>
+					<address>
+    				<strong>Order Date :</strong>@Model.purchase_date
+    				</address>
+    			</div>
+    			<div class="col-xs-6 text-right">
+    				<address style="margin-bottom:0px !important;">
+    				<strong>Invoice Number :</strong> ORD/789-12/IN
+    				</address>
+					<address style="margin-bottom:0px !important;">
+    				<strong>Invoice Details :</strong>14.09.2017
+    				</address>
+					<address>
+    				<strong>Invoice Date :</strong>@Model.purchase_date
+    				</address>
+    			</div>
+    		</div>
+    	</div>
+
+    
+    <div class="row" style="margin:0px !important;">
+    	<div class="col-md-12">
+    		<div class="panel panel-default">    			
+    				<div class="table-responsive" style="max-width:1299px;">
+    					<table class="table table-condensed">
+    						<thead>
+                                <tr style="background-color:#ccc;">
+        							<td><strong>SERIAL NO</strong></td>
+									<td class="text-center"><strong>Description</strong></td>
+									<td class="text-center"><strong>Unit Price</strong></td>                             
+									<td class="text-center"><strong>Quantity</strong></td>
+        							<td class="text-center"><strong>Net Amount</strong></td>
+        							<td class="text-center"><strong>Tax Rate</strong></td>
+									<td class="text-center"><strong>Tax Type</strong></td>
+        							<td class="text-center"><strong>Tax Amt</strong></td>
+        							<td class="text-right"><strong>Total</strong></td>
+                                </tr>
+    						</thead>
+    						<tbody style="font-size: 13px">
+    							<!-- foreach ($order->lineItems as $line) or some such thing here -->
+                                 @if (Model.id > 0)
+                                 {
+                                      int i = 0;
+                                      foreach (var item in Model.ddlsaleorderdetailList)
+                                      {
+                                           i++;
+                                            <tr>
+                                                <td>@i.</td>
+                                                <td class="text-center"><label>@item.product_name</label></td>
+                                                <td class="text-center"><label>@Model.Unitprice</label></td>                                           
+                                                <td class="text-center"><label>@item.quantity_ordered</label></td>
+
+                                                <td class="text-center"><label>@Model.Unitprice</label>
+                                                @if(item.i_cgst != null && item.i_sgst != null)
+                                                {
+                                                <td class="text-center"><label>@item.i_cgst%</label><br><label>@item.i_sgst%</label></td>
+                                                <td class="text-center"><label>CGST</label><br /><label>SGST</label></td>
+                                                <td class="text-center"><label>@Model.taxprice</label><br /><label> @Model.taxprice</label></td>
+                                               }
+                                                else
+                                                {
+                                                    if(item.i_igst != null)
+                                                    {
+                                                         <td class="text-center"><label>@item.i_igst%</label></td>
+                                                         <td class="text-center"><label>IGST</label></td>
+                                                         <td class="text-center"><label>@Model.price</label></td>
+                                                    }
+                                                }
+                                                <td class="text-center"><label>@item.item_price_amount</label>                           
+                                                </td>
+                                       </tr>    							                              
+    							<tr>
+								    <td class="thick-line"><strong>Total:</strong></td>
+    								<td class="thick-line"></td>
+    								<td class="thick-line"></td>
+									<td class="thick-line"></td>
+    								<td class="thick-line"></td>
+									<td class="thick-line"></td>
+    								<td class="thick-line"></td>                              
+    								<td class="thick-line text-center">@Model.price</td>
+    								<td class="thick-line text-right"><strong>@item.item_price_amount </strong></td>
+    							</tr> 
+                                           
+                                      }
+                                 }  							
+    						</tbody>
+							
+							<tbody style="font-size: 13px">
+								<tr style="border-bottom:1px solid #ccc">
+									<td><strong> Amount In Words:</strong></td>								
+                                     <td><strong>@Model.AmountWords</strong></td>
+								</tr>
+							</tbody>
+    					</table>
+						
+						<div style="border-top:1px solid #ccc; width:100%;">
+						<div class="col-md-12">
+						<p style="float:right; margin-top:10px;"><b> For MySource Innoventures Pvt Ltd </b></p><br/> <br/><br/>
+						<p style="float:right;"><b>Authorised Signatory </b></p>
+						</div>
+						</div>
+    				</div>    			
+    		</div>
+    	</div>
+    </div>
+
+</body>

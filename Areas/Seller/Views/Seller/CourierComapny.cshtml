@@ -1,0 +1,133 @@
+﻿
+@{
+    ViewBag.Title = "CourierComapny";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+<div class="row" data-ng-app="MyAppSeller" ng-controller="CourierNameController">
+        	<div class="grids">
+              <div class="forms-grids">
+                <div class="clearfix"></div>
+                 <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="x_panel">
+                            <div class="x_title">
+                                <h2 style="color: #D52E56;text-align:center;margin-right:120px;">My Courier Partners </h2>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="x_content">
+                                <br />
+                                <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1" ng-submit="SaveCourier()">
+
+                                 
+                                    <div class="row">
+                                     <div class="col-sm-2" >
+                                        <label for="first-name" style="color: #242627;">
+                                            Courier Company<span class="required star">*</span>
+                                        </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="ucourier_company_name" ng-model="courier_company_name" maxlength="50" class="form-control" placeholder=" Please Enter Courier Comapny Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                            <span class="error" ng-show="(f1.ucourier_company_name.$dirty || IsFormSubmitted) && f1.ucourier_company_name.$error.required" >Providing Courier Company Name is mandatory!</span>                                                                                    
+                                        </div>
+                               
+                                    </div>
+
+                                    <div class="ln_solid"></div>
+                                    <div class="form-group" style="margin-top:15px;">
+                                        <div class="col-md-6 col-sm-6 col-md-offset-3">
+                                            <button type="submit" class="btn btn-success">Add</button>
+                                            <button class="btn btn-primary" type="reset">Reset</button>
+                                        </div>
+                                    </div>
+
+                                </form>
+                            </div>
+                        </div>
+                        
+                      <div class="x_panel" style="margin-top:20px;">
+                      
+                          <h3 style="color: #242627;margin-left: 20px;">Courier Partner Detail</h3>
+                          <div class="x_title"></div>
+                           <div class="x_content">
+                            
+                                <div class="form-group" style="margin-top:10px;">
+                                    <div class="col-md-6 col-sm-6" style="color: #D59B2E;margin-left: 15px;">
+                                        Search by <input type="text" class="control-labe" placeholder="name" ng-model="search" />                                    
+                                    </div>
+                                </div>
+
+                                <br />
+                           
+                                 <div class="row" style="margin-top:30px;">
+                               <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                 <th>
+                                                   Courier Name
+                                                </th> 
+                                                                                                                                                                                    
+                                                <th></th>
+
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                       
+                                           <tr dir-paginate="item in CourierCompanyList|filter:search|orderBy:'ob_tbl_courier_comapny.courier_company_name'|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage">
+                                                <th scope="row">
+                                                   {{ ($index + 1) + (currentPage - 1) * 10}}
+                                                </th>                                                                                                            
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_tbl_courier_comapny.courier_company_name}} </span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.ob_tbl_courier_comapny.courier_company_name">
+                                                </td>
+                                                <td>
+                                                <p ng-show="item.showEdit"><span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                                                    <strong style="color:red;">|| </strong>
+                                                <span ng-show="item.showDelete" ng-click="toggleDeleteEdit(item)" class="glyphicon glyphicon-trash"></span></p>
+
+                                                <p ng-show="!item.showEdit">
+                                                <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                                <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span></p>                                         
+                                           </td>  
+                                            </tr>
+
+                                        </tbody>
+
+                                        <tbody style="text-align:right;">
+                                            <tr>
+                                                <td colspan="5" style="text-align:right;">
+                                                    <dir-pagination-controls max-size="5"
+                                                                             direction-links="true"
+                                                                             boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                                                    </dir-pagination-controls>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+
+                                    </table>
+</div>
+                           
+                            </div>
+
+                       </div>
+
+
+                    </div>
+                </div>
+             </div>
+	       </div>
+      
+       
+</div>
+
+
+@section scripts{        
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/CourierNameController.js"></script>
+  }
+
+
+

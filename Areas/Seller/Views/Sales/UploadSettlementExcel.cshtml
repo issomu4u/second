@@ -1,0 +1,192 @@
+﻿@{
+    ViewBag.Title = "Browse & Upload File";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+  
+}
+<script src="~/Areas/Seller/SellerScripts/jquery-1.7.1.min.js"></script>
+    <script src="~/Areas/Seller/SellerScripts/Cat/naresh.js"></script>
+    <link href="~/Areas/Seller/NewCSS/css/Cat/jquery.alerts.css" rel="stylesheet" />
+<script type="text/javascript" language="javascript">
+    
+    $("#tab_administration").addClass("active");
+    $("#searchReset").live("click", function () {
+      
+        $("#ddl_marketplace").val(0);
+        $("#checked").val(1);
+    });
+</script>
+@if (ViewData["Message"] != null)
+{
+    <script>jAlert('@ViewData["Message"]')</script>
+}
+<div class="row ">
+    <div class="col-lg-6 col-sm-6">
+        <div class="div-box">
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-sm-12">
+                    <a style="font-size: 20px; margin-left: 30px;"><b>Upload Order Report</b></a>
+                </div>
+
+            </div>
+            <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+            <div class="row" style="margin: 0px;">
+                @using (Html.BeginForm("UploadOrderExcel", "Sales", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-sm-4">
+                                <label>
+                                    Select Market Place <span class="required star">*</span>
+                                </label>
+                            </div>
+                             <div class="col-lg-4">
+                                    @Html.DropDownList("ddl_marketplace", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })
+                              </div> 
+                        </div>
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-sm-4 ">
+                                <label>
+                                    Select File <span class="required star">*</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="file" name="postedFile" />
+                            </div>
+                        </div>
+                        <div class="row text-center" style="margin-top: 40px;">
+                            <input type="submit" id="btnsubmit" value="Submit" name="submit1" class="btn btn2 btn-primary" />
+                            @Ajax.ActionLink("Cancel", "UploadSettlementExcel", "Sales", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "dv_PartialView", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning" })
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+        </div>
+
+    </div>
+    <div class="col-lg-6 col-sm-6">
+        <div class="div-box">
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-sm-12">
+                    <a style="font-size: 20px; margin-left: 30px;"><b>Upload Tax Report</b></a>
+                </div>
+            </div>
+            <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+            <div class="row" style="margin: 0">
+                @using (Html.BeginForm("UploadTaxExcel", "Sales", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-sm-4">
+                                <label>
+                                    Select Market Place <span class="required star">*</span>
+                                </label>
+                            </div>
+                          
+                                  <div class="col-lg-4">
+                                    @Html.DropDownList("ddl_marketplace", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })
+                                </div> 
+                            
+                        </div>
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-sm-4 ">
+                                <label>
+                                    Select File <span class="required star">*</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="file" name="postedFile" />
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 20px;">
+                            <div class="col-sm-4 ">
+                                <label>
+                                   Create Order(If not found)
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.CheckBox("checked")                            
+                            </div>
+                        </div>
+                        <div class="row text-center" style="margin-top: 0px;">
+                            <input type="submit" id="btnsubmit" value="Submit" name="submit1" class="btn btn2 btn-primary" />
+                            @Ajax.ActionLink("Cancel", "UploadSettlementExcel", "Sales", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "dv_PartialView", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning" })
+                        </div>
+
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row ">
+    <div class="col-lg-6 col-sm-6">
+        <div class="div-box">
+            <div class="row" style="margin-top: 15px;">
+                <div class="col-sm-12">
+                    <a style="font-size: 20px; margin-left: 30px;"><b>Upload Settlement Report</b></a>
+                </div>
+
+            </div>
+            <hr style="height: 1px; border: 0.5px solid #ccc; margin-top: 10px;">
+            <div class="row" style="margin: 0">
+                @using (Html.BeginForm("UploadSettlementExcel", "Sales", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <label>
+                                    Select Market Place <span class="required star">*</span>
+                                </label>
+                            </div>
+                             <div class="col-lg-4">
+                                    @Html.DropDownList("ddl_marketplace", ViewData["MarKetPlace"] as List<SelectListItem>, new { @class = "form-control" })
+                                </div>  
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-sm-4">
+                                <label>
+                                    Select Type <span class="required star">*</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-6">
+                                @{var listItems = new List<System.Web.UI.WebControls.ListItem>
+                                            {
+                                                  new System.Web.UI.WebControls.ListItem { Text = "Electronic Fund Transfer", Value="1" },
+                                                  new System.Web.UI.WebControls.ListItem { Text = "Cash on Delivery", Value="2" }
+                                            };
+                                }
+                                @Html.DropDownList("ddlFundType", new SelectList(listItems, "Value", "Text"), new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="row" style="margin-top: 10px;">
+                            <div class="col-sm-4">
+                                <label>
+                                    Select File <span class="required star">*</span>
+                                </label>
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="file" name="postedFile" />
+                            </div>
+                        </div>
+                        <div class="row text-center" style="margin-top: 20px;">
+                            <input type="submit" id="btnsubmit" value="Submit" name="submit1" class="btn btn2 btn-primary" />
+                            @Ajax.ActionLink("Cancel", "UploadSettlementExcel", "Sales", new AjaxOptions { HttpMethod = "Get", UpdateTargetId = "dv_PartialView", LoadingElementId = "spinner", InsertionMode = InsertionMode.Replace }, new { @class = "btn btn-warning" })
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+

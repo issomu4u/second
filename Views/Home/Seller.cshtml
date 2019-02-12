@@ -1,0 +1,348 @@
+﻿@{
+    ViewBag.Title = "Seller";
+    Layout = "~/Views/Shared/seller_layout.cshtml";
+}
+<div class="agile-grids" data-ng-app="MyApp" ng-controller="SellerController">
+
+    <div class="grids">
+        <div class="progressbar-heading grids-heading">
+            <h4></h4>
+
+            <div class="forms">
+                <div class="form-grids widget-shadow" data-example-id="basic-forms">
+                    <br />
+                    <form id="demo-form2" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1" ng-submit="SaveSellerDetails()">                     
+                        <div class="col-lg-6">
+                            <div class="well">
+                             <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name" style="color: black;">
+                                        Type Seller <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select ng-model="t_seller_typeid" name="selected_id" class="form-control" ng-options="c.id as c.t_seller_type for c in TypeSeller">
+                                            <option value="">-- Select Type Seller --</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                              <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name" style="color: black;">
+                                        Business Name <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="ubusiness_name" ng-model="business_name" maxlength="50" class="form-control" placeholder="Please Enter Business Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                        <span class="error" ng-show="(f1.ubusiness_name.$dirty || IsFormSubmitted) && f1.ubusiness_name.$error.required">Providing Business name is mandatory!</span>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name" style="color: black">
+                                        Email Address <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="email" name="uemail" ng-model="email" maxlength="250" class="form-control" placeholder="Please Enter EmailId" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                        <span class="error" ng-show="(f1.uemail.$dirty || IsFormSubmitted) && f1.uemail.$error.email">enter valid email address!</span>
+                                        <span class="error" ng-show="(f1.uemail.$dirty || IsFormSubmitted) && f1.uemail.$error.required">Providing   email address is mandatory!</span>
+                                    </div>
+                                </div>
+                              
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="last-name" style="color: black;">
+                                        Mobile No <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="umobile" ng-model="mobile" ng-trim="false" maxlength="10" class="form-control" placeholder="Please Enter Mobile No:" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                        <span class="error" ng-show="(f1.umobile.$dirty || IsFormSubmitted) && f1.umobile.$error.required">Providing  mobile no is mandatory!</span>
+
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name" style="color: black;">
+                                        Contact Person <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="contact_person" ng-model="contact_person" maxlength="50" class="form-control" placeholder="Please Enter Contact Person">
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="well">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name" style="color: black;">
+                                        Pan No <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="pan" ng-model="pan" maxlength="50" class="form-control" placeholder="Please Enter Pan No">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name" style="color: black;">
+                                        GSTIN <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="gstin" ng-model="gstin" maxlength="50" class="form-control" placeholder="Please Enter GSTIN No">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name" style="color: black;">
+                                        Address <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="uaddress" ng-model="address" maxlength="50" class="form-control" placeholder="Please Enter Address">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-6 " for="first-name" style="color: black">
+                                        Country <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-3 col-sm-3 col-xs-6 col-lg-offset-1">
+                                        <select ng-model="country" name="selected_id" class="form-control" ng-options="c.id as c.countryname for c in CountryList" ng-change="GetState(country)">
+                                            <option value="">--Select Country--</option>
+                                        </select>
+                                    </div>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-8 " for="first-name" style="color: black;">
+                                        City <span class="required"></span>
+                                        
+                                    </label>
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                        <input type="text" name="city" ng-model="city" maxlength="50" class="form-control" placeholder="Please Enter City Name">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-md-3 col-sm-3 col-xs-6" for="first-name" style="color: black;">
+                                        State <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-3 col-sm-3 col-xs-6 col-lg-offset-1">
+                                        <select ng-model="state" name="selected_id" class="form-control" ng-options="c.id as c.countryname for c in stateList" >
+                                            <option value="">--Select State--</option>
+                                        </select>
+                                    </div>
+                                    <label class="control-label col-md-1 col-sm-1 col-xs-8" for="first-name" style="color: black;">
+                                        PinCode <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-3 col-sm-3 col-xs-6">
+                                        <input type="text" name="pincode" ng-model="pincode" maxlength="50" class="form-control" placeholder="Please Enter Pincode">
+                                    </div>
+                                </div>
+
+   
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="well">
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name" style="color: black;">
+                                        DB Name <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select ng-model="db_name" name="selected_id" class="form-control" ng-options="c.id as c.database_name for c in SellerDatabseName">
+                                            <option value="">-- Select Database Name --</option>
+                                        </select>
+                                    </div>
+                                </div> 
+
+                                <div class="form-group">
+                                    <label for="middle-name" class="control-label col-md-4 col-sm-4 col-xs-12" style="color: black;">Reward Credit</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="wallet_balance" ng-model="wallet_balance" ng-trim="false" maxlength="50" class="form-control" placeholder="Please Enter Amount">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="middle-name" class="control-label col-md-4 col-sm-4 col-xs-12" style="color: black;">Applied Plan Rate</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="applied_plan_rate" ng-model="applied_plan_rate" ng-trim="false" maxlength="50" class="form-control" placeholder="Please Enter Applied Plan rate">                                    
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="middle-name" class="control-label col-md-4 col-sm-4 col-xs-12" style="color: black;">Seller Type</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select ng-model="tbl_type_id" name="selected_id" class="form-control" ng-options="c.id as c.t_type for c in SellerType">
+                                            <option value="">--Select Seller Type--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="well">
+                                <div class="form-group">
+                                    <label for="middle-name" class="control-label col-md-4 col-sm-4 col-xs-12" style="color: black;">Source Of Joining Id</label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <select ng-model="m_source_of_joining_id" name="selected_id" class="form-control" ng-options="c.id as c.source for c in SourceJoiningList">
+                                            <option value="">--Select Soucre of joining--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-md-4 col-sm-4 col-xs-12" for="first-name" style="color: black;">
+                                        Referred By <span class="required"></span>
+                                    </label>
+                                    <div class="col-md-6 col-sm-6 col-xs-12">
+                                        <input type="text" name="referred_by" ng-model="referred_by" maxlength="50" class="form-control" placeholder="Please Enter Refference Name">                                 
+                                    </div>
+                                </div>                              
+                            </div>
+                        </div>
+                        <div class="ln_solid"></div>
+                        <div class="row" style="text-align:center">
+                            <div class="form-group">
+                                <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                    <button type="submit" class="btn btn-success">Add</button>
+                                    <button class="btn btn-primary" type="reset">Reset</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+
+          
+       <h2>&nbsp;</h2>
+            <div class="forms">
+                <div class="form-grids widget-shadow" data-example-id="basic-forms">
+                    <div class="well">
+                        <h2 style="color: black">Seller Details</h2>
+                        <div class="x_title"></div>
+                        <div class="x_content">
+
+                            <div class="form-group" style="margin-top:10px;">
+                                <div class="col-md-6 col-sm-6 col-xs-12" style="color: #D59B2E;">
+                                    Search by : <input type="text" class="control-labe" placeholder="name" ng-model="searchText.ob_tbl_sellers.business_name" />
+                                    Exact Match : <input class="control-label" type="checkbox" ng-model="exactMatch" />
+                                </div>
+                            </div>
+                            <br />
+                            <div class="agile-tables">
+                                <div class="w3l-table-info">
+                                    <table class="table table-hover" style="margin-top:30px;">
+                                        <thead>
+                                            <tr>
+                                                <th>
+                                                    S.No
+                                                </th>
+                                                <th>
+                                                    Name
+                                                </th>
+                                                <th>
+                                                    Email id
+                                                </th>
+                                                <th>
+                                                    Password
+                                                </th>
+                                                <th>
+                                                    Mobile No.
+                                                </th>
+
+                                                <th>
+                                                    Address
+                                                </th>
+
+                                                <th>
+                                                    Contact Person
+                                                </th>
+                                                <th>
+                                                    Status
+                                                </th>
+                                                <th>
+                                               Action
+                                                </th>
+                                                
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+
+                                            <tr dir-paginate="item in SellerList|filter:searchText.ob_tbl_sellers.business_name:exactMatch|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'" current-page="currentPage">
+                                                <th scope="row">
+                                                    {{ ($index + 1) + (currentPage - 1) * 5}}
+                                                </th>
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_tbl_sellers.business_name}} </span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.ob_tbl_sellers.business_name">
+                                                </td>
+
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_tbl_sellers.email}}</span>
+                                                    <input ng-show="!item.showEdit" type="email" style="width:80%;height:30%" ng-model="item.ob_tbl_sellers.email">
+                                                </td>
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_tbl_sellers.db_pwd}}</span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.ob_tbl_sellers.db_pwd">
+
+                                                </td>
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_tbl_sellers.mobile}}</span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.ob_tbl_sellers.mobile">
+                                                </td>
+
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_tbl_sellers.address}}</span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.ob_tbl_sellers.address">
+                                                </td>
+                                                @* <td>
+                                                        <span ng-show="item.showEdit">{{item.ob_tbl_sellers.address}}</span>
+                                                        <span ng-show="!item.showEdit">{{item.ob_tbl_sellers.address}}</span>
+                                                    </td>*@
+                                                <td>
+                                                    <span ng-show="item.showEdit">{{item.ob_tbl_sellers.contact_person}}</span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.ob_tbl_sellers.contact_person">
+                                                </td>
+                                                @* <td>
+                                                         <span ng-show="item.showEdit">{{item.ob_member_details.date_of_creation.slice(6, -2) | date: 'dd-MM-yyyy'}}</span>
+                                                         <span ng-show="!item.showEdit">{{item.ob_member_details.date_of_creation.slice(6, -2) | date: 'dd-MM-yyyy'}}</span>
+                                                    </td>*@
+                                                <td>
+                                                    <span ng-show="item.showEdit" ng-if="item.ob_tbl_sellers.isactive == 1">Active</span>
+                                                    <span ng-show="item.showEdit" ng-if="item.ob_tbl_sellers.isactive ==0">Deactive</span>
+                                                    <input ng-show="!item.showEdit" type="text" style="width:80%;height:30%" ng-model="item.ob">
+                                                </td>
+
+                                                <td>
+                                                    <p ng-show="item.showEdit">
+                                                        <span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                                                        <strong style="color:red;">|| </strong>
+                                                        <span ng-show="item.showDelete" ng-click="toggleDeleteEdit(item)" class="glyphicon glyphicon-trash"></span>
+                                                    </p>
+
+                                                    <p ng-show="!item.showEdit">
+                                                        <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                                        <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span>
+                                                    </p>
+                                                </td>
+                                            </tr>
+
+                                        </tbody>  
+                                        
+                                    </table>
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <dir-pagination-controls max-size="5"
+                                                                     direction-links="true"
+                                                                     boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">
+                                            </dir-pagination-controls>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                   </div> 
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section scripts{
+         
+      <script src="~/Scripts/Angular/Controller/SellerController.js"></script>
+      <script src="~/Scripts/Datetime/angular-datepicker.js"></script>  
+    }

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<SellerVendor.Areas.Seller.Models.ReimburesementDetail>
+@{
+    ViewBag.Title = "ReimbursementData";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+    }
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <style type="text/css">
+        body {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+
+        table {
+            border: 1px solid #ccc;
+            border-collapse: collapse;
+        }
+
+        table th {
+            background-color: #F7F7F7;
+            color: #333;
+            font-weight: bold;
+        }
+
+        table th, table td {
+            padding: 5px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <table cellpadding="0" cellspacing="0" >
+          <tr>
+              <th>Sr.No</th>
+
+              <th>Approval_date</th>
+              <th>Reimbursement_id</th>
+              <th>Case_id</th>
+              <th>Amazon_order_id</th>
+              <th>Reason</th>
+              <th>Sku</th>
+              <th>FnSku</th>
+              <th>Asin</th>
+              <th>Produc_Name</th>
+              <th>Condition</th>
+              <th>Currency_Unit</th>
+              <th>Amazon_per_unit</th>
+              <th>Amount_Total</th>
+              <th>Quantity_Cash</th>
+             
+           </tr>
+         @if (Model.ToList().Count != 0)
+         {
+             int i =0;
+             foreach (var  customer in Model)
+              {
+                  if (customer.ReimbursementOrderDetails != null)
+                  {
+                      foreach (var item in customer.ReimbursementOrderDetails)
+                      {
+                          i++;
+                           <tr>
+                         <td>@i.</td>
+                         <td>@item.Approval_date</td>
+                         <td>@item.Reimbursement_id</td>
+                         <td>@item.Case_id</td>
+                         <td>@item.Amazon_order_id</td>
+                         <td>@item.Reason</td>
+                         <td>@item.Sku</td>
+                         <td>@item.FnSku</td>
+                         <td>@item.Asin</td>
+                         <td>@item.Produc_Name</td>  
+                         <td>@item.Condition</td>  
+                         <td>@item.Currency_Unit</td>  
+                         <td>@item.Amazon_per_unit</td>  
+                         <td>@item.Amount_Total</td>  
+                         <td>@item.Quantity_Cash</td>  
+                                                     
+                       </tr>
+                      }
+                    }
+            
+           }
+         }
+    </table>
+
+  
+</body>
+</html>

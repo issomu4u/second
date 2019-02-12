@@ -1,0 +1,174 @@
+﻿
+@{ 
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";  
+}
+<script type="text/javascript">
+    $(function () {
+
+        var session_value = @Session["UserName"].ToString()
+            alert(session_value);
+        });
+</script>
+<style type="text/css">
+    .zoomin img {
+        height: 70px;
+        width: 80px;
+        -webkit-transition: all 2s ease;
+        -moz-transition: all 2s ease;
+        -ms-transition: all 2s ease;
+        transition: all 2s ease;
+    }
+
+        .zoomin img:hover {
+            width: 600px !important;
+            height: 600px !important;
+        }
+</style>
+<div class="row" ng-app="MyAppseller2" ng-controller="getInventoryController">
+    <div class="">
+          
+            <div class="">
+                <div class="clearfix"></div>
+                <div class="row">                          
+                    <div class="col-md-12 col-sm-12 col-xs-12">                          
+      
+
+        <div class="x_panel">
+            <div class="row">         
+              <h4>My Inventory Details List</h4> 
+                 <div class="col-md-9 text-right" style="margin-bottom:10px;">
+                        <a href="~/Seller/Seller/MyInventoryList"  class="btn btn-small btn-success text-right">Back To List</a>
+                    </div>                           
+           </div>  
+            
+            <div class="container">
+                    <div class="row">
+                        <div class="col-md-4">
+                           @* <div class="col-sm-4" >
+                                <label for="first-name">Item Name</label>
+                            </div>*@
+                            <div class="col-sm-8">              
+                                <input type="text" name="uitem_name" ng-readonly="true" ng-model="item_name" maxlength="50" class="form-control" placeholder=" Please Enter Item Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>                                                                   
+                            </div>                                        
+                        </div>
+
+                         <div class="col-md-4">
+                            @*<div class="col-sm-4" >
+                                 <label for="first-name">Item Image</label>
+                            </div>*@
+                            <div class="col-sm-8 zoomin">
+                                 <img ng-show="showImages" src="{{item_photo1_path}}" alt="Logo" />                                        
+                                
+                            </div>
+                        </div>
+
+                        
+
+                    </div>
+                  </div>            
+            <div class="x_title"></div>
+            <div class="x_content" style="margin-top:20px;">
+                <div class="form-group">                   
+             @*<table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0" style="margin-top:20px;">*@
+                 <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                               S.No
+                            </th> 
+                             @*<th>Image</th>
+                             <th>Item Name</th>*@
+                             <th>Vendor Name</th>  
+                             <th>Ware House Name</th>                             
+                             <th>Bought Price</th>
+                             <th>Color</th>
+                             <th>Created On </th>
+                             <th>SKU No </th>
+                             <th>Item Status </th>
+                             <th>Item Serial No</th>
+                                        
+                             <th>Action</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>                    
+                         <tr dir-paginate="item in InventoryDetailList|itemsPerPage:5" ng-class-odd="'odd'" ng-class-even="'even'"  current-page="currentPage">
+                          <th scope="row">
+                               {{ ($index + 1) + (currentPage - 1) * 5}}                                                      
+                            </th>                                                                                                                                          
+                           
+                              <td>
+                                  {{item.ob_tbl_seller_vendors.vendor_name}}                              
+                              @* @Session["UserName"].ToString() *@                                                                         
+                            </td>
+                              <td>{{item.ob_tbl_seller_warehouses.warehouse_name}} </td>
+
+                              <td>{{item.ob_tbl_inventory_details.bought_price}} </td>
+
+                              <td>{{item.ob_m_color.color_name}}</td>
+
+                              <td>{{item.ob_tbl_inventory_details.created_on.slice(6, -2) | date: 'dd-MM-yyyy'}}  </td>
+                              <td>{{item.ob_tbl_inventory_details.item_uid}}  </td>
+
+                               <td>
+                                  <span ng-show="item.showEdit"> {{item.ob_m_item_status.status}} </span>                             
+                                  <select  ng-show="!item.showEdit" style="width:80%;height:30%"  ng-model="item.ob_tbl_inventory_details.m_item_status_id" style="width:30%;height:30%"  ng-options="c.id as c.status for c in StatusList">
+                                      <option value="">--Select--</option>
+                                  </select>                           
+                                </td>
+
+                             <td>
+                                  <span ng-show="item.showEdit">{{item.ob_tbl_inventory_details.item_serial_No}} </span>
+                                 <input ng-show="!item.showEdit" type="text" ng-model="item.ob_tbl_inventory_details.item_serial_No">                           
+                            </td>
+                              <td>
+                                   <p ng-show="item.showEdit"><span ng-show="item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                                    <strong style="color:red;">|| </strong>
+                                   <span ng-show="item.showDelete" ng-click="toggleDeleteEdit(item)" class="glyphicon glyphicon-trash"></span>                               
+                                                  
+                                   <p ng-show="!item.showEdit">
+                                   <span ng-show="!item.showEdit" ng-click="toggleEdit(item)" class="glyphicon glyphicon-ok"></span> <strong style="color:red;">|| </strong>
+                                   <span ng-show="!item.CancelEdit" ng-click="toggleCancelEdit(item)" class="glyphicon glyphicon-remove"></span></p>
+
+                               </td>  
+
+                             
+                        </tr>
+
+                    </tbody>
+                            <tbody>
+                                <tr>
+                                    <td colspan="12" style="text-align:end;color:red;">
+                                         <dir-pagination-controls
+                                            max-size="5"
+                                            direction-links="true"
+                                            boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)">            
+                                      </dir-pagination-controls>
+                                     </td>
+                                </tr>
+                            </tbody>
+
+                        </table>
+                             
+                                </div>
+
+                                <br />
+                              
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>            
+    </div>
+</div>
+
+
+
+@section scripts{
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/getInventoryController.js"></script>
+}
+
+
+
+
+

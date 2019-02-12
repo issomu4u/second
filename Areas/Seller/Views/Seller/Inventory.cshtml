@@ -1,0 +1,705 @@
+﻿@{
+    ViewBag.Title = "Inventory";
+    Layout = "~/Areas/Seller/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Areas/Seller/SellerScripts/jquery-1.7.1.min.js"></script>
+<script src="~/Areas/Seller/SellerScripts/Cat/naresh.js"></script>
+<link href="~/Areas/Seller/NewCSS/css/Cat/jquery.alerts.css" rel="stylesheet" />
+<script src="../../Scripts/jquery-1.7.1.min.js" type="text/javascript"></script>
+<link href="~/Areas/Seller/TabCss/jquery-ui.css" rel="stylesheet" />
+<script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.9/angular.min.js"></script>
+<div class="row" data-ng-app="MyAppseller2" ng-controller="InventoryController">
+<div class="grids">
+   <div class="forms-grids">
+      <div class="clearfix"></div>
+         <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+              <div class="x_panel">
+                <div class="x_title">
+                   <h2 style="color: #D52E56;margin-right:120px;">Add Item</h2>
+                   <div class="clearfix"></div>
+                 </div>
+                <div class="x_content">
+                    <br />
+                   <form id="demo-form2" name="InventoryDetailForm" data-parsley-validate class="form-horizontal form-label-left" novalidatename="f1" ng-submit="SaveInventoryDetails(InventoryDetailForm.$valid)"> 
+                         @Html.Hidden("hdn_AddUpdate_id")  
+                         @Html.Hidden("status")  
+                         <input type="hidden" name="country" ng-model="hdn_AddUpdate_id"> 
+                         <input type="hidden" name="country" ng-model="status"> 
+                         <div class="container" style="margin-left: -17px;">                                       
+                             <fieldset>                                 
+                                <div class="well well-lg">
+                                   <div class="row">
+                                      <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">
+                                                Item Name<span class="required star">*</span> 
+                                         </label>
+                                       </div>
+                                      <div class="col-sm-4">
+                                           <input type="text" name="uitem_name" ng-model="item_name" maxlength="50" class="form-control" placeholder=" Please Enter Item Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                           <span class="error" ng-show="(f1.uitem_name.$dirty || IsFormSubmitted) && f1.uitem_name.$error.required" >Providing Item Name is mandatory!</span>
+                                      </div>
+                                      <div class="col-sm-2">
+                                         <label  for="first-name" style="color: #242627;">Item Code</label>
+                                      </div>
+                                      <div class="col-sm-4">
+                                         <input type="text" name="uitem_code" ng-model="item_code" maxlength="50" class="form-control" placeholder=" Please Enter Item Code">
+                                            @*<span class="error" ng-show="(f1.uitem_code.$dirty || IsFormSubmitted) && f1.uitem_code.$error.required" >Providing Item Code is mandatory!</span>*@
+                                      </div>                                     
+                                   </div>
+
+                                                                                 
+                                   <div class="row" style="margin-top:10px;">
+                                       <div class="col-sm-2">
+                                          <label for="first-name" style="color: #242627;">
+                                                Select Category<span class="required star">*</span>
+                                          </label>
+                                       </div>
+                                       <div class="col-sm-2">
+                                           <select ng-model="tbl_item_category_id" name="selected_id" class="form-control" ng-options="c.id as c.category_name for c in CategoryList" ng-change="GetSubCategory(tbl_item_category_id)" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                                 <option value="">-- Select Category --</option>
+                                           </select>
+                                           <span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required">Providing  select Category Name is mandatory!</span>
+                                                 @* <input type="button" class="btn btn-success" ng-click="AddCategory();" value="Add Category" style="margin-top:5px;" data-toggle="modal" data-target="#myModal" />*@
+                                        </div>
+                                       <div class="col-sm-2">
+                                            <input type="button"  class="btn btn-success" ng-click="ViewTax(tbl_item_category_id);" value="View Tax" style="margin-top:5px;" data-toggle="modal" data-target="#ViewModal" />
+                                       </div>
+                                       <div class="col-sm-2">
+                                            <label for="first-name" style="color: #242627;">Select SubCategory </label>
+                                       </div>
+                                       <div class="col-sm-3">
+                                           <select ng-model="tbl_item_subcategory_id" name="selected_id" class="form-control" ng-options="c.id as c.subcategory_name for c in subcategorylist">
+                                                 <option value="">--Select SubCategory --</option>
+                                           </select>                                              
+                                           <input type="button" class="btn btn-success" ng-click="AddSubCategory();" value="Add Sub Category" style="margin-top:5px;" data-toggle="modal" data-target="#mysubModal" />
+                                       </div>
+                                    </div>
+                                  
+                                   <div class="row" style="margin-top:10px;">                                                                                                           
+                                       <div class="col-sm-2">
+                                           <label  for="first-name" style="color: #242627;">MRP</label>
+                                       </div>
+                                       <div class="col-sm-4">
+                                          <input type="text" name="umrp" ng-model="mrp" maxlength="50" class="form-control" placeholder=" Please Enter MRP">
+                                                 @* <span class="error" ng-show="(f1.umrp.$dirty || IsFormSubmitted) && f1.umrp.$error.required" >Providing MRP is mandatory!</span>*@
+                                       </div>
+                                       <div class="col-sm-2" >
+                                          <label for="first-name" style="color: #242627;">SKU<span class="required star">*</span></label>
+                                       </div>
+                                       <div class="col-sm-4">
+                                           <input type="text" name="usku" ng-model="sku" maxlength="50" class="form-control" placeholder=" Please Enter SKU" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                           <span class="error" ng-show="(f1.usku.$dirty || IsFormSubmitted) && f1.usku.$error.required" >Providing SKU is mandatory!</span>
+                                       </div>  
+                                   </div>
+
+                       @if (Convert.ToInt32(Session["SellerType"]) == 2)
+                              {
+ 
+                                    <div class="row" style="margin-top:10px;">
+                                        <div class="col-sm-2">
+                                          <label  for="first-name" style="color: #242627;">Brand</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="ubrand" ng-model="brand" maxlength="50" class="form-control" placeholder=" Please Enter Brand">
+                                            @*<span class="error" ng-show="(f1.ubrand.$dirty || IsFormSubmitted) && f1.ubrand.$error.required" >Providing Brand is mandatory!</span>*@
+                                        </div>
+                                        <div class="col-sm-2" >
+                                           <label for="first-name" style="color: #242627;">Select Color </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <select ng-model="m_item_color_id" name="selected_id" class="form-control" ng-options="c.id as c.color_name for c in ColorList">
+                                                <option value="">-- Select Color--</option>
+                                            </select>
+                                             @*<span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required" >Providing  select Color Name is mandatory!</span> *@                                     
+                                        </div>
+                                     </div>
+                           
+                               }
+                                    <div class="row" style="margin-top:10px;">
+                                       <div class="col-sm-2">
+                                          <label  for="first-name" style="color: #242627;">Lead Time To Ship(Days) </label>
+                                       </div>
+                                       <div class="col-sm-4">
+                                            <input type="text" name="ulead_time_to_ship" ng-model="lead_time_to_ship" maxlength="50" class="form-control" placeholder=" Please Enter No Of Days">                                        
+                                       </div>
+                                       <div class="col-sm-2" >
+                                          <label for="first-name" style="color: #242627;">Select Fullfilled By </label>
+                                       </div>
+                                       <div class="col-sm-4">
+                                            <select ng-model="n_fullfilled_id" name="selected_id" class="form-control" ng-options="c.id as c.Name for c in FullfilledList">
+                                                <option value="">-- Select Fullfilled--</option>
+                                            </select>
+                                       </div>
+                                    </div>
+                                 
+                                </div>
+                             </fieldset>
+                                   
+
+                             <fieldset>                                 
+                                  <div class="well well-lg">                                                                      
+                                     <div class="row" style="margin-top:10px;">
+                                       <div class="col-sm-2" >
+                                         <label for="first-name" style="color: #242627;">Item Description</label>
+                                       </div>
+                                       <div class="col-sm-4">
+                                           <textarea type="text" name="uitem_description" ng-model="item_description" class="form-control" placeholder=" Please Enter Item Description"></textarea>                                                                                 
+                                       </div>
+                                 
+                                       <div class="col-sm-2">
+                                          <label  for="first-name" style="color: #242627;">Item Dimension</label>
+                                       </div>
+                                       <div class="col-sm-4">
+                                           <input type="text" name="uitem_dimension" ng-model="item_dimension" maxlength="50" class="form-control" placeholder=" Please Enter Item Dimension">                                         
+                                       </div>
+                                     </div>
+
+                                     <div class="row" style="margin-top:10px;">
+                                        <div class="col-sm-2" >
+                                           <label for="first-name" style="color: #242627;">Packed Weight(gm)</label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                           <input type="text" name="upacked_weight" ng-model="packed_weight" maxlength="50" class="form-control" placeholder=" Please Enter Packed Weight">                                         
+                                        </div>
+                                                                                                
+                                        <div class="col-sm-2">
+                                          <label  for="first-name" style="color: #242627;">Packed Dimension(L*W*H) </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                            <input type="text" name="upacked_dimension" ng-model="packed_dimension" maxlength="50" class="form-control" placeholder=" Please Enter Packed Dimension">                                        
+                                        </div>
+                                     </div>
+
+                                     <div class="row" style="margin-top:10px;">                                                                   
+                                        <div class="col-sm-2">
+                                           <label  for="first-name" style="color: #242627;">Item Photo 1 </label>
+                                        </div>
+                                        <div class="col-sm-4">
+                                             <input type="file" name="file" accept="image/*" class="form-control" onchange="angular.element(this).scope().selectFileforUpload(this.files)" />
+                                                @*<span class="error" ng-show="(f1.file.$dirty || IsFormSubmitted) && f1.file.$error.required">Image required!</span>*@
+                                                <span class="error">{{FileInvalidMessage}}</span>
+                                            @* <img ng-show="showImages" src="{{item_photo1_path}}" alt="Logo" width="50" height="50" />                                        
+                                             <input type="file" name="file" accept="image/*" class="form-control col-md-3 col-sm-3 col-xs-12" onchange="angular.element(this).scope().selectFileforUpload(this.files)" required />                                          
+                                            <span class="error">{{FileInvalidMessage}}</span> *@                                                                     
+                                         </div>
+                                     </div>
+
+                                      
+                                 @if (Convert.ToInt32(Session["SellerType"]) == 2)
+                                   {
+                                      <div class="row"style="margin-top:10px;">
+                                         <div class="col-sm-2" >
+                                            <label for="first-name" style="color: #242627;">Item Photo 2</label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                           <img ng-show="showImages" src="{{item_photo2_path}}" alt="Logo" width="50" height="50" />                                        
+                                           <input type="file" name="file1" accept="image/*" class="form-control col-md-3 col-sm-3 col-xs-12" onchange="angular.element(this).scope().selectFileforUpload1(this.files)" />                                       
+                                           <span class="error">{{FileInvalidMessage1}}</span>                                                                  
+                                         </div>                                                                         
+                                      </div>
+
+                                 }
+                                      <div class="row" style="margin-top:10px;">                                                               
+                                        @if (Convert.ToInt32(Session["SellerType"]) == 2) 
+                                        {                                                          
+                                         <div class="col-sm-2">
+                                           <label  for="first-name" style="color: #242627;">Item Photo 3</label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                            <img ng-show="showImages" src="{{item_photo3_path}}" alt="Logo" width="50" height="50" />                                        
+                                            <input type="file" name="file2" accept="image/*" class="form-control col-md-3 col-sm-3 col-xs-12" onchange="angular.element(this).scope().selectFileforUpload2(this.files)"  />                                        
+                                            <span class="error">{{FileInvalidMessage2}}</span>                                                                      
+                                          </div>
+                                        }
+                                         <div class="col-sm-2">
+                                           <label  for="first-name" style="color: #242627;">Item Weight</label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                              <input type="text" name="uitem_weight" ng-model="item_weight" maxlength="50" class="form-control" placeholder="Please Enter Item Weight">                                       
+                                         </div>
+                                      </div>
+
+                                      <div class="row" style="margin-top:10px;">                                    
+                                         <div class="col-sm-2">
+                                           <label  for="first-name" style="color: #242627;">Effective Bought Price</label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                            <input type="text" name="ut_effectiveBought_price" ng-model="t_effectiveBought_price" maxlength="50" class="form-control" ng-readonly="true" placeholder=" Please Enter Effective Bought Price">
+                                            
+                                            <span data-ng-if="status==1">
+                                                 <input type="button" class="btn btn-success" ng-click="UpdatePrice(hdn_AddUpdate_id);" value="Update Price" style="margin-top:5px;" data-toggle="modal" data-target="#myModal5" />                                          
+                                           </span>
+                                              <input data-ng-if="status==0" type="button" class="btn btn-success" ng-click="AddEffective();" value="Manage Price" style="margin-top:5px;" data-toggle="modal" data-target="#myModal5" />
+                                                    
+                                           @* <span data-ng-if="status==1">
+                                                 <input type="button" class="btn btn-success" ng-click="UpdatePrice(hdn_AddUpdate_id);" value="Update Price" style="margin-top:5px;"  />                                          
+                                           </span>
+                                              <input data-ng-if="status==0" type="button" class="btn btn-success" ng-click="AddEffective();" value="Manage Price" style="margin-top:5px;" />
+                                           *@                                                                                     
+                                         </div>
+                                         <div class="col-sm-2" >
+                                            <label for="first-name" style="color: #242627;"> Transfer Price</label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                           <input type="text" name="utransfer_price" ng-model="transfer_price" maxlength="50" class="form-control" placeholder=" Please Enter Transfer Price">                                        
+                                         </div>                                 
+                                     
+                                      </div>
+
+                                      <div class="row" style="margin-top:10px;">                                    
+                                         <div class="col-sm-2">
+                                           <label  for="first-name" style="color: #242627;">Item Type </label>
+                                         </div>
+                                         <div class="col-sm-4">
+                                            <select ng-model="tbl_details_item_id" name="selected_id" class="form-control" ng-options="c.id as c.Quantity_Item for c in ItemDetailsList"  ng-class="IsFormSubmitted?'ng-dirty':''" >
+                                                <option value="">-- Select --</option>
+                                            </select>                                         
+                                         </div>                                     
+                                      </div>
+                                  </div>
+                              </fieldset>
+
+                             <div class="ln_solid"></div>
+                             <div class="form-group" style="margin-top:15px;">
+                               <div class="col-md-6 col-sm-6 col-md-offset-3">
+                                   <button type="submit" class="btn btn-success">{{buttonTxt}}</button>
+                                   @*<button class="btn btn-primary" type="reset">Reset</button>*@
+                                  <button class="btn btn-primary" ng-click="ResetForm()">Reset</button>
+                               </div>
+                             </div>
+                         </div>
+                   </form>
+                </div>
+              </div>
+                        
+              <div class="x_panel" style="margin-top: 20px;">
+                 <h3 style="color: #242627; margin-left: 20px;">Inventory Detail</h3>
+                 <div class="x_title"></div>
+                 <div class="x_content">
+                    <div class="form-group" style="margin-top: 10px;">
+                       <div class="col-lg-12" >
+                          <div class="col-lg-1" style="color: #59D52E ">
+                                <h5>  Search by :</h5>
+                          </div>
+                          <div class="col-lg-2" >
+                               <input type="text" class="control-labe" placeholder="name" ng-model="searchText.ob_tbl_inventory.sku" />
+                          </div>            
+                          <div class="col-lg-2" style="color: #59D52E">
+                                 <h5>Select category</h5>
+                          </div>
+                          <div class="col-lg-2" style="color: #59D52E">
+                                <select ng-model="tbl_item_category_id" name="selected_id" class="form-control" ng-options="c.id as c.category_name for c in CategoryList" ng-change="GetSubCategory(tbl_item_category_id)" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                                   <option value="">-- Select Category --</option>
+                                </select>                                                                             
+                          </div>
+                          <div class="col-lg-2">                                       
+                              <button ng-click="GetValue(tbl_item_category_id)" style="margin-right:10px; color:darkcyan">Apply</button>
+                          </div>
+                        </div>
+                    </div>
+
+                     <br />
+                     <!-- table start-->
+                     <div class="row" style="margin-top: 30px;">
+                        <table class="table table-hover">
+                           <thead>
+                              <tr>
+                                 <th>S.No
+                                  </th>
+                                  <th>Select All
+                                      <input type="checkbox" ng-click="checkAll()" ng-model="selectedAll">
+                                  </th>
+                                  <th>Item Name</th>
+                                  <th>Brand</th>
+                                  <th>Item Count</th>
+                                  <th>SKU</th>
+                                  <th>Category</th>
+                                  <th>Tax</th>
+                                  <th>Actions</th>
+                                </tr>
+                           </thead>
+
+                            <tbody>
+                               <tr dir-paginate="item in InventoryList|filter:searchText.ob_tbl_inventory.sku:exactMatch|itemsPerPage:15" ng-class-odd="'odd'" ng-class-even="'even'" current-page="currentPage" pagination-id="itemlist">
+                                  <th scope="row">{{ ($index + 1) + (currentPage - 1) * 15}}</th>
+                                  <td>
+                                    <label for="chkCustomer_{{item.ob_tbl_inventory.id}}">
+                                         <input id="chkItem_{{item.ob_tbl_inventory.id}}" class="control-label" type="checkbox" ng-model="item.Selected" />
+                                    </label>
+                                   </td>
+                                  <td><span ng-show="item.showEdit">{{item.ob_tbl_inventory.item_name}}</span></td>
+
+                                  <td><span ng-show="item.showEdit">{{item.ob_tbl_inventory.brand}} </span></td>
+
+                                  <td><span ng-show="item.showEdit">{{item.ob_tbl_inventory.item_count}}</span></td>
+                                  <td><span ng-show="item.showEdit">{{item.ob_tbl_inventory.sku}}</span></td>
+                                  <td><span ng-show="item.showEdit">{{item.ob_item_category.category_name}}</span></td>
+                                  <td><span ng-show="item.showEdit">{{item.ob_m_item_tax.tax_rate}}</span></td>
+                                  <td>
+                                     <p ng-show="item.showEdit">
+                                         <span ng-show="item.showEdit" id="btn_update_inventory" ng-click="toggleEdit(item)" class="glyphicon glyphicon-edit"></span>
+                                           <strong style="color: red;">|| </strong>
+                                         <span ng-show="item.showDelete" ng-click="toggleDeleteEdit(item)" class="glyphicon glyphicon-trash"></span>
+                                     </p>                                            
+                                  </td>
+                               </tr>
+                            </tbody>
+
+                            <tbody style="text-align: right;">
+                               <tr>
+                                  <td colspan="5" style="text-align: right;">
+                                       <dir-pagination-controls max-size="5"
+                                           direction-links="true"
+                                           boundary-links="true" pagination-id="itemlist"> @*ng-change="pageChanged()*@
+                                       </dir-pagination-controls>
+                                   </td>
+                               </tr>
+                             </tbody>
+
+                         </table>
+                     </div>
+                     <!-- table end-->
+                  </div>
+
+              </div>
+
+            </div>
+         </div>
+   </div>
+
+</div>
+
+
+<div id="ViewModal" class="modal fade" role="dialog">
+    <form id="demo-form4" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+        <div class="modal-dialog">
+           <!-- Modal content-->l
+            <div class="modal-content" style="width:130%">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">{{Action}} Category</h4>
+                </div>
+                <div class="modal-body">
+                   <div class="form-vertical">
+                      <div class="form-group">
+                         <div class="row">
+                            <div class="col-md-1 col-sm-1" style="margin-left: 20px; color: #5bc0de;">
+                               <label for="first-name" style="color: #242627;"> Name </label>
+                            </div>
+                            <div class="col-md-4 col-sm-4" style="margin-left: 20px;">
+                                <input type="text" name="category_name" ng-model="category_name" maxlength="50" class="form-control" ng-readonly="true" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>                                                                                     
+                            </div>
+                            <div class="col-md-1 col-sm-1" style="margin-left: 20px; color: #5bc0de;">
+                                 <b>HSN Code</b>
+                            </div>
+                            <div class="col-md-4 col-sm-4" style="margin-left: 20px;">
+                                <input type="text" name="hsn_code" ng-model="hsn_code" maxlength="50" class="form-control" ng-readonly="true" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus>
+                            </div>
+                         </div>
+                      </div>
+                      <table class="table table-bordered">
+                         <thead>
+                            <tr>
+                              <th>S.No.</th>
+                              <th>From (Rs.)</th>
+                              <th>To (Rs.)</th>
+                              <th>Tax Rate</th>
+                              <th>Action</th>
+                             </tr>
+                         </thead>
+                         <tbody ng-repeat="item in list_slabs">
+                            <tr>
+                               @*<td>{{ ($index + 1)}}</td>
+                                 <td>{{item.from_rs}}</td> 
+                                 <td>{{item.to_rs}}</td> 
+                                 <td>{{item.tax_rate}}</td>*@   
+                                 <td>{{ ($index + 1)}}</td>
+                                 <td><input type="text" value="{{item.from_rs}}" id="txt_from{{$index}}" disabled /></td>
+                                 <td><input type="text" value="{{item.to_rs}}" id="txt_to{{$index}}" disabled /></td>
+                                 <td><input type="text" value="{{item.tax_rate}}" id="txt_taxrate{{$index}}" disabled /></td>
+                                 <td>
+                                    <i class="fa fa-times-circle fa-lg text-danger"
+                                         ng-click="Remove($index)"
+                                         title="Delete" aria-hidden="true"></i>
+                                    <i class="fa fa-pencil" style="color:green" ng-click="Edit($index)" title="Edit" aria-hidden="true"></i>
+                                    <i class="glyphicon glyphicon-ok" style="color:black" ng-click="UpdateCategorySlabs($index)" title="Update" aria-hidden="true"></i>  
+                                  </td>                                    
+                              </tr>
+                         </tbody>
+                         <tfoot>
+                            <tr>
+                              <td></td>
+                              <td><input type="text" ng-model="txt_from" /></td>
+                              <td><input type="text" ng-model="txt_to" /></td>
+                              <td><input type="text" ng-model="taxrate" /></td>
+                              <td>
+                                  @*<input type="button" class="fa fa-plus-circle fa-lg text-success"ng-click="Add()" value="Add" />*@
+                                  <i class="fa fa-plus-circle fa-lg text-success" ng-click="Add()" title="Add" aria-hidden="true"></i>
+                               </td>
+                             </tr>
+                         </tfoot> 
+                                
+                      </table>
+                   <div>
+                            </div>
+                        </div>
+                   <div class="modal-footer">
+                      @*<input type="button" class="btnAdd btn btn-success" value="Save" ng-click="AddCategoryClick();" data-dismiss="modal" />*@
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                   </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div id="myModal" class="modal fade" role="dialog">
+    <form id="demo-form4" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+       <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content" style="width:130%">
+             <div class="modal-header">
+                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                 <h4 class="modal-title">{{Action}} Category</h4>
+              </div>
+             <div class="modal-body">
+               <div class="form-vertical">
+                  <div class="form-group">
+                     <div class="row">
+                        <div class="col-md-1 col-sm-1" style="margin-left: 20px; color: #5bc0de;">
+                             <label for="first-name" style="color: #242627;">
+                                  Name<span class="required star">*</span>
+                             </label>
+                        </div>
+                        <div class="col-md-4 col-sm-4" style="margin-left: 20px;">
+                           <input type="text" class="form-control" name="Ecategory_name" ng-model="category_name" maxlength="64" ng-required="category_name"  placeholder="Please Enter Name" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus />                                      
+                           <span class="error" ng-show="(f1.Ecategory_name.$dirty || IsFormSubmitted) && f1.Ecategory_name.$error.required">Providing  select Market Place is mandatory!</span>                                            
+                        </div>
+                        <div class="col-md-1 col-sm-1" style="margin-left: 20px; color: #5bc0de;">
+                             <b>HSN Code</b>
+                        </div>
+                        <div class="col-md-4 col-sm-4" style="margin-left: 20px;">                                      
+                            <input type="text" class="form-control" name="hsn_code" ng-model="hsn_code" maxlength="64" ng-class="IsFormSubmitted?'ng-dirty':''" required  />
+                            <span class="error" ng-show="(f1.hsn_code.$dirty) && f1.hsn_code.$error.required">Providing HSN Code is mandatory!</span>
+                        </div>
+                     </div>
+                  </div>
+                            
+                  <table class="table table-bordered">
+                      <thead>
+                         <tr>
+                            <th>S.No.</th>
+                            <th>From (Rs.)</th>
+                            <th>To (Rs.)</th>
+                            <th>Tax Rate</th>
+                            <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody ng-repeat="m in Customers">
+                         <tr>
+                            <td>{{ ($index + 1)}}</td>
+                            <td><input type="text" value="{{m.from_rs}}" id="txt_from{{$index}}" disabled  /></td>
+                            <td><input type="text" value="{{m.to_rs}}"id="txt_to{{$index}}" disabled /></td>
+                            <td><input type="text" value="{{m.tax_rate}}" id="txt_taxrate{{$index}}" disabled /></td>
+                            <td>
+                                 @*<input type="button" ng-click="Remove($index)" value="Remove" />*@
+                                <i class="fa fa-times-circle fa-lg text-danger"
+                                    ng-click="Remove($index)" 
+                                    title="Delete" aria-hidden="true"></i>
+                                <i class="fa fa-pencil" style="color:green" ng-click="Edit($index)" title="Edit"aria-hidden="true"></i>
+                                <i class="glyphicon glyphicon-ok" style="color:black" ng-click="CategoryUpdate($index)" title="Update" aria-hidden="true"></i>  
+                             </td>
+                         </tr>
+                      </tbody>
+                      <tfoot>
+                        <tr>
+                           <td></td>
+                           <td><input type="text" ng-model="txt_from" /></td>
+                           <td><input type="text" ng-model="txt_to" /></td>
+                           <td><input type="text" ng-model="taxrate" /></td>
+                           <td>
+                             @*<input type="button" class="fa fa-plus-circle fa-lg text-success"ng-click="Add()" value="Add" />*@
+                             <i class="fa fa-plus-circle fa-lg text-success" ng-click="Add()" title="Add" aria-hidden="true"></i>
+                           </td>
+                         </tr>
+                      </tfoot>
+                  </table>                            
+               <div>
+                          </div>
+                        </div>
+               <div class="modal-footer">
+                  <input type="button"  class="btnAdd btn btn-success" value="Save" ng-click="AddCategoryClick();" data-dismiss="modal" />
+                  <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
+               </div>                  
+             </div>
+          </div>
+       </div>
+    </form>
+
+</div>
+
+<div id="alertModal" class="modal fade">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <!-- dialog body -->
+         <div class="modal-body">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            {{msg}}
+         </div>
+         <!-- dialog buttons -->
+         <div class="modal-footer">
+            <button type="button" ng-click="alertmsg()" class="btn btn-primary">OK</button>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div id="mysubModal" class="modal fade"  role="dialog">
+   <form id="demo-form3" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+      <div class="modal-dialog">
+         <!-- Modal content-->
+         <div class="modal-content">
+           <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{Action}}Add Sub Category</h4>
+            </div>
+           <div class="modal-body">
+              <div class="form-vertical">
+                 <div class="form-group">
+                    <div class="row">
+                       <div class="col-md-4 col-sm-4" style="margin-left: 20px; color: #5bc0de;">
+                               <b> Select Category</b>
+                       </div>
+                       <div class="col-md-4 col-sm-4" style="margin-left: 20px;">
+                           <select ng-model="tbl_item_category_id" name="selected_id" class="form-control" ng-options="c.id as c.category_name for c in CategoryList">
+                              <option value="">-- Select Category --</option>
+                           </select>
+                           <span class="error" ng-show="(f1.selected_id.$dirty || IsFormSubmitted) && f1.selected_id.$error.required" >Providing  select Category Name is mandatory!</span>                                      
+                       </div> 
+                    </div>
+                 </div>
+                 <div class="form-group">
+                    <div class="row">
+                       <div class="col-md-4 col-sm-4" style="margin-left: 20px; color: #5bc0de;">
+                           <b>Subcategory Name</b>
+                       </div>
+                       <div class="col-md-8 col-sm-8" style="margin-left: 20px;">
+                           <input type="text" class="form-control" name="Esubcategory_name" ng-model="subcategory_name" maxlength="64"  ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus />
+                           <span class="error" ng-show="(f1.Esubcategory_name.$dirty) && f1.Esubcategory_name.$error.required" >Providing Subcategory Name is mandatory!</span>
+                       </div>
+                    </div>
+                 </div>
+              </div>
+              <div class="form-group">
+                 <div class="row">
+                    <div class="col-md-4 col-sm-4" style="margin-left: 20px; color: #5bc0de;">
+                         <b>HSN Code</b>
+                    </div>
+                    <div class="col-md-8 col-sm-8" style="margin-left: 20px;">
+                        <input type="text"   class="form-control" data-modal="modal" name="Ehsn_code" ng-model="hsn_code" maxlength="128"  ng-required="true" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus />
+                        <span class="error" ng-show="(f1.Ehsn_code.$dirty) && f1.Ehsn_code.$error.required" >Providing HSN Code is mandatory!</span>                                       
+                    </div>
+                 </div>
+              </div> 
+              <div class="form-group">
+                <div class="row">
+                   <div class="col-md-4 col-sm-4" style="margin-left: 20px; color: #5bc0de;">
+                       <b>Tax Rate</b>
+                   </div>
+                   <div class="col-md-8 col-sm-8" style="margin-left: 20px;">
+                       <input type="text"   class="form-control" data-modal="modal" name="Etax_rate" ng-model="tax_rate" maxlength="128"  ng-required="true" ng-class="IsFormSubmitted?'ng-dirty':''" required autofocus />
+                       <span class="error" ng-show="(f1.Etax_rate.$dirty) && f1.Etax_rate.$error.required" >Providing Tax Rate is mandatory!</span>                                       
+                   </div>
+                </div>
+              </div> 
+              <div class="modal-footer">
+                 <input type="button" ng-disabled="f1.$invalid" class="btnAdd btn btn-success" value="Save" ng-click="SubCategory()" data-dismiss="modal" />
+                 <button type="button"  class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+           </div>              
+         </div>
+      </div>
+   </form>
+</div>
+
+<div id="myModal5" class="modal fade" role="dialog">
+   <form id="demo-form5" data-parsley-validate class="form-horizontal form-label-left" novalidate name="f1">
+      <div class="modal-dialog">
+       <!-- Modal content-->
+         <div class="modal-content" style="width:170%;margin-left:-35%">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">{{Action}} Manage Price</h4>
+            </div>
+            <div class="modal-body">
+              <div class="form-vertical">
+                 <table class="table table-bordered">
+                     <thead>
+                        <tr>
+                           <th>S.No.</th>
+                           <th>Date</th>
+                           <th>Net Price (Rs.)</th>
+                           <th>Tax (Rs.)</th>
+                           <th>Gross Price (Rs.)</th>                                        
+                           <th>Action</th>
+                         </tr>
+                     </thead>
+                     <tbody ng-repeat="m in EffectivePrice">
+                        <tr>
+                           <td>{{ ($index + 1)}}</td>                                     
+                           <td><input type="text" value="{{m.Effecive_date}}" id="Effecive_date{{$index}}" disabled  /> </td>                                                                                        
+                           <td><input type="text" value="{{m.Effective_price}}"id="Effective_price{{$index}}" disabled /></td>
+                           <td><input type="text" value="{{m.Item_Tax}}"id="Item_Tax{{$index}}" disabled /></td>
+                           <td><input type="text" value="{{m.Gross_price}}"id="Gross_price{{$index}}" disabled /></td>
+                           <td>
+                              <i class="fa fa-times-circle fa-lg text-danger"
+                                 ng-click="RemovePrice($index)" 
+                                 title="Delete" aria-hidden="true"></i>
+                              <i class="fa fa-pencil" style="color:green" ng-click="EditPrice($index)" title="Edit"aria-hidden="true"></i>
+                              <i class="glyphicon glyphicon-ok" style="color:black" ng-click="PriceUpdate($index)" title="Update" aria-hidden="true"></i>  
+                            </td>
+                        </tr>
+                     </tbody>
+                     <tfoot>
+                        <tr>
+                          <td></td>
+                          <td>                                                                                       
+                             @*<input type="text" ng-model="Effecive_date" id ="txt_effectivedate"/>{{Effecive_date}}*@
+                             <input type="text"  id ="txt_effectivedate"/>{{Effecive_date}}
+                           </td>
+                          <td><input type="text" ng-model="Effective_price"/></td>
+                          <td><input type="text" ng-model="Item_Tax"/></td>
+                          <td><input type="text" ng-model="Gross_price" value="{{Addsum(Effective_price,Item_Tax)}}"/>{{$scope.Gross_price}}</td>
+                          <td>
+                             <i class="fa fa-plus-circle fa-lg text-success" ng-click="AddPrice()" title="Add" aria-hidden="true"></i>                                           
+                          </td>
+                        </tr>
+                     </tfoot>
+                 </table>                            
+              <div>
+                          </div>
+                        </div>
+
+
+              <div class="modal-footer">
+                @* <input type="button"  class="btnAdd btn btn-success" value="Save" ng-click="AddPriceClick();" data-dismiss="modal" />*@
+                <button type="button"  class="btn btn-default" ng-click="ClearformClick();">Clear</button>
+                <button type="button"  class="btn btn-default"  data-dismiss="modal">Save & Close</button>
+             </div>
+            </div>
+         </div>
+      </div>
+   </form>
+</div>
+</div>
+
+@section scripts{        
+    <script src="~/Areas/Seller/SellerScripts/Angular/Controller/InventoryController.js"></script>
+  }
+
+
+                       
+
+
